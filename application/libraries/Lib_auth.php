@@ -31,8 +31,14 @@ class Lib_auth
   {
     if (!$this->is_logged_in())
     {
+      if (!is_null($this->CI->session->userdata('login_email_key')))
+      {
+        $this->error = ['message' => 'Slow down boy, try after 5 mins'];
+        return NULL;
+      }
+
       $login_email_key = random_string('md5');
-      $this->CI->session->set_tempdata('login_email_key', $login_email_key, 10); // Expire in 5 minutes
+      $this->CI->session->set_tempdata('login_email_key', $login_email_key, 300); // Expire in 5 minutes
 
       return $login_email_key;
     }
