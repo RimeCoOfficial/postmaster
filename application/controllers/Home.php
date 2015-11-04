@@ -5,6 +5,9 @@ class Home extends CI_Controller
 {
   public function index()
   {
-    $this->load->view('welcome_message');
+    $this->load->library('lib_auth');
+    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
+
+    $this->load->view('welcome_message', $view_data);
   }
 }
