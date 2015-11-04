@@ -1,7 +1,7 @@
--- CREATE DATABASE IF NOT EXISTS ci_email;
+-- CREATE DATABASE IF NOT EXISTS ci_postmaster;
 
 --
--- Database: `ci_email`
+-- Database: `ci_postmaster`
 --
 
 -- --------------------------------------------------------
