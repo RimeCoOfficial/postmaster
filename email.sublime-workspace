@@ -1,0 +1,1913 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fon",
+				"font-weight"
+			],
+			[
+				"mar",
+				"margin-bottom"
+			],
+			[
+				"model",
+				"model_oauth_cache"
+			],
+			[
+				"ex",
+				"execution_time"
+			],
+			[
+				"cach",
+				"cached_responses"
+			],
+			[
+				"url",
+				"url_list"
+			],
+			[
+				"sync",
+				"sync_priority"
+			],
+			[
+				"res",
+				"response_list"
+			],
+			[
+				"fo",
+				"foreach	foreach …"
+			],
+			[
+				"re",
+				"results"
+			],
+			[
+				"req",
+				"request_list"
+			],
+			[
+				"va",
+				"value"
+			],
+			[
+				"resp",
+				"response_list"
+			],
+			[
+				"u",
+				"url_id"
+			],
+			[
+				"fet",
+				"fetch_org_data"
+			],
+			[
+				"x_a",
+				"x_actor_id"
+			],
+			[
+				"user",
+				"user_id"
+			],
+			[
+				"ac",
+				"actor_id"
+			],
+			[
+				"act",
+				"actor_about_table"
+			],
+			[
+				"mode",
+				"model_actor_about"
+			],
+			[
+				"abo",
+				"about"
+			],
+			[
+				"li",
+				"lib_service"
+			],
+			[
+				"up",
+				"update_list"
+			],
+			[
+				"json",
+				"json_decode"
+			],
+			[
+				"oa",
+				"oauth_actor_list"
+			],
+			[
+				"actor",
+				"actor_table"
+			],
+			[
+				"is_a",
+				"is_array"
+			],
+			[
+				"acti",
+				"activity_id"
+			],
+			[
+				"fe",
+				"fetch_user_data"
+			],
+			[
+				"a",
+				"actor_data"
+			],
+			[
+				"ues",
+				"user_id"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"us",
+				"user_oauth_list"
+			],
+			[
+				"lib",
+				"library"
+			],
+			[
+				"base",
+				"base_url"
+			],
+			[
+				"acc",
+				"access_token"
+			],
+			[
+				"ha",
+				"handler"
+			],
+			[
+				"lib_",
+				"lib_guzzle"
+			],
+			[
+				"gc_",
+				"gc_collect_cycles"
+			],
+			[
+				"na",
+				"nav_links"
+			],
+			[
+				"use",
+				"user_id"
+			],
+			[
+				"model_",
+				"model_actor_user_guest"
+			],
+			[
+				"lo",
+				"local_data"
+			],
+			[
+				"time",
+				"time_txt"
+			],
+			[
+				"join",
+				"Joined"
+			],
+			[
+				"posted",
+				"posted_tweet_img"
+			],
+			[
+				"twe",
+				"tweet_img"
+			],
+			[
+				"twee",
+				"tweet_txt"
+			],
+			[
+				"noti",
+				"notification_tweet"
+			],
+			[
+				"tmp",
+				"tmp_file_name"
+			],
+			[
+				"media",
+				"media_id"
+			],
+			[
+				"medi",
+				"media_id"
+			],
+			[
+				"notification",
+				"notification_id"
+			],
+			[
+				"pos",
+				"posted"
+			],
+			[
+				"mo",
+				"model_notification"
+			],
+			[
+				"ends",
+				"ends_with"
+			],
+			[
+				"notif",
+				"notif_user"
+			],
+			[
+				"ec",
+				"ends_with_char_count"
+			],
+			[
+				"not",
+				"notif_user"
+			],
+			[
+				"tw",
+				"twitter_handle"
+			],
+			[
+				"twi",
+				"twitter_actor"
+			],
+			[
+				"thi",
+				"thumbnail_url"
+			],
+			[
+				"notification_",
+				"notification_tweet_table"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"prin",
+				"print_r"
+			],
+			[
+				"ver",
+				"Verified"
+			],
+			[
+				"sy",
+				"sync_priority"
+			],
+			[
+				"auth",
+				"author_url"
+			],
+			[
+				"cano",
+				"canonical_url"
+			],
+			[
+				"extr",
+				"extract_data"
+			],
+			[
+				"gu",
+				"guest_owner_user_id"
+			],
+			[
+				"uer",
+				"user_id"
+			],
+			[
+				"log",
+				"login_actor"
+			],
+			[
+				"st",
+				"query_str"
+			],
+			[
+				"gues",
+				"guest_user_id"
+			],
+			[
+				"strto",
+				"strtotime"
+			],
+			[
+				"bio",
+				"bio_max_lenght"
+			],
+			[
+				"guest",
+				"guest_user"
+			],
+			[
+				"htmlde",
+				"html_entity_decode"
+			],
+			[
+				"fetc",
+				"fetch_data"
+			],
+			[
+				"Api",
+				"api_base_path"
+			],
+			[
+				"api",
+				"api_base_path"
+			],
+			[
+				"po",
+				"post_list"
+			],
+			[
+				"toke",
+				"token_secret"
+			],
+			[
+				"_",
+				"_HandlerStack"
+			],
+			[
+				"lin",
+				"linkedin"
+			],
+			[
+				"au",
+				"authorize_url"
+			],
+			[
+				"sta",
+				"status"
+			],
+			[
+				"com",
+				"compact"
+			],
+			[
+				"err",
+				"error_message"
+			],
+			[
+				"str",
+				"strip_tags"
+			],
+			[
+				"mb_ch",
+				"mb_character_limiter"
+			],
+			[
+				"lib_user",
+				"lib_user_login"
+			],
+			[
+				"old_email",
+				"old_email_id"
+			],
+			[
+				"email",
+				"email_id"
+			],
+			[
+				"oauth_",
+				"oauth_id"
+			],
+			[
+				"sign",
+				"signin"
+			],
+			[
+				"acto",
+				"actor_id"
+			],
+			[
+				"pu",
+				"public"
+			],
+			[
+				"is",
+				"is_null"
+			],
+			[
+				"q",
+				"quotes"
+			],
+			[
+				"con",
+				"config"
+			],
+			[
+				"sear",
+				"search_actor_list"
+			],
+			[
+				"im",
+				"img-center"
+			],
+			[
+				"ur",
+				"url_index"
+			],
+			[
+				"valid",
+				"validate_post_list"
+			],
+			[
+				"vali",
+				"valid_actor"
+			],
+			[
+				"parse",
+				"parse_url"
+			],
+			[
+				"autho",
+				"author_name"
+			],
+			[
+				"bo",
+				"body_arr"
+			],
+			[
+				"ut",
+				"url_extract"
+			],
+			[
+				"cac",
+				"cached_response"
+			],
+			[
+				"ca",
+				"cached_response"
+			],
+			[
+				"emai",
+				"email_status"
+			],
+			[
+				"no",
+				"notifcation"
+			],
+			[
+				"is_nu",
+				"is_numeric"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"map",
+				"mapView"
+			],
+			[
+				"zoom",
+				"zoom_level"
+			],
+			[
+				"loca",
+				"locations"
+			],
+			[
+				"unse",
+				"unset"
+			],
+			[
+				"loc",
+				"location_summary"
+			],
+			[
+				"place",
+				"placehold"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"curr",
+				"current_url_hash"
+			],
+			[
+				"nex",
+				"next_page_button"
+			],
+			[
+				"tex",
+				"text_via"
+			],
+			[
+				"get",
+				"getMonth"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "application/controllers/Home.php",
+			"settings":
+			{
+				"buffer_size": 184,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/Campaign.php",
+			"settings":
+			{
+				"buffer_size": 188,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "schema.sql",
+			"settings":
+			{
+				"buffer_size": 3695,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/Api.php",
+			"settings":
+			{
+				"buffer_size": 349,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/Process_queue.php",
+			"settings":
+			{
+				"buffer_size": 1187,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/libraries/Lib_email_status.php",
+			"settings":
+			{
+				"buffer_size": 5193,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "application/libraries/Stats.php",
+			"settings":
+			{
+				"buffer_size": 1221,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 400.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 448.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/suvozit/Sites/email",
+		"/Users/suvozit/Sites/email/application",
+		"/Users/suvozit/Sites/email/application/controllers"
+	],
+	"file_history":
+	[
+		"/Users/suvozit/Sites/email/index.php",
+		"/Users/suvozit/Sites/email/application/views/welcome_message.php",
+		"/Users/suvozit/Sites/email/application/config/autoload.php",
+		"/Users/suvozit/Sites/email/schema.sql",
+		"/Users/suvozit/Sites/email/application/views/errors/html/error_404.php",
+		"/Users/suvozit/Sites/email/application/config/routes.php",
+		"/Users/suvozit/Sites/email/application/config/config.php",
+		"/Users/suvozit/Sites/email/application/views/errors/html/error_db.php",
+		"/Users/suvozit/Sites/email/application/views/errors/html/error_general.php",
+		"/Users/suvozit/Sites/log-pixel/application/config/autoload.php",
+		"/Users/suvozit/Sites/email/.htaccess",
+		"/Users/suvozit/Sites/email/.gitignore",
+		"/Users/suvozit/Sites/log-pixel/application/config/config.php",
+		"/Users/suvozit/Sites/log-pixel/application/config/routes.php",
+		"/Users/suvozit/Sites/email/application/config/database.php",
+		"/Users/suvozit/Sites/log-pixel/application/config/database.php",
+		"/Users/suvozit/Sites/log-pixel/application/config/production/database.php",
+		"/Users/suvozit/Sites/email/application/config/constants.php",
+		"/Users/suvozit/Sites/Email/composer.json",
+		"/Users/suvozit/Sites/email/robots.txt",
+		"/Users/suvozit/Sites/log-pixel/application/config/email_sender.php",
+		"/Users/suvozit/Sites/log-pixel/application/helpers/MY_email_helper.php",
+		"/Users/suvozit/Sites/log-pixel/application/libraries/email/Lib_send_email.php",
+		"/Users/suvozit/Sites/log-pixel/application/controllers/test/Send_email.php",
+		"/Users/suvozit/Sites/log-pixel/application/core/MY_Exceptions.php",
+		"/Users/suvozit/Sites/log-pixel/application/hooks/ExceptionHook.php",
+		"/Users/suvozit/Sites/log-pixel/application/libraries/url/Lib_url_extract.php",
+		"/Users/suvozit/Sites/log-pixel/application/libraries/url/Lib_embedkit.php",
+		"/Users/suvozit/Sites/log-pixel/application/controllers/action/Email.php",
+		"/Users/suvozit/Sites/log-pixel/install/opsworks.json",
+		"/Users/suvozit/Sites/log-pixel/application/config/email.php",
+		"/Users/suvozit/Desktop/Rime/Rime-Business/Bills/Expense copy.txt",
+		"/Users/suvozit/Desktop/Rime/Rime-Business/NDA/Unsigned/Tiru Dehariya.md",
+		"/Users/suvozit/Desktop/Rime/Sendy/includes/config.php",
+		"/Users/suvozit/Desktop/Rime/Mail/composer.json",
+		"/Users/suvozit/Desktop/Rime/Sendy/includes/create/upload.php",
+		"/Users/suvozit/Desktop/Rime/Sendy/includes/create/upload2.php",
+		"/Users/suvozit/Desktop/Rime/Rime-Business/NDA/default - Rime, Nirvana - 560047.md",
+		"/Users/suvozit/Desktop/Rime/Rime-Business/NDA/Unsigned/default - Rime, Nirvana - 560047.md",
+		"/Users/suvozit/Desktop/Rime/Rime-Business/NDA/Joydeep Mondal.md",
+		"/Users/suvozit/Desktop/Rime/Rime-Business/NDA/default.md",
+		"/Users/suvozit/Desktop/Rime/Rime-Business/NDA/Neha Agarwal.md",
+		"/Users/suvozit/Desktop/Rime/Rime-Business/NDA/Rime, Nirvana - 560047.md",
+		"/Users/suvozit/Desktop/Rime/Sendy/composer.json",
+		"/Users/suvozit/Sites/log-pixel/composer.json",
+		"/Users/suvozit/Desktop/Rime/Sendy/includes/create/send-now.php",
+		"/Users/suvozit/Sites/log-pixel/application/controllers/Start.php",
+		"/Users/suvozit/Sites/rimeofficial.github.io/test-page/email.html",
+		"/Users/suvozit/Sites/rimeofficial.github.io/asset/css/email.css",
+		"/Users/suvozit/Sites/rimeofficial.github.io/asset/plugin/twbs-bootstrap-3.3.5/config.json",
+		"/Users/suvozit/Sites/rimeofficial.github.io/www/Zurb - Responsive Email Templates/responsive-email-templates/basic.html",
+		"/Users/suvozit/Sites/rimeofficial.github.io/www/Zurb - Responsive Email Templates/responsive-email-templates/stylesheets/email.css",
+		"/Users/suvozit/Sites/log-pixel/application/views/base.php",
+		"/Users/suvozit/Sites/log-pixel/application/views/email/common/user_item.php",
+		"/Users/suvozit/Sites/rimeofficial.github.io/asset/css/main.css",
+		"/Users/suvozit/Sites/log-pixel/application/views/email/common/button.php",
+		"/Users/suvozit/Sites/log-pixel/application/views/email/error/backtrace.php",
+		"/Users/suvozit/Sites/log-pixel/application/views/email/test.php",
+		"/Users/suvozit/Sites/log-pixel/application/views/email/common/base_header-html.php",
+		"/Users/suvozit/Downloads/newsletter-email-template/newsletter.html",
+		"/Users/suvozit/Sites/log-pixel/application/helpers/MY_html_helper.php",
+		"/Users/suvozit/Sites/log-pixel/system/helpers/html_helper.php",
+		"/Users/suvozit/Sites/log-pixel/application/views/email/base-html.php",
+		"/Users/suvozit/Sites/log-pixel/application/views/email/common/base_footer-html.php",
+		"/Users/suvozit/Downloads/newsletter-email-template/stylesheets/email.css",
+		"/Users/suvozit/Sites/log-pixel/application/config/production/api_key.php",
+		"/Users/suvozit/Sites/log-pixel/application/config/api_key.php",
+		"/Users/suvozit/Sites/log-pixel/application/config/production/config.php",
+		"/Users/suvozit/Sites/log-pixel/application/libraries/service/Lib_oauth.php",
+		"/Users/suvozit/Sites/log-pixel/application/views/email/error/error_general.php",
+		"/Users/suvozit/Desktop/Rime/Sendy/includes/helpers/S3.php",
+		"/Users/suvozit/Desktop/Rime/Sendy/edit-brand.php",
+		"/Users/suvozit/Sites/log-pixel/application/controllers/Home.php",
+		"/Users/suvozit/Desktop/Rime/Rime-Docs/Email/Vimeo Contacts.md",
+		"/Users/suvozit/Sites/rimeofficial.github.io/index.html"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 106.0,
+		"where_history":
+		[
+			"Sites/email/application",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/views/email",
+			"Desktop/Rime/Sendy",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/models",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/libraries",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/libraries/service",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/libraries/service",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/system",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/models",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/models",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/controllers",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/views",
+			"Sites/log-pixel/application/libraries",
+			"Sites/log-pixel/application/models",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/views",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/models",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/libraries",
+			"Sites/log-pixel/application/controllers",
+			"Sites/log-pixel/application/views",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/libraries",
+			"Sites/log-pixel/application/controller",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/controller",
+			"Sites/log-pixel/application/views",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/views",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/views/email",
+			"Sites/log-pixel/application/",
+			"Sites/log-pixel/application/views/email",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/views/email",
+			"Sites/log-pixel/application/views",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/system",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/system",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/views",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/system",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/models",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/models",
+			"Sites/log-pixel/application",
+			"Sites/log-pixel/application/libraries",
+			"Sites/log-pixel/application",
+			"~/Sites/log-pixel/application",
+			"~/Sites/log-pixel/system",
+			"~/Sites/log-pixel/application",
+			"~/Sites/log-pixel/system",
+			"~/Sites/log-pixel/application",
+			"~/Sites/log-pixel/system",
+			"~/Sites/log-pixel/application",
+			"~/Sites/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/views/email",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/views/email",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/view/email",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/views/email",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/controller/task",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/views/email",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/views/email",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/asset/css",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/asset/style",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/assets/style",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/libraries/service",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/views/email",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/views/email",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/system",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/libraries",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application",
+			"/Applications/XAMPP/xamppfiles/htdocs/log-pixel/application/controllers/action"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"email_status",
+			"getenv",
+			"log-pixel",
+			"log",
+			"-",
+			"{",
+			"$this->load->view('welcome_message');",
+			"ci_sessions",
+			"id=\"container\">",
+			"ci_logpixel",
+			"enc",
+			"utf8",
+			"@rime.co",
+			"report_error",
+			"full_name",
+			"html",
+			"[",
+			"100x100",
+			"75x75",
+			"cellpadding",
+			"=\"",
+			"#",
+			"p ",
+			"000",
+			"333",
+			"333333",
+			"margin",
+			"333",
+			"weight",
+			":",
+			",",
+			":",
+			";",
+			"link-light",
+			"link",
+			"style",
+			"<?php echo e_hr(); ?>",
+			"<?php echo app_name(); ?>",
+			"php",
+			"inputFile",
+			"putob",
+			"putO",
+			"ACL_PUBLIC",
+			"ACL_PUBLIC_READ",
+			"putObject",
+			"ACL_PRIVATE",
+			"putObject",
+			"get_app_info('s3_secret')",
+			"s3",
+			"aws",
+			"h1",
+			" ",
+			",,",
+			",,,,",
+			",,,",
+			",,",
+			" ",
+			"                                             ",
+			"                                            ",
+			"                                                   ",
+			"                                                  ",
+			"                                                 ",
+			"                                                ",
+			"                                               ",
+			"                                              ",
+			"                                             ",
+			"                                            ",
+			" ",
+			",,,",
+			",,",
+			" ",
+			"    ",
+			"   ",
+			"  ",
+			"model_oauth_cache",
+			"@todo:",
+			"extract_data",
+			"Model_url_extract->update",
+			"Model_url_extract",
+			"cached_response",
+			"url_id",
+			"cached_responses",
+			"cached_response",
+			"record",
+			"@todo: ",
+			"get_last_unsync",
+			"extract_data",
+			"url_embed_list",
+			"extract_data_list",
+			"extract_data",
+			"url_embed['url_id']",
+			"extract_data",
+			"results",
+			"each(",
+			"each",
+			"array_push",
+			"array_column",
+			"array_walk",
+			"array",
+			"list(",
+			" list(",
+			"(list(",
+			"list(",
+			"url_id_list",
+			"extract_data",
+			"lib_url_extract",
+			"gc_collect_cycles",
+			"random_string",
+			"NULL,",
+			"random",
+			"Response is not in json format",
+			"OR",
+			"invited_by",
+			" 'url' => NULL, 'image_url' => NULL,",
+			"kind'        => 'org',",
+			"foundedYear",
+			"name",
+			"employeeCountRange",
+			"emailDomains",
+			"companyType",
+			"abou",
+			"fetch_user_data",
+			"about",
+			"$about['kind'].$about['actor_id']",
+			"prev_actor",
+			"h4",
+			"actors",
+			"actors_sorted"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"guest.moderator",
+			"<script",
+			"asset_url.'",
+			"asset_url('",
+			"asset_url('asset",
+			"visible'    ",
+			"visible' ",
+			"btn-danger",
+			"model/model_actor_user_guest",
+			"service/lib_actor_user_guest",
+			"model_actor_user_guest",
+			"lib_actor_user_guest",
+			"verify",
+			"update",
+			"library('service/vendor/'",
+			"library('service/vendor'",
+			"lib_oauth",
+			"composer/lib_aws",
+			"aws/composer/lib_aws",
+			"session->tempdata('oauth_id'",
+			"html_encode",
+			"user/model_",
+			"user/lib_user",
+			"user/lib_user_place",
+			"user/lib_user_login",
+			"user/lib_user_guest",
+			"lib_user_guest",
+			"model_user_guest",
+			"user/Model_user",
+			"user/Model_user_task_vars",
+			"user/Model_user_login",
+			"user/Model_user_autologin",
+			"url_id",
+			"auth",
+			"lib_user->fill_user_in_list(",
+			"lib_url->fill_url_in_list(",
+			"",
+			" e_anchor",
+			"",
+			"update",
+			"twbs-bootstrap-3.3.5",
+			"// show_error($this->lib_user->get_error_message());\n      show_404();",
+			"show_404($this->lib_user->get_error_message());",
+			"button",
+			"user_item-html\nuser_item",
+			"backtrace",
+			"this->view",
+			"emojify",
+			"CURRENT_TIMESTAMP()) > ', 60",
+			"CURRENT_TIMESTAMP()) < ', 60",
+			"CURRENT_TIMESTAMP()) > ', 1440",
+			" <= ', ",
+			"cd ~/Sites/log-pixel",
+			"cd Sites/log-pixel && php index.php",
+			"$type.'_count'",
+			"tank_auth/model_user",
+			"lib_activity->add",
+			"icon-dots-three-horizontal",
+			"icon-magnifying-glass",
+			"icon-location-pin",
+			"set_sync_delta_cursor",
+			"reset_sync_cursor",
+			"<?php $rand = rand(0, 6); ?>",
+			"twbs-bootstrap-3.3.4",
+			"base_url",
+			"anchor",
+			"footer-html",
+			"<br>",
+			"font-size:14px",
+			"font-size:16",
+			"font-size:18",
+			"",
+			"\"15\"",
+			"width:500;",
+			"'static/about/",
+			"'static/about",
+			"valid_html_encode",
+			"lib_stats_user",
+			"model_stats_user",
+			"'form_element'",
+			"element_config['title'",
+			"create_new",
+			"library('email/lib_send_email'",
+			"'api_key'",
+			"app_name()",
+			"500",
+			"600",
+			"50",
+			"width=\"440\"",
+			"\"30\"",
+			"cellpadding=\"0\" cellspacing=\"0\"",
+			"<table border=\"0\" cellpadding=\"8\" cellspacing=\"0\" style=\"background-color:#ffffff; background:#ffffff; width:100% !important; max-width:500px; padding:0; word-break: break-all;\">",
+			"<table border=\"0\" cellpadding=\"8\" cellspacing=\"0\" style=\"background-color:#ffffff; background:#ffffff; width:100% !important; max-width:500px; padding:0;\">",
+			"<body>",
+			"<body style=\"width:100%; max-width=500px\">",
+			"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n  <head>\n    <title><?php echo $subject; ?></title>\n  </head>\n  <body style=\"max-width=500px\">",
+			"<!-- <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700,300\" type=\"text/css\"> -->",
+			"",
+			"contact_following_list(",
+			"font-size:16px; color:white; width:180px; font-weight:600; background-color:#DA2E75; padding:14px 7px 14px 7px; max-width:180px; font-family:sans-serif; text-align:center; text-decoration:none; display:block;",
+			"font-size:14px; color:inherit; font-family:sans-serif; border-collapse:collapse;",
+			"background-color:#ffffff; background:#ffffff; width:100% !important; padding:0;",
+			"font-family:sans-serif;",
+			"color:#DA2E75;",
+			"color:inherit;",
+			"font-family: sans-serif;",
+			"qr-crop",
+			"",
+			"Can be invoked after any failed operation.",
+			"  /**\n",
+			"  /*\n   * Get error message.\n",
+			"* Get error message.\n   * Can be invoked after any failed operation\n   *",
+			"",
+			"bootstrap-3.3.4",
+			"alert-info",
+			"view('utility/nav_side",
+			"$redirect = $this->input->get('redirect');",
+			"url/",
+			"reply_to",
+			"-->",
+			"array('people_list' => ",
+			"inc_user_stats_count",
+			"dec_user_stats_count",
+			"inc_user_stats_posts_count",
+			"dec_user_stats_count",
+			"inc_user_stats_followers_count",
+			"inc_user_stats_following_count",
+			"dec_user_stats_followers_count"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "application/controllers/Home.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 184,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								184,
+								184
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "application/controllers/Campaign.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 188,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								188,
+								188
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "schema.sql",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3695,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2533,
+								2533
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 865.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "application/controllers/Api.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 349,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								171,
+								171
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "application/controllers/Process_queue.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1187,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5,
+								5
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "application/libraries/Lib_email_status.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5193,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2330,
+								2349
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 714.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "application/libraries/Stats.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1221,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								763,
+								763
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "email.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"lib_email_status",
+				"application/libraries/Lib_email_status.php"
+			],
+			[
+				"hom",
+				"application/controllers/Home.php"
+			],
+			[
+				"sche",
+				"schema.sql"
+			],
+			[
+				"aut",
+				"application/config/autoload.php"
+			],
+			[
+				"con",
+				"application/config/config.php"
+			],
+			[
+				"auto",
+				"log-pixel/application/config/autoload.php"
+			],
+			[
+				"tesem",
+				"application/controllers/test/Send_email.php"
+			],
+			[
+				"lib_send_email",
+				"application/libraries/email/Lib_send_email.php"
+			],
+			[
+				"myem",
+				"application/helpers/MY_email_helper.php"
+			],
+			[
+				"ops",
+				"install/opsworks.json"
+			],
+			[
+				"acema",
+				"application/controllers/action/Email.php"
+			],
+			[
+				"acem",
+				"application/config/email.php"
+			],
+			[
+				"concon",
+				"application/config/config.php"
+			],
+			[
+				"sende",
+				"application/config/email_sender.php"
+			],
+			[
+				"libem",
+				"application/libraries/url/Lib_embedkit.php"
+			],
+			[
+				"conem",
+				"application/config/email_sender.php"
+			],
+			[
+				"sta",
+				"application/controllers/Start.php"
+			],
+			[
+				"viebase",
+				"application/views/base.php"
+			],
+			[
+				"emuser",
+				"application/views/email/common/user_item.php"
+			],
+			[
+				"embut",
+				"application/views/email/common/button.php"
+			],
+			[
+				"embu",
+				"application/views/email/common/button.php"
+			],
+			[
+				"tes",
+				"application/views/email/test.php"
+			],
+			[
+				"emhea",
+				"application/views/email/common/base_header-html.php"
+			],
+			[
+				"myhr",
+				"application/helpers/MY_html_helper.php"
+			],
+			[
+				"htmlhe",
+				"system/helpers/html_helper.php"
+			],
+			[
+				"emhe",
+				"application/helpers/MY_email_helper.php"
+			],
+			[
+				"base_footer",
+				"application/views/email/common/base_footer-html.php"
+			],
+			[
+				"base_header",
+				"application/views/email/common/base_header-html.php"
+			],
+			[
+				"emabase",
+				"application/views/email/base-html.php"
+			],
+			[
+				"api",
+				"application/config/production/api_key.php"
+			],
+			[
+				"procon",
+				"application/config/production/config.php"
+			],
+			[
+				"confikey",
+				"application/config/api_key.php"
+			],
+			[
+				"emerr",
+				"application/views/email/error/error_general.php"
+			],
+			[
+				"common/base_footer",
+				"application/views/email/common/base_footer-html.php"
+			],
+			[
+				"email/common/base_header",
+				"application/views/email/common/base_header-html.php"
+			],
+			[
+				"helps3",
+				"Sendy/includes/helpers/S3.php"
+			],
+			[
+				"home",
+				"application/controllers/Home.php"
+			],
+			[
+				"data",
+				"application/config/production/database.php"
+			],
+			[
+				"liboa",
+				"application/libraries/service/Lib_oauth.php"
+			],
+			[
+				"cron",
+				"install/crontab.txt"
+			],
+			[
+				"modcac",
+				"application/models/url/Model_embedkit_cache.php"
+			],
+			[
+				"tas",
+				"application/controllers/task/Sync_service.php"
+			],
+			[
+				"model_url_extract",
+				"application/models/url/Model_url_extract.php"
+			],
+			[
+				"moact",
+				"application/models/service/Model_actor.php"
+			],
+			[
+				"model_embedkit_cache",
+				"application/models/url/Model_embedkit_cache.php"
+			],
+			[
+				"lib_guzzle",
+				"application/libraries/composer/Lib_guzzle.php"
+			],
+			[
+				"lib_embedkit",
+				"application/libraries/url/Lib_embedkit.php"
+			],
+			[
+				"lib_url_index",
+				"application/libraries/url/Lib_url_index.php"
+			],
+			[
+				"tasksyn",
+				"application/controllers/task/Sync_url.php"
+			],
+			[
+				"urlex",
+				"application/libraries/url/Lib_url_extract.php"
+			],
+			[
+				"url",
+				"application/controllers/tool/Url_extract.php"
+			],
+			[
+				"cro",
+				"application/helpers/cron_helper.php"
+			],
+			[
+				"libaw",
+				"application/libraries/composer/Lib_aws.php"
+			],
+			[
+				"oauth",
+				"application/libraries/service/Lib_oauth.php"
+			],
+			[
+				"sercom",
+				"application/libraries/service/vendor/common.php"
+			],
+			[
+				"comp",
+				"composer.json"
+			],
+			[
+				"my_exceptions",
+				"application/core/MY_Exceptions.php"
+			],
+			[
+				"guest",
+				"application/controllers/Guest.php"
+			],
+			[
+				"header",
+				"application/views/header.php"
+			],
+			[
+				"tumb",
+				"application/libraries/service/vendor/Tumblr.php"
+			],
+			[
+				"guuse",
+				"application/views/guest/user.php"
+			],
+			[
+				"guse",
+				"application/views/guest/search_service.php"
+			],
+			[
+				"link",
+				"application/libraries/service/vendor/Linkedin.php"
+			],
+			[
+				"viabo",
+				"application/views/user/about_info.php"
+			],
+			[
+				"abou",
+				"application/controllers/user/About.php"
+			],
+			[
+				"libacabo",
+				"application/libraries/service/Lib_actor_about.php"
+			],
+			[
+				"lin",
+				"application/libraries/service/vendor/Linkedin.php"
+			],
+			[
+				"libse",
+				"application/libraries/service/Lib_service_sync.php"
+			],
+			[
+				"bo",
+				"application/views/url_result/body.php"
+			],
+			[
+				"abouex",
+				"application/views/user/about_ext_links.php"
+			],
+			[
+				"abex",
+				"application/views/user/about_ext_links.php"
+			],
+			[
+				"about_info",
+				"application/views/user/about_info.php"
+			],
+			[
+				"viewabout",
+				"application/views/user/about.php"
+			],
+			[
+				"model_actor_about",
+				"application/models/service/Model_actor_about.php"
+			],
+			[
+				"libabou",
+				"application/libraries/service/Lib_actor_about.php"
+			],
+			[
+				"userabou",
+				"application/controllers/user/About.php"
+			],
+			[
+				"moac",
+				"application/models/service/Model_actor.php"
+			],
+			[
+				"myte",
+				"application/helpers/MY_text_helper.php"
+			],
+			[
+				"libac",
+				"application/libraries/service/Lib_actor.php"
+			],
+			[
+				"libacpo",
+				"application/libraries/service/Lib_actor_post.php"
+			],
+			[
+				"lib_actor_post",
+				"application/libraries/service/Lib_actor_post.php"
+			],
+			[
+				"lib_actor_about",
+				"application/libraries/service/Lib_actor_about.php"
+			],
+			[
+				"oacom",
+				"application/config/oauth_common.php"
+			],
+			[
+				"oa",
+				"application/config/oauth_key.php"
+			],
+			[
+				"prooakey",
+				"application/config/production/oauth_key.php"
+			],
+			[
+				"libser",
+				"application/libraries/service/Lib_service_sync.php"
+			],
+			[
+				"mysqli_driver",
+				"system/database/drivers/mysqli/mysqli_driver.php"
+			],
+			[
+				"ci_db_mysqli_driver",
+				"application/core/MY_DB_mysqli_driver.php"
+			],
+			[
+				"cimydri",
+				"application/core/MY_DB_mysqli_driver.php"
+			],
+			[
+				"libsesyn",
+				"application/libraries/service/Lib_service_sync.php"
+			],
+			[
+				"mocat",
+				"application/models/service/Model_actor.php"
+			],
+			[
+				"tassyn",
+				"application/controllers/task/Sync_service.php"
+			],
+			[
+				"cr",
+				"install/crontab.txt"
+			],
+			[
+				"libsyn",
+				"application/libraries/service/Lib_service_sync.php"
+			],
+			[
+				"op",
+				"install/opsworks.json"
+			],
+			[
+				"mymy",
+				"application/core/MY_DB_mysqli_driver.php"
+			],
+			[
+				"ins",
+				"application/libraries/service/vendor/Instagram.php"
+			],
+			[
+				"googl",
+				"application/libraries/service/vendor/Google.php"
+			],
+			[
+				"rou",
+				"application/config/routes.php"
+			],
+			[
+				"conguse",
+				"application/controllers/Guest.php"
+			],
+			[
+				"search_service",
+				"application/views/guest/search_service.php"
+			],
+			[
+				"guesuser",
+				"application/views/guest/user.php"
+			],
+			[
+				"sese",
+				"application/views/guest/search_service.php"
+			],
+			[
+				"goo",
+				"application/libraries/service/vendor/Google.php"
+			],
+			[
+				"tw",
+				"application/libraries/service/vendor/Twitter.php"
+			],
+			[
+				"face",
+				"application/libraries/service/vendor/Facebook.php"
+			],
+			[
+				"tesaws",
+				"application/controllers/test/Aws.php"
+			],
+			[
+				"back",
+				"application/views/email/error/backtrace.php"
+			],
+			[
+				"hook",
+				"application/hooks/ExceptionHook.php"
+			],
+			[
+				"mye",
+				"application/helpers/MY_email_helper.php"
+			],
+			[
+				"tesse",
+				"application/controllers/test/Send_email.php"
+			],
+			[
+				"mymys",
+				"application/core/MY_DB_mysqli_driver.php"
+			],
+			[
+				"model_actor",
+				"application/models/service/Model_actor.php"
+			],
+			[
+				"lib",
+				"application/libraries/service/Lib_actor.php"
+			],
+			[
+				"authacto",
+				"application/views/auth/actor_list.php"
+			],
+			[
+				"sign",
+				"application/views/auth/signin.php"
+			],
+			[
+				"settings",
+				"application/controllers/Settings.php"
+			],
+			[
+				"model_user_login",
+				"application/models/user/Model_user_login.php"
+			],
+			[
+				"modeac",
+				"application/models/service/Model_actor.php"
+			],
+			[
+				"libcon",
+				"application/libraries/promo/Lib_contact.php"
+			],
+			[
+				"libactor",
+				"application/libraries/service/Lib_actor.php"
+			],
+			[
+				"libact",
+				"application/libraries/service/Lib_actor.php"
+			],
+			[
+				"mymysql",
+				"application/core/MY_DB_mysqli_driver.php"
+			],
+			[
+				"libuser",
+				"application/libraries/user/Lib_user_login.php"
+			],
+			[
+				"lib_actor",
+				"application/libraries/service/Lib_actor_post.php"
+			],
+			[
+				"auth",
+				"application/controllers/Auth.php"
+			],
+			[
+				"sc",
+				"install/schema.sql"
+			],
+			[
+				"libco",
+				"application/libraries/promo/Lib_contact.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 400.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 574.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 235.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
