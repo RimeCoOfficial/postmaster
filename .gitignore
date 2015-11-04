@@ -10,3 +10,4 @@ application/logs/*
 
 /vendor/
 /nbproject/
+*.sublime-workspace

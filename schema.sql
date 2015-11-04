@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS ci_sessions (
 
 CREATE TABLE IF NOT EXISTS status (
   email_id                varchar(256)        NOT NULL  UNIQUE,
-  -- name                    varchar(256)                  DEFAULT NULL,
 
   -- latest status
   status                  varchar(32)                   DEFAULT NULL, -- delivery, bounce, complaint
@@ -46,6 +45,7 @@ CREATE TABLE IF NOT EXISTS status (
 --
 
 CREATE TABLE IF NOT EXISTS list (
+  list_id                 int                 NOT NULL  AUTO_INCREMENT,
   id                      varchar(32)                   DEFAULT NULL,
 
   -- -- unsubscribtion category
@@ -90,20 +90,29 @@ CREATE TABLE IF NOT EXISTS campaign (
 -- --------------------------------------------------------
 
 --
--- Table structure for table send
+-- Table structure for table campaign_list
+--
+
+CREATE TABLE IF NOT EXISTS campaign_list (
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table tumblr
 --
 
 CREATE TABLE IF NOT EXISTS tumblr (
-  news_id                 int                 NOT NULL  AUTO_INCREMENT,
-  title                   varchar(256)        NOT NULL  COLLATE utf8mb4_unicode_ci,
-  description             text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
-  html                    text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
-  txt                     text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
-  tumblr_html             text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
-  tumblr_post_id          varchar(256)                  DEFAULT NULL,
-  email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  status                  varchar(16)                   DEFAULT NULL, -- in_progress
+  x_account_id            varchar(256)        NOT NULL,
+  token                   text                NOT NULL,
+  token_secret            text                NOT NULL,
+  limit_used              int                           DEFAULT 0,
+
+  url                     text                          DEFAULT NULL,
+
+  updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (service, x_account_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
