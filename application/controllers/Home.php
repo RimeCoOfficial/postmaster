@@ -8,6 +8,7 @@ class Home extends CI_Controller
     $this->load->library('lib_auth');
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $this->load->view('welcome_message', $view_data);
+    $view_data['main_content'] = $this->load->view('home', NULL, TRUE);
+    $this->load->view('base', $view_data);
   }
 }
