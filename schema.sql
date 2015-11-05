@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS feedback (
   email_id                varchar(256)        NOT NULL  UNIQUE,
 
   state                   varchar(32)                   DEFAULT NULL, -- latest status: delivery, bounce, complaint
-  type                    varchar(32)                   DEFAULT NULL,
+  type                    varchar(64)                   DEFAULT NULL,
   timestamp               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
 
   message_json            text                          DEFAULT NULL,
