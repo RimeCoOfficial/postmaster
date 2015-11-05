@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Lib_email_status
+class Lib_status
 {
   private $error = array();
   
@@ -9,7 +9,7 @@ class Lib_email_status
   {
     $this->CI =& get_instance();
 
-    $this->CI->load->model('email/model_email_status');
+    $this->CI->load->model('model_status');
   }
   
   /**
@@ -23,36 +23,12 @@ class Lib_email_status
     return $this->error;
   }
 
-  function store($email_id, $status = array())
-  {
-    $status['campaign']     = isset($status['campaign']) ? $status['campaign'] : 1;
-    $status['tips']         = 1;
-    $status['newsletter']   = isset($status['newsletter']) ? $status['newsletter'] : 1;
-    $status['promotion']    = isset($status['promotion']) ? $status['promotion'] : 1;
-    $status['notification'] = isset($status['notification']) ? $status['notification'] : 1;
-    $status['announcement'] = isset($status['announcement']) ? $status['announcement'] : 1;
-    $status['digest']       = 1;
-
-    return $this->CI->model_email_status->store($email_id, $status);
-  }
-
   function get($email_id)
   {
-    return $this->CI->model_email_status->get($email_id);
+    return $this->CI->model_status->get($email_id);
   }
 
-  function unsubscribe($email_id, $type)
-  {
-    $this->CI->load->library('email/lib_send_email');
-
-    if ($this->CI->lib_send_email->can_unsubscribe($type))
-    {
-      $status[ $type ] = 0;
-      return $this->CI->model_email_status->store($email_id, $status);
-    }
-  }
-
-  function process_queue($queue_type = 'bounces') // type = bounces, complaints, deliveries
+  function process_notification_queue($queue_type = 'bounces') // type = bounces, complaints, deliveries
   {
     $this->CI->load->library('composer/lib_aws');
     $sqs_client = $this->CI->lib_aws->get_sqs();
@@ -60,9 +36,9 @@ class Lib_email_status
     // $result = $sqs_client->ListQueues();
     // echo '<pre>' . print_r($result, TRUE) . '</pre>';
 
-    // https://sqs.us-west-2.amazonaws.com/927493227978/log-pixel-ses-bounces-queue
-    // https://sqs.us-west-2.amazonaws.com/927493227978/log-pixel-ses-complaints-queue
-    // https://sqs.us-west-2.amazonaws.com/927493227978/log-pixel-ses-deliveries-queue
+    // https://sqs.us-west-2.amazonaws.com/927493227978/bounces
+    // https://sqs.us-west-2.amazonaws.com/927493227978/complaints
+    // https://sqs.us-west-2.amazonaws.com/927493227978/deliveries
     $queue_url = 'https://sqs.'.$this->CI->config->item('aws_region', 'api_key').'.amazonaws.com/'.$this->CI->config->item('aws_account_id', 'api_key').'/' .$this->CI->config->item('aws_prefix', 'api_key'). '-ses-'.$queue_type.'-queue';
 
     $result = $sqs_client->receiveMessage(array(
@@ -98,7 +74,7 @@ class Lib_email_status
           
           if (!is_null($email_id = valid_email($ses_message['mail']['destination'][0])))
           {
-            $this->CI->model_email_status->store($email_id);
+            $this->CI->model_status->store($email_id);
             $state = array();
 
             if (!empty($ses_message['bounce']))
@@ -124,7 +100,7 @@ class Lib_email_status
 
             $state['status_json'] = $message_body['Message'];
 
-            $this->CI->model_email_status->update_status($email_id, $state);
+            $this->CI->model_status->update_status($email_id, $state);
 
             echo $email_id.': '.$state['status'].' '.$state['status_type'].PHP_EOL;
           }
@@ -151,8 +127,8 @@ class Lib_email_status
   function stats()
   {
     $stats = array(
-      'aws' => $this->CI->model_email_status->stats(),
-      'unsubscribe' => $this->CI->model_email_status->stats_unsubscribe(),
+      'aws' => $this->CI->model_status->stats(),
+      'unsubscribe' => $this->CI->model_status->stats_unsubscribe(),
     );
     return $stats;
   }

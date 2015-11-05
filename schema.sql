@@ -29,8 +29,7 @@ CREATE TABLE IF NOT EXISTS ci_sessions (
 CREATE TABLE IF NOT EXISTS status (
   email_id                varchar(256)        NOT NULL  UNIQUE,
 
-  -- latest status
-  status                  varchar(32)                   DEFAULT NULL, -- delivery, bounce, complaint
+  status                  varchar(32)                   DEFAULT NULL, -- latest status: delivery, bounce, complaint
   status_type             varchar(32)                   DEFAULT NULL,
   status_timestamp        datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
 
