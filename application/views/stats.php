@@ -5,10 +5,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <h1>Stats</h1>
 
 <table class="table">
-  <caption>Amazon SES</caption>
+  <caption>Feedback</caption>
   <thead>
     <tr>
-      <th>Status</th>
+      <th>State</th>
       <th>Type</th>
       <th>Timestamp</th>
       <th>Count</th>
@@ -18,14 +18,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <tbody>
     <?php
     $total = 0;
-    foreach ($status as $s)
+    foreach ($feedback as $s)
     {
       $total += $s['count'];
       ?>
       <tr>
-        <th scope="row"><?php echo $s['status']; ?></th>
-        <td><?php echo $s['status_type']; ?></td>
-        <td><?php echo $s['status_timestamp']; ?></td>
+        <th scope="row"><?php echo $s['state']; ?></th>
+        <td><?php echo $s['type']; ?></td>
+        <td><?php echo $s['timestamp']; ?></td>
         <td><?php echo $s['count']; ?></td>
       </tr>
       <?php

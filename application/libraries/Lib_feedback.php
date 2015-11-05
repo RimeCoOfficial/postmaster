@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Lib_status
+class Lib_feedback
 {
   private $error = array();
   
   function __construct($options = array())
   {
     $this->CI =& get_instance();
-    $this->CI->load->model('model_status');
+    $this->CI->load->model('model_feedback');
   }
   
   /**
@@ -72,31 +72,31 @@ class Lib_status
 
             if (!empty($ses_message['bounce']))
             {
-              $state['status'] = 'bounce';
-              $state['status_type'] = strtolower($ses_message['bounce']['bounceSubType'].'/'.$ses_message['bounce']['bounceType']);
-              $state['status_timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['bounce']['timestamp']));
+              $state['state'] = 'bounce';
+              $state['type'] = strtolower($ses_message['bounce']['bounceSubType'].'/'.$ses_message['bounce']['bounceType']);
+              $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['bounce']['timestamp']));
             }
 
             if (!empty($ses_message['complaint']))
             {
-              $state['status'] = 'complaint';
-              $state['status_type'] = $ses_message['complaint']['complaintFeedbackType'];
-              $state['status_timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['complaint']['timestamp']));
+              $state['state'] = 'complaint';
+              $state['type'] = $ses_message['complaint']['complaintFeedbackType'];
+              $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['complaint']['timestamp']));
             }
 
             if (!empty($ses_message['delivery']))
             {
-              $state['status'] = 'delivery';
-              $state['status_type'] = $ses_message['delivery']['smtpResponse'];
-              $state['status_timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['delivery']['timestamp']));
+              $state['state'] = 'delivery';
+              $state['type'] = $ses_message['delivery']['smtpResponse'];
+              $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['delivery']['timestamp']));
             }
 
-            $state['status_json'] = $message_body['Message'];
+            $state['message_json'] = $message_body['Message'];
 
-            $this->CI->model_status->store($email_id);
-            $this->CI->model_status->update_status($email_id, $state);
+            $this->CI->model_feedback->store($email_id);
+            $this->CI->model_feedback->update($email_id, $state);
 
-            echo "\t- ".'Email: '.$email_id.', status: '.$state['status'].', type: '.$state['status_type'].PHP_EOL;
+            echo "\t- ".'Email: '.$email_id.', state: '.$state['state'].', type: '.$state['type'].PHP_EOL;
           }
         }
       }
@@ -120,11 +120,11 @@ class Lib_status
 
   function get($email_id)
   {
-    return $this->CI->model_status->get($email_id);
+    return $this->CI->model_feedback->get($email_id);
   }
 
   function stats()
   {
-    return $this->CI->model_status->stats();
+    return $this->CI->model_feedback->stats();
   }
 }

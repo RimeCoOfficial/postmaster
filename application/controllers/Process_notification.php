@@ -29,16 +29,16 @@ class Process_notification extends CI_Controller
   function queue($type = 'bounces') //  type = bounces, complaints, deliveries
   {
     echo 'Start Notification'.PHP_EOL;
-    $this->load->library('lib_status');
+    $this->load->library('lib_feedback');
 
     if (is_running() === FALSE)
     {
       lock();
       while (TRUE)
       {
-        if (is_null($this->lib_status->process_notification($type)))
+        if (is_null($this->lib_feedback->process_notification($type)))
         {
-          show_error($this->lib_status->get_error_message());
+          show_error($this->lib_feedback->get_error_message());
         }
       }
       unlock();

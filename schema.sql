@@ -23,17 +23,17 @@ CREATE TABLE IF NOT EXISTS ci_sessions (
 -- --------------------------------------------------------
 
 --
--- Table structure for table status
+-- Table structure for table feedback
 --
 
-CREATE TABLE IF NOT EXISTS status (
+CREATE TABLE IF NOT EXISTS feedback (
   email_id                varchar(256)        NOT NULL  UNIQUE,
 
-  status                  varchar(32)                   DEFAULT NULL, -- latest status: delivery, bounce, complaint
-  status_type             varchar(32)                   DEFAULT NULL,
-  status_timestamp        datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  state                   varchar(32)                   DEFAULT NULL, -- latest status: delivery, bounce, complaint
+  type                    varchar(32)                   DEFAULT NULL,
+  timestamp               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
 
-  status_json             text                          DEFAULT NULL,
+  message_json            text                          DEFAULT NULL,
   PRIMARY KEY (email_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
