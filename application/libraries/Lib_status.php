@@ -36,16 +36,19 @@ class Lib_status
     // $result = $sqs_client->ListQueues();
     // echo '<pre>' . print_r($result, TRUE) . '</pre>';
 
-    // https://sqs.us-west-2.amazonaws.com/927493227978/bounces
-    // https://sqs.us-west-2.amazonaws.com/927493227978/complaints
-    // https://sqs.us-west-2.amazonaws.com/927493227978/deliveries
-    $queue_url = 'https://sqs.'.$this->CI->config->item('aws_region', 'api_key').'.amazonaws.com/'.$this->CI->config->item('aws_account_id', 'api_key').'/' .$this->CI->config->item('aws_prefix', 'api_key'). '-ses-'.$queue_type.'-queue';
+    $config = $this->CI->config->item('aws', 'api_key');
+
+    // https://sqs.us-west-2.amazonaws.com/927493227978/ses-bounces
+    // https://sqs.us-west-2.amazonaws.com/927493227978/ses-complaints
+    // https://sqs.us-west-2.amazonaws.com/927493227978/ses-deliveries
+    $queue_url = 'https://sqs.'.$config['region'].'.amazonaws.com/'.$config['account_id'].'/ses-'.$queue_type;
 
     $result = $sqs_client->receiveMessage(array(
       'QueueUrl' => $queue_url,
       'MaxNumberOfMessages' => 10,
     ));
 
+    print_r($result); die();
     // echo '<pre>' . print_r($result, TRUE) . '</pre>';
 
     if (empty($result['Messages']))

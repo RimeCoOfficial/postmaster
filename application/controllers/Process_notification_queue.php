@@ -22,8 +22,8 @@ class Process_notification_queue extends CI_Controller
     echo 'Process notification queue'.PHP_EOL;
   }
 
-  // cd ~/Sites/postmaster && php index.php task process_notification_queue index bounces
-  // cd /srv/www/postmaster/current && php index.php task process_notification_queue index bounces
+  // cd ~/Sites/postmaster && php index.php process_notification_queue index bounces
+  // cd /srv/www/postmaster/current && php index.php process_notification_queue index bounces
   function index($type = 'bounces') //  type = bounces, complaints, deliveries
   {
     echo 'Start Notification'.PHP_EOL;
