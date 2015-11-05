@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <tbody>
     <?php
     $total = 0;
-    foreach ($stats['aws'] as $s)
+    foreach ($status as $s)
     {
       $total += $s['count'];
       ?>
@@ -44,6 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php
 // var_dump($stats['unsubscribe']);
 ?>
+<!-- 
 <table class="table">
   <caption>Unsubscribe</caption>
   <thead>
@@ -55,6 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <tbody>
     <?php
+    if (FALSE)
     foreach ($stats['unsubscribe'] as $key => $s)
     {
       ?>
@@ -67,3 +69,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     ?>
   </tbody>
 </table>
+ -->

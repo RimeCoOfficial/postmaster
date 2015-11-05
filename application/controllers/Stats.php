@@ -5,8 +5,8 @@ class Stats extends CI_Controller
 {
   public function index()
   {
-    $this->load->library('lib_email_status');
-    $local_view_data['stats'] = $this->lib_email_status->stats();
+    $this->load->library('lib_status');
+    $local_view_data['status'] = $this->lib_status->stats();
 
     $this->load->library('lib_auth');
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
