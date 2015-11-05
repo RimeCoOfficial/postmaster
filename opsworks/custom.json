@@ -1,0 +1,35 @@
+{
+  "custom_env": {
+    "log_pixel": {
+      "path_to_vars": "opsworks",
+      "env_vars" : [
+        "CI_ENV=production",
+        "aws_account_id=012345678901",
+        "aws_access_key=ABCDEFGHIJKLMNOPQWEQ",
+        "aws_secret_key=skudhfjk8WN1J2/FHskduUEHFNEIUSDBI2ani+A0",
+        "aws_region=us-west-2",
+        "aws_s3_bucket=bucket",
+        "ga=UA-12345678-1",
+        "tumblr_client_id=auwhajw2JHGWJHB2M2MJSFNSJEJBJ2BJ12aj21JDKBJKJW2jBJ",
+        "tumblr_client_secret=EUjseheuiw182bjBJBWKJBWJBJAy3blfnlseifkbWBLBWJbbfe"
+      ]
+    },
+    "cron_jobs": [
+      {
+        "name"    : "process_notification queue bounces",
+        "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
+        "command" : "cd /srv/www/postmaster/current && php index.php process_notification queue bounces"
+      },
+      {
+        "name"    : "process_notification queue complaints",
+        "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
+        "command" : "cd /srv/www/postmaster/current && php index.php process_notification queue complaints"
+      },
+      {
+        "name"    : "process_notification queue deliveries",
+        "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
+        "command" : "cd /srv/www/postmaster/current && php index.php process_notification queue deliveries"
+      }
+    ]
+  }
+}

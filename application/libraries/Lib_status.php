@@ -8,7 +8,6 @@ class Lib_status
   function __construct($options = array())
   {
     $this->CI =& get_instance();
-
     $this->CI->load->model('model_status');
   }
   
@@ -23,24 +22,18 @@ class Lib_status
     return $this->error;
   }
 
-  function get($email_id)
-  {
-    return $this->CI->model_status->get($email_id);
-  }
-
-  function process_notification_queue($queue_type = 'bounces') // type = bounces, complaints, deliveries
+  function process_notification($queue_type)
   {
     $this->CI->load->library('composer/lib_aws');
     $sqs_client = $this->CI->lib_aws->get_sqs();
 
-    // $result = $sqs_client->ListQueues();
-    // echo '<pre>' . print_r($result, TRUE) . '</pre>';
+    // $result = $sqs_client->ListQueues(); print_r($result); die();
 
     $config = $this->CI->config->item('aws', 'api_key');
 
-    // https://sqs.us-west-2.amazonaws.com/927493227978/ses-bounces
-    // https://sqs.us-west-2.amazonaws.com/927493227978/ses-complaints
-    // https://sqs.us-west-2.amazonaws.com/927493227978/ses-deliveries
+    // https://sqs.us-west-2.amazonaws.com/012345678901/ses-bounces
+    // https://sqs.us-west-2.amazonaws.com/012345678901/ses-complaints
+    // https://sqs.us-west-2.amazonaws.com/012345678901/ses-deliveries
     $queue_url = 'https://sqs.'.$config['region'].'.amazonaws.com/'.$config['account_id'].'/ses-'.$queue_type;
 
     $result = $sqs_client->receiveMessage(array(
@@ -48,36 +41,33 @@ class Lib_status
       'MaxNumberOfMessages' => 10,
     ));
 
-    print_r($result); die();
-    // echo '<pre>' . print_r($result, TRUE) . '</pre>';
-
     if (empty($result['Messages']))
     {
-      exit('@kill-task: Queue empty!');
-      
-      $this->error = array('message' => 'Queue empty!');
-      return NULL;
+      exit('@kill-task: No task found');
     }
 
     foreach ($result['Messages'] as $message)
     {
-      $message_body = json_decode($message['Body'], TRUE);
-
-      if (!empty($message_body['Message']))
+      if (!empty($message['Body']))
       {
-        $ses_message = json_decode($message_body['Message'], TRUE);
-        // var_dump($ses_message);
+        $message_body = json_decode($message['Body'], TRUE);
 
-        if (!empty($ses_message['mail']['destination'][0]))
+        if (!empty($message_body['Message']))
         {
-          // $email_id = $ses_message['mail']['destination'][0];
-          // $email_id = strtolower($email_id);
-          
-          $this->CI->load->helper('email');
-          
-          if (!is_null($email_id = valid_email($ses_message['mail']['destination'][0])))
+          $ses_message = json_decode($message_body['Message'], TRUE);
+          // var_dump($ses_message);
+
+          if (!empty($ses_message['mail']['destination'][0]))
           {
-            $this->CI->model_status->store($email_id);
+            // $email_id = $ses_message['mail']['destination'][0];
+            // $email_id = strtolower($email_id);
+            
+            $this->CI->load->helper('email');
+            if (is_null($email_id = valid_email($ses_message['mail']['destination'][0])))
+            {
+              throw new Exception("Not a valid email: ".$ses_message['mail']['destination'][0], 1);
+            }
+
             $state = array();
 
             if (!empty($ses_message['bounce']))
@@ -103,16 +93,17 @@ class Lib_status
 
             $state['status_json'] = $message_body['Message'];
 
+            $this->CI->model_status->store($email_id);
             $this->CI->model_status->update_status($email_id, $state);
 
-            echo $email_id.': '.$state['status'].' '.$state['status_type'].PHP_EOL;
+            echo "\t- ".'Email: '.$email_id.', status: '.$state['status'].', type: '.$state['status_type'].PHP_EOL;
           }
         }
       }
 
       if (!empty($message['ReceiptHandle']))
       {
-        echo 'Delete message: '.$message['ReceiptHandle'];
+        echo "\t- ".'Delete message: '.$message['ReceiptHandle'].PHP_EOL;
         $receipt_handle = $message['ReceiptHandle'];
 
         $sqs_client->deleteMessage(array(
@@ -127,12 +118,13 @@ class Lib_status
     return TRUE;
   }
 
+  function get($email_id)
+  {
+    return $this->CI->model_status->get($email_id);
+  }
+
   function stats()
   {
-    $stats = array(
-      'aws' => $this->CI->model_status->stats(),
-      'unsubscribe' => $this->CI->model_status->stats_unsubscribe(),
-    );
-    return $stats;
+    return $this->CI->model_status->stats();
   }
 }
