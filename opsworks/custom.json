@@ -1,6 +1,6 @@
 {
   "custom_env": {
-    "log_pixel": {
+    "postmaster": {
       "path_to_vars": "opsworks",
       "env_vars" : [
         "CI_ENV=production",
