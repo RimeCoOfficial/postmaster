@@ -4,6 +4,9 @@
       "path_to_vars": "opsworks",
       "env_vars" : [
         "CI_ENV=production",
+        "db_hostname=mydbinstance.jaeqkkqniuuw.us-west-2.rds.amazonaws.com",
+        "db_username=awsuser",
+        "db_password=password"
         "aws_account_id=012345678901",
         "aws_access_key=ABCDEFGHIJKLMNOPQWEQ",
         "aws_secret_key=skudhfjk8WN1J2/FHskduUEHFNEIUSDBI2ani+A0",

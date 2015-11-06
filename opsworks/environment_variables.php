@@ -4,6 +4,10 @@
  */
 putenv('FOO=BAR');
 
+putenv('db_hostname=localhost');
+putenv('db_username=root');
+putenv('db_password=root');
+
 // Debug keys
 putenv('aws_account_id=012345678901');
 putenv('aws_access_key=ABCDEFGHIJKLMNOPQWEQ');
