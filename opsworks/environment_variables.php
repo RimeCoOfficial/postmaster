@@ -4,6 +4,9 @@
  */
 putenv('FOO=BAR');
 
+putenv('ci_base_url=http://localhost/postmaster');
+putenv('ci_proxy_ips=');
+
 putenv('db_hostname=localhost');
 putenv('db_username=root');
 putenv('db_password=root');

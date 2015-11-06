@@ -4,9 +4,11 @@
       "path_to_vars": "opsworks",
       "env_vars" : [
         "CI_ENV=production",
+        "ci_base_url=http://mail.example.com"
+        "ci_proxy_ips=172.22.11.0/20,172.22.22.0/20,172.22.0.0/20"
         "db_hostname=mydbinstance.jaeqkkqniuuw.us-west-2.rds.amazonaws.com",
         "db_username=awsuser",
-        "db_password=password"
+        "db_password=password",
         "aws_account_id=012345678901",
         "aws_access_key=ABCDEFGHIJKLMNOPQWEQ",
         "aws_secret_key=skudhfjk8WN1J2/FHskduUEHFNEIUSDBI2ani+A0",

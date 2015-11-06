@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/postmaster';
+$config['base_url'] = getenv('ci_base_url');
 
 /*
 |--------------------------------------------------------------------------
@@ -510,4 +510,4 @@ $config['rewrite_short_tags'] = FALSE;
 | Comma-separated:	'10.0.1.200,192.168.5.0/24'
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
-$config['proxy_ips'] = '';
+$config['proxy_ips'] = getenv('ci_proxy_ips');
