@@ -40,8 +40,9 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
                   ?>
                   <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Stats</a></li>
-                    <li><a href="#">Campaign</a></li>
+                    <li><a href="#">Campaigns</a></li>
                     <li><a href="#">Lists</a></li>
+                    <li><a href="#">Settings</a></li>
                   </ul>
                   <?php
                 }

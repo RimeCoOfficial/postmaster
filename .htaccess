@@ -1,16 +1,7 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     #RewriteBase /
-
-    # Force HTTPS
-    RewriteCond %{HTTP:X-Forwarded-Proto} !https
-    RewriteCond %{HTTPS} off
-    RewriteCond %{SERVER_NAME} !localhost
-    # Health Check - Ping Target = TCP:80
-    #RewriteCond %{HTTP_USER_AGENT} !^ELB-HealthChecker$
-    #RewriteCond %{REQUEST_URI} !/index.php
-    RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [L,R=301]
-
+    
     # Removes access to the system folder by users.
     # Additionally this will allow you to create a System.php controller,
     # previously this would not have been possible.
