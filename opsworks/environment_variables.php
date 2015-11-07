@@ -37,8 +37,3 @@ putenv('admin_email_id=joe@example.com');
 putenv('debug_email_id=joe@example.com');
 
 putenv('api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-
-putenv('ga=UA-12345678-1');
-
-putenv('tumblr_client_id=auwhajw2JHGWJHB2M2MJSFNSJEJBJ2BJ12aj21JDKBJKJW2jBJ');
-putenv('tumblr_client_secret=EUjseheuiw182bjBJBWKJBWJBJAy3blfnlseifkbWBLBWJbbfe');
