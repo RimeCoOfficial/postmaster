@@ -5,18 +5,18 @@
       "env_vars" : [
         "CI_ENV=production",
         "ci_base_url=http://mail.example.com"
-        "ci_proxy_ips=172.22.11.0/20,172.22.22.0/20,172.22.0.0/20"
-        "db_hostname=mydbinstance.jaeqkkqniuuw.us-west-2.rds.amazonaws.com",
+        "ci_proxy_ips=172.XX.XX.0/20,172.XX.XX.0/20,172.XX.XX.0/20"
+        "db_hostname=mydbinstance.XXXXXXXXXXXX.us-west-2.rds.amazonaws.com",
         "db_username=awsuser",
         "db_password=mypassword",
-        "aws_account_id=012345678901",
-        "aws_access_key=ABCDEFGHIJKLMNOPQWEQ",
-        "aws_secret_key=skudhfjk8WN1J2/FHskduUEHFNEIUSDBI2ani+A0",
+        "aws_account_id=XXXXXXXXXXXX",
+        "aws_access_key=XXXXXXXXXXXXXXXXXXXX",
+        "aws_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         "aws_region=us-west-2",
         "aws_s3_bucket=bucket",
-        "ga=UA-12345678-1",
-        "tumblr_client_id=auwhajw2JHGWJHB2M2MJSFNSJEJBJ2BJ12aj21JDKBJKJW2jBJ",
-        "tumblr_client_secret=EUjseheuiw182bjBJBWKJBWJBJAy3blfnlseifkbWBLBWJbbfe"
+        "ga=UA-XXXXXXXX-X",
+        "tumblr_client_id=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "tumblr_client_secret=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
       ]
     },
     "cron_jobs": [

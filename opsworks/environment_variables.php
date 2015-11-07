@@ -12,9 +12,9 @@ putenv('db_username=root');
 putenv('db_password=root');
 
 // Debug keys
-putenv('aws_account_id=012345678901');
-putenv('aws_access_key=ABCDEFGHIJKLMNOPQWEQ');
-putenv('aws_secret_key=skudhfjk8WN1J2/FHskduUEHFNEIUSDBI2ani+A0');
+putenv('aws_account_id=XXXXXXXXXXXX');
+putenv('aws_access_key=XXXXXXXXXXXXXXXXXXXX');
+putenv('aws_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 
 // US East (N. Virginia)        us-east-1
 // US West (Oregon)             us-west-2
@@ -27,6 +27,16 @@ putenv('aws_secret_key=skudhfjk8WN1J2/FHskduUEHFNEIUSDBI2ani+A0');
 // South America (Sao Paulo)    sa-east-1
 putenv('aws_region=us-west-2');
 putenv('aws_s3_bucket=bucket');
+
+putenv('ga=UA-XXXXXXXXX-X');
+
+putenv('tumblr_client_id=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+putenv('tumblr_client_secret=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+
+putenv('admin_email_id=joe@example.com');
+putenv('debug_email_id=joe@example.com');
+
+putenv('api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 
 putenv('ga=UA-12345678-1');
 
