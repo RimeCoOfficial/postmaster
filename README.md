@@ -13,6 +13,7 @@ AWS email server
 - [x] Admin login for campaigns
 - [ ] Auto inline CSS
 - [ ] Auto (body + footer) `Plain text` email
-- [ ] SNS, SQS - handle bounces, complaints, deliveries
+- [ ] SNS, SQS - handle feedback (bounces, complaints, deliveries)
 - [ ] Queuing and Multiple emails sending
 - [ ] Post email to **Tumblr**
+- [ ] Email stats - using [ga-beacon](https://github.com/igrigorik/ga-beacon)
