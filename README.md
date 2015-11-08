@@ -16,4 +16,4 @@ AWS email server
 - [x] SNS, SQS - handle feedback (bounces, complaints, deliveries)
 - [ ] Queuing and Multiple emails sending
 - [ ] Post email to **Tumblr**
-- [ ] Email stats - using [ga-beacon](https://github.com/igrigorik/ga-beacon)
+- [ ] Email stats - using [ga-beacon](https://github.com/igrigorik/ga-beacon), [sitepoint.com](http://www.sitepoint.com/using-beacon-image-github-website-email-analytics/)
