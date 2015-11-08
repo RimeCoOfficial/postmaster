@@ -9,6 +9,7 @@ AWS email server
 - [ ] Auto `List-Unsubscribe` headers
 - [ ] Markdown editor for Campaigns
 - [ ] API Access
+- [ ] Assets upload to S3 (`YYYYMMDD-HHMMSS.ext`)
 - [x] Stats
 - [x] Admin login for campaigns
 - [ ] Auto inline CSS
