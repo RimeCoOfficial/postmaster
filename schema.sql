@@ -46,15 +46,6 @@ CREATE TABLE IF NOT EXISTS feedback (
 CREATE TABLE IF NOT EXISTS list (
   list_id                 int                 NOT NULL  AUTO_INCREMENT,
   id                      varchar(32)                   DEFAULT NULL,
-
-  -- -- unsubscribtion category
-  -- campaign                tinyint(1)          NOT NULL  DEFAULT 0,
-  -- tips                    tinyint(1)          NOT NULL  DEFAULT 0,
-  -- newsletter              tinyint(1)          NOT NULL  DEFAULT 0,
-  -- notification            tinyint(1)          NOT NULL  DEFAULT 0,
-  -- promotion               tinyint(1)          NOT NULL  DEFAULT 0,
-  -- announcement            tinyint(1)          NOT NULL  DEFAULT 0,
-  -- digest                  tinyint(1)          NOT NULL  DEFAULT 0,
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -64,7 +55,9 @@ CREATE TABLE IF NOT EXISTS list (
 --
 
 CREATE TABLE IF NOT EXISTS list_subscribed (
-  unsubscribed              tinyint(1)          NOT NULL  DEFAULT 0,
+  email_id
+  list_id
+  unsubscribed            tinyint(1)          NOT NULL  DEFAULT 0,
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -74,8 +67,8 @@ CREATE TABLE IF NOT EXISTS list_subscribed (
 --
 
 CREATE TABLE IF NOT EXISTS campaign (
-  news_id                 int                 NOT NULL  AUTO_INCREMENT,
-  title                   varchar(256)        NOT NULL  COLLATE utf8mb4_unicode_ci,
+  campaign_id             int                 NOT NULL  AUTO_INCREMENT,
+  title                   varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
   description             text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
   html                    text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
   txt                     text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
@@ -93,7 +86,52 @@ CREATE TABLE IF NOT EXISTS campaign (
 --
 
 CREATE TABLE IF NOT EXISTS campaign_list (
+  campaign_id
+  list_ids
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table transaction_category
+--
+
+CREATE TABLE IF NOT EXISTS transaction_category (
+  transaction_category_id int                 NOT NULL  AUTO_INCREMENT,
+  category                varchar(64)         NOT NULL  UNIQUE,
+
+  reply_to_name           varchar(128)                  DEFAULT NULL,
+  reply_to_email          varchar(256)                  DEFAULT NULL,
+
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (transaction_category_id)
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table transaction
+--
+
+CREATE TABLE IF NOT EXISTS transaction (
+  transaction_id          int                 NOT NULL AUTO_INCREMENT,
+  transaction_category_id int                 NOT NULL,
+
+  is_archived             tinyint(1)          NOT NULL DEFAULT 0,
+
+  subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
+  body_html               text                NOT NULL  COLLATE utf8mb4_unicode_ci,
+
+  PRIMARY KEY (transaction_id),
+  FOREIGN KEY (transaction_category_id)  REFERENCES transaction_category(transaction_category_id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+
+CREATE TABLE IF NOT EXISTS transaction_history (
+  transaction_id
+  data
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
 
 -- --------------------------------------------------------
 
@@ -121,4 +159,13 @@ CREATE TABLE IF NOT EXISTS tumblr (
 --
 
 CREATE TABLE IF NOT EXISTS send (
+  unique_id               int                 NOT NULL  AUTO_INCREMENT,
+  from_email_id
+  from_name
+  from_email_id
+  to_name
+  subject
+  body
+
+  -- proirity
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;

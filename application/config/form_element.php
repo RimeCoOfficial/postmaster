@@ -14,12 +14,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$email_max_length       =  256;
+$email_max_length           =  256;
 
-$date_picker_length     =   19; // 'YYYY-MM-DD HH:MM AM'
+$date_picker_length         =   19; // 'YYYY-MM-DD HH:MM AM'
 
-$news_title_max_length  =   75;
-$news_desc_max_length   = 4000;
+$news_title_max_length      =   75;
+$news_desc_max_length       = 4000;
+
+$reply_to_name_max_length   = 128;
+$category_max_length        =  64;
 
 $config = array(
   'email' => array(
@@ -58,5 +61,34 @@ $config = array(
     
     // html5 tag - not supported in Internet Explorer 9 and earlier versions.
     'type'          => 'file',
-  )
+  ),
+
+  'category' => array(
+    'label'         => 'Category',
+    'rules'         => 'strtolower|max_length['.$category_max_length.']|trim|alpha_dash|required',
+
+    'max_length'    => $category_max_length,
+    
+    // html5 tag - not supported in Internet Explorer 9 and earlier versions.
+    'placeholder'   => 'Don\'t worry, you can change it later.',
+    'required'      => 1,
+  ),
+  'reply_to_name' => array(
+    'label'         => 'Reply-to Name',
+    'rules'         => 'max_length['.$reply_to_name_max_length.']|trim',
+
+    'max_length'    => $reply_to_name_max_length,
+    
+    // html5 tag - not supported in Internet Explorer 9 and earlier versions.
+    'placeholder'   => 'Enter reply-to name, so people you know can recognize you.',
+  ),
+  'reply_to_email' => array(
+    'label'         => 'Reply-to Email',
+    'rules'         => 'strtolower|max_length['.$email_max_length.']|valid_email|trim',
+    'max_length'    => $email_max_length,
+    
+    // html5 tag - not supported in Internet Explorer 9 and earlier versions.
+    'placeholder'   => 'Type an email address',
+    'type'          => 'email',
+  ),
 );

@@ -37,12 +37,14 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
                 <?php
                 if ($is_logged_in)
                 {
+                  $nav_list = ['stats' => 'Stats', 'campaign' => 'Campaign', 'transactional' => 'Transactional', 'settings' => 'Settings'];
                   ?>
                   <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Stats</a></li>
-                    <li><a href="#">Campaigns</a></li>
-                    <li><a href="#">Lists</a></li>
-                    <li><a href="#">Settings</a></li>
+                    <?php foreach ($nav_list as $uri => $name): ?>
+                    <li class="<?php if (strpos(uri_string(), $uri) === 0) echo 'active'; ?>">
+                      <a href="<?php echo base_url($uri); ?>"><?php echo $name; ?></a>
+                    </li>
+                    <?php endforeach; ?>
                   </ul>
                   <?php
                 }
