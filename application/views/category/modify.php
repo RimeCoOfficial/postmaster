@@ -2,14 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>Modify Category <small><?php echo $category['category']; ?></small></h1>
+<h1>Modify Category <small><?php echo $category['name']; ?></small></h1>
 
 <?php echo form_open(uri_string()); ?>
 
-<?php $this->view('form/input', array('id' => 'category', 'value' => $category['category'])); ?>
-
-<?php $this->view('form/input', array('id' => 'reply_to_name', 'value' => $category['reply_to_name'])); ?>
-<?php $this->view('form/input', array('id' => 'reply_to_email', 'value' => $category['reply_to_email'])); ?>
+<?php $this->view('form/input', array('id' => 'category', 'value' => $category['name'])); ?>
 
 <div class="row">
   <div class="col-sm-5">

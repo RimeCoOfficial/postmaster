@@ -93,18 +93,14 @@ CREATE TABLE IF NOT EXISTS campaign_list (
 -- --------------------------------------------------------
 
 --
--- Table structure for table transaction_category
+-- Table structure for table category
 --
 
-CREATE TABLE IF NOT EXISTS transaction_category (
-  transaction_category_id int                 NOT NULL  AUTO_INCREMENT,
-  category                varchar(64)         NOT NULL  UNIQUE,
-
-  reply_to_name           varchar(128)                  DEFAULT NULL,
-  reply_to_email          varchar(256)                  DEFAULT NULL,
-
-  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (transaction_category_id)
+CREATE TABLE IF NOT EXISTS category (
+  category_id             int                 NOT NULL  AUTO_INCREMENT,
+  name                    varchar(64)         NOT NULL  UNIQUE,
+  color                   varchar(8)                    DEFAULT NULL,
+  PRIMARY KEY (category_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -114,16 +110,20 @@ CREATE TABLE IF NOT EXISTS transaction_category (
 --
 
 CREATE TABLE IF NOT EXISTS transaction (
-  transaction_id          int                 NOT NULL AUTO_INCREMENT,
-  transaction_category_id int                 NOT NULL,
+  transaction_id          int                 NOT NULL  AUTO_INCREMENT,
+  category_id             int                           DEFAULT NULL,
 
-  is_archived             tinyint(1)          NOT NULL DEFAULT 0,
+  is_archived             tinyint(1)          NOT NULL  DEFAULT 0,
+
+  reply_to_name           varchar(128)                  DEFAULT NULL,
+  reply_to_email          varchar(256)                  DEFAULT NULL,
 
   subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
-  body_html               text                NOT NULL  COLLATE utf8mb4_unicode_ci,
+  body_html               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
 
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (transaction_id),
-  FOREIGN KEY (transaction_category_id)  REFERENCES transaction_category(transaction_category_id) ON UPDATE CASCADE ON DELETE CASCADE
+  FOREIGN KEY (category_id) REFERENCES category(category_id) ON UPDATE CASCADE ON DELETE SET NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 

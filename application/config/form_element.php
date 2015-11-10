@@ -22,7 +22,9 @@ $news_title_max_length      =   75;
 $news_desc_max_length       = 4000;
 
 $reply_to_name_max_length   = 128;
+
 $category_max_length        =  64;
+$subject_max_length         = 128;
 
 $config = array(
   'email' => array(
@@ -73,6 +75,19 @@ $config = array(
     'placeholder'   => 'Don\'t worry, you can change it later.',
     'required'      => 1,
   ),
+
+  'subject' => array(
+    'label'         => 'Subject',
+    'rules'         => 'max_length['.$subject_max_length.']|trim|required',
+
+    'max_length'    => $subject_max_length,
+    
+    // html5 tag - not supported in Internet Explorer 9 and earlier versions.
+    'placeholder'   => 'Don\'t worry, you can change it later.',
+    'required'      => 1,
+  ),
+
+
   'reply_to_name' => array(
     'label'         => 'Reply-to Name',
     'rules'         => 'max_length['.$reply_to_name_max_length.']|trim',

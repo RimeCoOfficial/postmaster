@@ -8,9 +8,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php $this->view('form/input', array('id' => 'category', 'value' => NULL)); ?>
 
-<?php $this->view('form/input', array('id' => 'reply_to_name', 'value' => NULL)); ?>
-<?php $this->view('form/input', array('id' => 'reply_to_email', 'value' => NULL)); ?>
-
 <div class="row">
   <div class="col-sm-5">
     <button type="submit" class="btn btn-primary btn-block">Create</button>

@@ -37,7 +37,7 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
                 <?php
                 if ($is_logged_in)
                 {
-                  $nav_list = ['stats' => 'Stats', 'campaign' => 'Campaign', 'transactional' => 'Transactional', 'settings' => 'Settings'];
+                  $nav_list = ['stats' => 'Stats', 'campaign' => 'Campaign', 'transaction' => 'Transaction', 'settings' => 'Settings'];
                   ?>
                   <ul class="nav navbar-nav">
                     <?php foreach ($nav_list as $uri => $name): ?>
