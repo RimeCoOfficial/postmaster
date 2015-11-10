@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
+<?php $this->view('transaction/nav'); ?>
+
 <h1>New Category</h1>
 
 <?php echo form_open(uri_string()); ?>

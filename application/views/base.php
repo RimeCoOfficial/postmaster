@@ -13,6 +13,7 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Postmaster</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
     <style type="text/css">
       body { padding-top: 20px; padding-bottom: 20px; }
       .container { max-width: 680px; }
@@ -37,11 +38,19 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
                 <?php
                 if ($is_logged_in)
                 {
-                  $nav_list = ['stats' => 'Stats', 'campaign' => 'Campaign', 'transaction' => 'Transaction', 'settings' => 'Settings'];
+                  $nav_list = [
+                    'stats'       => '<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>',
+                    'campaign'    => 'Campaign',
+                    'transaction' => 'Transaction',
+                    'upload'      => '<span class="glyphicon glyphicon-open-file" aria-hidden="true"></span>',
+                    'settings'    => '<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>',
+                  ];
+                  $nav_selected = explode('/', uri_string());
+                  $nav_selected = $nav_selected[0];
                   ?>
                   <ul class="nav navbar-nav">
                     <?php foreach ($nav_list as $uri => $name): ?>
-                    <li class="<?php if (strpos(uri_string(), $uri) === 0) echo 'active'; ?>">
+                    <li class="<?php if ($nav_selected == $uri) echo 'active'; ?>">
                       <a href="<?php echo base_url($uri); ?>"><?php echo $name; ?></a>
                     </li>
                     <?php endforeach; ?>

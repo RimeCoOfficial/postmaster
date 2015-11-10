@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS category (
   PRIMARY KEY (category_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
--- INSERT INTO `ci_postmaster`.`category` (`name`) VALUES ('announcement'), ('error'), ('newsletter'), ('notification'), ('promotion'), ('report'), ('test');
+INSERT INTO `ci_postmaster`.`category` (`name`) VALUES ('announcement'), ('error'), ('newsletter'), ('notification'), ('promotion'), ('report'), ('test');
 
 -- --------------------------------------------------------
 

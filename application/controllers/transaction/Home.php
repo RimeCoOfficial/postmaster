@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Transaction extends CI_Controller
+class Home extends CI_Controller
 {
   function __construct()
   {
@@ -41,7 +41,7 @@ class Transaction extends CI_Controller
 
     // load again
     $this->config->load('form_validation', TRUE);
-    $this->form_validation->set_rules($this->config->item('transaction/create', 'form_validation'));
+    $this->form_validation->set_rules($this->config->item('transaction/home/create', 'form_validation'));
 
     $local_view_data = [];
     if ($this->form_validation->run())
@@ -55,7 +55,7 @@ class Transaction extends CI_Controller
       }
       else
       {
-        redirect('transaction/modify/'.$transction_id);
+        redirect('transaction/home/modify/'.$transction_id);
       }
     }
 
@@ -84,7 +84,7 @@ class Transaction extends CI_Controller
 
     // load again
     $this->config->load('form_validation', TRUE);
-    $this->form_validation->set_rules($this->config->item('transaction/modify', 'form_validation'));
+    $this->form_validation->set_rules($this->config->item('transaction/home/modify', 'form_validation'));
 
     if ($this->form_validation->run())
     {

@@ -11,11 +11,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config = array(
   // 'controller/method'            => ['value1', 'value2'],
 
-  'category/create'   => ['category'],
-  'category/modify'   => ['category'],
+  'transaction/category/create'   => ['category'],
+  'transaction/category/modify'   => ['category'],
 
-  'transaction/create'   => ['subject', 'category_id'],
-  'transaction/modify'   => ['subject', 'reply_to_name', 'reply_to_email', 'body_html', 'category_id'],
+  'transaction/home/create'       => ['subject', 'category_id'],
+  'transaction/home/modify'       => ['subject', 'reply_to_name', 'reply_to_email', 'body_html', 'category_id'],
 );
 
 if ( ! function_exists('fill_element'))

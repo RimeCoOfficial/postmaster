@@ -21,7 +21,7 @@ class Category extends CI_Controller
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('category/list', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('transaction/category/list', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 
@@ -30,7 +30,7 @@ class Category extends CI_Controller
     $this->load->library('form_validation');
     
     $local_view_data = [];
-    if ($this->form_validation->run())
+    if ($this->form_validation->run('transaction/category/create'))
     {
       $this->load->library('lib_category');
       if (is_null($this->lib_category->create(
@@ -41,13 +41,13 @@ class Category extends CI_Controller
       }
       else
       {
-        redirect('category');
+        redirect('transaction/category');
       }
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('category/create', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('transaction/category/create', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 
@@ -62,7 +62,7 @@ class Category extends CI_Controller
 
     $this->load->library('form_validation');
     
-    if ($this->form_validation->run())
+    if ($this->form_validation->run('transaction/category/modify'))
     {
       if (is_null($this->lib_category->modify(
         $category_id,
@@ -73,13 +73,13 @@ class Category extends CI_Controller
       }
       else
       {
-        redirect('category');
+        redirect('transaction/category');
       }
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('category/modify', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('transaction/category/modify', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 }
