@@ -57,21 +57,40 @@ class Transaction extends CI_Controller
 
     $local_view_data['transaction'] = $this->lib_transaction->get($transaction_id);
 
+    $this->load->library('lib_category');
+    $local_view_data['category_list'] = $this->lib_category->get_list();
+
+    // $this->config->set_item('item_name', 'item_value');
+
+    $category_keys = [];
+    foreach ($local_view_data['category_list'] as $category) $category_keys[ $category['category_id'] ] = $category['name'];
+
+    $config = $this->config->item('form_element');
+    $config['category_id']['rules'] = str_replace('[]', '['.implode(',', array_keys($category_keys)).']', $config['category_id']['rules']);
+    $config['category_id']['options'] = $category_keys;
+    $this->config->set_item('form_element', $config);
+
+    // load again
+    $this->config->load('form_validation', TRUE);
+    $this->form_validation->set_rules($this->config->item('transaction/modify', 'form_validation'));
+
     if ($this->form_validation->run())
     {
       if (is_null($this->lib_transaction->modify(
         $transaction_id,
         $this->form_validation->set_value('subject'),
         $this->form_validation->set_value('reply_to_name'),
-        $this->form_validation->set_value('reply_to_email')
+        $this->form_validation->set_value('reply_to_email'),
+        $this->form_validation->set_value('body_html'),
+        $this->form_validation->set_value('category_id')
       )))
       {
         show_error($this->lib_transaction->get_error_message());
       }
-      else
-      {
-        // redirect('transaction');
-      }
+      // else
+      // {
+      //   redirect('transaction');
+      // }
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();

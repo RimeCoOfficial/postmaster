@@ -37,12 +37,12 @@ class Lib_transaction
     return $this->CI->model_transaction->create($subject);
   }
 
-  function modify($transaction_id, $subject, $reply_to_name, $reply_to_email)
+  function modify($transaction_id, $subject, $reply_to_name, $reply_to_email, $body_html, $category_id)
   {
     if (empty($reply_to_name)) $reply_to_name = NULL;
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
-    $this->CI->model_transaction->update($transaction_id, $subject, $reply_to_name, $reply_to_email);
+    $this->CI->model_transaction->update($transaction_id, $subject, $reply_to_name, $reply_to_email, $body_html, $category_id);
     return TRUE;
   }
 

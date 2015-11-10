@@ -126,12 +126,20 @@ CREATE TABLE IF NOT EXISTS transaction (
   FOREIGN KEY (category_id) REFERENCES category(category_id) ON UPDATE CASCADE ON DELETE SET NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table transaction_history
+--
 
 CREATE TABLE IF NOT EXISTS transaction_history (
-  transaction_id
-  data
+  unique_id               int                 NOT NULL  AUTO_INCREMENT,
+  transaction_id          int                 NOT NULL,
+  data                    text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (unique_id),
+  FOREIGN KEY (transaction_id) REFERENCES transaction(transaction_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
 
 -- --------------------------------------------------------
 

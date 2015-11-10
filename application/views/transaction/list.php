@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <tr>    
       <th scope="row"><?php echo $transaction['transaction_id']; ?></th>
       <td><?php echo anchor('transaction/modify/'.$transaction['transaction_id'], $transaction['subject']); ?></td>
-      <td><?php echo $transaction['category_id']; ?></td>
+      <td><?php echo !empty($transaction['category_name']) ? $transaction['category_name'] : '-'; ?></td>
       <td><?php echo $transaction['reply_to_name']; ?></td>
       <td><?php echo $transaction['reply_to_email']; ?></td>
       <!-- <td>0</td> -->
