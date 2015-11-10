@@ -41,6 +41,7 @@ class Lib_transaction
   {
     if (empty($reply_to_name)) $reply_to_name = NULL;
     if (empty($reply_to_email)) $reply_to_email = NULL;
+    if (empty($category_id)) $category_id = NULL;
 
     $this->CI->model_transaction->update($transaction_id, $subject, $reply_to_name, $reply_to_email, $body_html, $category_id);
     return TRUE;

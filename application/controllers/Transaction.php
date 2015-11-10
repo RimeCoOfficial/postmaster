@@ -60,9 +60,7 @@ class Transaction extends CI_Controller
     $this->load->library('lib_category');
     $local_view_data['category_list'] = $this->lib_category->get_list();
 
-    // $this->config->set_item('item_name', 'item_value');
-
-    $category_keys = [];
+    $category_keys = [NULL => '&mdash;'];
     foreach ($local_view_data['category_list'] as $category) $category_keys[ $category['category_id'] ] = $category['name'];
 
     $config = $this->config->item('form_element');

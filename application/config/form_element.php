@@ -58,7 +58,7 @@ $config = array(
 
   'category_id' => array(
     'label'         => 'Category',
-    'rules'         => 'in_list[]|required',
+    'rules'         => 'in_list[]',
 
     'options'       => NULL,
   ),
