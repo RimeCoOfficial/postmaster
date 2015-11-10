@@ -100,8 +100,11 @@ CREATE TABLE IF NOT EXISTS category (
   category_id             int                 NOT NULL  AUTO_INCREMENT,
   name                    varchar(64)         NOT NULL  UNIQUE,
   color                   varchar(8)                    DEFAULT NULL,
+  is_archived             tinyint(1)          NOT NULL  DEFAULT 0,
   PRIMARY KEY (category_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+-- INSERT INTO `ci_postmaster`.`category` (`name`) VALUES ('announcement'), ('error'), ('newsletter'), ('notification'), ('promotion'), ('report'), ('test');
 
 -- --------------------------------------------------------
 
@@ -111,7 +114,7 @@ CREATE TABLE IF NOT EXISTS category (
 
 CREATE TABLE IF NOT EXISTS transaction (
   transaction_id          int                 NOT NULL  AUTO_INCREMENT,
-  category_id             int                           DEFAULT NULL,
+  category_id             int                 NOT NULL,
 
   is_archived             tinyint(1)          NOT NULL  DEFAULT 0,
 
@@ -123,7 +126,7 @@ CREATE TABLE IF NOT EXISTS transaction (
 
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (transaction_id),
-  FOREIGN KEY (category_id) REFERENCES category(category_id) ON UPDATE CASCADE ON DELETE SET NULL
+  FOREIGN KEY (category_id) REFERENCES category(category_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------

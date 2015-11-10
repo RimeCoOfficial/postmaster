@@ -14,7 +14,7 @@ $config = array(
   'category/create'   => ['category'],
   'category/modify'   => ['category'],
 
-  'transaction/create'   => ['subject'],
+  'transaction/create'   => ['subject', 'category_id'],
   'transaction/modify'   => ['subject', 'reply_to_name', 'reply_to_email', 'body_html', 'category_id'],
 );
 

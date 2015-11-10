@@ -32,9 +32,9 @@ class Lib_transaction
     return $this->CI->model_transaction->get_list();
   }
 
-  function create($subject)
+  function create($subject, $category_id)
   {
-    return $this->CI->model_transaction->create($subject);
+    return $this->CI->model_transaction->create($subject, $category_id);
   }
 
   function modify($transaction_id, $subject, $reply_to_name, $reply_to_email, $body_html, $category_id)

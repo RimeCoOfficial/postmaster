@@ -22,15 +22,16 @@ class Model_transaction extends CI_Model
 
     $this->db->order_by($this->transaction_table.'.category_id', 'ASC');
 
-    $this->db->join($this->category_table, $this->transaction_table.'.category_id = '.$this->category_table.'.category_id', 'LEFT');
+    $this->db->join($this->category_table, $this->transaction_table.'.category_id = '.$this->category_table.'.category_id');
 
     $query = $this->db->get($this->transaction_table);
     return $query->result_array();
   }
 
-  function create($subject)
+  function create($subject, $category_id)
   {
     $this->db->set('subject', $subject);
+    $this->db->set('category_id', $category_id);
 
     $this->db->insert($this->transaction_table);
     return $this->db->insert_id();

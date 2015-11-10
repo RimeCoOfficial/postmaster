@@ -28,13 +28,27 @@ class Transaction extends CI_Controller
 
   public function create()
   {
-    $this->load->library('form_validation');
-    
+    $this->load->library('lib_category');
+    $category_list = $this->lib_category->get_list();
+
+    $category_keys = []; // [NULL => '&mdash;'];
+    foreach ($category_list as $category) $category_keys[ $category['category_id'] ] = $category['name'];
+
+    $config = $this->config->item('form_element');
+    $config['category_id']['rules'] = str_replace('[]', '['.implode(',', array_keys($category_keys)).']', $config['category_id']['rules']);
+    $config['category_id']['options'] = $category_keys;
+    $this->config->set_item('form_element', $config);
+
+    // load again
+    $this->config->load('form_validation', TRUE);
+    $this->form_validation->set_rules($this->config->item('transaction/create', 'form_validation'));
+
     $local_view_data = [];
     if ($this->form_validation->run())
     {
       if (is_null($transction_id = $this->lib_transaction->create(
-        $this->form_validation->set_value('subject')
+        $this->form_validation->set_value('subject'),
+        $this->form_validation->set_value('category_id')
       )))
       {
         show_error($this->lib_transaction->get_error_message());
@@ -58,10 +72,10 @@ class Transaction extends CI_Controller
     $local_view_data['transaction'] = $this->lib_transaction->get($transaction_id);
 
     $this->load->library('lib_category');
-    $local_view_data['category_list'] = $this->lib_category->get_list();
+    $category_list = $this->lib_category->get_list();
 
-    $category_keys = [NULL => '&mdash;'];
-    foreach ($local_view_data['category_list'] as $category) $category_keys[ $category['category_id'] ] = $category['name'];
+    $category_keys = []; // [NULL => '&mdash;'];
+    foreach ($category_list as $category) $category_keys[ $category['category_id'] ] = $category['name'];
 
     $config = $this->config->item('form_element');
     $config['category_id']['rules'] = str_replace('[]', '['.implode(',', array_keys($category_keys)).']', $config['category_id']['rules']);
