@@ -12,6 +12,7 @@ $config = array(
   // 'controller/method'            => ['value1', 'value2'],
 
   'transactional/create_category'   => ['category', 'reply_to_name', 'reply_to_email'],
+  'transactional/modify_category'   => ['category', 'reply_to_name', 'reply_to_email'],
 );
 
 function fill_element($config)

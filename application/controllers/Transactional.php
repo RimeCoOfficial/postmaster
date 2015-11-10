@@ -53,12 +53,55 @@ class Transactional extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function category($cat_id)
+  public function modify_category($category_id)
   {
+    $local_view_data = [];
+
+    $this->load->library('lib_transactional');
+    $local_view_data['category'] = $this->lib_transactional->get_category($category_id);
+
+    if (empty($local_view_data['category'])) show_error('category not found');
+
+    $this->load->library('form_validation');
+    
+    if ($this->form_validation->run())
+    {
+      if (is_null($this->lib_transactional->modify_category(
+        $category_id,
+        $this->form_validation->set_value('category'),
+        $this->form_validation->set_value('reply_to_name'),
+        $this->form_validation->set_value('reply_to_email')
+      )))
+      {
+        show_error($this->lib_transactional->get_error_message());
+      }
+      else
+      {
+        redirect('transactional');
+      }
+    }
+
+    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
+
+    $view_data['main_content'] = $this->load->view('transactional/modify_category', $local_view_data, TRUE);
+    $this->load->view('base', $view_data);
+  }
+
+  public function category($category_id)
+  {
+    $this->load->library('lib_transactional');
+    $local_view_data['list'] = $this->lib_transactional->get_list($category_id);
+
+    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
+
+    $view_data['main_content'] = $this->load->view('transactional/list', $local_view_data, TRUE);
+    $this->load->view('base', $view_data);
   }
 
   public function create()
-  {}
+  {
+
+  }
 
   public function modify($transaction_id)
   {}
