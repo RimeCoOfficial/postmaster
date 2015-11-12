@@ -2,22 +2,24 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
+<code>
+  <strong>Heading:</strong> <?php echo $heading; ?><br>
+  <strong>Message:</strong> <?php echo $message; ?><br>
+  <strong>Status Code:</strong> <?php echo $status_code; ?><br>
+</code>
+<br>
+
 <?php
 if (!empty($ip))
 {
   ?>
-  <p>
+  <code>
     <strong>IP:</strong> <?php echo $ip; ?>
-  </p>
+  </code>
+  <br>
   <?php
 }
 ?>
-
-<p>
-  <strong>Heading:</strong> <?php echo $heading; ?><br>
-  <strong>Message:</strong> <?php echo $message; ?><br>
-  <strong>Status Code:</strong> <?php echo $status_code; ?><br>
-</p>
 
 <?php $this->view('email/error/backtrace'); ?>
 
@@ -25,5 +27,5 @@ if (!empty($ip))
 
 <p>
   Happy debugging!<br>
-  &mdash; The <?php echo app_name(); ?> Bot (<?php echo e_anchor('@bot', '@bot'); ?>)
+  &mdash; The <?php echo app_name(); ?>
 </p>

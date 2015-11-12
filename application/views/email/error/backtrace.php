@@ -3,22 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <?php
-// function recursive($array, $level = 1) {
-//     foreach($array as $key => $value) {
-//         //If $value is an array.
-//         if(is_array($value)) {
-//             //We need to loop through it.
-//             recursive($value, $level + 1);
-//         } else {
-//             //It is not an array, so print it out.
-//             echo $key . ": " . $value, '<br>';
-//         }
-//     }
-// }
 if (!empty($debug_backtrace))
 {
   ?>
-  <?php echo e_heading('Debug'); ?>
+  <h1><?php echo 'Debug'; ?></h1>
   <code>
     <?php
     print_r($debug_backtrace);
@@ -31,8 +19,8 @@ if (!empty($debug_backtrace))
 if (!empty($backtrace))
 {
   ?>
-  <?php echo e_heading('Backtrace'); ?>
-  <code style="white-space: pre;">
+  <h1><?php echo 'Backtrace'; ?></h1>
+  <code>
     <ol>
     <?php foreach ($backtrace as $b)
     {
@@ -40,7 +28,7 @@ if (!empty($backtrace))
       echo '<b>File:</b> '.$b['file'].'<br>';
       echo '<b>Line:</b> '.$b['line'].'<br>';
       echo '<b>Function:</b> '.$b['function'].'<br>';
-      echo '<b>Args:</b> '; print_r($b['args']); echo '<br>';
+      echo '<span style="white-space: pre;"><b>Args:</b> '; print_r($b['args']); echo '<br></span>';
       echo '</li>';
       echo '<br>';
     }
@@ -55,9 +43,9 @@ if (!empty($backtrace))
 if (!empty($request))
 {
   ?>
-  <?php echo e_heading('Request'); ?>
+  <h1><?php echo 'Request'; ?></h1>
   <code>
-    <?php foreach ($request as $k => $v) echo $k.' => '.$v.'<br>'; ?>
+    <?php foreach ($request as $k => $v) echo '<b>'.$k.':</b> '.$v.'<br>'; ?>
   </code>
   <?php
 }
@@ -67,9 +55,9 @@ if (!empty($request))
 if (!empty($server))
 {
   ?>
-  <?php echo e_heading('Server'); ?>
+  <h1><?php echo 'Server'; ?></h1>
   <code>
-    <?php foreach ($server as $k => $v) echo $k.' => '.$v.'<br>'; ?>
+    <?php foreach ($server as $k => $v) echo '<b>'.$k.':</b> '.$v.'<br>'; ?>
   </code>
   <?php
 }

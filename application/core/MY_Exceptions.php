@@ -22,14 +22,12 @@ class MY_Exceptions extends CI_Exceptions
     {
       if (!is_null($CI =& get_instance()))
       {
-        $data['subject'] = 'HTTP Error 500: Internal server error';
-
         $data['heading'] = $heading;
         $data['message'] = is_array($message) ? '<pre>'.print_r($message, TRUE).'</pre>' : $message;
         $data['status_code'] = $status_code;
 
         $CI->load->helper('email');
-        report_error('error.general@rime.co', 'error/error_general', $data);
+        report_error('HTTP Error 500: Internal server error', 'error/error_general', $data);
       }
     }
 
@@ -40,15 +38,13 @@ class MY_Exceptions extends CI_Exceptions
   {
     if (!is_null($CI =& get_instance()))
     {
-      $data['subject'] = 'A PHP Error was encountered';
-      
       $data['severity'] = $severity;
       $data['message']  = $message;
       $data['filepath'] = $filepath;
       $data['line']     = $line;
 
       $CI->load->helper('email');
-      report_error('error.php@rime.co', 'error/error_php', $data);
+      report_error('A PHP Error was encountered', 'error/error_php', $data);
     }
     
     return parent::log_exception($severity, $message, $filepath, $line);

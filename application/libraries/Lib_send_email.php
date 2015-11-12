@@ -21,7 +21,7 @@ class Lib_send_email
     return $this->error;
   }
 
-  function direct($to, $subject, $message_html, $message_txt)
+  function direct($to, $subject = '', $message_html = '', $message_txt = '')
   {
     $this->CI->load->library('composer/lib_aws');
     $ses_client = $this->CI->lib_aws->get_ses();
@@ -43,7 +43,7 @@ class Lib_send_email
     return $result['MessageId'];
   }
 
-  function general($to, $template, $subject = 'Untitled', $data = [])
+  function general($to, $subject = 'Untitled', $template, $data = [])
   {
     $message = $this->CI->load->view('email/'.$template, $data, TRUE);
 
@@ -51,6 +51,8 @@ class Lib_send_email
     $alt_message = $this->CI->lib_html_to_markdown->convert($message);
 
     $message = $this->CI->load->view('email/base', ['subject' => $subject, 'message' => $message], TRUE);
+
+    // var_dump($to); echo $message; die();
 
     return $this->direct($to, $subject, $message, $alt_message);
   }

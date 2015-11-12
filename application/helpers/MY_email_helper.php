@@ -28,9 +28,11 @@ function valid_email($str)
   return filter_var($str, FILTER_VALIDATE_EMAIL) ? $str : NULL;
 }
 
-function report_error($to, $template, $data)
+function report_error($subject, $template, $data)
 {
-  if (!is_null($CI =& get_instance()) AND ENVIRONMENT === 'production')
+  if (!is_null($CI =& get_instance())
+    // AND ENVIRONMENT === 'production'
+  )
   {
     $data['debug_backtrace'] = NULL;
     $data['backtrace'] = array();
@@ -52,7 +54,7 @@ function report_error($to, $template, $data)
       }
     }
 
-    if (is_cli()) $data['subject'] = 'CLI: '.$data['subject'];
+    if (is_cli()) $subject = 'CLI: '.$subject;
 
     $data['ip']       = is_cli() ? NULL : $CI->input->ip_address();
 
@@ -60,6 +62,6 @@ function report_error($to, $template, $data)
     $data['server']   = is_cli() ? NULL : $CI->input->server(NULL);
     
     $CI->load->library('lib_send_email');
-    $CI->lib_send_email->general($to, $template, $data);
+    $CI->lib_send_email->general(getenv('email_debug'), $subject, $template, $data);
   }
 }

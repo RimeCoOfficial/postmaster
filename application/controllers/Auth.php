@@ -24,7 +24,7 @@ class Auth extends CI_Controller
     // send email
     $email_data = ['login_email_key' => $login_email_key];
     $this->load->library('lib_send_email');
-    $this->lib_send_email->general(getenv('email_admin'), 'auth/verify', app_name().' Login', $email_data);
+    $this->lib_send_email->general(getenv('email_admin'), app_name().' Login', 'auth/verify', $email_data);
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 

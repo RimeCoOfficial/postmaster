@@ -33,15 +33,13 @@ class ExceptionHook
 
     if (!is_null($CI =& get_instance()))
     {
-      $data['subject'] = 'An uncaught Exception was encountered'; // 'A PHP Error was encountered'
-      
       $data['severity'] = $severity;
       $data['message']  = $message;
       $data['filepath'] = $filepath;
       $data['line']     = $line;
 
       $CI->load->helper('email');
-      report_error('error.exception@rime.co', 'error/error_exception', $data);
+      report_error('An uncaught Exception was encountered', 'error/error_exception', $data);
     }
 
     exit(1); // EXIT_ERROR
