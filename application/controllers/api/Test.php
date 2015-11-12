@@ -6,9 +6,9 @@ class Test extends CI_Controller
   public function index()
   {
     $this->load->library('lib_send_email');
-    $this->lib_send_email->general(getenv('email_debug'), 'foo', 'bar');
+    $message_id = $this->lib_send_email->general(getenv('email_debug'), 'foo', 'bar');
     
-    $response = array('status' => 'OK');
+    $response = array('status' => 'OK', 'email' => getenv('email_debug'), 'message_id' => $message_id);
 
     $this->output
       ->set_status_header(200)

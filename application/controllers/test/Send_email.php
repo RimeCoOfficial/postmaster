@@ -15,10 +15,10 @@ class Send_email extends CI_Controller
 
   // cd ~/Sites/log-pixel && php index.php test send_email test
   // cd /srv/www/log_pixel/current && php index.php test send_email test
-  public function test($to = 'dev@example.com')
+  public function test()
   {
     $this->load->library('lib_send_email');
-    $this->lib_send_email->test($to);
+    echo '<pre>' . $this->lib_send_email->general(getenv('email_debug'), 'foo', 'bar') . '</pre>';
   }
 
   function error_php()
