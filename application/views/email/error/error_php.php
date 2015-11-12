@@ -8,6 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <strong>Filename:</strong> <?php echo $filepath; ?><br>
   <strong>Line:</strong> <?php echo $line; ?><br>
 </code>
+<br>
 
 <?php
 if (!empty($ip))
