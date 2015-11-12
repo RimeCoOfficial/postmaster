@@ -17,9 +17,9 @@
         "ga=UA-XXXXXXXX-X",
         "tumblr_client_id=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         "tumblr_client_secret=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "source_email=postmaster@mail.example.com",
-        "admin_email_id=joe@example.com",
-        "debug_email_id=joe@example.com",
+        "email_source=postmaster@mail.example.com",
+        "email_admin=joe@example.com",
+        "email_debug=joe@example.com",
         "api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
       ]
     },
