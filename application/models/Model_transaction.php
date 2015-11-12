@@ -37,12 +37,12 @@ class Model_transaction extends CI_Model
     return $this->db->insert_id();
   }
 
-  function update($transaction_id, $subject, $reply_to_name, $reply_to_email, $body_html, $category_id)
+  function update($transaction_id, $subject, $reply_to_name, $reply_to_email, $message_html, $category_id)
   {
     $this->db->set('subject', $subject);
     $this->db->set('reply_to_name', $reply_to_name);
     $this->db->set('reply_to_email', $reply_to_email);
-    $this->db->set('body_html', $body_html);
+    $this->db->set('message_html', $message_html);
     $this->db->set('category_id', $category_id);
 
     $this->db->where('transaction_id', $transaction_id);

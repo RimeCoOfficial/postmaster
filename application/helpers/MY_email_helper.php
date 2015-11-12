@@ -27,3 +27,39 @@ function valid_email($str)
 
   return filter_var($str, FILTER_VALIDATE_EMAIL) ? $str : NULL;
 }
+
+function report_error($to, $template, $data)
+{
+  if (!is_null($CI =& get_instance()) AND ENVIRONMENT === 'production')
+  {
+    $data['debug_backtrace'] = NULL;
+    $data['backtrace'] = array();
+    if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE === TRUE)
+    {
+      // $data['debug_backtrace'] = debug_backtrace();
+      foreach (debug_backtrace() as $error)
+      {
+        if (isset($error['file']) && strpos($error['file'], realpath(BASEPATH)) !== 0)
+        {
+          $b['file'] = $error['file'];
+          $b['line'] = $error['line'];
+          $b['function'] = $error['function'];
+
+          $b['args'] = $error['args'];
+
+          $data['backtrace'][] = $b;
+        }
+      }
+    }
+
+    if (is_cli()) $data['subject'] = 'CLI: '.$data['subject'];
+
+    $data['ip']       = is_cli() ? NULL : $CI->input->ip_address();
+
+    $data['request']  = $_REQUEST;
+    $data['server']   = is_cli() ? NULL : $CI->input->server(NULL);
+    
+    $CI->load->library('lib_send_email');
+    $CI->lib_send_email->general($to, $template, $data);
+  }
+}

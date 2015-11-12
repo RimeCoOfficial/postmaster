@@ -34,4 +34,5 @@ class Lib_aws
   public function get_s3()  { return $this->aws_client->createS3();  }
   public function get_swf() { return $this->aws_client->createSWF(); }
   public function get_sqs() { return $this->aws_client->createSQS(); }
+  public function get_ses() { return $this->aws_client->createSES(); }
 }

@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php $this->view('form/input', array('id' => 'reply_to_name', 'value' => $transaction['reply_to_name'])); ?>
 <?php $this->view('form/input', array('id' => 'reply_to_email', 'value' => $transaction['reply_to_email'])); ?>
 
-<?php $this->view('form/textarea', array('id' => 'body_html', 'value' => $transaction['body_html'])); ?>
+<?php $this->view('form/textarea', array('id' => 'message_html', 'value' => $transaction['message_html'])); ?>
 
 <?php $this->view('form/dropdown', array('id' => 'category_id', 'value' => $transaction['category_id'])); ?>
 
@@ -24,3 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <?php echo form_close(); ?>
+
+<br>
+<p>
+  <a href="<?php echo base_url('transaction/home/show/'.$transaction['transaction_id']); ?>" target="_blank">Show HTML</a>
+</p>

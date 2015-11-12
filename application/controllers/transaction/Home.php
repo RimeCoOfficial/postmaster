@@ -39,7 +39,7 @@ class Home extends CI_Controller
     $config['category_id']['options'] = $category_keys;
     $this->config->set_item('form_element', $config);
 
-    // load again
+    // load config again
     $this->config->load('form_validation', TRUE);
     $this->form_validation->set_rules($this->config->item('transaction/home/create', 'form_validation'));
 
@@ -82,7 +82,7 @@ class Home extends CI_Controller
     $config['category_id']['options'] = $category_keys;
     $this->config->set_item('form_element', $config);
 
-    // load again
+    // load config again
     $this->config->load('form_validation', TRUE);
     $this->form_validation->set_rules($this->config->item('transaction/home/modify', 'form_validation'));
 
@@ -93,7 +93,7 @@ class Home extends CI_Controller
         $this->form_validation->set_value('subject'),
         $this->form_validation->set_value('reply_to_name'),
         $this->form_validation->set_value('reply_to_email'),
-        $this->form_validation->set_value('body_html'),
+        $this->form_validation->set_value('message_html'),
         $this->form_validation->set_value('category_id')
       )))
       {
@@ -112,5 +112,8 @@ class Home extends CI_Controller
   }
 
   public function show($transaction_id)
-  {}
+  {
+    $transaction = $this->lib_transaction->get($transaction_id);
+    echo $transaction['message_html'];
+  }
 }

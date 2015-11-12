@@ -34,6 +34,8 @@ putenv('tumblr_client_id=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 putenv('tumblr_client_secret=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 
 putenv('admin_email_id=joe@example.com');
+putenv('source_email=postmaster@mail.example.com');
+
 putenv('debug_email_id=joe@example.com');
 
 putenv('api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');

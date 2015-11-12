@@ -68,10 +68,8 @@ CREATE TABLE IF NOT EXISTS list_subscribed (
 
 CREATE TABLE IF NOT EXISTS campaign (
   campaign_id             int                 NOT NULL  AUTO_INCREMENT,
-  title                   varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
-  description             text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
-  html                    text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
-  txt                     text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
+  subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
+  message_html            text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
   tumblr_html             text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
   tumblr_post_id          varchar(256)                  DEFAULT NULL,
   email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
@@ -98,7 +96,7 @@ CREATE TABLE IF NOT EXISTS campaign_list (
 
 CREATE TABLE IF NOT EXISTS category (
   category_id             int                 NOT NULL  AUTO_INCREMENT,
-  name                    varchar(64)         NOT NULL  UNIQUE,
+  name                    varchar(32)         NOT NULL  UNIQUE,
   color                   varchar(8)                    DEFAULT NULL,
   is_archived             tinyint(1)          NOT NULL  DEFAULT 0,
   PRIMARY KEY (category_id)
@@ -122,8 +120,9 @@ CREATE TABLE IF NOT EXISTS transaction (
   reply_to_email          varchar(256)                  DEFAULT NULL,
 
   subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
-  body_html               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  message_html            text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
 
+  tumblr_post_id          varchar(256)                  DEFAULT NULL,
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (transaction_id),
   FOREIGN KEY (category_id) REFERENCES category(category_id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -163,6 +162,20 @@ CREATE TABLE IF NOT EXISTS tumblr (
   PRIMARY KEY (service, x_account_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table tumblr
+--
+
+CREATE TABLE IF NOT EXISTS s3 (
+  key                     varchar(256)        NOT NULL,
+  type
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (service, x_account_id)
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
 -- --------------------------------------------------------
 
 --
@@ -177,6 +190,5 @@ CREATE TABLE IF NOT EXISTS send (
   to_name
   subject
   body
-
-  -- proirity
+  proirity
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;

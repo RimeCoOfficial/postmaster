@@ -8,9 +8,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if (!empty($s3_object_url))
 {
   ?>
-  <div class="thumbnail">
-    <img class="img-responsive" src="<?php echo $s3_object_url; ?>">
-  </div>
+  <a href="<?php echo $s3_object_url; ?>" target="_blank">
+    <div class="thumbnail">
+      <img class="img-responsive" src="<?php echo $s3_object_url; ?>">
+    </div>
+  </a>
 
   <pre><?php echo $s3_object_url; ?></pre>
   <?php

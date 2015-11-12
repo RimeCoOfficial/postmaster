@@ -15,7 +15,7 @@ $config = array(
   'transaction/category/modify'   => ['category'],
 
   'transaction/home/create'       => ['subject', 'category_id'],
-  'transaction/home/modify'       => ['subject', 'reply_to_name', 'reply_to_email', 'body_html', 'category_id'],
+  'transaction/home/modify'       => ['subject', 'reply_to_name', 'reply_to_email', 'message_html', 'category_id'],
 );
 
 if ( ! function_exists('fill_element'))
