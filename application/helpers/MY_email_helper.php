@@ -30,7 +30,7 @@ function valid_email($str)
 
 function report_error($subject, $template, $data)
 {
-  if (!is_null($CI =& get_instance())) AND ENVIRONMENT === 'production')
+  if (!is_null($CI =& get_instance()) AND ENVIRONMENT === 'production')
   {
     $data['debug_backtrace'] = NULL;
     $data['backtrace'] = array();
