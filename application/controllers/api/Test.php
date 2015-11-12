@@ -6,7 +6,7 @@ class Test extends CI_Controller
   public function index()
   {
     $this->load->library('lib_send_email');
-    $this->lib_send_email->go();
+    $this->lib_send_email->general(getenv('email_debug'), 'foo', 'bar');
     
     $response = array('status' => 'OK');
 
