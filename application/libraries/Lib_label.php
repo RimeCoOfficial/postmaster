@@ -54,4 +54,9 @@ class Lib_label
     $this->CI->model_label->modify($label_id, $name);
     return TRUE;
   }
+
+  function delete($label_id)
+  {
+    return $this->CI->model_label->delete($label_id);
+  }
 }

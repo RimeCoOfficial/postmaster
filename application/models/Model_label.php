@@ -47,4 +47,12 @@ class Model_label extends CI_Model
 
     $this->db->update($this->label_table);
   }
+
+  function delete($label_id)
+  {
+    $this->db->where('label_id', $label_id);
+    $this->db->delete($this->label_table);
+
+    return $this->db->affected_rows() > 0;
+  }
 }

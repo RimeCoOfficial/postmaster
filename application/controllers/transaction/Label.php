@@ -12,11 +12,12 @@ class label extends CI_Controller
     {
       redirect();
     }
+
+    $this->load->library('lib_label');
   }
 
   public function index()
   {
-    $this->load->library('lib_label');
     $local_view_data['label_list'] = $this->lib_label->get_list();
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
@@ -32,7 +33,6 @@ class label extends CI_Controller
     $this->load->library('form_validation');
     if ($this->form_validation->run('transaction/label/create'))
     {
-      $this->load->library('lib_label');
       if (is_null($this->lib_label->create(
         $this->form_validation->set_value('label')
       )))
@@ -54,8 +54,6 @@ class label extends CI_Controller
   public function modify($label_id)
   {
     $local_view_data = [];
-
-    $this->load->library('lib_label');
     $local_view_data['label'] = $this->lib_label->get($label_id);
 
     if (empty($local_view_data['label'])) show_error('label not found');
@@ -80,5 +78,11 @@ class label extends CI_Controller
 
     $view_data['main_content'] = $this->load->view('transaction/label/modify', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
+  }
+
+  public function delete($label_id)
+  {
+    $this->lib_label->delete($label_id);
+    redirect('transaction/label');
   }
 }

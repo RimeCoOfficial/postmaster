@@ -18,6 +18,8 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
       body { padding-top: 20px; padding-bottom: 20px; }
       .container { max-width: 680px; }
     </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   </head>
   <body>
 
@@ -89,7 +91,6 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
       </div>
     </div>
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   </body>
 </html>
