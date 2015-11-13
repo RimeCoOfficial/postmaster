@@ -37,11 +37,10 @@ class Home extends CI_Controller
     foreach ($label_list as $label) $label_keys[ $label['label_id'] ] = $label['name'];
     set_dropdown_options('label_id', $label_keys);
 
-    $this->load->library('lib_message');
-    $message_list = $this->lib_message->get_list();
+    $message_list = $this->lib_transaction->get_available_message_list();
 
     $message_keys = [];
-    foreach ($message_list as $message) $message_keys[ $message['message_id'] ] = $message['subject'];
+    foreach ($message_list as $message) $message_keys[ $message['message_id'] ] = $message['subject'].' #'.$message['message_id'];
     set_dropdown_options('message_id', $message_keys);
 
     $this->load->library('form_validation');
@@ -56,7 +55,7 @@ class Home extends CI_Controller
       }
       else
       {
-        redirect('transaction/home/modify/'.$transction_id);
+        redirect('transaction');
       }
     }
 
@@ -66,10 +65,10 @@ class Home extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function modify($transaction_id)
+  public function modify($message_id)
   {
     $local_view_data = [];
-    $local_view_data['transaction'] = $this->lib_transaction->get($transaction_id);
+    $local_view_data['transaction'] = $this->lib_transaction->get($message_id);
 
     if (empty($local_view_data['transaction'])) show_error('transaction not found');
 
@@ -91,7 +90,7 @@ class Home extends CI_Controller
     if ($this->form_validation->run('transaction/home/modify'))
     {
       if (is_null($this->lib_transaction->modify(
-        $transaction_id,
+        $message_id,
         $this->form_validation->set_value('label_id')
       )))
       {
@@ -107,5 +106,11 @@ class Home extends CI_Controller
 
     $view_data['main_content'] = $this->load->view('transaction/modify', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
+  }
+
+  public function delete($message_id)
+  {
+    $this->lib_transaction->delete($message_id);
+    redirect('transaction');
   }
 }

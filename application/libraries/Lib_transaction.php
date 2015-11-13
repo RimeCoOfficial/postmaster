@@ -22,9 +22,9 @@ class Lib_transaction
     return $this->error;
   }
 
-  function get($transaction_id)
+  function get($message_id)
   {
-    return $this->CI->model_transaction->get($transaction_id);
+    return $this->CI->model_transaction->get($message_id);
   }
 
   function get_list()
@@ -32,15 +32,29 @@ class Lib_transaction
     return $this->CI->model_transaction->get_list();
   }
 
-  function create($transaction_id, $label_id)
+  function get_available_message_list()
   {
-    $this->CI->model_transaction->create($transaction_id, $label_id);
+    return $this->CI->model_transaction->get_available_message_list();
+  }
+
+  function create($message_id, $label_id)
+  {
+    if (empty($label_id)) $label_id = NULL;
+
+    $this->CI->model_transaction->create($message_id, $label_id);
     return TRUE;
   }
 
-  function modify($transaction_id, $label_id)
+  function modify($message_id, $label_id)
   {
-    $this->CI->model_transaction->update($transaction_id, $label_id);
+    if (empty($label_id)) $label_id = NULL;
+
+    $this->CI->model_transaction->update($message_id, $label_id);
     return TRUE;
+  }
+
+  function delete($message_id)
+  {
+    $this->CI->model_transaction->delete($message_id);
   }
 }

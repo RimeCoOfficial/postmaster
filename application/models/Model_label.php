@@ -16,6 +16,8 @@ class Model_label extends CI_Model
 
   function get_list()
   {
+    $this->db->limit(50);
+
     $this->db->order_by('name', 'ASC');
 
     $query = $this->db->get($this->label_table);

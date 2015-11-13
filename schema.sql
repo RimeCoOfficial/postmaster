@@ -95,13 +95,12 @@ CREATE TABLE IF NOT EXISTS list_subscribed (
 --
 
 CREATE TABLE IF NOT EXISTS campaign (
-  campaign_id             int                 NOT NULL  AUTO_INCREMENT,
-  list_id                 int                 NOT NULL,
   message_id              int                 NOT NULL,
+  list_id                 int                 NOT NULL,
   email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   status                  varchar(16)                   DEFAULT NULL, -- in_progress
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (campaign_id),
+  PRIMARY KEY (message_id),
   FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
@@ -113,12 +112,11 @@ CREATE TABLE IF NOT EXISTS campaign (
 --
 
 CREATE TABLE IF NOT EXISTS autoresponder (
-  autoresponder_id        int                 NOT NULL  AUTO_INCREMENT,
-  list_id                 int                 NOT NULL,
   message_id              int                 NOT NULL,
-  email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  list_id                 int                 NOT NULL,
+  -- email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (autoresponder_id),
+  PRIMARY KEY (message_id),
   FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
@@ -130,10 +128,9 @@ CREATE TABLE IF NOT EXISTS autoresponder (
 --
 
 CREATE TABLE IF NOT EXISTS label (
-  label_id                 int                 NOT NULL  AUTO_INCREMENT,
+  label_id                int                 NOT NULL  AUTO_INCREMENT,
   name                    varchar(32)         NOT NULL  UNIQUE,
   color                   varchar(8)                    DEFAULT NULL,
-  is_archived             tinyint(1)          NOT NULL  DEFAULT 0,
   PRIMARY KEY (label_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
@@ -146,12 +143,12 @@ INSERT INTO `ci_postmaster`.`label` (`name`) VALUES ('auth'), ('feedback'), ('no
 --
 
 CREATE TABLE IF NOT EXISTS transaction (
-  transaction_id          int                 NOT NULL,
+  message_id          int                 NOT NULL,
   label_id                int                           DEFAULT NULL,
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (transaction_id),
+  PRIMARY KEY (message_id),
   FOREIGN KEY (label_id) REFERENCES label(label_id) ON UPDATE CASCADE ON DELETE SET NULL,
-  FOREIGN KEY (transaction_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
+  FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------

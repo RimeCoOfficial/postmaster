@@ -48,7 +48,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <h4 class="modal-title" id="label-delete-modal-label">Delete Label</h4>
       </div>
       <div class="modal-body">
-        Are you sure you want to delete <code></code>?<br>
+        <p>
+          Are you sure you want to delete <strong></strong>?
+        </p>
       </div>
       <div class="modal-footer">
         <div class="row">
@@ -69,7 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    modal.find('.modal-body code').text(label_name)
+    modal.find('.modal-body strong').text(label_name)
     modal.find('.modal-footer a').attr("href", '<?php echo base_url('transaction/label/delete'); ?>' + '/' + label_id)
   });
 </script>

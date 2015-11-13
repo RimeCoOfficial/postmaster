@@ -19,7 +19,7 @@ class Model_message extends CI_Model
   {
     $this->db->limit(50);
     
-    $this->db->order_by($this->message_table.'.message_id', 'ASC');
+    $this->db->order_by($this->message_table.'.message_id', 'DESC');
 
     $query = $this->db->get($this->message_table);
     return $query->result_array();
