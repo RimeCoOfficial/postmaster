@@ -15,7 +15,7 @@ putenv('db_password=root');
 putenv('aws_account_id=XXXXXXXXXXXX');
 putenv('aws_access_key=XXXXXXXXXXXXXXXXXXXX');
 putenv('aws_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-putenv('AWS_PHP_CACHE_DIR=/tmp/aws-php-cache');
+putenv('AWS_PHP_CACHE_DIR=/tmp/aws-cache/root-data');
 
 // US East (N. Virginia)        us-east-1
 // US West (Oregon)             us-west-2

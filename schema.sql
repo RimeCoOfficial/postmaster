@@ -40,13 +40,37 @@ CREATE TABLE IF NOT EXISTS feedback (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table message
+--
+
+CREATE TABLE IF NOT EXISTS message (
+  message_id              int                 NOT NULL  AUTO_INCREMENT,
+
+  subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
+  message_html            text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+
+  reply_to_name           varchar(128)                  DEFAULT NULL,
+  reply_to_email          varchar(256)                  DEFAULT NULL,
+
+  tumblr_post_id          varchar(256)                  DEFAULT NULL, -- 0 = must be posted or filled
+  is_archived             tinyint(1)          NOT NULL  DEFAULT 0,
+
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (message_id)
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table list
 --
 
 CREATE TABLE IF NOT EXISTS list (
   list_id                 int                 NOT NULL  AUTO_INCREMENT,
-  id                      varchar(32)                   DEFAULT NULL,
+  name                    varchar(32)                   DEFAULT NULL,
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+INSERT INTO `ci_postmaster`.`list` (`name`) VALUES ('announcement'), ('request-invitation'), ('newsletter'), ('tips');
 
 -- --------------------------------------------------------
 
@@ -55,9 +79,13 @@ CREATE TABLE IF NOT EXISTS list (
 --
 
 CREATE TABLE IF NOT EXISTS list_subscribed (
-  email_id
-  list_id
-  unsubscribed            tinyint(1)          NOT NULL  DEFAULT 0,
+  email_id                varchar(256)        NOT NULL,
+  list_id                 int                 NOT NULL  AUTO_INCREMENT,
+  subscribed              datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  unsubscribed            datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (email_id, list_id),
+  FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -68,24 +96,18 @@ CREATE TABLE IF NOT EXISTS list_subscribed (
 
 CREATE TABLE IF NOT EXISTS campaign (
   campaign_id             int                 NOT NULL  AUTO_INCREMENT,
-  subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
-  message_html            text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
-  tumblr_html             text                          DEFAULT NULL COLLATE utf8mb4_unicode_ci,
-  tumblr_post_id          varchar(256)                  DEFAULT NULL,
+  list_id                 int                 NOT NULL,
+
+  autoresponder           tinyint(1)          NOT NULL  DEFAULT 0, -- drip campaign
+
+  message_id              int                 NOT NULL,
+
   email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   status                  varchar(16)                   DEFAULT NULL, -- in_progress
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
--- --------------------------------------------------------
-
---
--- Table structure for table campaign_list
---
-
-CREATE TABLE IF NOT EXISTS campaign_list (
-  campaign_id
-  list_ids
+  PRIMARY KEY (campaign_id),
+  FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -102,7 +124,7 @@ CREATE TABLE IF NOT EXISTS category (
   PRIMARY KEY (category_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
-INSERT INTO `ci_postmaster`.`category` (`name`) VALUES ('announcement'), ('error'), ('newsletter'), ('notification'), ('promotion'), ('report'), ('test');
+INSERT INTO `ci_postmaster`.`category` (`name`) VALUES ('auth'), ('feedback'), ('notification'), ('invite'), ('report'), ('test');
 
 -- --------------------------------------------------------
 
@@ -113,19 +135,11 @@ INSERT INTO `ci_postmaster`.`category` (`name`) VALUES ('announcement'), ('error
 CREATE TABLE IF NOT EXISTS transaction (
   transaction_id          int                 NOT NULL  AUTO_INCREMENT,
   category_id             int                 NOT NULL,
-
-  is_archived             tinyint(1)          NOT NULL  DEFAULT 0,
-
-  reply_to_name           varchar(128)                  DEFAULT NULL,
-  reply_to_email          varchar(256)                  DEFAULT NULL,
-
-  subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
-  message_html            text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
-
-  tumblr_post_id          varchar(256)                  DEFAULT NULL,
+  message_id              int                 NOT NULL,
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (transaction_id),
-  FOREIGN KEY (category_id) REFERENCES category(category_id) ON UPDATE CASCADE ON DELETE CASCADE
+  FOREIGN KEY (category_id) REFERENCES category(category_id) ON UPDATE CASCADE ON DELETE SET NULL,
+  FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -166,7 +180,7 @@ CREATE TABLE IF NOT EXISTS tumblr (
 -- --------------------------------------------------------
 
 --
--- Table structure for table tumblr
+-- Table structure for table s3
 --
 
 CREATE TABLE IF NOT EXISTS s3 (
@@ -179,10 +193,10 @@ CREATE TABLE IF NOT EXISTS s3 (
 -- --------------------------------------------------------
 
 --
--- Table structure for table send
+-- Table structure for table send_async
 --
 
-CREATE TABLE IF NOT EXISTS send (
+CREATE TABLE IF NOT EXISTS send_async (
   unique_id               int                 NOT NULL  AUTO_INCREMENT,
   from_email_id
   from_name

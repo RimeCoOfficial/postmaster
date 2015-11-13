@@ -16,7 +16,7 @@ class Home extends CI_Controller
     $this->load->library('lib_transaction');
   }
 
-  public function index($filter = NULL) // 'show_archived|category:notification'
+  public function index($filter = NULL)
   {
     $local_view_data['list'] = $this->lib_transaction->get_list();
 
