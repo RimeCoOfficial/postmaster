@@ -4,7 +4,7 @@ AWS email server
 
 ## Features
 
-- [ ] Campaigns emails
+- [ ] Campaign emails
 - [ ] Drip campaign emails (Autoresponders)
 - [ ] Transcational emails
 - [ ] Lists (unsubscribe-able and not unsubscribe-able)
