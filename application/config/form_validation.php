@@ -11,11 +11,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config = array(
   // 'controller/method'            => ['value1', 'value2'],
 
-  'transaction/category/create'   => ['category'],
-  'transaction/category/modify'   => ['category'],
+  'transaction/label/create'      => ['label'],
+  'transaction/label/modify'      => ['label'],
 
-  'transaction/home/create'       => ['subject', 'category_id'],
-  'transaction/home/modify'       => ['subject', 'reply_to_name', 'reply_to_email', 'message_html', 'category_id'],
+  'transaction/home/create'       => ['message_id', 'label_id'],
+  'transaction/home/modify'       => ['message_id', 'label_id'],
 
   'message/create'                => ['subject'],
   'message/modify'                => ['subject', 'reply_to_name', 'reply_to_email', 'message_html'],

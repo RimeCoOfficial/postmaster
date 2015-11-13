@@ -18,13 +18,15 @@ $element = array(
   'class'         => 'form-control',
 );
 
+if (!empty($element_config['required'])) $element['required'] = NULL;
+
 $form_error = form_error($element['name']);
 if (!empty($form_error)) $error[ $element['name'] ] = $form_error;
 if (!empty($error[ $element['name'] ])) $element['id'] = 'inputError';
 ?>
 
 <div class="form-group <?php if (!empty($error[ $element['name'] ])) echo 'has-error'; ?>">
-  <?php echo form_label($element_config['label'], $element['id'], array('class' => 'control-label')); ?>
+  <?php echo form_label($element_config['label'].(!empty($element_config['required']) ? ' *' : ''), $element['id'], array('class' => 'control-label')); ?>
 
   <?php echo form_dropdown($element); ?>
 

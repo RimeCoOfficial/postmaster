@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php
 $nav_list = [
   'home' => 'Transaction',
-  'category' => 'Category',
+  'label' => 'Label',
   'history' => 'History',
 ];
 

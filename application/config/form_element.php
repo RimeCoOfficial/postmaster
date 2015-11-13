@@ -22,7 +22,7 @@ $message_html_max_length    = 9000;
 
 $reply_to_name_max_length   =  128;
 
-$category_max_length        =   32;
+$label_max_length        =   32;
 $subject_max_length         =  128;
 
 $config = array(
@@ -45,20 +45,28 @@ $config = array(
     'type'          => 'file',
   ),
 
-  'category' => array(
-    'label'         => 'Category',
-    'rules'         => 'strtolower|max_length['.$category_max_length.']|trim|alpha_dash|required',
+  'label' => array(
+    'label'         => 'Label',
+    'rules'         => 'strtolower|max_length['.$label_max_length.']|trim|alpha_dash|required',
 
-    'max_length'    => $category_max_length,
+    'max_length'    => $label_max_length,
     
     // html5 tag - not supported in Internet Explorer 9 and earlier versions.
     'placeholder'   => 'Don\'t worry, you can change it later.',
     'required'      => 1,
   ),
 
-  'category_id' => array(
-    'label'         => 'Category',
-    'rules'         => 'in_list[]',
+  'message_id' => array(
+    'label'         => 'Message',
+    'rules'         => 'in_list[]|integer|required',
+
+    'options'       => NULL,
+    'required'      => 1,
+  ),
+
+  'label_id' => array(
+    'label'         => 'Label',
+    'rules'         => 'in_list[]|integer',
 
     'options'       => NULL,
   ),
@@ -86,6 +94,7 @@ $config = array(
     'required'      => 1,
   ),
 
+  'post_to_tumblr'  => array('label' => 'Post to tumblr', 'rules' => 'integer'),
 
   'reply_to_name' => array(
     'label'         => 'Reply-to Name',

@@ -15,9 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <tr>
       <th>id</th>
       <th>Subject</th>
-      <th>Reply-to Name</th>
-      <th>Reply-to Email</th>
-      <th>Category</th>
+      <!-- <th>Label</th> -->
     </tr>
   </thead>
 
@@ -25,10 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php foreach ($list as $key => $transaction): ?>
     <tr>    
       <th scope="row"><?php echo $transaction['transaction_id']; ?></th>
-      <td><?php echo anchor('transaction/home/modify/'.$transaction['transaction_id'], $transaction['subject']); ?></td>
-      <td><?php echo $transaction['reply_to_name']; ?></td>
-      <td><?php echo $transaction['reply_to_email']; ?></td>
-      <td><?php echo $transaction['category_name']; ?></td>
+      <td>
+        <strong><?php echo anchor('transaction/home/modify/'.$transaction['transaction_id'], $transaction['subject']); ?></strong>
+        <?php echo !empty($transaction['label_name']) ? '<span class="label label-default">'.$transaction['label_name'].'</span class="label label-default">' : ''; ?>
+      </td>
     </tr>
     <?php endforeach; ?>
   </tbody>

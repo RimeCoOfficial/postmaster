@@ -29,6 +29,8 @@ class Message extends CI_Controller
   public function create()
   {
     $local_view_data = [];
+
+    $this->load->library('form_validation');
     if ($this->form_validation->run())
     {
       if (is_null($message_id = $this->lib_message->create(
@@ -56,14 +58,15 @@ class Message extends CI_Controller
 
     $local_view_data['message'] = $this->lib_message->get($message_id);
 
+    $this->load->library('form_validation');
     if ($this->form_validation->run())
     {
       if (is_null($this->lib_message->modify(
         $message_id,
         $this->form_validation->set_value('subject'),
+        $this->form_validation->set_value('message_html'),
         $this->form_validation->set_value('reply_to_name'),
-        $this->form_validation->set_value('reply_to_email'),
-        $this->form_validation->set_value('message_html')
+        $this->form_validation->set_value('reply_to_email')
       )))
       {
         show_error($this->lib_message->get_error_message());

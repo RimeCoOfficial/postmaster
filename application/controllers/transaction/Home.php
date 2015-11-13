@@ -28,27 +28,28 @@ class Home extends CI_Controller
 
   public function create()
   {
-    $this->load->library('lib_category');
-    $category_list = $this->lib_category->get_list();
-
-    $category_keys = []; // [NULL => '&mdash;'];
-    foreach ($category_list as $category) $category_keys[ $category['category_id'] ] = $category['name'];
-
-    $config = $this->config->item('form_element');
-    $config['category_id']['rules'] = str_replace('[]', '['.implode(',', array_keys($category_keys)).']', $config['category_id']['rules']);
-    $config['category_id']['options'] = $category_keys;
-    $this->config->set_item('form_element', $config);
-
-    // load config again
-    $this->config->load('form_validation', TRUE);
-    $this->form_validation->set_rules($this->config->item('transaction/home/create', 'form_validation'));
-
     $local_view_data = [];
+
+    $this->load->library('lib_label');
+    $label_list = $this->lib_label->get_list();
+
+    $label_keys = [NULL => '&mdash;'];
+    foreach ($label_list as $label) $label_keys[ $label['label_id'] ] = $label['name'];
+    set_dropdown_options('label_id', $label_keys);
+
+    $this->load->library('lib_message');
+    $message_list = $this->lib_message->get_list();
+
+    $message_keys = [];
+    foreach ($message_list as $message) $message_keys[ $message['message_id'] ] = $message['subject'];
+    set_dropdown_options('message_id', $message_keys);
+
+    $this->load->library('form_validation');
     if ($this->form_validation->run())
     {
       if (is_null($transction_id = $this->lib_transaction->create(
-        $this->form_validation->set_value('subject'),
-        $this->form_validation->set_value('category_id')
+        $this->form_validation->set_value('message_id'),
+        $this->form_validation->set_value('label_id')
       )))
       {
         show_error($this->lib_transaction->get_error_message());
@@ -68,33 +69,30 @@ class Home extends CI_Controller
   public function modify($transaction_id)
   {
     $local_view_data = [];
-
     $local_view_data['transaction'] = $this->lib_transaction->get($transaction_id);
 
-    $this->load->library('lib_category');
-    $category_list = $this->lib_category->get_list();
+    if (empty($local_view_data['transaction'])) show_error('transaction not found');
 
-    $category_keys = []; // [NULL => '&mdash;'];
-    foreach ($category_list as $category) $category_keys[ $category['category_id'] ] = $category['name'];
+    $this->load->library('lib_label');
+    $label_list = $this->lib_label->get_list();
 
-    $config = $this->config->item('form_element');
-    $config['category_id']['rules'] = str_replace('[]', '['.implode(',', array_keys($category_keys)).']', $config['category_id']['rules']);
-    $config['category_id']['options'] = $category_keys;
-    $this->config->set_item('form_element', $config);
+    $label_keys = [NULL => '&mdash;'];
+    foreach ($label_list as $label) $label_keys[ $label['label_id'] ] = $label['name'];
+    set_dropdown_options('label_id', $label_keys);
 
-    // load config again
-    $this->config->load('form_validation', TRUE);
-    $this->form_validation->set_rules($this->config->item('transaction/home/modify', 'form_validation'));
+    $this->load->library('lib_message');
+    $message_list = $this->lib_message->get_list();
 
-    if ($this->form_validation->run())
+    $message_keys = [];
+    foreach ($message_list as $message) $message_keys[ $message['message_id'] ] = $message['subject'];
+    set_dropdown_options('message_id', $message_keys);
+
+    $this->load->library('form_validation');
+    if ($this->form_validation->run('transaction/home/modify'))
     {
       if (is_null($this->lib_transaction->modify(
         $transaction_id,
-        $this->form_validation->set_value('subject'),
-        $this->form_validation->set_value('reply_to_name'),
-        $this->form_validation->set_value('reply_to_email'),
-        $this->form_validation->set_value('message_html'),
-        $this->form_validation->set_value('category_id')
+        $this->form_validation->set_value('label_id')
       )))
       {
         show_error($this->lib_transaction->get_error_message());
@@ -109,11 +107,5 @@ class Home extends CI_Controller
 
     $view_data['main_content'] = $this->load->view('transaction/modify', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
-  }
-
-  public function show($transaction_id)
-  {
-    $transaction = $this->lib_transaction->get($transaction_id);
-    echo $transaction['message_html'];
   }
 }
