@@ -8,7 +8,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php echo form_open(uri_string()); ?>
 
-<?php $this->view('form/dropdown', array('id' => 'message_id', 'value' => $transaction['message_id'])); ?>
 <?php $this->view('form/dropdown', array('id' => 'label_id', 'value' => $transaction['label_id'])); ?>
 
 <div class="row">

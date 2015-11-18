@@ -15,7 +15,7 @@ $config = array(
   'transaction/label/modify'      => ['label'],
 
   'transaction/home/create'       => ['message_id', 'label_id'],
-  'transaction/home/modify'       => ['message_id', 'label_id'],
+  'transaction/home/modify'       => ['label_id'],
 
   'message/create'                => ['subject'],
   'message/modify'                => ['subject', 'reply_to_name', 'reply_to_email', 'message_html'],

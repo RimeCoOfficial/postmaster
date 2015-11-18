@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS message (
 CREATE TABLE IF NOT EXISTS list (
   list_id                 int                 NOT NULL  AUTO_INCREMENT,
   name                    varchar(32)                   DEFAULT NULL,
+  PRIMARY KEY (list_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 INSERT INTO `ci_postmaster`.`list` (`name`) VALUES ('announcement'), ('request-invitation'), ('newsletter'), ('tips');
@@ -143,7 +144,7 @@ INSERT INTO `ci_postmaster`.`label` (`name`) VALUES ('auth'), ('feedback'), ('no
 --
 
 CREATE TABLE IF NOT EXISTS transaction (
-  message_id          int                 NOT NULL,
+  message_id              int                 NOT NULL,
   label_id                int                           DEFAULT NULL,
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (message_id),
@@ -159,11 +160,11 @@ CREATE TABLE IF NOT EXISTS transaction (
 
 CREATE TABLE IF NOT EXISTS transaction_history (
   unique_id               int                 NOT NULL  AUTO_INCREMENT,
-  transaction_id          int                 NOT NULL,
+  message_id              int                 NOT NULL,
   data                    text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (unique_id),
-  FOREIGN KEY (transaction_id) REFERENCES transaction(transaction_id) ON UPDATE CASCADE ON DELETE CASCADE
+  FOREIGN KEY (message_id) REFERENCES transaction(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -209,7 +210,7 @@ CREATE TABLE IF NOT EXISTS send_async (
   unique_id               int                 NOT NULL  AUTO_INCREMENT,
   from_email_id
   from_name
-  from_email_id
+  to_email_id
   to_name
   subject
   body

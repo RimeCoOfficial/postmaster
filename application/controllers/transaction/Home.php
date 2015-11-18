@@ -79,13 +79,6 @@ class Home extends CI_Controller
     foreach ($label_list as $label) $label_keys[ $label['label_id'] ] = $label['name'];
     set_dropdown_options('label_id', $label_keys);
 
-    $this->load->library('lib_message');
-    $message_list = $this->lib_message->get_list();
-
-    $message_keys = [];
-    foreach ($message_list as $message) $message_keys[ $message['message_id'] ] = $message['subject'];
-    set_dropdown_options('message_id', $message_keys);
-
     $this->load->library('form_validation');
     if ($this->form_validation->run('transaction/home/modify'))
     {
