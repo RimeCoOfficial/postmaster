@@ -19,19 +19,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </span>
 </h1>
 
-<?php // var_dump($s3_object_list); ?>
+<p>
+  Bucket <strong><?php echo $aws_config['s3_bucket']; ?></strong><br>
+  <code>https://s3.amazonaws.com/<strong><?php echo $aws_config['s3_bucket']; ?></strong>/&lt;S3_key&gt;</code>
+</p>
 
 <?php if (!empty($s3_object_list)): ?>
 <table class="table">
-  <caption>
-    Bucket <strong><?php echo $aws_config['s3_bucket']; ?></strong><br>
-    <code>https://s3.amazonaws.com/<strong><?php echo $aws_config['s3_bucket']; ?></strong>/&lt;S3_key&gt;</code>
-  </caption>
   <thead>
     <tr>
       <th>#</th>
       <th>S3 key</th>
-      <th>Delete</th>
+      <!-- <th>Delete</th> -->
     </tr>
   </thead>
 
@@ -54,13 +53,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <br>
         <small><?php echo $s3_object['file_size']; ?> KB, <?php echo $s3_object['file_type']; ?>, created <?php echo date('M d, Y h:i A', strtotime($s3_object['created'])); ?></small>
       </td>
-      <td><a href="#"
+      <!-- <td><a href="#"
         data-toggle="modal"
         data-target="#s3_object-delete-modal"
         data-s3-key="<?php echo $s3_object['s3_key']; ?>"
         data-s3-key-encoded="<?php echo urlencode($s3_object['s3_key']); ?>"
         href="#"><span class="glyphicon glyphicon-trash"></span>
-      </a></td>
+      </a></td> -->
     </tr>
     <?php endforeach; ?>
   </tbody>
