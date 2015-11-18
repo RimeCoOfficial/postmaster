@@ -41,7 +41,7 @@ class Lib_s3_object
 
     $s3_key = '';
     if (!empty($type)) $s3_key = $type.'/';
-    $s3_key .= date('Ymd-Hms', time()).' '.$upload['file_name'];
+    $s3_key .= date('Ymd-Hms', time()).'_'.$upload['file_name'];
 
     $result = $s3_client->putObject(array(
       'Bucket'     => $bucket,
@@ -60,11 +60,10 @@ class Lib_s3_object
 
     if (empty($result['ObjectURL']))
     {
-      $this->error = ['message' => 'something went wrong'];
+      $this->error = ['message' => 'ObjectURL not found in AWS response'];
       return NULL;
     }
 
-    // model_s3_object
     $this->CI->model_s3_object->store($s3_key, $upload['file_type'], $upload['file_size'], $upload['is_image']);
 
     $s3_object_url = $result['ObjectURL'];
@@ -72,5 +71,21 @@ class Lib_s3_object
   }
 
   function delete($s3_key)
-  {}
+  {
+    $this->CI->load->config('api_key', TRUE);
+    $config = $this->CI->config->item('aws', 'api_key');
+    $bucket = $config['s3_bucket'];
+
+    $this->CI->load->library('composer/lib_aws');
+    $s3_client = $this->CI->lib_aws->get_s3();
+
+    $result = $s3_client->deleteObject(array(
+      'Bucket'     => $bucket,
+      'Key'        => $s3_key
+    ));
+
+    $this->CI->model_s3_object->delete($s3_key);
+
+    return TRUE;
+  }
 }

@@ -20,15 +20,10 @@ class Lib_aws
           'secret'  => $config['secret_key'],
         ),
         
-        // 'S3' => [
-        //   'region' => $config['region'],
-        // ]
+        'S3' => [
+          'region' => 'us-east-1',
+        ]
     ]);
-
-    // $credentials = $this->aws_client->getCredentials();
-    // $credentials->setAccessKeyId($access_key);
-    // $credentials->setSecretKey($secret_key);
-    // $credentials->setExpiration(null);
   }
 
   public function get_s3()  { return $this->aws_client->createS3();  }

@@ -24,4 +24,10 @@ class Model_s3_object extends CI_Model
     $query = $this->db->get($this->s3_object_table);
     return $query->result_array();
   }
+
+  function delete($s3_key)
+  {
+    $this->db->where('s3_key', $s3_key);
+    $this->db->delete($this->s3_object_table);
+  }
 }

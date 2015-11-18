@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Upload extends CI_Controller
+class S3_object extends CI_Controller
 {
   function __construct()
   {
@@ -23,20 +23,20 @@ class Upload extends CI_Controller
     $bucket = $config['s3_bucket'];
 
     $local_view_data['aws_config'] = $config;
-    $local_view_data['upload_list'] = $this->lib_s3_object->get_list();
+    $local_view_data['s3_object_list'] = $this->lib_s3_object->get_list();
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('upload/list', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('s3_object/list', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 
-  function go($type) // inline-image, attachment, import
+  function upload($type) // inline-image, attachment, import
   {
     $local_view_data = array();
     
-    $this->config->load('upload_s3_object', TRUE);
-    $config = $this->config->item($type, 'upload_s3_object');
+    $this->config->load('upload_s3', TRUE);
+    $config = $this->config->item($type, 'upload_s3');
     
     if (empty($config))
     {
@@ -61,15 +61,28 @@ class Upload extends CI_Controller
 
       // $local_view_data['upload'] = $upload;
       // $local_view_data['result'] = $result;
-      $local_view_data['s3_object_url'] = $s3_object_url;
+      // $local_view_data['s3_object_url'] = $s3_object_url;
+
+      $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Uploaded '.$type.'</strong>: '.$s3_object_url]);
+      redirect('s3_object');
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('upload/form', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('s3_object/upload', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 
-  function delete($key)
-  {}
+  function delete()
+  {
+    $s3_key = $this->input->get('s3_key');
+
+    if (is_null($this->lib_s3_object->delete($s3_key)))
+    {
+      show_error($this->lib_s3_object->get_error_message());
+    }
+
+    $this->session->set_flashdata('alert', ['type' => 'info', 'message' => '<strong>Deleted</strong>: '.$s3_key]);
+    redirect('s3_object');
+  }
 }

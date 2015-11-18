@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h2>Upload <small><?php echo $type; ?></small></h2>
+<h1>Upload <small><?php echo $type; ?></small></h1>
 
 <?php
 if (!empty($s3_object_url))

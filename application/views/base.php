@@ -44,7 +44,7 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
                     'stats'       => '<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>',
                     'campaign'    => 'Campaign',
                     'transaction' => 'Transaction',
-                    'upload'      => '<span class="glyphicon glyphicon-open-file" aria-hidden="true"></span>',
+                    's3-object'   => '<span class="glyphicon glyphicon-open-file" aria-hidden="true"></span>',
                     'settings'    => '<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>',
                   ];
                   $nav_selected = explode('/', uri_string());
@@ -80,6 +80,8 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
               </div>
             </nav>
           </header>
+
+          <?php $this->view('alert'); ?>
 
           <?php echo $main_content; ?>
 
