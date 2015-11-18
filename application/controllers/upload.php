@@ -12,58 +12,64 @@ class Upload extends CI_Controller
     {
       redirect();
     }
+
+    $this->load->library('lib_s3_object');
   }
 
   function index()
   {
+    $this->load->config('api_key', TRUE);
+    $config = $this->config->item('aws', 'api_key');
+    $bucket = $config['s3_bucket'];
+
+    $local_view_data['aws_config'] = $config;
+    $local_view_data['upload_list'] = $this->lib_s3_object->get_list();
+
+    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
+
+    $view_data['main_content'] = $this->load->view('upload/list', $local_view_data, TRUE);
+    $this->load->view('base', $view_data);
+  }
+
+  function go($type) // inline-image, attachment, import
+  {
     $local_view_data = array();
     
-    $this->load->library('upload');
-    if ( ! $this->upload->do_upload('upload_image'))
+    $this->config->load('upload_s3_object', TRUE);
+    $config = $this->config->item($type, 'upload_s3_object');
+    
+    if (empty($config))
     {
-      $local_view_data['error'] = array('upload_image' => $this->upload->display_errors());
+      show_error('type not found');
+    }
+    $local_view_data['type'] = $type;
+
+    $this->load->library('upload', $config);
+    if ( ! $this->upload->do_upload('upload_s3_object'))
+    {
+      $local_view_data['error'] = array('upload_s3_object' => $this->upload->display_errors());
     }
     else
     {
       // file uploaded to /tmp
-      $upload_data = $this->upload->data();
+      $upload = $this->upload->data();
 
-      // upload file to s3
-      $this->load->config('api_key', TRUE);
-      $config = $this->config->item('aws', 'api_key');
-      $bucket = $config['s3_bucket'];
+      if (is_null($s3_object_url = $this->lib_s3_object->upload($upload, $type)))
+      {
+        show_error($this->lib_s3_object->get_error_message());
+      }
 
-      $s3_key = $upload_data['file_name'];
-      $tmp_file_name = $upload_data['full_path'];
-
-      $this->load->library('composer/lib_aws');
-      $s3_client = $this->lib_aws->get_s3();
-
-      $result = $s3_client->putObject(array(
-        'Bucket'     => $bucket,
-        'Key'        => $s3_key,
-        'SourceFile' => $tmp_file_name,
-      ));
-
-      // We can poll the object until it is accessible
-      $s3_client->waitUntil('ObjectExists', array(
-        'Bucket' => $bucket,
-        'Key'    => $s3_key
-      ));
-
-      $s3_object_url = $result['ObjectURL'];
-
-      // clean up
-      unlink($upload_data['full_path']);
-
-      // $local_view_data['upload_data'] = $upload_data;
+      // $local_view_data['upload'] = $upload;
       // $local_view_data['result'] = $result;
       $local_view_data['s3_object_url'] = $s3_object_url;
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('upload_image', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('upload/form', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
+
+  function delete($key)
+  {}
 }

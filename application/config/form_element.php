@@ -38,8 +38,8 @@ $config = array(
   ),
   
   
-  'upload_image' => array(
-    'label'         => 'Select image to upload',
+  'upload_s3_object' => array(
+    'label'         => 'Select file to upload',
     
     // html5 tag - not supported in Internet Explorer 9 and earlier versions.
     'type'          => 'file',

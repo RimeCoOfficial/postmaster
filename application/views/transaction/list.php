@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <strong><?php echo anchor('transaction/home/modify/'.$transaction['message_id'], $transaction['subject']); ?></strong>
         <?php echo !empty($transaction['label_name']) ? '<span class="label label-default">'.$transaction['label_name'].'</span class="label label-default">' : ''; ?>
       </td>
-      <td><a href="#<?php echo base_url('/'.$transaction['message_id']); ?>"
+      <td><a href="#"
         data-toggle="modal"
         data-target="#transaction-delete-modal"
         data-message-id="<?php echo $transaction['message_id']; ?>"

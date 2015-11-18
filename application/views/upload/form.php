@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h2>Upload Image</h2>
+<h2>Upload <small><?php echo $type; ?></small></h2>
 
 <?php
 if (!empty($s3_object_url))
@@ -23,7 +23,7 @@ else
 
   <?php echo form_open_multipart(uri_string()); ?>
 
-  <?php $this->view('form/input', array('id' => 'upload_image', 'value' => NULL)); ?>
+  <?php $this->view('form/input', array('id' => 'upload_s3_object', 'value' => NULL)); ?>
 
   <div class="row">
     <div class="col-sm-5">

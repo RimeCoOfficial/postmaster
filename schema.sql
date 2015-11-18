@@ -190,14 +190,16 @@ CREATE TABLE IF NOT EXISTS tumblr (
 -- --------------------------------------------------------
 
 --
--- Table structure for table s3
+-- Table structure for table s3_object
 --
 
-CREATE TABLE IF NOT EXISTS s3 (
-  key                     varchar(256)        NOT NULL,
-  type
+CREATE TABLE IF NOT EXISTS s3_object (
+  s3_key                  varchar(256)        NOT NULL,
+  file_type               varchar(1024)       NOT NULL,
+  file_size               varchar(256)        NOT NULL,
+  is_image                tinyint(1)          NOT NULL DEFAULT 0,
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (service, x_account_id)
+  PRIMARY KEY (s3_key)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
