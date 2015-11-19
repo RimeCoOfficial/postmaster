@@ -9,7 +9,7 @@
         "db_hostname=mydbinstance.XXXXXXXXXXXX.us-west-2.rds.amazonaws.com",
         "db_username=awsuser",
         "db_password=mypassword",
-        "AWS_PHP_CACHE_DIR=/tmp/aws-cache-data",
+        "AWS_PHP_CACHE_DIR=/tmp/aws-cache",
         "aws_account_id=XXXXXXXXXXXX",
         "aws_access_key=XXXXXXXXXXXXXXXXXXXX",
         "aws_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
