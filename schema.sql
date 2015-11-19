@@ -186,7 +186,6 @@ CREATE TABLE IF NOT EXISTS tumblr (
   PRIMARY KEY (service, x_account_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
-
 -- --------------------------------------------------------
 
 --

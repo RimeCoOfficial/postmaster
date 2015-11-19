@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <span class="pull-right">
     <div class="dropdown">
       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        New
+        Upload
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">

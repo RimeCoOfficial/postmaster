@@ -18,11 +18,7 @@ class Lib_aws
         'credentials' => array(
           'key'     => $config['access_key'],
           'secret'  => $config['secret_key'],
-        ),
-        
-        'S3' => [
-          'region' => 'us-east-1',
-        ]
+        )
     ]);
   }
 

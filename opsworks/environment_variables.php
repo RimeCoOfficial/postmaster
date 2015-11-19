@@ -26,8 +26,8 @@ putenv('AWS_PHP_CACHE_DIR=/tmp/aws-cache/root-data');
 // Asia Pacific (Sydney)        ap-southeast-2
 // Asia Pacific (Tokyo)         ap-northeast-1
 // South America (Sao Paulo)    sa-east-1
-putenv('aws_region=us-west-2');
 putenv('aws_s3_bucket=bucket');
+putenv('aws_region=us-east-1');
 
 putenv('ga=UA-XXXXXXXXX-X');
 
