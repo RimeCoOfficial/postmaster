@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <p>
   Bucket <strong><?php echo $aws_config['s3_bucket']; ?></strong><br>
-  <code>https://s3.amazonaws.com/<strong><?php echo $aws_config['s3_bucket']; ?></strong>/&lt;S3_key&gt;</code>
+  <code>https://s3-<strong><?php echo $aws_config['region']; ?></strong>.amazonaws.com/<strong><?php echo $aws_config['s3_bucket']; ?></strong>/&lt;S3_key&gt;</code>
 </p>
 
 <?php if (!empty($s3_object_list)): ?>

@@ -25,6 +25,17 @@ class Lib_s3_object
   function get_list()
   {
     return $this->CI->model_s3_object->get_list();
+
+    // $this->CI->load->library('composer/lib_aws');
+    // $s3_client = $this->CI->lib_aws->get_s3();
+
+    // $this->CI->load->config('api_key', TRUE);
+    // $config = $this->CI->config->item('aws', 'api_key');
+    // $bucket = $config['s3_bucket'];
+
+    // $result = $s3_client->listObjects(array('Bucket' => $bucket));
+
+    // var_dump($result, $result['Contents']); die();
   }
 
   function upload($upload, $type = NULL)
