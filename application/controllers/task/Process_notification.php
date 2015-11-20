@@ -24,8 +24,8 @@ class Process_notification extends CI_Controller
   // complaint@simulator.amazonses.com
   // suppressionlist@simulator.amazonses.com
 
-  // cd ~/Sites/postmaster && php index.php process_notification queue bounces
-  // cd /srv/www/postmaster/current && php index.php process_notification queue bounces
+  // cd ~/Sites/postmaster && php index.php task process_notification queue bounces
+  // cd /srv/www/postmaster/current && php index.php task process_notification queue bounces
   function queue($type = 'bounces') //  type = bounces, complaints, deliveries
   {
     echo 'Start Notification'.PHP_EOL;

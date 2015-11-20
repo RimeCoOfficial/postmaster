@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // // $config['detect_mime']      = TRUE;   // DEFAULT
 // // $config['mod_mime_fix']     = TRUE;   // DEFAULT
 
-$config['inline-image'] ['upload_path']       = '/tmp';
+$config['inline-image'] ['upload_path']       = '/tmp/ci/upload';
 $config['inline-image'] ['allowed_types']     = 'gif|jpg|png';
 $config['inline-image'] ['max_filename']      = 200; // type_name / [YYYYmmdd-HHmmss filename.ext]
 $config['inline-image'] ['file_ext_tolower']  = TRUE;
@@ -25,14 +25,14 @@ $config['inline-image'] ['max_size']          = '2048';
 $config['inline-image'] ['max_width']         = '750';
 $config['inline-image'] ['max_height']        = '750';
 
-$config['attachment']   ['upload_path']       = '/tmp';
+$config['attachment']   ['upload_path']       = '/tmp/ci/upload';
 $config['attachment']   ['allowed_types']     = 'md|txt';
 $config['attachment']   ['max_filename']      = 200;
 $config['attachment']   ['file_ext_tolower']  = TRUE;
 $config['attachment']   ['overwrite']         = TRUE;
 $config['attachment']   ['max_size']          = '2048';
 
-$config['import']       ['upload_path']       = '/tmp';
+$config['import']       ['upload_path']       = '/tmp/ci/upload';
 $config['import']       ['allowed_types']     = 'csv|xls';
 $config['import']       ['max_filename']      = 200;
 $config['import']       ['file_ext_tolower']  = TRUE;
