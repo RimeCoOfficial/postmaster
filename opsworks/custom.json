@@ -4,8 +4,8 @@
       "path_to_vars": "opsworks",
       "env_vars" : [
         "CI_ENV=production",
-        "ci_base_url=http://postmaster.example.com"
-        "ci_proxy_ips=172.XX.XX.0/20,172.XX.XX.0/20,172.XX.XX.0/20"
+        "ci_base_url=http://postmaster.example.com",
+        "ci_proxy_ips=172.XX.XX.0/20,172.XX.XX.0/20,172.XX.XX.0/20",
         "db_hostname=mydbinstance.XXXXXXXXXXXX.us-west-2.rds.amazonaws.com",
         "db_username=awsuser",
         "db_password=mypassword",

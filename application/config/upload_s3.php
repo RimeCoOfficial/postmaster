@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // $config['upload_path']      = '/tmp';
 // $config['allowed_types']    = 'gif|jpg|png';
 // // $config['file_name']        = date('Ymd-Hms', time()); // lib_s3_object
-// $config['max_filename']     = 240; // YYYYmmdd-HHmmss filename.ext = 256 - 16 = 240
+// $config['max_filename']     = 240; // YYYYmmdd-HHmmss_filename.ext = 256 - 16 = 240
 // $config['file_ext_tolower'] = TRUE;
 // $config['overwrite']        = TRUE;
 // $config['max_size']         = '2048';
@@ -18,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config['inline-image'] ['upload_path']       = '/tmp/ci/upload';
 $config['inline-image'] ['allowed_types']     = 'gif|jpg|png';
-$config['inline-image'] ['max_filename']      = 200; // type_name / [YYYYmmdd-HHmmss filename.ext]
+$config['inline-image'] ['max_filename']      = 200; // type_name / [YYYYmmdd-HHmmss_filename.ext]
 $config['inline-image'] ['file_ext_tolower']  = TRUE;
 $config['inline-image'] ['overwrite']         = TRUE;
 $config['inline-image'] ['max_size']          = '2048';
