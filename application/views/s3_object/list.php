@@ -69,45 +69,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php endif; ?>
   </ol>
 
-
   <div class="list-group">
-
     <?php if (!empty($s3_object_list['CommonPrefixes'])): ?>
       <?php foreach ($s3_object_list['CommonPrefixes'] as $common_prefix): ?>
         <a class="list-group-item" href="<?php echo base_url('s3-object/index?prefix='.urlencode($common_prefix['Prefix'])); ?>">
-          <span class="glyphicon glyphicon-folder-close"></span>&nbsp;
-          <strong>
-            <?php echo s3_key_name($common_prefix['Prefix'], $prefix); ?>
-          </strong>
-          <!-- <small>
-            <span class="pull-right glyphicon glyphicon-folder-close"></span>
-          </small> -->
+          <div class="media">
+            <div class="media-left">
+              <span class="media-object glyphicon glyphicon-folder-close"></span>
+            </div>
+            <div class="media-body">
+              <h5 class="media-heading"><?php echo s3_key_name($common_prefix['Prefix'], $prefix); ?></h5>
+            </div>
+          </div>
         </a>
       <?php endforeach; ?>
     <?php endif; ?>
-
+  
     <?php if (!empty($s3_object_list['Contents'])): ?>
       <?php // var_dump($s3_object_list['Contents']); ?>
-      
       <?php foreach ($s3_object_list['Contents'] as $s3_object): ?>
         <div class="list-group-item">
-          <!-- https://s3.amazonaws.com/example-postmaster/inline-image/20151118-081105%20logo-share.png -->
-          <strong>
-            <?php echo anchor($s3_url.'/'.$s3_object['Key'], s3_key_name($s3_object['Key'], $prefix), 'target="_blank" '.($is_archived ? 'class="text-muted"' : '')); ?>
-          </strong>
-          <small>
-            <?php echo byte_format($s3_object['Size']); ?>,
-            <?php echo $s3_object['StorageClass']; ?>,
-            created <?php echo date('M d, Y h:i A', strtotime($s3_object['LastModified'])); ?>
-          
-            <a class="pull-right <?php echo $is_archived ? 'text-muted' : 'text-danger'; ?>"
-              data-toggle="modal"
-              data-target="#s3-object-archive-modal"
-              data-key="<?php echo $s3_object['Key']; ?>"
-              data-key-encoded="<?php echo urlencode($s3_object['Key']); ?>"
-              href="#"><span class="glyphicon glyphicon-<?php echo $is_archived ? 'time' : 'trash'; ?>"></span>
-            </a>
-          </small>
+
+          <div class="media">
+            <div class="media-body">
+              <h5 class="media-heading">
+                <?php echo anchor($s3_url.'/'.$s3_object['Key'], s3_key_name($s3_object['Key'], $prefix), 'target="_blank" '.($is_archived ? 'class="text-muted"' : '')); ?>
+              
+                <small>
+                  <?php echo byte_format($s3_object['Size']); ?>,
+                  <?php echo $s3_object['StorageClass']; ?>,
+                  created <?php echo date('M d, Y h:i A', strtotime($s3_object['LastModified'])); ?>
+                </small>
+              </h5>
+            </div>
+            <div class="media-right">
+              <a class="media-object pull-right <?php echo $is_archived ? 'text-muted' : 'text-danger'; ?>"
+                data-toggle="modal"
+                data-target="#s3-object-archive-modal"
+                data-key="<?php echo $s3_object['Key']; ?>"
+                data-key-encoded="<?php echo urlencode($s3_object['Key']); ?>"
+                href="#"><span class="glyphicon glyphicon-<?php echo $is_archived ? 'time' : 'trash'; ?>"></span>
+              </a>
+            </div>
+          </div>
         </div>
       <?php endforeach; ?>
     <?php endif; ?>
