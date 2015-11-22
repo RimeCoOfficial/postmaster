@@ -40,8 +40,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </p>
 
   <ol class="breadcrumb">
-    <li><?php echo anchor('s3-object', $s3_object_list['Name']); ?></li>
     <?php if (!empty($s3_object_list['Prefix'])): ?>
+      <li><?php echo anchor('s3-object', $s3_object_list['Name']); ?></li>
       <?php // var_dump($s3_object_list['Prefix']); ?>
       <?php
       $prefix_list = explode('/', $prefix);
@@ -64,6 +64,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php
       }
       ?>
+    <?php else: ?>
+      <li class="active"><?php echo $s3_object_list['Name']; ?></li>
     <?php endif; ?>
   </ol>
 

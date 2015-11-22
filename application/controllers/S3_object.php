@@ -24,7 +24,6 @@ class S3_object extends CI_Controller
 
     $this->load->config('api_key', TRUE);
     $config = $this->config->item('aws', 'api_key');
-    $bucket = $config['s3_bucket'];
 
     $local_view_data['aws_config'] = $config;
     $local_view_data['s3_object_list'] = $this->lib_s3_object->get_list($prefix);
