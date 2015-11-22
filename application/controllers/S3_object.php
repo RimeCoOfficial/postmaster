@@ -66,7 +66,7 @@ class S3_object extends CI_Controller
       // $local_view_data['result'] = $result;
       // $local_view_data['s3_object_url'] = $s3_object_url;
 
-      if (!empty($prefix))  $redirect_url = 's3-object/index?key='.urlencode($prefix.'/');
+      if (!empty($prefix))  $redirect_url = 's3-object/index?prefix='.urlencode($prefix.'/');
       else                  $redirect_url = 's3-object';
 
       $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Uploaded '.$prefix.'</strong>: '.$s3_object_url]);
@@ -82,11 +82,19 @@ class S3_object extends CI_Controller
   function archive()
   {
     $key = $this->input->get('key');
-
     if (is_null($this->lib_s3_object->archive($key)))
     {
       show_error($this->lib_s3_object->get_error_message());
     }
+
+    $prefix = '';
+    $prefix_list = explode('/', $key);
+    if (!empty($prefix_list)) for ($i = 0; $i < count($prefix_list) - 1; $i++) $prefix .= $prefix_list[ $i ].'/';
+
+    if (!empty($prefix))  $redirect_url = 's3-object/index?prefix='.urlencode($prefix);
+    else                  $redirect_url = 's3-object';
+
+    var_dump($redirect_url); die();
 
     $this->session->set_flashdata('alert', ['type' => 'info', 'message' => '<strong>Archived</strong>: '.$key]);
     redirect('s3-object');
