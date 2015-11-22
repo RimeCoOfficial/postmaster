@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           // if (empty($name)) continue;
           $prefix_key .= $name.'/';
           ?>
-          <li><?php echo anchor('s3-object/index?key='.urlencode($prefix_key), $name); ?></li>
+          <li><?php echo anchor('s3-object/index?prefix='.urlencode($prefix_key), $name); ?></li>
         <?php endfor; ?>
 
         <li class="active"><?php echo $name; ?></li>
@@ -74,13 +74,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <?php if (!empty($s3_object_list['CommonPrefixes'])): ?>
       <?php foreach ($s3_object_list['CommonPrefixes'] as $common_prefix): ?>
-        <a class="list-group-item" href="<?php echo base_url('s3-object/index?key='.urlencode($common_prefix['Prefix'])); ?>">
+        <a class="list-group-item" href="<?php echo base_url('s3-object/index?prefix='.urlencode($common_prefix['Prefix'])); ?>">
+          <span class="glyphicon glyphicon-folder-close"></span>&nbsp;
           <strong>
             <?php echo s3_key_name($common_prefix['Prefix'], $prefix); ?>
           </strong>
-          <small class="pull-right">
-            <span class="glyphicon glyphicon-folder-close"></span>
-          </small>
+          <!-- <small>
+            <span class="pull-right glyphicon glyphicon-folder-close"></span>
+          </small> -->
         </a>
       <?php endforeach; ?>
     <?php endif; ?>
@@ -94,7 +95,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <strong>
             <?php echo anchor($s3_url.'/'.$s3_object['Key'], s3_key_name($s3_object['Key'], $prefix), 'target="_blank" '.($is_archived ? 'class="text-muted"' : '')); ?>
           </strong>
-          <br>
           <small>
             <?php echo byte_format($s3_object['Size']); ?>
             ,

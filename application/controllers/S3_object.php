@@ -18,7 +18,7 @@ class S3_object extends CI_Controller
 
   function index()
   {
-    $prefix = $this->input->get('key');
+    $prefix = $this->input->get('prefix');
 
     $this->load->helper('number');
 
