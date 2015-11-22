@@ -18,6 +18,8 @@ class S3_object extends CI_Controller
 
   function index()
   {
+    $this->load->helper('number');
+
     $this->load->config('api_key', TRUE);
     $config = $this->config->item('aws', 'api_key');
     $bucket = $config['s3_bucket'];
@@ -73,16 +75,16 @@ class S3_object extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  function delete()
+  function archive()
   {
-    $s3_key = $this->input->get('s3_key');
+    $key = $this->input->get('key');
 
-    if (is_null($this->lib_s3_object->delete($s3_key)))
+    if (is_null($this->lib_s3_object->archive($key)))
     {
       show_error($this->lib_s3_object->get_error_message());
     }
 
-    $this->session->set_flashdata('alert', ['type' => 'info', 'message' => '<strong>Deleted</strong>: '.$s3_key]);
+    $this->session->set_flashdata('alert', ['type' => 'info', 'message' => '<strong>Archived</strong>: '.$key]);
     redirect('s3_object');
   }
 }

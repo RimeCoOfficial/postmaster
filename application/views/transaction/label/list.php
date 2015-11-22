@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <tr>
       <th scope="row"><?php echo anchor('transaction/label/modify/'.$label['label_id'], $label['name']); ?></th>
       <td><a href="<?php echo base_url('transaction/label/modify/'.$label['label_id']); ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
-      <td><a href="#"
+      <td><a class="text-danger"
         data-toggle="modal"
         data-target="#label-delete-modal"
         data-label-id="<?php echo $label['label_id']; ?>"

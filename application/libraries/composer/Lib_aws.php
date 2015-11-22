@@ -11,14 +11,14 @@ class Lib_aws
     
     // http://docs.aws.amazon.com/aws-sdk-php/v3/guide/index.html
     $this->aws_client = new Aws\Sdk([
-        'version'  => 'latest',
+      'version'  => 'latest',
 
-        'region' => $config['region'],
+      'region' => $config['region'],
 
-        'credentials' => array(
-          'key'     => $config['access_key'],
-          'secret'  => $config['secret_key'],
-        )
+      'credentials' => array(
+        'key'     => $config['access_key'],
+        'secret'  => $config['secret_key'],
+      )
     ]);
   }
 

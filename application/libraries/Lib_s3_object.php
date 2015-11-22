@@ -8,7 +8,7 @@ class Lib_s3_object
   function __construct($options = array())
   {
     $this->CI =& get_instance();
-    $this->CI->load->model('model_s3_object');
+    // $this->CI->load->model('model_aws_cache');
   }
   
   /**
@@ -24,18 +24,21 @@ class Lib_s3_object
 
   function get_list()
   {
-    return $this->CI->model_s3_object->get_list();
+    // return $this->CI->model_aws_cache->get('s3', 'listObjects');
 
-    // $this->CI->load->library('composer/lib_aws');
-    // $s3_client = $this->CI->lib_aws->get_s3();
+    $this->CI->load->library('composer/lib_aws');
+    $s3_client = $this->CI->lib_aws->get_s3();
 
-    // $this->CI->load->config('api_key', TRUE);
-    // $config = $this->CI->config->item('aws', 'api_key');
-    // $bucket = $config['s3_bucket'];
+    $this->CI->load->config('api_key', TRUE);
+    $config = $this->CI->config->item('aws', 'api_key');
+    $bucket = $config['s3_bucket'];
 
-    // $result = $s3_client->listObjects(array('Bucket' => $bucket));
+    $result = $s3_client->listObjects(array('Bucket' => $bucket));
 
-    // var_dump($result, $result['Contents']); die();
+    // $this->CI->load->model('model_aws_cache');
+    // $this->CI->model_aws_cache->store($service, $method, $result);
+
+    return $result;
   }
 
   function upload($upload, $type = NULL)
@@ -50,20 +53,20 @@ class Lib_s3_object
     $config = $this->CI->config->item('aws', 'api_key');
     $bucket = $config['s3_bucket'];
 
-    $s3_key = '';
-    if (!empty($type)) $s3_key = $type.'/';
-    $s3_key .= date('Ymd-Hms', time()).'_'.$upload['file_name'];
+    $key = '';
+    if (!empty($type)) $key = $type.'/';
+    $key .= date('Ymd-Hms', time()).'_'.$upload['file_name'];
 
     $result = $s3_client->putObject(array(
       'Bucket'     => $bucket,
-      'Key'        => $s3_key,
+      'Key'        => $key,
       'SourceFile' => $tmp_full_path,
     ));
 
     // We can poll the object until it is accessible
     $s3_client->waitUntil('ObjectExists', array(
       'Bucket' => $bucket,
-      'Key'    => $s3_key
+      'Key'    => $key
     ));
 
     // clean up
@@ -75,13 +78,13 @@ class Lib_s3_object
       return NULL;
     }
 
-    $this->CI->model_s3_object->store($s3_key, $upload['file_type'], $upload['file_size'], $upload['is_image']);
+    // $this->CI->model_aws_cache->update('s3', 'listObjects');
 
     $s3_object_url = $result['ObjectURL'];
     return $s3_object_url;
   }
 
-  function delete($s3_key)
+  function delete($key)
   {
     $this->CI->load->config('api_key', TRUE);
     $config = $this->CI->config->item('aws', 'api_key');
@@ -92,10 +95,45 @@ class Lib_s3_object
 
     $result = $s3_client->deleteObject(array(
       'Bucket'     => $bucket,
-      'Key'        => $s3_key
+      'Key'        => $key
     ));
 
-    $this->CI->model_s3_object->delete($s3_key);
+    // $this->CI->model_aws_cache->update('s3', 'listObjects');
+
+    return TRUE;
+  }
+
+  function archive($key)
+  {
+    $this->CI->load->config('api_key', TRUE);
+    $config = $this->CI->config->item('aws', 'api_key');
+    $bucket = $config['s3_bucket'];
+
+    $this->CI->load->library('composer/lib_aws');
+    $s3_client = $this->CI->lib_aws->get_s3();
+
+    $archived_key = '_archived'.'/';
+    if (starts_with($key, $archived_key)) $target_keyname = substr($key, strlen($archived_key)) ;
+    else                                  $target_keyname = $archived_key.$key;
+
+    $source_bucket = $bucket;
+    $source_keyname = $key;
+    $target_bucket = $bucket;
+    $target_keyname = $target_keyname;
+
+    // Copy an object.
+    $s3_client->copyObject(array(
+      'Bucket'     => $target_bucket,
+      'Key'        => $target_keyname,
+      'CopySource' => "{$source_bucket}/{$source_keyname}",
+    ));
+
+    $s3_client->deleteObject(array(
+      'Bucket'     => $source_bucket,
+      'Key'        => $source_keyname
+    ));
+
+    // $this->CI->model_aws_cache->update('s3', 'listObjects');
 
     return TRUE;
   }
