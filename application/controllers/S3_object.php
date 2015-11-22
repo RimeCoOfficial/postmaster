@@ -18,6 +18,8 @@ class S3_object extends CI_Controller
 
   function index()
   {
+    $prefix = $this->input->get('key');
+
     $this->load->helper('number');
 
     $this->load->config('api_key', TRUE);
@@ -25,7 +27,7 @@ class S3_object extends CI_Controller
     $bucket = $config['s3_bucket'];
 
     $local_view_data['aws_config'] = $config;
-    $local_view_data['s3_object_list'] = $this->lib_s3_object->get_list();
+    $local_view_data['s3_object_list'] = $this->lib_s3_object->get_list($prefix);
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
@@ -33,18 +35,18 @@ class S3_object extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  function upload($type) // inline-image, attachment, import
+  function upload($prefix) // inline-image, attachment, import
   {
     $local_view_data = array();
     
     $this->config->load('upload_s3', TRUE);
-    $config = $this->config->item($type, 'upload_s3');
+    $config = $this->config->item($prefix, 'upload_s3');
     
     if (empty($config))
     {
-      show_error('type not found');
+      show_error('prefix not found');
     }
-    $local_view_data['type'] = $type;
+    $local_view_data['prefix'] = $prefix;
 
     $this->load->library('upload', $config);
     if ( ! $this->upload->do_upload('upload_s3_object'))
@@ -56,7 +58,7 @@ class S3_object extends CI_Controller
       // file uploaded to /tmp
       $upload = $this->upload->data();
 
-      if (is_null($s3_object_url = $this->lib_s3_object->upload($upload, $type)))
+      if (is_null($s3_object_url = $this->lib_s3_object->upload($upload, $prefix)))
       {
         show_error($this->lib_s3_object->get_error_message());
       }
@@ -65,8 +67,11 @@ class S3_object extends CI_Controller
       // $local_view_data['result'] = $result;
       // $local_view_data['s3_object_url'] = $s3_object_url;
 
-      $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Uploaded '.$type.'</strong>: '.$s3_object_url]);
-      redirect('s3_object');
+      if (!empty($prefix))  $redirect_url = 's3-object/index?key='.urlencode($prefix.'/');
+      else                  $redirect_url = 's3-object';
+
+      $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Uploaded '.$prefix.'</strong>: '.$s3_object_url]);
+      redirect($redirect_url);
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
@@ -85,6 +90,6 @@ class S3_object extends CI_Controller
     }
 
     $this->session->set_flashdata('alert', ['type' => 'info', 'message' => '<strong>Archived</strong>: '.$key]);
-    redirect('s3_object');
+    redirect('s3-object');
   }
 }

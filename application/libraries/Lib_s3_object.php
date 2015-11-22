@@ -22,7 +22,7 @@ class Lib_s3_object
     return $this->error;
   }
 
-  function get_list()
+  function get_list($prefix = '')
   {
     // return $this->CI->model_aws_cache->get('s3', 'listObjects');
 
@@ -33,7 +33,9 @@ class Lib_s3_object
     $config = $this->CI->config->item('aws', 'api_key');
     $bucket = $config['s3_bucket'];
 
-    $result = $s3_client->listObjects(array('Bucket' => $bucket));
+    $result = $s3_client->listObjects(array('Bucket' => $bucket, 'Delimiter' => '/', 'Prefix' => $prefix));
+
+    // var_dump($result, $result['Contents'], $result['CommonPrefixes']); die();
 
     // $this->CI->load->model('model_aws_cache');
     // $this->CI->model_aws_cache->store($service, $method, $result);
@@ -41,7 +43,7 @@ class Lib_s3_object
     return $result;
   }
 
-  function upload($upload, $type = NULL)
+  function upload($upload, $prefix = '')
   {
     $tmp_full_path = $upload['full_path'];
 
@@ -54,7 +56,7 @@ class Lib_s3_object
     $bucket = $config['s3_bucket'];
 
     $key = '';
-    if (!empty($type)) $key = $type.'/';
+    if (!empty($prefix)) $key = $prefix.'/';
     $key .= date('Ymd-Hms', time()).'_'.$upload['file_name'];
 
     $result = $s3_client->putObject(array(
@@ -112,9 +114,9 @@ class Lib_s3_object
     $this->CI->load->library('composer/lib_aws');
     $s3_client = $this->CI->lib_aws->get_s3();
 
-    $archived_key = '_archived'.'/';
-    if (starts_with($key, $archived_key)) $target_keyname = substr($key, strlen($archived_key)) ;
-    else                                  $target_keyname = $archived_key.$key;
+    $archive_prefix = '_archive'.'/';
+    if (starts_with($key, $archive_prefix)) $target_keyname = substr($key, strlen($archive_prefix));
+    else                                    $target_keyname = $archive_prefix.$key;
 
     $source_bucket = $bucket;
     $source_keyname = $key;
