@@ -96,10 +96,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php echo anchor($s3_url.'/'.$s3_object['Key'], s3_key_name($s3_object['Key'], $prefix), 'target="_blank" '.($is_archived ? 'class="text-muted"' : '')); ?>
           </strong>
           <small>
-            <?php echo byte_format($s3_object['Size']); ?>
-            ,
-            <?php echo $s3_object['StorageClass']; ?>
-            ,
+            <?php echo byte_format($s3_object['Size']); ?>,
+            <?php echo $s3_object['StorageClass']; ?>,
             created <?php echo date('M d, Y h:i A', strtotime($s3_object['LastModified'])); ?>
           
             <a class="pull-right <?php echo $is_archived ? 'text-muted' : 'text-danger'; ?>"
