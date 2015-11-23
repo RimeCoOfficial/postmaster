@@ -34,20 +34,20 @@ class S3_object extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  function upload($type) // inline-image, attachment, import
+  function upload($prefix) // inline-image, file, import
   {
     $local_view_data = array();
     
     $this->config->load('upload_s3', TRUE);
-    $config = $this->config->item($type, 'upload_s3');
+    $config = $this->config->item($prefix, 'upload_s3');
     
     if (empty($config))
     {
-      show_error('type not found');
+      show_error('prefix not found');
     }
-    $local_view_data['type'] = $type;
+    $local_view_data['prefix'] = $prefix;
 
-    $prefix = 'upload';
+    $prefix = 'upload/'.$prefix;
 
     $this->load->library('upload', $config);
     if ( ! $this->upload->do_upload('upload_s3_object'))
