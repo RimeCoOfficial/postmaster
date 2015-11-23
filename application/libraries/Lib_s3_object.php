@@ -8,7 +8,6 @@ class Lib_s3_object
   function __construct($options = array())
   {
     $this->CI =& get_instance();
-    // $this->CI->load->model('model_aws_cache');
   }
   
   /**
@@ -24,7 +23,6 @@ class Lib_s3_object
 
   function get_list($prefix = '')
   {
-    // return $this->CI->model_aws_cache->get('s3', 'listObjects');
 
     $this->CI->load->library('composer/lib_aws');
     $s3_client = $this->CI->lib_aws->get_s3();
@@ -34,11 +32,6 @@ class Lib_s3_object
     $bucket = $config['s3_bucket'];
 
     $result = $s3_client->listObjects(array('Bucket' => $bucket, 'Delimiter' => '/', 'Prefix' => $prefix));
-
-    // var_dump($result, $result['Contents'], $result['CommonPrefixes']); die();
-
-    // $this->CI->load->model('model_aws_cache');
-    // $this->CI->model_aws_cache->store($service, $method, $result);
 
     return $result;
   }
@@ -80,8 +73,6 @@ class Lib_s3_object
       return NULL;
     }
 
-    // $this->CI->model_aws_cache->update('s3', 'listObjects');
-
     $s3_object_url = $result['ObjectURL'];
     return $s3_object_url;
   }
@@ -99,43 +90,6 @@ class Lib_s3_object
       'Bucket'     => $bucket,
       'Key'        => $key
     ));
-
-    // $this->CI->model_aws_cache->update('s3', 'listObjects');
-
-    return TRUE;
-  }
-
-  function archive($key)
-  {
-    $this->CI->load->config('api_key', TRUE);
-    $config = $this->CI->config->item('aws', 'api_key');
-    $bucket = $config['s3_bucket'];
-
-    $this->CI->load->library('composer/lib_aws');
-    $s3_client = $this->CI->lib_aws->get_s3();
-
-    $archive_prefix = '_archive'.'/';
-    if (starts_with($key, $archive_prefix)) $target_keyname = substr($key, strlen($archive_prefix));
-    else                                    $target_keyname = $archive_prefix.$key;
-
-    $source_bucket = $bucket;
-    $source_keyname = $key;
-    $target_bucket = $bucket;
-    $target_keyname = $target_keyname;
-
-    // Copy an object.
-    $s3_client->copyObject(array(
-      'Bucket'     => $target_bucket,
-      'Key'        => $target_keyname,
-      'CopySource' => "{$source_bucket}/{$source_keyname}",
-    ));
-
-    $s3_client->deleteObject(array(
-      'Bucket'     => $source_bucket,
-      'Key'        => $source_keyname
-    ));
-
-    // $this->CI->model_aws_cache->update('s3', 'listObjects');
 
     return TRUE;
   }

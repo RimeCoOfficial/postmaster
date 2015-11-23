@@ -34,18 +34,20 @@ class S3_object extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  function upload($prefix) // inline-image, attachment, import
+  function upload($type) // inline-image, attachment, import
   {
     $local_view_data = array();
     
     $this->config->load('upload_s3', TRUE);
-    $config = $this->config->item($prefix, 'upload_s3');
+    $config = $this->config->item($type, 'upload_s3');
     
     if (empty($config))
     {
-      show_error('prefix not found');
+      show_error('type not found');
     }
-    $local_view_data['prefix'] = $prefix;
+    $local_view_data['type'] = $type;
+
+    $prefix = 'upload';
 
     $this->load->library('upload', $config);
     if ( ! $this->upload->do_upload('upload_s3_object'))
@@ -54,7 +56,7 @@ class S3_object extends CI_Controller
     }
     else
     {
-      // file uploaded to /tmp
+      // file uploaded to /tmp/ci/upload
       $upload = $this->upload->data();
 
       if (is_null($s3_object_url = $this->lib_s3_object->upload($upload, $prefix)))
@@ -62,14 +64,9 @@ class S3_object extends CI_Controller
         show_error($this->lib_s3_object->get_error_message());
       }
 
-      // $local_view_data['upload'] = $upload;
-      // $local_view_data['result'] = $result;
-      // $local_view_data['s3_object_url'] = $s3_object_url;
+      $redirect_url = 's3-object/index?prefix='.urlencode($prefix.'/');
 
-      if (!empty($prefix))  $redirect_url = 's3-object/index?prefix='.urlencode($prefix.'/');
-      else                  $redirect_url = 's3-object';
-
-      $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Uploaded '.$prefix.'</strong>: '.$s3_object_url]);
+      $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Uploaded</strong>: '.$s3_object_url]);
       redirect($redirect_url);
     }
 
@@ -77,26 +74,5 @@ class S3_object extends CI_Controller
 
     $view_data['main_content'] = $this->load->view('s3_object/upload', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
-  }
-
-  function archive()
-  {
-    $key = $this->input->get('key');
-    if (is_null($this->lib_s3_object->archive($key)))
-    {
-      show_error($this->lib_s3_object->get_error_message());
-    }
-
-    $prefix = '';
-    $prefix_list = explode('/', $key);
-    if (!empty($prefix_list)) for ($i = 0; $i < count($prefix_list) - 1; $i++) $prefix .= $prefix_list[ $i ].'/';
-
-    if (!empty($prefix))  $redirect_url = 's3-object/index?prefix='.urlencode($prefix);
-    else                  $redirect_url = 's3-object';
-
-    var_dump($redirect_url); die();
-
-    $this->session->set_flashdata('alert', ['type' => 'info', 'message' => '<strong>Archived</strong>: '.$key]);
-    redirect('s3-object');
   }
 }
