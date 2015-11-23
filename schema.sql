@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS message (
   reply_to_name           varchar(128)                  DEFAULT NULL,
   reply_to_email          varchar(256)                  DEFAULT NULL,
 
-  -- tumblr_post_id          varchar(256)                  DEFAULT 0, -- 1 = must be posted or filled
+  tumblr_post_id          varchar(256)                  DEFAULT 0, -- 1 = must be posted or filled
   is_archived             tinyint(1)          NOT NULL  DEFAULT 0,
 
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,

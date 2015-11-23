@@ -41,11 +41,12 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
                 if ($is_logged_in)
                 {
                   $nav_list = [
-                    'stats'       => '<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>',
+                    'stats'       => '<span class="glyphicon glyphicon-stats"></span>',
+                    'message'     => '<span class="glyphicon glyphicon-envelope"></span>',
                     'campaign'    => 'Campaign',
                     'transaction' => 'Transaction',
-                    's3-object'   => '<span class="glyphicon glyphicon-open-file" aria-hidden="true"></span>',
-                    'settings'    => '<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>',
+                    's3-object'   => '<span class="glyphicon glyphicon-open-file"></span>',
+                    'settings'    => '<span class="glyphicon glyphicon-cog"></span>',
                   ];
                   $nav_selected = explode('/', uri_string());
                   $nav_selected = $nav_selected[0];
