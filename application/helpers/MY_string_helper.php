@@ -27,20 +27,16 @@ function ends_with($haystack, $needle)
 
 function s3_key_name($key, $prefix = '')
 {
-  $name = $key;
+  $name = trim($key, '/');
   
-  if ($name == $prefix AND !empty($name))
+  if ($name <= $prefix AND !empty($name))
   {
-    $name = trim($name, '/');
-
     $name_list = explode('/', $name);
-    if (count($name)) $name = end($name_list);
+    if (count($name_list)) $name = end($name_list);
   }
   else
   {
     if (starts_with($name, $prefix)) $name = substr($name, strlen($prefix));
-
-    $name = trim($name, '/');
   }
 
   return $name;

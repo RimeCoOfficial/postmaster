@@ -23,7 +23,8 @@ class Lib_s3_object
 
   function get_list($prefix = '')
   {
-
+    if (!empty($prefix) AND !ends_with($prefix, '/')) $prefix .= '/';
+    
     $this->CI->load->library('composer/lib_aws');
     $s3_client = $this->CI->lib_aws->get_s3();
 

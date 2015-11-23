@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           // if (empty($name)) continue;
           $prefix_key .= $name.'/';
           ?>
-          <li><?php echo anchor('s3-object/index?prefix='.urlencode($prefix_key), $name); ?></li>
+          <li><a href="<?php echo base_url('s3-object/index').'?prefix='.$prefix_key; ?>"><?php echo $name; ?></a></li>
         <?php endfor; ?>
 
         <li class="active"><?php echo $name; ?></li>
@@ -67,9 +67,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </ol>
 
   <div class="list-group">
+    <!-- Filters -->
     <?php if (!empty($s3_object_list['CommonPrefixes'])): ?>
       <?php foreach ($s3_object_list['CommonPrefixes'] as $common_prefix): ?>
-        <a class="list-group-item" href="<?php echo base_url('s3-object/index?prefix='.urlencode($common_prefix['Prefix'])); ?>">
+        <a class="list-group-item" href="<?php echo base_url('s3-object/index').'?prefix='.$common_prefix['Prefix']; ?>">
 
           <div class="media">
             <div class="media-left">
@@ -84,6 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <?php endforeach; ?>
     <?php endif; ?>
   
+    <!-- Files -->
     <?php if (!empty($s3_object_list['Contents'])): ?>
       <?php foreach ($s3_object_list['Contents'] as $s3_object): ?>
         <a class="list-group-item" href="<?php echo $s3_url.'/'.$s3_object['Key']; ?>" target="_blank">
