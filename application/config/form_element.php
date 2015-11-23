@@ -22,7 +22,7 @@ $message_html_max_length    = 9000;
 
 $reply_to_name_max_length   =  128;
 
-$label_max_length        =   32;
+$label_max_length           =   32;
 $subject_max_length         =  128;
 
 $config = array(

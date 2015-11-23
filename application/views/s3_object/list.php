@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-          <li><a href="<?php echo base_url('s3-object/upload/inline-image'); ?>">Inline image</a></li>
-          <li><a href="<?php echo base_url('s3-object/upload/attachment'); ?>">Attachment</a></li>
+          <li><a href="<?php echo base_url('s3-object/upload/inline-image'); ?>">Picture inline</a></li>
+          <li><a href="<?php echo base_url('s3-object/upload/file'); ?>">File as attachment</a></li>
           <li><a href="<?php echo base_url('s3-object/upload/import'); ?>">Import</a></li>
         </ul>
       </div>

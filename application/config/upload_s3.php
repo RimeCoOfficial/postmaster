@@ -25,12 +25,12 @@ $config['inline-image'] ['max_size']          = '2048';
 $config['inline-image'] ['max_width']         = '750';
 $config['inline-image'] ['max_height']        = '750';
 
-$config['attachment']   ['upload_path']       = '/tmp/ci/upload';
-$config['attachment']   ['allowed_types']     = 'md|txt';
-$config['attachment']   ['max_filename']      = 200;
-$config['attachment']   ['file_ext_tolower']  = TRUE;
-$config['attachment']   ['overwrite']         = TRUE;
-$config['attachment']   ['max_size']          = '2048';
+$config['file']         ['upload_path']       = '/tmp/ci/upload';
+$config['file']         ['allowed_types']     = 'md|txt';
+$config['file']         ['max_filename']      = 200;
+$config['file']         ['file_ext_tolower']  = TRUE;
+$config['file']         ['overwrite']         = TRUE;
+$config['file']         ['max_size']          = '2048';
 
 $config['import']       ['upload_path']       = '/tmp/ci/upload';
 $config['import']       ['allowed_types']     = 'csv|xls';
