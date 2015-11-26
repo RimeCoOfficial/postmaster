@@ -4,16 +4,17 @@ AWS email server
 
 ## Features
 
-- [ ] Transcational emails
+- [ ] Autoresponders emails (Drip campaign)
 - [ ] Campaign emails
-- [ ] Drip campaign emails (Autoresponders)
+- [ ] Transcational emails
 - [ ] Lists (unsubscribe-able and not unsubscribe-able)
 - [ ] Auto `List-Unsubscribe` headers
 - [ ] API Access
 - [x] Attachments upload to S3 (`YYYYMMDD-HHMMSS_file_name.ext`)
 - [ ] S3 temporary uploads stored for 30 days
 - [x] Admin login for campaigns
-- [ ] Auto inline CSS
+- [x] Auto inline CSS
+- [x] Minify HTML
 - [ ] Auto (body + footer) `Plain text` email
 - [x] SNS, SQS - handle feedback (bounces, complaints, deliveries)
 - [ ] Queuing and Multiple emails sending
