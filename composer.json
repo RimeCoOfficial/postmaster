@@ -6,6 +6,8 @@
     "aws/aws-sdk-php": "3.0.4",
     "league/html-to-markdown": "~4.0",
     "tijsverkoyen/css-to-inline-styles": "1.5.4",
-    "etechnika/idna-convert": "1.0.*"
+    "etechnika/idna-convert": "1.0.*",
+    "zaininnari/html-minifier": "*",
+    "pixel418/markdownify": "2.1.*"
   }
 }

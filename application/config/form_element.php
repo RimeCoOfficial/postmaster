@@ -18,9 +18,9 @@ $email_max_length           =  256;
 
 $date_picker_length         =   19; // 'YYYY-MM-DD HH:MM AM'
 
-$body_html_max_length    = 9000;
+$body_html_max_length       = 9000;
 
-$reply_to_name_max_length   =  128;
+$reply_to_name_max_length   =   64;
 
 $label_max_length           =   32;
 $subject_max_length         =  128;
