@@ -53,10 +53,11 @@ class label extends CI_Controller
 
   public function modify($label_id)
   {
-    $local_view_data = [];
-    $local_view_data['label'] = $this->lib_label->get($label_id);
+    $label = $this->lib_label->get($label_id);
+    if (empty($label)) show_404();
 
-    if (empty($local_view_data['label'])) show_error('label not found');
+    $local_view_data = [];
+    $local_view_data['label'] = $label;
 
     $this->load->library('form_validation');
     if ($this->form_validation->run('transaction/label/modify'))

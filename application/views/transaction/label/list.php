@@ -9,31 +9,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php // var_dump($label_list); ?>
 
 <?php if (!empty($label_list)): ?>
-<table class="table">
-  <!-- <caption>List</caption> -->
-  <thead>
-    <tr>
-      <th>Name</th>
-      <!-- <th>Reply-to Name</th> -->
-      <!-- <th>Reply-to Email</th> -->
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <div class="list-group">
     <?php foreach ($label_list as $key => $label): ?>
-    <tr>
-      <th scope="row"><?php echo anchor('transaction/label/modify/'.$label['label_id'], $label['name']); ?></th>
-      <td><a href="<?php echo base_url('transaction/label/modify/'.$label['label_id']); ?>"><span class="glyphicon glyphicon-edit"></span></a></td>
-      <td><a class="text-danger"
-        data-toggle="modal"
-        data-target="#label-delete-modal"
-        data-label-id="<?php echo $label['label_id']; ?>"
-        data-label-name="<?php echo $label['name']; ?>"
-        href="#"><span class="glyphicon glyphicon-trash"></span>
-      </a></td>
-    </tr>
+      <div class="list-group-item">
+        <div class="media">
+          <div class="media-body">
+            <h5 class="media-heading">
+              <?php echo anchor('transaction/label/modify/'.$label['label_id'], $label['name']); ?>
+            </h5>
+          </div>
+      
+          <div class="media-right">
+            <a class="text-danger"
+              data-toggle="modal"
+              data-target="#label-delete-modal"
+              data-label-id="<?php echo $label['label_id']; ?>"
+              data-label-name="<?php echo $label['name']; ?>"
+              href="#"><span class="media-object glyphicon glyphicon-trash"></span>
+            </a>
+          </div>
+        </div>
+      </div>
     <?php endforeach; ?>
   </tbody>
 </table>

@@ -54,11 +54,10 @@ class Message extends CI_Controller
 
   public function modify($message_id)
   {
-    $local_view_data = [];
-
     $message = $this->lib_message->get($message_id);
     if (empty($message)) show_404();
 
+    $local_view_data = [];
     $local_view_data['message'] = $message;
 
     $this->load->library('form_validation');

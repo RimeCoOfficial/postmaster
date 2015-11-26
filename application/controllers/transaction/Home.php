@@ -28,10 +28,11 @@ class Home extends CI_Controller
 
   public function modify($message_id)
   {
-    $local_view_data = [];
-    $local_view_data['transaction'] = $this->lib_transaction->get($message_id);
+    $transaction = $this->lib_transaction->get($message_id);
+    if (empty($transaction)) show_404();
 
-    if (empty($local_view_data['transaction'])) show_error('transaction not found');
+    $local_view_data = [];
+    $local_view_data['transaction'] = $transaction;
 
     $this->load->library('lib_label');
     $label_list = $this->lib_label->get_list();
