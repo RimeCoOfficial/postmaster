@@ -41,12 +41,12 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
                 if ($is_logged_in)
                 {
                   $nav_list = [
-                    'stats'       => '<span class="glyphicon glyphicon-stats"></span>',
-                    'message'     => '<span class="glyphicon glyphicon-envelope"></span>',
-                    'campaign'    => 'Campaign',
-                    'transaction' => 'Transaction',
-                    's3-object'   => '<span class="glyphicon glyphicon-open-file"></span>',
-                    'settings'    => '<span class="glyphicon glyphicon-cog"></span>',
+                    'stats'         => '<span class="glyphicon glyphicon-stats"></span>',
+                    'message'       => '<span class="glyphicon glyphicon-envelope"></span>',
+                    's3-object'     => '<span class="glyphicon glyphicon-open-file"></span>',
+                    'autoresponder' => 'Autoresponder',
+                    'campaign'      => 'Campaign',
+                    'transaction'   => 'Transaction',
                   ];
                   $nav_selected = explode('/', uri_string());
                   $nav_selected = $nav_selected[0];
@@ -67,7 +67,13 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
                   if ($is_logged_in)
                   {
                     ?>
-                    <li><a href="<?php echo base_url('auth/sign-out') ?>">Sign out</a></li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><?php echo anchor('settings', 'Settings'); ?></li>
+                        <li><?php echo anchor('auth/sign-out', 'Sign out'); ?></li>
+                      </ul>
+                    </li>
                     <?php
                   }
                   else
