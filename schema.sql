@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS message (
   owner                   varchar(64)         NOT NULL,
 
   subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
-  message_html            text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  body_html               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
 
   reply_to_name           varchar(128)                  DEFAULT NULL,
   reply_to_email          varchar(256)                  DEFAULT NULL,
@@ -58,6 +58,64 @@ CREATE TABLE IF NOT EXISTS message (
 
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (message_id)
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table tumblr
+--
+
+CREATE TABLE IF NOT EXISTS tumblr (
+  x_account_id            varchar(256)        NOT NULL,
+  token                   text                NOT NULL,
+  token_secret            text                NOT NULL,
+  limit_used              int                           DEFAULT 0,
+
+  url                     text                          DEFAULT NULL,
+
+  updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (service, x_account_id)
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table message_history
+--
+
+CREATE TABLE IF NOT EXISTS message_history (
+  history_id              int                 NOT NULL  AUTO_INCREMENT,
+  message_id              int                 NOT NULL,
+  to_name                 text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  to_email                varchar(256)        NOT NULL,
+  subject                 text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  body                    text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (history_id),
+  FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table message_send
+--
+
+CREATE TABLE IF NOT EXISTS message_send (
+  history_id              int                 NOT NULL  AUTO_INCREMENT,
+  from_email_id
+  from_name
+  reply_to_name
+  reply_to_email
+  to_email_id
+  to_name
+  subject
+  body_html
+  body_text
+  list_unsubscribe
+  proirity
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -93,14 +151,13 @@ CREATE TABLE IF NOT EXISTS list_subscribed (
 -- --------------------------------------------------------
 
 --
--- Table structure for table campaign
+-- Table structure for table autoresponder (drip campaign)
 --
 
-CREATE TABLE IF NOT EXISTS campaign (
+CREATE TABLE IF NOT EXISTS autoresponder (
   message_id              int                 NOT NULL,
   list_id                 int                 NOT NULL,
-  email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  status                  varchar(16)                   DEFAULT NULL, -- in_progress
+  time_str                varchar(64)                   DEFAULT NULL, -- now, +1 day http://php.net/manual/en/function.strtotime.php
   PRIMARY KEY (message_id),
   FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -109,13 +166,14 @@ CREATE TABLE IF NOT EXISTS campaign (
 -- --------------------------------------------------------
 
 --
--- Table structure for table autoresponder (drip campaign)
+-- Table structure for table campaign
 --
 
-CREATE TABLE IF NOT EXISTS autoresponder (
+CREATE TABLE IF NOT EXISTS campaign (
   message_id              int                 NOT NULL,
   list_id                 int                 NOT NULL,
-  time_str                varchar(64)                   DEFAULT NULL, -- now, +1 day http://php.net/manual/en/function.strtotime.php
+  email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  status                  varchar(16)                   DEFAULT NULL, -- in_progress
   PRIMARY KEY (message_id),
   FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -148,58 +206,4 @@ CREATE TABLE IF NOT EXISTS transaction (
   PRIMARY KEY (message_id),
   FOREIGN KEY (label_id) REFERENCES label(label_id) ON UPDATE CASCADE ON DELETE SET NULL,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
--- --------------------------------------------------------
-
---
--- Table structure for table message_history
---
-
-CREATE TABLE IF NOT EXISTS message_history (
-  history_id              int                 NOT NULL  AUTO_INCREMENT,
-  message_id              int                 NOT NULL,
-  to_name                 text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
-  to_email                varchar(256)        NOT NULL,
-  subject_vars            text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
-  message_vars            text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
-  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (history_id),
-  FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
--- --------------------------------------------------------
-
---
--- Table structure for table tumblr
---
-
-CREATE TABLE IF NOT EXISTS tumblr (
-  x_account_id            varchar(256)        NOT NULL,
-  token                   text                NOT NULL,
-  token_secret            text                NOT NULL,
-  limit_used              int                           DEFAULT 0,
-
-  url                     text                          DEFAULT NULL,
-
-  updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (service, x_account_id)
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
--- --------------------------------------------------------
-
---
--- Table structure for table send_async
---
-
-CREATE TABLE IF NOT EXISTS send_async (
-  history_id              int                 NOT NULL  AUTO_INCREMENT,
-  from_email_id
-  from_name
-  to_email_id
-  to_name
-  subject
-  body
-  proirity
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;

@@ -54,10 +54,11 @@ class Lib_transaction
       return NULL;
     }
 
-    $subject_vars = $this->CI->input->post('subject');
-    $message_vars = $this->CI->input->post('message');
+    $subject = $this->CI->input->post('subject');
+    $body = $this->CI->input->post('body');
     
-    if (is_null($history_id = $this->CI->lib_message_history->add('transaction', $message_id, $to_name, $to_email, $subject_vars, $message_vars)))
+    if (is_null($history_id = $this->CI->lib_message_history->add(
+      'transaction', $message_id, $to_name, $to_email, $subject, $body)))
     {
       $this->error = $this->CI->lib_message_history->get_error_message();
       return NULL;

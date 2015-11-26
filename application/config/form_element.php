@@ -18,7 +18,7 @@ $email_max_length           =  256;
 
 $date_picker_length         =   19; // 'YYYY-MM-DD HH:MM AM'
 
-$message_html_max_length    = 9000;
+$body_html_max_length    = 9000;
 
 $reply_to_name_max_length   =  128;
 
@@ -82,15 +82,15 @@ $config = array(
     'required'      => 1,
   ),
 
-  'message_html' => array(
+  'body_html' => array(
     'label'         => 'Message',
-    'rules'         => 'max_length['.$message_html_max_length.']|trim|required',
+    'rules'         => 'max_length['.$body_html_max_length.']|trim|required',
 
     'rows'          => 7,
-    'max_length'    => $message_html_max_length,
+    'max_length'    => $body_html_max_length,
     
     // html5 tag - not supported in Internet Explorer 9 and earlier versions.
-    'placeholder'   => 'Tell something about this mail in HTML ('.$message_html_max_length.' characters)',
+    'placeholder'   => 'Tell something about this mail in HTML ('.$body_html_max_length.' characters)',
     'required'      => 1,
   ),
 

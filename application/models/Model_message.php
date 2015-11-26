@@ -34,12 +34,12 @@ class Model_message extends CI_Model
     return $this->db->insert_id();
   }
 
-  function update($message_id, $subject, $message_html, $reply_to_name, $reply_to_email)
+  function update($message_id, $subject, $body_html, $reply_to_name, $reply_to_email)
   {
     $this->db->set('subject', $subject);
     $this->db->set('reply_to_name', $reply_to_name);
     $this->db->set('reply_to_email', $reply_to_email);
-    $this->db->set('message_html', $message_html);
+    $this->db->set('body_html', $body_html);
 
     $this->db->where('message_id', $message_id);
 

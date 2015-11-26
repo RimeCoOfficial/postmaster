@@ -22,7 +22,7 @@ class Lib_message_history
     return $this->error;
   }
 
-  function add($owner, $message_id, $to_name, $to_email, $subject_vars, $message_vars)
+  function add($owner, $message_id, $to_name, $to_email, $subject, $body)
   {
     if (!$this->CI->model_message_history->can_add($message_id, $owner))
     {
@@ -31,9 +31,14 @@ class Lib_message_history
     }
 
     if (empty($to_name)) $to_name = NULL;
-    if (empty($subject_vars)) $subject_vars = NULL;
-    if (empty($message_vars)) $message_vars = NULL;
+    if (empty($subject)) $subject = NULL;
+    if (empty($body)) $body = NULL;
 
-    return $this->CI->model_message_history->add($message_id, $to_name, $to_email, $subject_vars, $message_vars);
+    return $this->CI->model_message_history->add($message_id, $to_name, $to_email, $subject, $body);
+  }
+
+  function process()
+  {
+    
   }
 }

@@ -21,7 +21,7 @@ class Lib_send_email
     return $this->error;
   }
 
-  function direct($to, $subject = '', $message_html = '', $message_txt = '')
+  function direct($to, $subject = '', $body_html = '', $body_text = '')
   {
     $this->CI->load->library('composer/lib_aws');
     $ses_client = $this->CI->lib_aws->get_ses();
@@ -32,8 +32,8 @@ class Lib_send_email
       ],
       'Message' => [
         'Body' => [
-          'Html' => ['Data' => $message_html],
-          'Text' => ['Data' => $message_txt],
+          'Html' => ['Data' => $body_html],
+          'Text' => ['Data' => $body_text],
         ],
         'Subject' => ['Data' => $subject],
       ],

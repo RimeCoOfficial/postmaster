@@ -46,12 +46,12 @@ class Lib_message
     return $message_id;
   }
 
-  function modify($message_id, $subject, $message_html, $reply_to_name, $reply_to_email)
+  function modify($message_id, $subject, $body_html, $reply_to_name, $reply_to_email)
   {
     if (empty($reply_to_name)) $reply_to_name = NULL;
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
-    $this->CI->model_message->update($message_id, $subject, $message_html, $reply_to_name, $reply_to_email);
+    $this->CI->model_message->update($message_id, $subject, $body_html, $reply_to_name, $reply_to_email);
     return TRUE;
   }
 
