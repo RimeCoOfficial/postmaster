@@ -153,16 +153,19 @@ CREATE TABLE IF NOT EXISTS transaction (
 -- --------------------------------------------------------
 
 --
--- Table structure for table transaction_history
+-- Table structure for table message_history
 --
 
-CREATE TABLE IF NOT EXISTS transaction_history (
-  unique_id               int                 NOT NULL  AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS message_history (
+  history_id              int                 NOT NULL  AUTO_INCREMENT,
   message_id              int                 NOT NULL,
-  data                    text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  to_name                 text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  to_email                varchar(256)        NOT NULL,
+  subject_vars            text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  message_vars            text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (unique_id),
-  FOREIGN KEY (message_id) REFERENCES transaction(message_id) ON UPDATE CASCADE ON DELETE CASCADE
+  PRIMARY KEY (history_id),
+  FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -191,7 +194,7 @@ CREATE TABLE IF NOT EXISTS tumblr (
 --
 
 CREATE TABLE IF NOT EXISTS send_async (
-  unique_id               int                 NOT NULL  AUTO_INCREMENT,
+  history_id              int                 NOT NULL  AUTO_INCREMENT,
   from_email_id
   from_name
   to_email_id

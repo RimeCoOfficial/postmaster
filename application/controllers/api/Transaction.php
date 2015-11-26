@@ -7,21 +7,21 @@ class Transaction extends CI_Controller
   {
     parent::__construct();
 
-    $this->load->library('lib_auth');
-    if (!$this->lib_auth->is_logged_in())
-    {
-      redirect();
-    }
-
+    $this->load->helper('api');
+    
     $this->load->library('lib_api');
     if (is_null($this->lib_api->check_api_key())) output_error($this->lib_api->get_error_message());
+
+    $this->load->library('lib_transaction');
   }
 
   public function send($message_id = 0)
   {
-    $data = $this->input->post('data');
+    if (is_null($result = $this->lib_transaction->add_message()))
+    {
+      output_error($this->lib_transaction->get_error_message());
+    }
 
-    $this->load->helper('api');
-    output($data);
+    output($result);
   }
 }
