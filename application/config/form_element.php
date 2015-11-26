@@ -86,7 +86,7 @@ $config = array(
     'label'         => 'Message',
     'rules'         => 'max_length['.$message_html_max_length.']|trim|required',
 
-    'rows'          => 20,
+    'rows'          => 7,
     'max_length'    => $message_html_max_length,
     
     // html5 tag - not supported in Internet Explorer 9 and earlier versions.

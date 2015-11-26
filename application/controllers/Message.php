@@ -65,7 +65,6 @@ class Message extends CI_Controller
     {
       if (is_null($this->lib_message->modify(
         $message_id,
-        $this->form_validation->set_value('message_owner'),
         $this->form_validation->set_value('subject'),
         $this->form_validation->set_value('message_html'),
         $this->form_validation->set_value('reply_to_name'),
