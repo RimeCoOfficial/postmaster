@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
+  private $debug = FALSE;
+
   function __construct()
   {
     parent::__construct();
@@ -19,6 +21,11 @@ class Auth extends CI_Controller
     if (is_null($login_email_key = $this->lib_auth->sign_in()))
     {
       show_error($this->lib_auth->get_error_message());
+    }
+
+    if ($debug AND ENVIRONMENT == 'development')
+    {
+      echo anchor('auth/verify/'.$login_email_key); die();
     }
 
     // send email

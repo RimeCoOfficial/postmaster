@@ -34,8 +34,8 @@ class Message extends CI_Controller
     if ($this->form_validation->run())
     {
       if (is_null($message_id = $this->lib_message->create(
-        $this->form_validation->set_value('subject'),
-        $this->form_validation->set_value('category_id')
+        $this->form_validation->set_value('message_owner'),
+        $this->form_validation->set_value('subject')
       )))
       {
         show_error($this->lib_message->get_error_message());
@@ -56,13 +56,17 @@ class Message extends CI_Controller
   {
     $local_view_data = [];
 
-    $local_view_data['message'] = $this->lib_message->get($message_id);
+    $message = $this->lib_message->get($message_id);
+    if (empty($message)) show_404();
+
+    $local_view_data['message'] = $message;
 
     $this->load->library('form_validation');
     if ($this->form_validation->run())
     {
       if (is_null($this->lib_message->modify(
         $message_id,
+        $this->form_validation->set_value('message_owner'),
         $this->form_validation->set_value('subject'),
         $this->form_validation->set_value('message_html'),
         $this->form_validation->set_value('reply_to_name'),
@@ -86,6 +90,8 @@ class Message extends CI_Controller
   public function show($message_id)
   {
     $message = $this->lib_message->get($message_id);
+    if (empty($message)) show_404();
+
     echo $message['message_html'];
   }
 }

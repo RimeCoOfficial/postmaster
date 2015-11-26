@@ -7,31 +7,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php // var_dump($list); ?>
 
 <?php if (!empty($list)): ?>
-<table class="table">
-  <caption>List</caption>
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>Subject</th>
-      <th>Reply-to Name</th>
-      <th>Reply-to Email</th>
-      <th>Tumblr</th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <div class="list-group">
     <?php foreach ($list as $message): ?>
-    <tr>
-      <th scope="row"><?php echo $message['message_id']; ?></th>
-      <td>
-        <b><?php echo anchor('message/modify/'.$message['message_id'], $message['subject']); ?></b><br>
-        <small><?php echo date('M d, Y h:i A', strtotime($message['created'])); ?></small>
-      </td>
-      <td><?php echo $message['reply_to_name']; ?></td>
-      <td><?php echo $message['reply_to_email']; ?></td>
-      <td><?php echo $message['tumblr_post_id']; ?></td>
-    </tr>
+      <div class="list-group-item">
+        <div class="media">
+          <div class="media-body">
+            <h5 class="media-heading">
+              <?php echo anchor('message/modify/'.$message['message_id'], $message['subject']); ?>
+              <small>
+                #<?php echo $message['message_id']; ?>
+                <?php echo strtoupper($message['owner']); ?>
+                <?php echo $message['reply_to_name']; ?>
+                <?php echo $message['reply_to_email']; ?>
+                <?php if (!empty($message['tumblr_post_id'])) echo $message['tumblr_post_id']; ?>
+                <?php echo date('M d, Y h:i A', strtotime($message['created'])); ?>
+              </small>
+            </h5>
+          </div>
+        </div>
+      </div>
     <?php endforeach; ?>
-  </tbody>
-</table>
+  </div>
 <?php endif; ?>

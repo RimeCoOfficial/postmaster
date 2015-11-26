@@ -4,40 +4,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php $this->view('transaction/nav'); ?>
 
-<h1>Transactions <span><a href="<?php echo base_url('transaction/home/create'); ?>" class="btn btn-primary pull-right">Create</a></span></h1>
+<h1>Transactions</h1>
 
 <?php // var_dump($list); ?>
 
 <?php if (!empty($list)): ?>
-<table class="table">
-  <caption>List</caption>
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>Subject</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <div class="list-group">
     <?php foreach ($list as $key => $transaction): ?>
-    <tr>    
-      <th scope="row"><?php echo $transaction['message_id']; ?></th>
-      <td>
-        <strong><?php echo anchor('transaction/home/modify/'.$transaction['message_id'], $transaction['subject']); ?></strong>
-        <?php echo !empty($transaction['label_name']) ? '<span class="label label-default">'.$transaction['label_name'].'</span class="label label-default">' : ''; ?>
-      </td>
-      <td><a class="text-danger"
-        data-toggle="modal"
-        data-target="#transaction-delete-modal"
-        data-message-id="<?php echo $transaction['message_id']; ?>"
-        data-transaction-subject="<?php echo $transaction['subject']; ?>"
-        href="#"><span class="glyphicon glyphicon-trash"></span>
-      </a></td>
-    </tr>
+      <div class="list-group-item">
+        <div class="media">
+          <div class="media-body">
+            <h5 class="media-heading">
+              <?php echo anchor('transaction/home/modify/'.$transaction['message_id'], $transaction['subject']); ?>
+              <small>
+                #<?php echo $transaction['message_id']; ?>
+                <?php echo $transaction['reply_to_name']; ?>
+                <?php echo $transaction['reply_to_email']; ?>
+              </small>
+
+              <?php echo !empty($transaction['label']) ? '<span class="pull-right label label-default">'.$transaction['label'].'</span class="label label-default">' : ''; ?>
+            </h5>
+          </div>
+          
+          <div class="media-right">
+            <a class="text-danger"
+              data-toggle="modal"
+              data-target="#transaction-delete-modal"
+              data-message-id="<?php echo $transaction['message_id']; ?>"
+              data-transaction-subject="<?php echo $transaction['subject']; ?>"
+              href="#"><span class="media-object glyphicon glyphicon-trash"></span>
+            </a>
+          </div>
+        </div>
+      </div>
     <?php endforeach; ?>
-  </tbody>
-</table>
+  </div>
 <?php endif; ?>
 
 

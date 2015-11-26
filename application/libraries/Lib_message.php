@@ -32,9 +32,18 @@ class Lib_message
     return $this->CI->model_message->get_list();
   }
 
-  function create($subject)
+  function create($owner, $subject)
   {
-    return $this->CI->model_message->create($subject);
+    $this->CI->db->trans_start();
+    $message_id = $this->CI->model_message->create($owner, $subject);
+
+    $model_owner = 'model_'.$owner;
+    $this->CI->load->model($model_owner);
+    $this->CI->$model_owner->create($message_id);
+
+    $this->CI->db->trans_complete();
+
+    return $message_id;
   }
 
   function modify($message_id, $subject, $message_html, $reply_to_name, $reply_to_email)

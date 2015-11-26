@@ -32,19 +32,6 @@ class Lib_transaction
     return $this->CI->model_transaction->get_list();
   }
 
-  function get_available_message_list()
-  {
-    return $this->CI->model_transaction->get_available_message_list();
-  }
-
-  function create($message_id, $label_id)
-  {
-    if (empty($label_id)) $label_id = NULL;
-
-    $this->CI->model_transaction->create($message_id, $label_id);
-    return TRUE;
-  }
-
   function modify($message_id, $label_id)
   {
     if (empty($label_id)) $label_id = NULL;

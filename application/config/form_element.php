@@ -56,14 +56,6 @@ $config = array(
     'required'      => 1,
   ),
 
-  'message_id' => array(
-    'label'         => 'Message',
-    'rules'         => 'in_list[]|integer|required',
-
-    'options'       => NULL,
-    'required'      => 1,
-  ),
-
   'label_id' => array(
     'label'         => 'Label',
     'rules'         => 'in_list[]|integer',
@@ -79,6 +71,14 @@ $config = array(
     
     // html5 tag - not supported in Internet Explorer 9 and earlier versions.
     'placeholder'   => 'Enter something really interesting.',
+    'required'      => 1,
+  ),
+
+  'message_owner'  => array(
+    'label'         => 'Owner',
+    'rules'         => 'in_list[autoresponder,campaign,transaction]|required',
+
+    'options'       => ['autoresponder' => 'Autoresponder', 'campaign' => 'Campaign', 'transaction' => 'Transaction'],
     'required'      => 1,
   ),
 

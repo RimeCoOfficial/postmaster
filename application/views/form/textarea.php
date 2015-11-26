@@ -33,7 +33,7 @@ if (!empty($error[ $element['name'] ])) $element['id'] = 'inputError';
 ?>
 
 <div class="form-group <?php if (!empty($error[ $element['name'] ])) echo 'has-error'; ?>">
-  <?php echo form_label($element_config['label'], $element['id'], array('class' => 'control-label')); ?>
+  <?php echo form_label($element_config['label'].(!empty($element_config['required']) ? ' *' : ''), $element['id'], array('class' => 'control-label')); ?>
 
   <?php echo form_textarea($element); ?>
 

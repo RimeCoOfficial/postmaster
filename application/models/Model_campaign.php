@@ -4,12 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Model_campaign extends CI_Model
 {
   private $campaign_table = 'campaign';
-
-  function create($title = '')
+  private $list_table = 'list';
+  private $message_table = 'message';
+  
+  function create($message_id)
   {
-    $this->db->set('title', $title);
-    $this->db->insert($this->campaign_table);
-    return $this->db->insert_id();
+    $this->db->set('message_id', $message_id);
+    $this->db->insert($this->transaction_table);
   }
 
   function get_latest()

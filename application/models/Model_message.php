@@ -25,8 +25,9 @@ class Model_message extends CI_Model
     return $query->result_array();
   }
 
-  function create($subject)
+  function create($owner, $subject)
   {
+    $this->db->set('owner', $owner);
     $this->db->set('subject', $subject);
 
     $this->db->insert($this->message_table);

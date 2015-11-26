@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS feedback (
 
 CREATE TABLE IF NOT EXISTS message (
   message_id              int                 NOT NULL  AUTO_INCREMENT,
+  owner                   varchar(64)         NOT NULL,
 
   subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
   message_html            text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
@@ -100,7 +101,6 @@ CREATE TABLE IF NOT EXISTS campaign (
   list_id                 int                 NOT NULL,
   email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   status                  varchar(16)                   DEFAULT NULL, -- in_progress
-  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (message_id),
   FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -115,8 +115,7 @@ CREATE TABLE IF NOT EXISTS campaign (
 CREATE TABLE IF NOT EXISTS autoresponder (
   message_id              int                 NOT NULL,
   list_id                 int                 NOT NULL,
-  -- email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  time_str                varchar(64)                   DEFAULT NULL, -- now, +1 day http://php.net/manual/en/function.strtotime.php
   PRIMARY KEY (message_id),
   FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -146,7 +145,6 @@ INSERT INTO `ci_postmaster`.`label` (`name`) VALUES ('auth'), ('feedback'), ('no
 CREATE TABLE IF NOT EXISTS transaction (
   message_id              int                 NOT NULL,
   label_id                int                           DEFAULT NULL,
-  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (message_id),
   FOREIGN KEY (label_id) REFERENCES label(label_id) ON UPDATE CASCADE ON DELETE SET NULL,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
