@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>Message <small><?php echo strtoupper($message['owner']); ?> #<?php echo $message['message_id']; ?></small></h1>
+<h1>Message <small class="text-uppercase"><?php echo $message['owner']; ?> #<?php echo $message['message_id']; ?></small></h1>
 
 <?php echo form_open(uri_string()); ?>
 

@@ -13,10 +13,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
-              <?php echo anchor('message/modify/'.$message['message_id'], $message['subject']); ?>
+              <?php echo anchor('message/modify/'.$message['message_id'], $message['subject'], $message['is_archived'] ? 'class="text-muted"' : ''); ?>
               <small>
                 #<?php echo $message['message_id']; ?>
-                <?php echo strtoupper($message['owner']); ?>
+                <span class="text-uppercase"><?php echo $message['owner']; ?></span>
                 <?php echo $message['reply_to_name']; ?>
                 <?php echo $message['reply_to_email']; ?>
                 <?php if (!empty($message['tumblr_post_id'])) echo $message['tumblr_post_id']; ?>

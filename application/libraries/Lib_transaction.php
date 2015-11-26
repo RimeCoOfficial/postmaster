@@ -39,9 +39,4 @@ class Lib_transaction
     $this->CI->model_transaction->update($message_id, $label_id);
     return TRUE;
   }
-
-  function delete($message_id)
-  {
-    $this->CI->model_transaction->delete($message_id);
-  }
 }

@@ -54,4 +54,9 @@ class Lib_message
     $this->CI->model_message->update($message_id, $subject, $message_html, $reply_to_name, $reply_to_email);
     return TRUE;
   }
+
+  function archive($message_id)
+  {
+    $this->CI->model_message->archive($message_id);
+  }
 }

@@ -45,4 +45,13 @@ class Model_message extends CI_Model
 
     $this->db->update($this->message_table);
   }
+
+  function archive($message_id)
+  {
+    $this->db->set('is_archived', 1);
+    
+    $this->db->where('message_id', $message_id);
+
+    $this->db->update($this->message_table);
+  }
 }

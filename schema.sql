@@ -184,22 +184,6 @@ CREATE TABLE IF NOT EXISTS tumblr (
   PRIMARY KEY (service, x_account_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
--- -- --------------------------------------------------------
-
--- --
--- -- Table structure for table aws_cache
--- --
-
--- CREATE TABLE IF NOT EXISTS aws_cache (
---   service                 varchar(256)        NOT NULL,
---   method                  varchar(256)        NOT NULL,
---   -- agrs
---   response                text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
---   updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
---   -- created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
---   PRIMARY KEY (service, method)
--- ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
 -- --------------------------------------------------------
 
 --

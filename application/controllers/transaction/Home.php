@@ -65,7 +65,8 @@ class Home extends CI_Controller
 
   public function delete($message_id)
   {
-    $this->lib_transaction->delete($message_id);
+    $this->load->library('lib_message');
+    $this->lib_message->archive($message_id);
     redirect('transaction');
   }
 }

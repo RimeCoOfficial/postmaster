@@ -34,6 +34,8 @@ class Model_transaction extends CI_Model
     $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->transaction_table.'.message_id');
     $this->db->join($this->label_table, $this->label_table.'.label_id = '.$this->transaction_table.'.label_id', 'LEFT');
 
+    $this->db->where('is_archived', 0);
+    
     $query = $this->db->get($this->transaction_table);
     return $query->result_array();
   }
