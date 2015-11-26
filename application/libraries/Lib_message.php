@@ -46,20 +46,20 @@ class Lib_message
     return $message_id;
   }
 
-  function modify($message_id, $subject, $body_html, $reply_to_name, $reply_to_email)
+  function modify($message_id, $subject, $body_html_ori, $reply_to_name, $reply_to_email)
   {
     if (empty($reply_to_name)) $reply_to_name = NULL;
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
-    $body_html_min = $body_html;
+    $body_html = $body_html_ori;
 
     $this->CI->load->library('composer/lib_html_minifier');
-    $body_html_min = $this->CI->lib_html_minifier->process($body_html_min);
+    $body_html = $this->CI->lib_html_minifier->process($body_html);
 
     $this->CI->load->library('composer/lib_css_to_inline');
-    $body_html_min = $this->CI->lib_css_to_inline->convert($body_html_min);
+    $body_html = $this->CI->lib_css_to_inline->convert($body_html);
 
-    $this->CI->model_message->update($message_id, $subject, $body_html, $body_html_min,$reply_to_name, $reply_to_email);
+    $this->CI->model_message->update($message_id, $subject, $body_html_ori, $body_html,$reply_to_name, $reply_to_email);
     return TRUE;
   }
 
