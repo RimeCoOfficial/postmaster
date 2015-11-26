@@ -7,6 +7,7 @@ AWS email server
 - [ ] Autoresponders emails (Drip campaign)
 - [ ] Campaign emails
 - [ ] Transcational emails
+- [x] Labels (transactional mail utility)
 - [ ] Lists (unsubscribe-able and not unsubscribe-able)
 - [ ] Auto `List-Unsubscribe` headers
 - [ ] API Access
