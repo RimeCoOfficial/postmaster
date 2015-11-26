@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-define('LOCK_DIR', '/tmp/ci/');
+define('LOCK_DIR', '/tmp/ci');
 define('LOCK_SUFFIX', '.lock');
 
 function job_name()
@@ -16,7 +16,7 @@ function job_name()
 
 function _check_lock_file()
 {
-  $lock_file = LOCK_DIR.'cron'.LOCK_SUFFIX;
+  $lock_file = LOCK_DIR.'/'.app_name().'-cron'.LOCK_SUFFIX;
 
   if (!file_exists($lock_file))
   {

@@ -29,4 +29,22 @@ class Model_message_history extends CI_Model
     $this->db->insert($this->message_history_table);
     return $this->db->insert_id();
   }
+
+  function get_to_process($count = 100)
+  {
+    $this->db->limit($count);
+    $this->db->order_by('history_id', 'ASC');
+
+    $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->message_history_table.'.message_id');
+
+    $this->db->where('processed', '1000-01-01 00:00:00');
+
+    $query = $this->db->get($this->message_history_table);
+    return $query->result_array();
+  }
+
+  function mark_processed($message_list)
+  {
+    $this->db->update_batch($this->message_history_table, $message_list, 'history_id');
+  }
 }

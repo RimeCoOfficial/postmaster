@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS message_history (
   to_email                varchar(256)        NOT NULL,
   subject                 text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   body                    text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
-  process                 datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  processed               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (history_id),
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -117,8 +117,8 @@ CREATE TABLE IF NOT EXISTS message_send (
   body_html               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   body_text               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   list_unsubscribe        tinyint(1)          NOT NULL  DEFAULT 0,
-  proirity                tinyint(1)          NOT NULL  DEFAULT 0,
-  email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  priority                tinyint unsigned              DEFAULT 0,
+  email_sent              datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   PRIMARY KEY (history_id),
   FOREIGN KEY (history_id) REFERENCES message_history(history_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS autoresponder (
 CREATE TABLE IF NOT EXISTS campaign (
   message_id              int                 NOT NULL,
   list_id                 int                 NOT NULL,
-  email_sent_at           datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  email_sent              datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   status                  varchar(16)                   DEFAULT NULL, -- in_progress
   PRIMARY KEY (message_id),
   FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,

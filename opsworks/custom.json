@@ -39,6 +39,12 @@
         "name"    : "process_notification queue deliveries",
         "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
         "command" : "cd /srv/www/postmaster/current && php index.php task process_notification queue deliveries"
+      },
+
+      {
+        "name"    : "message process",
+        "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
+        "command" : "cd /srv/www/postmaster/current && php index.php task message process"
       }
     ]
   }
