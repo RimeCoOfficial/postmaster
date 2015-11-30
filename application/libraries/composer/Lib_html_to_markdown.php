@@ -12,9 +12,5 @@ class Lib_html_to_markdown
     $this->converter = new HtmlConverter();
   }
 
-  public function convert($html)
-  {
-    $markdown = $this->converter->convert($html);
-    return $markdown;
-  }
+  public function convert($html) { return $this->converter->convert($html); }
 }

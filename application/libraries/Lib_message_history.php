@@ -91,9 +91,9 @@ class Lib_message_history
     $message_send['reply_to_name'] = $message['reply_to_name'];
     $message_send['reply_to_email'] = $message['reply_to_email'];
 
-    $message_send['subject'] = $message['subject'];
-    $message_send['body_html'] = $message['body_html'];
-    $message_send['body_text'] = 'o.O'; // $message['body_text'];
+    // $message_send['subject'] = $message['subject'];
+    // $message_send['body_html'] = $message['body_html'];
+    // $message_send['body_text'] = $message['body_html'];
 
     $message_send['list_unsubscribe'] = 0;
 
@@ -105,28 +105,50 @@ class Lib_message_history
       default: break;
     }
 
-    // echo($message['subject_var_json']); die();
+    $this->CI->load->library('parser');
 
-    // $message_vars = [];
+    // parse subject
+    $subject_vars = !is_null($message['subject_var_json']) ? json_decode($message['subject_var_json'], TRUE) : [];
+    $message_send['subject'] = $this->CI->parser->parse_string($message['subject'],  $subject_vars, TRUE);
 
-    // $subject = $message['subject'];
+    // parse body
+    $body_vars = !is_null($message['body_var_json']) ? json_decode($message['body_var_json'], TRUE) : [];    
+    $body_vars['_subject'] = $message_send['subject'];
 
-    // $this->CI->load->library('parser');
-    // $subject = $this->CI->parser->parse('blog_template', $data, TRUE);
+    $message_send['body_html'] = $this->CI->parser->parse_string($message['body_html'],  $body_vars, TRUE);
 
-    // $message_vars['_subject'] = $subject;
+    libxml_use_internal_errors(TRUE);
+    $dom = new DOMDocument();
+    $dom->loadHTML($message_send['body_html']);
 
-    // var_dump($subject); die();
-
-    // 1. replace vars: subject, body_html
-    // 2. body_txt
-    // 3. attachment
+    // 3. attachment inline-image=img.src file=a.href
     // 4. link-unsubscribe
     // 5. unsubscribe link using verify_id
     // 6. GA stats
 
-    // var_dump($message_send); die();
+    // {unsubscribe} {web_version} {stats}
 
+    // text email
+    $body_div = $dom->getElementById('body');
+    $body_div_html = $this->DOMinnerHTML($body_div);
+
+    $footer_div = $dom->getElementById('footer');
+    $footer_div_html .= $this->DOMinnerHTML($footer_div);
+
+    $this->CI->load->library('composer/lib_markdown');
+    $message_send['body_text'] = $this->CI->lib_markdown->convert($body_div_html.(!empty($footer_div_html) ? "<hr>"$footer_div_html : ''));
+
+    // print_r($message_send); die();
     return $message_send;
   }
+
+  function DOMinnerHTML(DOMNode $element) 
+  { 
+    $innerHTML = ''; 
+    $children  = $element->childNodes;
+
+    foreach ($children as $child) $innerHTML .= $element->ownerDocument->saveHTML($child);
+
+    return $innerHTML; 
+  } 
 }

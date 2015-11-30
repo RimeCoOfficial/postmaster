@@ -16,6 +16,7 @@ class Lib_css_to_inline
   {
     if (is_null($css))
     {
+      libxml_use_internal_errors(true);
       $doc = new DOMDocument();
       $doc->loadHTML($html);
 
@@ -39,7 +40,7 @@ class Lib_css_to_inline
     $this->cssToInlineStyles->setHTML($html);
     $this->cssToInlineStyles->setCSS($css);
     // $this->cssToInlineStyles->setUseInlineStylesBlock(TRUE);
-    $this->cssToInlineStyles->setCleanup(TRUE);
+    // $this->cssToInlineStyles->setCleanup(TRUE);
     $html = $this->cssToInlineStyles->convert();
     return $html;
   }
