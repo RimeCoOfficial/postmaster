@@ -30,7 +30,7 @@ class Model_message_history extends CI_Model
     return $this->db->insert_id();
   }
 
-  function get_to_process($count = 100)
+  function get_to_process($count)
   {
     $this->db->limit($count);
     $this->db->order_by('history_id', 'ASC');

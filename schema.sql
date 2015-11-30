@@ -119,6 +119,7 @@ CREATE TABLE IF NOT EXISTS message_send (
   list_unsubscribe        tinyint(1)          NOT NULL  DEFAULT 0,
   priority                tinyint unsigned              DEFAULT 0,
   email_sent              datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  amzn_message_id         varchar(256)                  DEFAULT NULL,
   PRIMARY KEY (history_id),
   FOREIGN KEY (history_id) REFERENCES message_history(history_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;

@@ -49,6 +49,8 @@ class Lib_message_history
 
     foreach ($messages as $message)
     {
+      echo '('.$message['history_id'].') Processing message: '.$message['message_id'].' '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
+
       $message_send = [];
 
       $message_send['history_id'] = $message['history_id'];
@@ -69,9 +71,9 @@ class Lib_message_history
 
       $message_send['priority'] = 0;
       switch ($message['owner']) {
-        case 'transaction':   $message_send['priority'] = 150; break;
-        case 'campaign':      $message_send['priority'] = 100; break;
-        case 'autoresponder': $message_send['priority'] =  50; break;
+        case 'transaction':   $message_send['priority'] = 225; break;
+        case 'campaign':      $message_send['priority'] = 150; break;
+        case 'autoresponder': $message_send['priority'] =  75; break;
         default: break;
       }
 

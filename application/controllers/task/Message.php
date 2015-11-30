@@ -20,7 +20,7 @@ class Message extends CI_Controller
   // cd /srv/www/postmaster/current && php index.php task message process
   function process($count = 99)
   {
-    echo 'Start Notification'.PHP_EOL;
+    echo 'Start process'.PHP_EOL;
     $this->load->library('lib_message_history');
 
     if (is_running() === FALSE)
@@ -38,6 +38,34 @@ class Message extends CI_Controller
         if (is_null($this->lib_message_history->process($messages)))
         {
           show_error($this->lib_message_history->get_error_message());
+        }
+      }
+      unlock();
+    }
+  }
+
+  // cd ~/Sites/postmaster && php index.php task message send
+  // cd /srv/www/postmaster/current && php index.php task message send
+  function send($count = 99)
+  {
+    echo 'Start send'.PHP_EOL;
+    $this->load->library('lib_message_send');
+
+    if (is_running() === FALSE)
+    {
+      lock();
+      while (TRUE)
+      {
+        $messages = $this->lib_message_send->get_to_send($count);
+        if (empty($messages))
+        {
+          echo 'No task found!';
+          break;
+        }
+
+        if (is_null($this->lib_message_send->send($messages)))
+        {
+          show_error($this->lib_message_send->get_error_message());
         }
       }
       unlock();
