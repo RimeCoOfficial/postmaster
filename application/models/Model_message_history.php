@@ -18,13 +18,13 @@ class Model_message_history extends CI_Model
     return $query->num_rows() == 1;
   }
 
-  function add($message_id, $to_name, $to_email, $subject, $body)
+  function add($message_id, $to_name, $to_email, $subject_var_json, $body_var_json)
   {
     $this->db->set('message_id', $message_id);
     $this->db->set('to_name', $to_name);
     $this->db->set('to_email', $to_email);
-    $this->db->set('subject', $subject);
-    $this->db->set('body', $body);
+    $this->db->set('subject_var_json', $subject_var_json);
+    $this->db->set('body_var_json', $body_var_json);
 
     $this->db->insert($this->message_history_table);
     return $this->db->insert_id();
