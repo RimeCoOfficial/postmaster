@@ -32,7 +32,6 @@ class Lib_message_send
   function send($messages)
   {
     // 1. send emails async
-
     $this->CI->load->library('composer/lib_aws');
     $ses_client = $this->CI->lib_aws->get_ses();
     $promises = [];
@@ -40,6 +39,9 @@ class Lib_message_send
     foreach ($messages as $message)
     {
       echo '('.$message['history_id'].') Sending message: '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
+
+      // list_unsubscribe header
+      // email_key
 
       $promises[ $message['history_id'] ] = $ses_client->sendEmailAsync([
           'Destination' => [

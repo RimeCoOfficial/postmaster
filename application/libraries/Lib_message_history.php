@@ -51,9 +51,12 @@ class Lib_message_history
     {
       echo '('.$message['history_id'].') Processing message: '.$message['message_id'].' '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
 
+      $verify_id = random_string('alnum', 64);
+
       $message_send = [];
 
       $message_send['history_id'] = $message['history_id'];
+      $message_send['verify_id'] = $verify_id;
       $message_send['from_name'] = NULL; // getenv('email_source');
       $message_send['from_email'] = getenv('email_source');
 
@@ -71,17 +74,18 @@ class Lib_message_history
 
       $message_send['priority'] = 0;
       switch ($message['owner']) {
-        case 'transaction':   $message_send['priority'] = 225; break;
-        case 'campaign':      $message_send['priority'] = 150; break;
-        case 'autoresponder': $message_send['priority'] =  75; break;
+        case 'transaction':   $message_send['priority'] = 15; break;
+        case 'campaign':      $message_send['priority'] = 10; break;
+        case 'autoresponder': $message_send['priority'] =  5; break;
         default: break;
       }
 
-      // 1. replace vars: subject, body_html
-      // 2. body_txt
-      // 3. attachment
-      // 4. link-unsubscribe
-      // 5. GA stats
+      // 1.  replace vars: subject, body_html
+      // 2.  body_txt
+      // 3.  attachment
+      // 4.  link-unsubscribe
+      // 4.1 unsubscribe link using verify_id
+      // 5.  GA stats
 
       // var_dump($message_send); die();
 
