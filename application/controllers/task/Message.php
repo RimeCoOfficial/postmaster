@@ -31,7 +31,7 @@ class Message extends CI_Controller
         $messages = $this->lib_message_history->get_to_process($count);
         if (empty($messages))
         {
-          echo 'No task found!';
+          echo 'No task found!'.PHP_EOL;
           break;
         }
 
@@ -59,7 +59,7 @@ class Message extends CI_Controller
         $messages = $this->lib_message_send->get_to_send($count);
         if (empty($messages))
         {
-          echo 'No task found!';
+          echo 'No task found!'.PHP_EOL;
           break;
         }
 

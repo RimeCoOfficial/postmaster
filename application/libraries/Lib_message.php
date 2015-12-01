@@ -51,20 +51,56 @@ class Lib_message
     if (empty($reply_to_name)) $reply_to_name = NULL;
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
-    $body_html = $body_html_ori;
-
-    $this->CI->load->library('composer/lib_html_minifier');
-    $body_html = $this->CI->lib_html_minifier->process($body_html);
-
-    $this->CI->load->library('composer/lib_css_to_inline');
-    $body_html = $this->CI->lib_css_to_inline->convert($body_html);
-
-    $this->CI->model_message->update($message_id, $subject, $body_html_ori, $body_html,$reply_to_name, $reply_to_email);
+    $this->CI->model_message->update($message_id, $subject, $body_html_ori, $reply_to_name, $reply_to_email);
     return TRUE;
   }
 
   function archive($message_id)
   {
     $this->CI->model_message->archive($message_id);
+  }
+
+  function process_html($message_id, $body_html)
+  {
+    // 1. minify html
+    $this->CI->load->library('composer/lib_html_minifier');
+    $body_html = $this->CI->lib_html_minifier->process($body_html);
+
+    // 2. inline css
+    $this->CI->load->library('composer/lib_css_to_inline');
+    $body_html = $this->CI->lib_css_to_inline->convert($body_html);
+
+    // 3. a.target=_blank
+    libxml_use_internal_errors(TRUE);
+    $doc = new DOMDocument();
+    $doc->loadHTML($body_html);
+
+    $a_tags = $doc->getElementsByTagName('a');
+    foreach ($a_tags as $a_element)
+    {
+      $href = $a_element->getAttribute('href');
+
+      $a_element->setAttribute('target', '_blank');
+    }
+
+    // 4. attachment inline-image=img.src file=a.href
+
+    // 5. GA stats
+    $ga_node_url = base_url('ga/{message_id}'); // @todo: campaign vars
+
+    $ga_node = $doc->createElement('img');
+    $ga_node->setAttribute('src', $ga_node_url);
+    $ga_node->setAttribute('alt', 'GA');
+
+    $body_tag = $doc->getElementsByTagName('body');
+    $body_element = $body_tag[0];
+    if (!empty($body_element))  $body_element->appendChild($ga_node);
+    else                        $doc->appendChild($ga_node);
+
+    $body_html = $doc->saveHtml();
+    // echo $body_html; die();
+
+    $this->CI->model_message->update_html($message_id, $body_html);
+    return true;
   }
 }

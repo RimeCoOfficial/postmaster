@@ -33,8 +33,7 @@ class Lib_s3_object
     $bucket = $config['s3_bucket'];
 
     $result = $s3_client->listObjects(array('Bucket' => $bucket, 'Delimiter' => '/', 'Prefix' => $prefix));
-
-    return $result;
+    return $result->toArray();
   }
 
   function upload($upload, $prefix = '')

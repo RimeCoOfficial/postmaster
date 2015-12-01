@@ -90,6 +90,6 @@ class Message extends CI_Controller
     $message = $this->lib_message->get($message_id);
     if (empty($message)) show_404();
 
-    echo $message['body_html'];
+    echo $message['body_html_ori'];
   }
 }
