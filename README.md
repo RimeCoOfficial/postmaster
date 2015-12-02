@@ -12,7 +12,8 @@ AWS email server
 - [ ] Auto `List-Unsubscribe` headers
 - [ ] API Access
 - [x] Attachments upload to S3 (`YYYYMMDD-HHMMSS_file_name.ext`)
-- [ ] S3 temporary uploads stored for 30 days
+- [ ] S3 `/upload/<Key>`: files temporary stored for 30 days
+- [x] S3 `/attachment/<Key>`: files copied from upload, can't be deleted
 - [x] Admin login for campaigns
 - [x] Auto inline CSS
 - [x] Minify HTML
