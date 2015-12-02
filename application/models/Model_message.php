@@ -47,12 +47,13 @@ class Model_message extends CI_Model
     $this->db->update($this->message_table);
   }
 
-  function update_html($message_id, $body_html)
+  function update_html($message_id, $body_html_input, $body_html)
   {
+    $this->db->set('body_html_ori', $body_html_input);
     $this->db->set('body_html', $body_html);
 
     $this->db->where('message_id', $message_id);
-
+    
     $this->db->update($this->message_table);
   }
 

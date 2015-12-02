@@ -30,18 +30,10 @@ class Lib_message_history
       return NULL;
     }
 
-    // if (is_null($to_email = valid_email($to_email)))
-    // {
-    //   $this->error = ['status' => 401, 'message' => 'invalid to_email'];
-    //   return NULL;
-    // }
-
     if (empty($to_name)) $to_name = NULL;
 
-    $subject_var_json = $body_var_json = NULL;
-
-    if (is_array($subject_var) AND !empty($subject_var))   $subject_var_json = json_encode($subject_var);
-    if (is_array($body_var)    AND !empty($body_var))      $body_var_json    = json_encode($body_var);
+    $subject_var_json = (is_array($subject_var) AND !empty($subject_var)) ? json_encode($subject_var) : NULL;
+    $body_var_json    = (is_array($body_var)    AND !empty($body_var))    ? json_encode($body_var)    : NULL;
 
     return $this->CI->model_message_history->add($message_id, $to_name, $to_email, $subject_var_json, $body_var_json);
   }
@@ -61,14 +53,18 @@ class Lib_message_history
     {
       if (!empty($message_process_html_list[ $message['message_id'] ]))
       {
-        echo 'Already pre-processed HTML: (Skipping..)'.PHP_EOL;
+        echo 'Already pre-processed HTML: '.$message['message_id'].' (Skipping..)'.PHP_EOL;
       }
       else if (is_null($message['body_html']))
       {
         echo 'Processing HTML message: '.$message['message_id'].PHP_EOL;
 
         $this->CI->load->library('lib_message');
-        $this->CI->lib_message->process_html($message['message_id'], $message['body_html_ori']);
+        if (is_null($this->CI->lib_message->process_html($message['message_id'], $message['subject'], $message['body_html_ori'])))
+        {
+          // raise php error: user_error
+          continue;
+        }
 
         $message_process_html_list[ $message['message_id'] ] = TRUE;
       }

@@ -60,32 +60,74 @@ class Lib_message
     $this->CI->model_message->archive($message_id);
   }
 
-  function process_html($message_id, $body_html)
+  function process_html($message_id, $subject, $body_html_input, $post_to_tumblr = 0)
   {
-    // 1. minify html
-    $this->CI->load->library('composer/lib_html_minifier');
-    $body_html = $this->CI->lib_html_minifier->process($body_html);
+    $body_html = $body_html_input;
 
-    // 2. inline css
-    $this->CI->load->library('composer/lib_css_to_inline');
-    $body_html = $this->CI->lib_css_to_inline->convert($body_html);
-
-    // 3. a.target=_blank
     libxml_use_internal_errors(TRUE);
     $doc = new DOMDocument();
     $doc->loadHTML($body_html);
 
+    // 1. attachment inline-image=img.src file=a.href
+    $url_list = [];
     $a_tags = $doc->getElementsByTagName('a');
     foreach ($a_tags as $a_element)
     {
-      $href = $a_element->getAttribute('href');
-
-      $a_element->setAttribute('target', '_blank');
+      $href = $a_element->getAttribute('href'); $url_list[ $href ] = $href;
     }
 
-    // 4. attachment inline-image=img.src file=a.href
+    $img_tags = $doc->getElementsByTagName('img');
+    foreach ($img_tags as $img_element)
+    {
+      $src = $img_element->getAttribute('src'); $url_list[ $src ] = $src;
+    }
 
-    // 5. GA stats
+    if (!empty($url_list))
+    {
+      $this->CI->load->library('lib_s3_object');
+      if (is_null($attachments = $this->CI->lib_s3_object->attach($url_list)))
+      {
+        $this->error = $this->CI->lib_s3_object->get_error_message();
+        return NULL;
+      }
+
+      if (!empty($attachments))
+      {
+        // loop and update the urls
+        foreach ($a_tags as $a_element)
+        {
+          $href = $a_element->getAttribute('href');
+          if (!empty($attachments[ $href ])) $a_element->setAttribute('href', $attachments[ $href ]);
+        }
+
+        foreach ($img_tags as $img_element)
+        {
+          $src = $img_element->getAttribute('src');
+          if (!empty($attachments[ $src ])) $img_element->setAttribute('src', $attachments[ $src ]);
+        }
+
+        $body_html_input = $doc->saveHtml();
+      }
+    }
+
+    // 2. a.target=_blank
+    $a_tags = $doc->getElementsByTagName('a');
+    foreach ($a_tags as $a_element) $a_element->setAttribute('target', '_blank');
+
+    $body_html = $doc->saveHtml();
+
+    // 3. post to tumblr
+    if ($post_to_tumblr)
+    {
+      $this->CI->load->library('lib_tumblr');
+      if (is_null($this->CI->lib_tumblr->post($subject, $body_html)))
+      {
+        $this->error = $this->CI->lib_tumblr->get_error_message();
+        return NULL;
+      }
+    }
+
+    // 4. GA stats
     $ga_node_url = base_url('ga/{message_id}'); // @todo: campaign vars
 
     $ga_node = $doc->createElement('img');
@@ -98,9 +140,19 @@ class Lib_message
     else                        $doc->appendChild($ga_node);
 
     $body_html = $doc->saveHtml();
+
+    // 5. minify html
+    $this->CI->load->library('composer/lib_html_minifier');
+    $body_html = $this->CI->lib_html_minifier->process($body_html);
+
+    // 6. inline css
+    // @todo: download css file async
+    $this->CI->load->library('composer/lib_css_to_inline');
+    $body_html = $this->CI->lib_css_to_inline->convert($body_html);
+
     // echo $body_html; die();
 
-    $this->CI->model_message->update_html($message_id, $body_html);
-    return true;
+    $this->CI->model_message->update_html($message_id, $body_html_input, $body_html);
+    return TRUE;
   }
 }

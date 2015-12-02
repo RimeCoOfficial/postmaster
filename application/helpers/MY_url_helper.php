@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-function s3_url($str)
+function s3_base_url($str = '')
 {
   $CI =& get_instance();
   $CI->load->config('api_key', TRUE);
@@ -23,6 +23,8 @@ function s3_url($str)
   $url .= ($aws_region === 'us-east-1') ? 's3' : 's3-'.$aws_region;
   $url .= '.amazonaws.com';
   $url .= '/'.$config['s3_bucket'];
+
+  if (!empty($str)) $url .= '/'.$str;
 
   return $url;
 }

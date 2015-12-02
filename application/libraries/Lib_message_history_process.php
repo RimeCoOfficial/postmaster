@@ -70,8 +70,8 @@ class Lib_message_history_process
       '_reply_to_email' => $message['reply_to_email'],
       '_reply_to_name' => $message['reply_to_name'],
       '_tumblr_post_link' => $message['tumblr_post_id'],
-      '_unsubscribe_link' => base_url('_unsubscribe_link'),
-      '_web_version_link' => base_url('_web_version_link'),
+      '_unsubscribe_link' => base_url('_unsubscribe_link/'.$message_send['history_id'].'/'.$message_send['verify_id']),
+      '_web_version_link' => base_url('_web_version_link/'.$message_send['history_id'].'/'.$message_send['verify_id']),
       '_current_day' => date('l'),
       '_current_day_number' => date('N'),
       '_current_date' => date('j'),
@@ -143,7 +143,7 @@ class Lib_message_history_process
 
     $message_send['body_text'] = $this->body_text($message_send['body_html']);
 
-    // var_dump($message_send['body_text']); die();
+    // print_r($message_send); die();
     return $message_send;
   }
 }

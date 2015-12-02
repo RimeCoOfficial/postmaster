@@ -28,6 +28,7 @@ class Lib_css_to_inline
           $stylesheet_href = $link->getAttribute('href');
           if (!empty($stylesheet_href))
           {
+            // @todo: cache this file
             // $css = file_get_contents('https://rimeofficial.github.io/asset/css/email.css');
             $css = file_get_contents($stylesheet_href);
             break;
@@ -40,7 +41,7 @@ class Lib_css_to_inline
     $this->cssToInlineStyles->setHTML($html);
     $this->cssToInlineStyles->setCSS($css);
     // $this->cssToInlineStyles->setUseInlineStylesBlock(TRUE);
-    // $this->cssToInlineStyles->setCleanup(TRUE);
+    $this->cssToInlineStyles->setCleanup(TRUE);
     $html = $this->cssToInlineStyles->convert();
     return $html;
   }
