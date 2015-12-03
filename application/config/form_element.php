@@ -74,13 +74,13 @@ $config = array(
     'required'      => 1,
   ),
 
-  'message_owner'  => array(
-    'label'         => 'Owner',
-    'rules'         => 'in_list[autoresponder,campaign,transaction]|required',
+  // 'message_owner'  => array(
+  //   'label'         => 'Owner',
+  //   'rules'         => 'in_list[autoresponder,campaign,transaction]|required',
 
-    'options'       => ['autoresponder' => 'Autoresponder', 'campaign' => 'Campaign', 'transaction' => 'Transaction'],
-    'required'      => 1,
-  ),
+  //   'options'       => ['autoresponder' => 'Autoresponder', 'campaign' => 'Campaign', 'transaction' => 'Transaction'],
+  //   'required'      => 1,
+  // ),
 
   'body_html_input' => array(
     'label'         => 'Message',

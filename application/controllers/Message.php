@@ -26,70 +26,11 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function create()
-  {
-    $local_view_data = [];
-
-    $this->load->library('form_validation');
-    if ($this->form_validation->run())
-    {
-      if (is_null($message_id = $this->lib_message->create(
-        $this->form_validation->set_value('message_owner'),
-        $this->form_validation->set_value('subject')
-      )))
-      {
-        show_error($this->lib_message->get_error_message());
-      }
-      else
-      {
-        redirect('message/modify/'.$message_id);
-      }
-    }
-
-    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
-
-    $view_data['main_content'] = $this->load->view('message/create', $local_view_data, TRUE);
-    $this->load->view('base', $view_data);
-  }
-
-  public function modify($message_id)
-  {
-    $message = $this->lib_message->get($message_id);
-    if (empty($message)) show_404();
-
-    $local_view_data = [];
-    $local_view_data['message'] = $message;
-
-    $this->load->library('form_validation');
-    if ($this->form_validation->run())
-    {
-      if (is_null($this->lib_message->modify(
-        $message_id,
-        $this->form_validation->set_value('subject'),
-        $this->form_validation->set_value('body_html_input'),
-        $this->form_validation->set_value('reply_to_name'),
-        $this->form_validation->set_value('reply_to_email')
-      )))
-      {
-        show_error($this->lib_message->get_error_message());
-      }
-      // else
-      // {
-      //   redirect('message');
-      // }
-    }
-
-    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
-
-    $view_data['main_content'] = $this->load->view('message/modify', $local_view_data, TRUE);
-    $this->load->view('base', $view_data);
-  }
-
   public function show($message_id)
   {
     $message = $this->lib_message->get($message_id);
     if (empty($message)) show_404();
 
-    echo $message['body_html_input'];
+    echo is_null($message['body_html']) ? $message['body_html_input'] : $message['body_html'];
   }
 }

@@ -14,10 +14,8 @@ $config = array(
   'transaction/label/create'      => ['label'],
   'transaction/label/modify'      => ['label'],
 
-  'transaction/home/modify'       => ['label_id'],
-
-  'message/create'                => ['subject', 'message_owner'],
-  'message/modify'                => ['subject', 'reply_to_name', 'reply_to_email', 'body_html_input'],
+  'transaction/message/create'    => ['subject'],
+  'transaction/message/modify'    => ['label_id', 'subject', 'reply_to_name', 'reply_to_email', 'body_html_input', 'label_id'],
 );
 
 if ( ! function_exists('fill_element'))

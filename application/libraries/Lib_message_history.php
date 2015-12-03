@@ -22,7 +22,7 @@ class Lib_message_history
     return $this->error;
   }
 
-  function add($owner, $message_id, $to_name, $to_email, $subject_var, $body_var)
+  function add($message_id, $owner, $to_name, $to_email, $subject_var, $body_var)
   {
     if (!$this->CI->model_message_history->can_add($message_id, $owner))
     {

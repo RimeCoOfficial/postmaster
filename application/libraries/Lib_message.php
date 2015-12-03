@@ -32,32 +32,28 @@ class Lib_message
     return $this->CI->model_message->get_list();
   }
 
-  function create($owner, $subject)
+  function create($owner, $subject, $published = '1000-01-01 00:00:00')
   {
-    $this->CI->db->trans_start();
-    $message_id = $this->CI->model_message->create($owner, $subject);
-
-    $model_owner = 'model_'.$owner;
-    $this->CI->load->model($model_owner);
-    $this->CI->$model_owner->create($message_id);
-
-    $this->CI->db->trans_complete();
-
-    return $message_id;
+    return $this->CI->model_message->create($owner, $subject, $published);
   }
 
-  function modify($message_id, $subject, $body_html_ori, $reply_to_name, $reply_to_email)
+  function modify($message_id, $owner, $subject, $published, $body_html_input, $reply_to_name, $reply_to_email)
   {
     if (empty($reply_to_name)) $reply_to_name = NULL;
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
-    $this->CI->model_message->update($message_id, $subject, $body_html_ori, $reply_to_name, $reply_to_email);
+    $this->CI->model_message->update($message_id, $owner, $subject, $published, $body_html_input, $reply_to_name, $reply_to_email);
     return TRUE;
   }
 
-  function archive($message_id)
+  function archive($message_id, $owner)
   {
-    $this->CI->model_message->archive($message_id);
+    $this->CI->model_message->archive($message_id, $owner);
+  }
+
+  function unarchive($message_id, $owner)
+  {
+    $this->CI->model_message->unarchive($message_id, $owner);
   }
 
   function process_html($message_id, $subject, $body_html_input, $post_to_tumblr = 0)

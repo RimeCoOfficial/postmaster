@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS message (
 
   tumblr_post_id          varchar(256)                  DEFAULT 0, -- 1 = must be posted or filled
   published               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
 
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (message_id)
@@ -178,7 +179,6 @@ CREATE TABLE IF NOT EXISTS autoresponder (
 CREATE TABLE IF NOT EXISTS campaign (
   message_id              int                 NOT NULL,
   list_id                 int                 NOT NULL,
-  archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   PRIMARY KEY (message_id),
   FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE

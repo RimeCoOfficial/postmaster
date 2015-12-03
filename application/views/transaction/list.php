@@ -4,18 +4,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php $this->view('transaction/nav'); ?>
 
-<h1>Transactions</h1>
+<h1>Transactions <span><a href="<?php echo base_url('transaction/message/create'); ?>" class="btn btn-primary pull-right">Create</a></span></h1>
 
 <?php // var_dump($list); ?>
 
 <?php if (!empty($list)): ?>
   <div class="list-group">
     <?php foreach ($list as $key => $transaction): ?>
+      <?php
+      $is_link_gray = $transaction['archived'] != '1000-01-01 00:00:00';
+      ?>
       <div class="list-group-item">
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
-              <?php echo anchor('transaction/home/modify/'.$transaction['message_id'], $transaction['subject']); ?>
+              <?php echo anchor('transaction/message/modify/'.$transaction['message_id'], $transaction['subject'], $is_link_gray ? 'class="text-muted"' : ''); ?>
               <small>
                 #<?php echo $transaction['message_id']; ?>
                 <?php echo $transaction['reply_to_name']; ?>
@@ -26,6 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </h5>
           </div>
           
+          <!-- 
           <div class="media-right">
             <a class="text-danger"
               data-toggle="modal"
@@ -35,6 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               href="#"><span class="media-object glyphicon glyphicon-trash"></span>
             </a>
           </div>
+           -->
         </div>
       </div>
     <?php endforeach; ?>

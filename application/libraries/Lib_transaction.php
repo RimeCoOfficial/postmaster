@@ -22,6 +22,22 @@ class Lib_transaction
     return $this->error;
   }
 
+  function create($subject)
+  {
+    $this->CI->db->trans_start();
+
+    $published = date('Y-m-d H:m:s');
+
+    $this->CI->load->library('lib_message');
+    $message_id = $this->CI->lib_message->create('transaction', $subject, $published);
+    
+    $this->CI->model_transaction->create($message_id);
+
+    $this->CI->db->trans_complete();
+
+    return $message_id;
+  }
+
   function get($message_id)
   {
     return $this->CI->model_transaction->get($message_id);
@@ -32,11 +48,35 @@ class Lib_transaction
     return $this->CI->model_transaction->get_list();
   }
 
-  function modify($message_id, $label_id)
+  function modify($message_id, $label_id, $subject, $body_html_input, $reply_to_name, $reply_to_email)
   {
     if (empty($label_id)) $label_id = NULL;
 
+    $this->CI->db->trans_start();
+
+    $published = date('Y-m-d H:m:s');
+
+    $this->CI->load->library('lib_message');
+    $this->CI->lib_message->modify($message_id, 'transaction', $subject, $published, $body_html_input, $reply_to_name, $reply_to_email);
+
     $this->CI->model_transaction->update($message_id, $label_id);
+
+    $this->CI->db->trans_complete();
+
+    return TRUE;
+  }
+
+  function archive($message_id)
+  {
+    $this->CI->load->library('lib_message');
+    $this->CI->lib_message->archive($message_id, 'transaction');
+    return TRUE;
+  }
+
+  function unarchive($message_id)
+  {
+    $this->CI->load->library('lib_message');
+    $this->CI->lib_message->unarchive($message_id, 'transaction');
     return TRUE;
   }
 
@@ -58,7 +98,7 @@ class Lib_transaction
     $body_var = $this->CI->input->post('body');
     
     if (is_null($history_id = $this->CI->lib_message_history->add(
-      'transaction', $message_id, $to_name, $to_email, $subject_var, $body_var)))
+      $message_id, 'transaction', $to_name, $to_email, $subject_var, $body_var)))
     {
       $this->error = $this->CI->lib_message_history->get_error_message();
       return NULL;

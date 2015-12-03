@@ -17,7 +17,14 @@ class Model_transaction extends CI_Model
   {
     $this->db->limit(1);
 
-    $this->db->where('message_id', $message_id);
+    $this->db->select($this->message_table.'.*');
+    $this->db->select($this->label_table.'.label_id');
+    $this->db->select($this->label_table.'.name AS label');
+
+    $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->transaction_table.'.message_id');
+    $this->db->join($this->label_table, $this->label_table.'.label_id = '.$this->transaction_table.'.label_id', 'LEFT');
+
+    $this->db->where($this->transaction_table.'.message_id', $message_id);
     $query = $this->db->get($this->transaction_table);
     return $query->row_array();
   }
@@ -47,13 +54,5 @@ class Model_transaction extends CI_Model
     $this->db->where('message_id', $message_id);
 
     $this->db->update($this->transaction_table);
-  }
-
-  function delete($message_id)
-  {
-    $this->db->where('message_id', $message_id);
-    $this->db->delete($this->transaction_table);
-
-    return $this->db->affected_rows() > 0;
   }
 }

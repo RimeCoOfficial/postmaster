@@ -2,12 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>New Message</h1>
+<h1>New Transaction</h1>
 
 <?php echo form_open(uri_string()); ?>
 
-<?php $this->view('form/dropdown', array('id' => 'message_owner', 'value' => NULL)); ?>
 <?php $this->view('form/input', array('id' => 'subject', 'value' => NULL)); ?>
+
+<?php // $this->view('form/input', array('id' => 'reply_to_name', 'value' => NULL)); ?>
+<?php // $this->view('form/input', array('id' => 'reply_to_email', 'value' => NULL)); ?>
+
+<?php // $this->view('form/textarea', array('id' => 'body_html_input', 'value' => NULL)); ?>
 
 <div class="row">
   <div class="col-sm-5">

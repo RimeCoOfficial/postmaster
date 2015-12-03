@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>Messages <span><a href="<?php echo base_url('message/create'); ?>" class="btn btn-primary pull-right">Create</a></span></h1>
+<h1>Messages</h1>
 
 <?php // var_dump($list); ?>
 
@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <h5 class="media-heading">
               <?php
               $is_draft = $message['published'] == '1000-01-01 00:00:00';
-              echo anchor('message/modify/'.$message['message_id'], $message['subject'], $is_draft ? 'class="text-muted"' : ''); ?>
+              echo anchor('message/show/'.$message['message_id'], $message['subject'], 'target="_blank"'.($is_draft ? 'class="text-muted"' : '')); ?>
               <small>
                 #<?php echo $message['message_id']; ?>
                 <span class="text-uppercase"><?php echo $message['owner']; ?></span>

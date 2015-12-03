@@ -14,6 +14,9 @@ class Model_message_history extends CI_Model
 
     if (!empty($owner)) $this->db->where('owner', $owner);
 
+    $this->db->where('published !=', '1000-01-01 00:00:00');
+    $this->db->where('archived', '1000-01-01 00:00:00');
+
     $query = $this->db->get($this->message_table);
     return $query->num_rows() == 1;
   }
