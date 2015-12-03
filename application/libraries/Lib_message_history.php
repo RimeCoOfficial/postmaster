@@ -60,7 +60,7 @@ class Lib_message_history
         echo 'Processing HTML message: '.$message['message_id'].PHP_EOL;
 
         $this->CI->load->library('lib_message');
-        if (is_null($this->CI->lib_message->process_html($message['message_id'], $message['subject'], $message['body_html_ori'])))
+        if (is_null($this->CI->lib_message->process_html($message['message_id'], $message['subject'], $message['body_html_input'])))
         {
           // raise php error: user_error
           continue;

@@ -66,7 +66,7 @@ class Message extends CI_Controller
       if (is_null($this->lib_message->modify(
         $message_id,
         $this->form_validation->set_value('subject'),
-        $this->form_validation->set_value('body_html_ori'),
+        $this->form_validation->set_value('body_html_input'),
         $this->form_validation->set_value('reply_to_name'),
         $this->form_validation->set_value('reply_to_email')
       )))
@@ -90,6 +90,6 @@ class Message extends CI_Controller
     $message = $this->lib_message->get($message_id);
     if (empty($message)) show_404();
 
-    echo $message['body_html_ori'];
+    echo $message['body_html_input'];
   }
 }

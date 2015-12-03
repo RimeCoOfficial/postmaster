@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS message (
   owner                   varchar(64)         NOT NULL,
 
   subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
-  body_html_ori           text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  body_html_input         text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   body_html               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
 
   reply_to_name           varchar(128)                  DEFAULT NULL,

@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php $this->view('form/input', array('id' => 'reply_to_name', 'value' => $message['reply_to_name'])); ?>
 <?php $this->view('form/input', array('id' => 'reply_to_email', 'value' => $message['reply_to_email'])); ?>
 
-<?php $this->view('form/textarea', array('id' => 'body_html_ori', 'value' => $message['body_html_ori'])); ?>
+<?php $this->view('form/textarea', array('id' => 'body_html_input', 'value' => $message['body_html_input'])); ?>
 
 <div class="row">
   <div class="col-sm-5">
