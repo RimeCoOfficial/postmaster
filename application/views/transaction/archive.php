@@ -4,12 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php $this->view('transaction/nav'); ?>
 
-<h1>Transaction <small>#<?php echo $message['message_id']; ?></small></h1>
+<h1>
+  <?php echo $message['subject']; ?>
+  <small>#<?php echo $message['message_id']; ?></small>
+
+  <span class="pull-right label label-default"><?php echo $message['label']; ?></span>
+</h1>
 
 <div class="jumbotron">
-<h3><?php echo $message['subject']; ?> <small><?php echo $message['label']; ?></small></h3>
-
-<?php echo $message['reply_to_name']; ?> <?php echo $message['reply_to_email']; ?>
+Reply-to: <?php echo $message['reply_to_name']; ?> &lt;<?php echo $message['reply_to_email']; ?>&gt;
 <p><?php echo strip_tags($message['body_html_input']); ?></p>
 </div>
 

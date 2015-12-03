@@ -143,7 +143,11 @@ class Lib_s3_object
             $s3_upload_list[ $key_id ] = TRUE;
             echo "\t".'Attachment successful: '.$key_id.PHP_EOL;
           },
-          function ($reason) { echo "\t".'Attachment failed: '.$key_id.PHP_EOL; }
+          function ($reason) use (&$s3_upload_list, $key_id)
+          {
+            $s3_upload_list[ $key_id ] = FALSE;
+            echo "\t".'Attachment failed: '.$key_id.PHP_EOL;
+          }
         );
 
         $promises[] = $promise;
