@@ -59,7 +59,7 @@ class Model_message extends CI_Model
 
   function archive($message_id)
   {
-    $this->db->set('is_archived', 1);
+    $this->db->set('published', 'CURRENT_TIMESTAMP()', FALSE);
     
     $this->db->where('message_id', $message_id);
 

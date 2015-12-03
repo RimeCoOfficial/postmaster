@@ -13,7 +13,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
-              <?php echo anchor('message/modify/'.$message['message_id'], $message['subject'], $message['is_archived'] ? 'class="text-muted"' : ''); ?>
+              <?php
+              $is_draft = $message['published'] == '1000-01-01 00:00:00';
+              echo anchor('message/modify/'.$message['message_id'], $message['subject'], $is_draft ? 'class="text-muted"' : ''); ?>
               <small>
                 #<?php echo $message['message_id']; ?>
                 <span class="text-uppercase"><?php echo $message['owner']; ?></span>
