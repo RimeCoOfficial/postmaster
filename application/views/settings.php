@@ -32,19 +32,19 @@ $env_vars = [
   <table class="table">
     <thead>
       <tr>
-        <th>var</th>
-        <th>value</th>
+        <th>Variable</th>
+        <th>Value</th>
       </tr>
     </thead>
 
     <tbody>
       <?php foreach ($env_vars as $var => $is_encrypted): ?>
       <tr>
-        <th scope="row"><?php echo $var; ?></th>
+        <th scope="row"><code><?php echo $var; ?></code></th>
         <td>
           <?php
           $value = getenv($var);
-          if ($is_encrypted) $value = ellipsize($value, strlen($value) * 0.5);
+          if ($is_encrypted) $value = ellipsize($value, strlen($value) * 0.2);
           echo $value;
           ?>
         </td>
