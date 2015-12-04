@@ -130,7 +130,7 @@ class Lib_message
     $ga_node->setAttribute('src', $ga_node_url);
     $ga_node->setAttribute('alt', 'GA');
 
-    $body_tag = $doc->getElementsByTagName('body');
+    $body_tag = $doc->getElementsByTagName('body')->item(0);
     $body_element = $body_tag[0];
     if (!empty($body_element))  $body_element->appendChild($ga_node);
     else                        $doc->appendChild($ga_node);
