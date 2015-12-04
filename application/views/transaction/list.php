@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php $this->view('transaction/nav'); ?>
 
-<h1>Transactions <span><a href="<?php echo base_url('transaction/message/create'); ?>" class="btn btn-primary pull-right">Create</a></span></h1>
+<h1>Messages <span><a href="<?php echo base_url('transaction/message/create'); ?>" class="btn btn-primary pull-right">Create</a></span></h1>
 
 <?php // var_dump($list); ?>
 

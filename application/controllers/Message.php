@@ -26,7 +26,7 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function show($message_id)
+  public function show($message_id = 0)
   {
     $message = $this->lib_message->get($message_id);
     if (empty($message)) show_404();

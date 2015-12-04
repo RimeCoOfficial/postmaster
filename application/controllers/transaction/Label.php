@@ -33,7 +33,7 @@ class label extends CI_Controller
     $this->load->library('form_validation');
     if ($this->form_validation->run('transaction/label/create'))
     {
-      if (is_null($this->lib_label->create(
+      if (is_null($label_id = $this->lib_label->create(
         $this->form_validation->set_value('label')
       )))
       {
@@ -41,7 +41,7 @@ class label extends CI_Controller
       }
       else
       {
-        redirect('transaction/label');
+        redirect('transaction/label/modify/'.$label_id);
       }
     }
 
@@ -51,7 +51,7 @@ class label extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function modify($label_id)
+  public function modify($label_id = 0)
   {
     $label = $this->lib_label->get($label_id);
     if (empty($label)) show_404();
@@ -71,7 +71,7 @@ class label extends CI_Controller
       }
       else
       {
-        redirect('transaction/label');
+        redirect('transaction/label/modify/'.$label_id);
       }
     }
 
@@ -81,7 +81,7 @@ class label extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function delete($label_id)
+  public function delete($label_id = 0)
   {
     $this->lib_label->delete($label_id);
     redirect('transaction/label');

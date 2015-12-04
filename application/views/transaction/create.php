@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>New Transaction</h1>
+<?php $this->view('transaction/nav'); ?>
+
+<h1>New Message</h1>
 
 <?php echo form_open(uri_string()); ?>
 

@@ -16,6 +16,16 @@ class Message extends CI_Controller
     $this->load->library('lib_transaction');
   }
 
+  public function index($filter = NULL)
+  {
+    $local_view_data['list'] = $this->lib_transaction->get_list();
+
+    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
+
+    $view_data['main_content'] = $this->load->view('transaction/list', $local_view_data, TRUE);
+    $this->load->view('base', $view_data);
+  }
+
   public function create()
   {
     $local_view_data = [];
@@ -41,7 +51,7 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function modify($message_id)
+  public function modify($message_id = 0)
   {
     $message = $this->lib_transaction->get($message_id);
     if (empty($message)) show_404();
@@ -76,10 +86,10 @@ class Message extends CI_Controller
         {
           show_error($this->lib_transaction->get_error_message());
         }
-        // else
-        // {
-        //   redirect('transaction');
-        // }
+        else
+        {
+          redirect('transaction/message/modify/'.$message_id);
+        }
       }
 
       $view_data['main_content'] = $this->load->view('transaction/modify', $local_view_data, TRUE);
@@ -89,13 +99,13 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function archive($message_id)
+  public function archive($message_id = 0)
   {
     $this->lib_transaction->archive($message_id);
     redirect('transaction/message/modify/'.$message_id);
   }
 
-  public function unarchive($message_id)
+  public function unarchive($message_id = 0)
   {
     $this->lib_transaction->unarchive($message_id);
     redirect('transaction/message/modify/'.$message_id);
