@@ -89,18 +89,8 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
             </nav>
           </header>
 
-          <?php
-          $nav_tab = $this->config->item('nav_tab', 'nav');
-          if (!empty($nav_tab[ $nav_selected ]))
-          {
-            $nav = [
-              'nav_base_uri'  => $nav_selected,
-              'nav_list'      => $nav_tab[ $nav_selected ]
-            ];
-            $this->view('nav_tab', $nav);
-          }
-          ?>
-          <?php $this->view('alert', $nav); ?>
+          <?php $this->view('nav_tab'); ?>
+          <?php $this->view('alert'); ?>
 
           <?php echo $main_content; ?>
 
