@@ -14,11 +14,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </span>
         </div> -->
         <div class="media-body">
-          <h3 class="media-heading">
+          <h4 class="media-heading">
             <span class="text-capitalize"><?php echo $config['title']; ?></span>
             <!-- <small><?php echo $config['description']; ?></small> -->
             <span class="pull-right label label-default"><?php echo $prefix; ?></span>
-          </h3>
+          </h4>
           <dl class="dl-horizontal">
             <?php foreach ($config['upload'] as $key => $value): ?>
             <dt><?php echo str_replace('_', ' ', $key); ?></dt>
