@@ -30,7 +30,7 @@ $config = [
       'lists'   => 'Lists',
       'history' => 'History',
     ],
-    'camapign' => [
+    'campaign' => [
       'message' => 'Messages',
       'lists'   => 'Lists',
       'history' => 'History',

@@ -5,6 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php
 $nav_selected = explode('/', uri_string());
 $nav_selected = $nav_selected[0];
+
+$nav_tab = $this->config->item('nav_tab', 'nav');
+// var_dump($nav_selected); die();
 ?>
 
 <?php if (!empty($nav_tab[ $nav_selected ])): ?>
