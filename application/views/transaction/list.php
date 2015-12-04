@@ -6,7 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php // var_dump($list); ?>
 
-<?php if (!empty($list)): ?>
+<?php if (empty($list)): ?>
+  <p class="lead text-muted">No message found</p>
+<?php else: ?>
   <div class="list-group">
     <?php foreach ($list as $key => $transaction): ?>
       <?php

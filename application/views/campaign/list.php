@@ -6,7 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php // var_dump($list); ?>
 
-<?php if (!empty($list)): ?>
+<?php if (empty($list)): ?>
+  <p class="lead text-muted">No message found</p>
+<?php else: ?>
   <div class="list-group">
     <?php foreach ($list as $key => $transaction): ?>
       <?php
@@ -46,8 +48,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     <?php endforeach; ?>
   </div>
-<?php else: ?>
-  <p class="lead text-muted">No message found</p>
 <?php endif; ?>
 
 <div class="modal fade" id="transaction-delete-modal" tabindex="-1" role="dialog" aria-labelledby="transaction-delete-modal-label" aria-hidden="true">

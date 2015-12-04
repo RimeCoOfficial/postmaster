@@ -21,7 +21,7 @@ class Auth extends CI_Controller
       show_error($this->lib_auth->get_error_message());
     }
 
-    if (ENVIRONMENT == 'development') echo anchor('auth/verify/'.$login_email_key); die();
+    if (ENVIRONMENT == 'development') { echo anchor('auth/verify/'.$login_email_key); die(); }
 
     // send email
     $email_data = ['login_email_key' => $login_email_key];
