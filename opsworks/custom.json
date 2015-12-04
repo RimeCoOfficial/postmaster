@@ -45,6 +45,11 @@
         "name"    : "message process",
         "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
         "command" : "cd /srv/www/postmaster/current && php index.php task message process"
+      },
+      {
+        "name"    : "message send",
+        "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
+        "command" : "cd /srv/www/postmaster/current && php index.php task message send"
       }
     ]
   }
