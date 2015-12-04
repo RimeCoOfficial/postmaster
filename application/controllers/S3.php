@@ -18,7 +18,7 @@ class S3 extends CI_Controller
 
   function index()
   {
-    redirect('s3/object');
+    redirect('s3/upload');
   }
 
   function object()

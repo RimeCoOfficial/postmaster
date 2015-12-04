@@ -26,8 +26,8 @@ $config = [
   ],
   'nav_tab' => [
     's3' => [
-      'object'   => 'Objects',
       'upload'  => 'Upload',
+      'object'   => 'Objects',
     ],
     'autoresponder' => [
       'message' => 'Messages',

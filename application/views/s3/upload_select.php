@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>Upload object</h1>
+<h1>Upload S3 object</h1>
 
 <div class="list-group">
   <?php foreach ($prefixes as $prefix => $config): ?>

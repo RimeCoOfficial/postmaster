@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   $s3_url = $s3_url['scheme'].'://'.$s3_url['host'].$s3_url['path'];
   ?>
 
-  <h1>Objects</h1>
+  <h1>S3 objects</h1>
 
   <dl class="dl-horizontal">
     <dt>Bucket</dt>
