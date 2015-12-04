@@ -88,13 +88,15 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
             </nav>
           </header>
 
+          <?php // $this->view('nav_tab'); ?>
+
           <?php $this->view('alert'); ?>
 
           <?php echo $main_content; ?>
 
           <footer>
             <hr>
-            <p>Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+            <p>Page rendered in <strong>{elapsed_time}</strong> seconds.<?php echo  (ENVIRONMENT === 'development') ?  ' CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
           </footer>
         </div>
       </div>

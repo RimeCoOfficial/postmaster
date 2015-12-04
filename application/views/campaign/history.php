@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<?php $this->view('transaction/nav_tab'); ?>
+<?php $this->view('campaign/nav_tab'); ?>
 
 <h1>History</h1>
 

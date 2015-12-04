@@ -14,5 +14,5 @@ class Home extends CI_Controller
     }
   }
 
-  function index() { redirect('campaign/message'); }
+  function index() { redirect('autoresponder/message'); }
 }

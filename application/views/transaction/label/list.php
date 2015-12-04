@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<?php $this->view('transaction/nav'); ?>
+<?php $this->view('transaction/nav_tab'); ?>
 
 <h1>Labels <span><a href="<?php echo base_url('transaction/label/create'); ?>" class="btn btn-primary pull-right">New</a></span></h1>
 
