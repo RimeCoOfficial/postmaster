@@ -25,6 +25,10 @@ $config = [
     ]
   ],
   'nav_tab' => [
+    's3-object' => [
+      'index'   => 'Objects',
+      'upload'  => 'Upload',
+    ],
     'autoresponder' => [
       'message' => 'Messages',
       'lists'   => 'Lists',

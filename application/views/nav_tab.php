@@ -25,7 +25,7 @@ $nav_tab = $this->config->item('nav_tab', 'nav');
   ?>
 
   <?php if (!empty($nav_list)): ?>
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs" style="margin-bottom: 20px;">
       <?php foreach ($nav_list as $uri => $name): ?>
       <li class="<?php if ($nav_selected == $uri) echo 'active'; ?>">
         <a href="<?php echo base_url($nav_base_uri.'/'.$uri); ?>"><?php echo $name; ?></a>

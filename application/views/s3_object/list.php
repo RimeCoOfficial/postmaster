@@ -14,27 +14,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   $s3_url = $s3_url['scheme'].'://'.$s3_url['host'].$s3_url['path'];
   ?>
 
-  <h1>
-    S3 objects
-    <span class="pull-right">
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Upload
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-          <li><a href="<?php echo base_url('s3-object/upload/inline-image'); ?>">Picture inline</a></li>
-          <li><a href="<?php echo base_url('s3-object/upload/file'); ?>">File as attachment</a></li>
-          <li><a href="<?php echo base_url('s3-object/upload/import'); ?>">Import</a></li>
-        </ul>
-      </div>
-    </span>
-  </h1>
+  <h1>Objects</h1>
 
-  <p>
-    Bucket <strong><?php echo $s3_object_list['Name']; ?></strong><br>
-    Loaction <?php echo htmlentities($s3_url); ?><code>/<strong>&lt;key&gt;</strong></code>
-  </p>
+  <dl class="dl-horizontal">
+    <dt>Bucket</dt>
+    <dd><?php echo $s3_object_list['Name']; ?></dd>
+    <dt>Loaction</dt>
+    <dd><?php echo htmlentities($s3_url); ?><code>/<strong>&lt;key&gt;</strong></code></dd>
+  </dl>
 
   <ol class="breadcrumb">
     <?php if (!empty($s3_object_list['Prefix'])): ?>

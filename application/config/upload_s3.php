@@ -16,25 +16,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // // $config['detect_mime']      = TRUE;   // DEFAULT
 // // $config['mod_mime_fix']     = TRUE;   // DEFAULT
 
-$config['inline-image'] ['upload_path']       = '/tmp/ci/upload';
-$config['inline-image'] ['allowed_types']     = 'gif|jpg|png';
-$config['inline-image'] ['max_filename']      = 200; // type_name / [YYYYmmdd-HHmmss_filename.ext]
-$config['inline-image'] ['file_ext_tolower']  = TRUE;
-$config['inline-image'] ['overwrite']         = TRUE;
-$config['inline-image'] ['max_size']          = '2048';
-$config['inline-image'] ['max_width']         = '750';
-$config['inline-image'] ['max_height']        = '750';
+$config = [
+  'inline-image' => [
+    'title' => 'Inline image',
+    'description' => '',
+    'icon' => 'glyphicon-picture',
 
-$config['file']         ['upload_path']       = '/tmp/ci/upload';
-$config['file']         ['allowed_types']     = 'md|txt';
-$config['file']         ['max_filename']      = 200;
-$config['file']         ['file_ext_tolower']  = TRUE;
-$config['file']         ['overwrite']         = TRUE;
-$config['file']         ['max_size']          = '2048';
+    'upload'  => [
+      'upload_path'       => '/tmp/ci/upload',
+      'allowed_types'     => 'gif|jpg|png',
+      'max_filename'      => 200, // type_name / [YYYYmmdd-HHmmss_filename.ext]
+      'file_ext_tolower'  => TRUE,
+      'overwrite'         => TRUE,
+      'max_size'          => '2048',
+      'max_width'         => '750',
+      'max_height'        => '750',
+    ]
+  ],
+  'file' => [
+    'title' => 'File',
+    'description' => '',
+    'icon' => 'glyphicon-file',
 
-$config['import']       ['upload_path']       = '/tmp/ci/upload';
-$config['import']       ['allowed_types']     = 'csv|xls';
-$config['import']       ['max_filename']      = 200;
-$config['import']       ['file_ext_tolower']  = TRUE;
-$config['import']       ['overwrite']         = TRUE;
-$config['import']       ['max_size']          = '2048';
+    'upload'  => [
+      'upload_path'       => '/tmp/ci/upload',
+      'allowed_types'     => 'md|txt',
+      'max_filename'      => 200,
+      'file_ext_tolower'  => TRUE,
+      'overwrite'         => TRUE,
+      'max_size'          => '2048',
+    ],
+  ],
+  'import' => [
+    'title' => 'Import contact list',
+    'description' => '',
+    'icon' => 'glyphicon-list',
+
+    'upload'  => [
+      'upload_path'       => '/tmp/ci/upload',
+      'allowed_types'     => 'csv|xls',
+      'max_filename'      => 200,
+      'file_ext_tolower'  => TRUE,
+      'overwrite'         => TRUE,
+      'max_size'          => '2048',
+    ],
+  ]
+];

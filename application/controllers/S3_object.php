@@ -34,45 +34,51 @@ class S3_object extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  function upload($prefix) // inline-image, file, import
+  function upload($prefix = NULL) // inline-image, file, import
   {
     $local_view_data = array();
     
     $this->config->load('upload_s3', TRUE);
-    $config = $this->config->item($prefix, 'upload_s3');
+    $prefixes = $this->config->item('upload_s3');
     
-    if (empty($config))
+    if (empty($prefixes[ $prefix ]))
     {
-      show_error('prefix not found');
-    }
-    $local_view_data['prefix'] = $prefix;
-
-    $prefix = 'upload/'.$prefix;
-
-    $this->load->library('upload', $config);
-    if ( ! $this->upload->do_upload('upload_s3_object'))
-    {
-      $local_view_data['error'] = array('upload_s3_object' => $this->upload->display_errors());
+      $local_view_data['prefixes'] = $prefixes;
+      $view_data['main_content'] = $this->load->view('s3_object/upload_select', $local_view_data, TRUE);
     }
     else
     {
-      // file uploaded to /tmp/ci/upload
-      $upload = $this->upload->data();
+      $config = $prefixes[ $prefix ];
 
-      if (is_null($s3_object_url = $this->lib_s3_object->upload($upload, $prefix)))
+      $local_view_data['prefix'] = $prefix;
+
+      $prefix = 'upload/'.$prefix;
+
+      $this->load->library('upload', $config['upload']);
+      if ( ! $this->upload->do_upload('upload_s3_object'))
       {
-        show_error($this->lib_s3_object->get_error_message());
+        $local_view_data['error'] = array('upload_s3_object' => $this->upload->display_errors());
+      }
+      else
+      {
+        // file uploaded to /tmp/ci/upload
+        $upload = $this->upload->data();
+
+        if (is_null($s3_object_url = $this->lib_s3_object->upload($upload, $prefix)))
+        {
+          show_error($this->lib_s3_object->get_error_message());
+        }
+
+        $redirect_url = 's3-object/index?prefix='.urlencode($prefix.'/');
+
+        $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Uploaded</strong>: '.$s3_object_url]);
+        redirect($redirect_url);
       }
 
-      $redirect_url = 's3-object/index?prefix='.urlencode($prefix.'/');
-
-      $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Uploaded</strong>: '.$s3_object_url]);
-      redirect($redirect_url);
+      $view_data['main_content'] = $this->load->view('s3_object/upload', $local_view_data, TRUE);
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
-
-    $view_data['main_content'] = $this->load->view('s3_object/upload', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 }
