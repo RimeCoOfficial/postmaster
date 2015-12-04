@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <ol class="breadcrumb">
     <?php if (!empty($s3_object_list['Prefix'])): ?>
-      <li><?php echo anchor('s3-object', $s3_object_list['Name']); ?></li>
+      <li><?php echo anchor('s3/object', $s3_object_list['Name']); ?></li>
       <?php // var_dump($s3_object_list['Prefix']); ?>
       <?php
       $prefix_list = explode('/', $prefix);
@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           // if (empty($name)) continue;
           $prefix_key .= $name.'/';
           ?>
-          <li><a href="<?php echo base_url('s3-object/index').'?prefix='.$prefix_key; ?>"><?php echo $name; ?></a></li>
+          <li><a href="<?php echo base_url('s3/object').'?prefix='.$prefix_key; ?>"><?php echo $name; ?></a></li>
         <?php endfor; ?>
 
         <li class="active"><?php echo $name; ?></li>
@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Filters -->
     <?php if (!empty($s3_object_list['CommonPrefixes'])): ?>
       <?php foreach ($s3_object_list['CommonPrefixes'] as $common_prefix): ?>
-        <a class="list-group-item" href="<?php echo base_url('s3-object/index').'?prefix='.$common_prefix['Prefix']; ?>">
+        <a class="list-group-item" href="<?php echo base_url('s3/object').'?prefix='.$common_prefix['Prefix']; ?>">
 
           <div class="media">
             <div class="media-left">

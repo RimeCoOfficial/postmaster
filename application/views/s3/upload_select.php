@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="list-group">
   <?php foreach ($prefixes as $prefix => $config): ?>
-    <a href="<?php echo base_url('s3-object/upload/'.$prefix); ?>" class="list-group-item">
+    <a href="<?php echo base_url('s3/upload/'.$prefix); ?>" class="list-group-item">
 
       <div class="media">
         <!-- <div class="media-left">

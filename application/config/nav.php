@@ -14,7 +14,7 @@ $config = [
     'left' => [
       'stats'         => '<span class="glyphicon glyphicon-stats"></span>',
       'message'       => '<span class="glyphicon glyphicon-envelope"></span>',
-      's3-object'     => '<span class="glyphicon glyphicon-open-file"></span>',
+      's3'            => '<span class="glyphicon glyphicon-open-file"></span>',
       'autoresponder' => 'Autoresponder',
       'campaign'      => 'Campaign',
       'transaction'   => 'Transaction',
@@ -25,8 +25,8 @@ $config = [
     ]
   ],
   'nav_tab' => [
-    's3-object' => [
-      'index'   => 'Objects',
+    's3' => [
+      'object'   => 'Objects',
       'upload'  => 'Upload',
     ],
     'autoresponder' => [

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class S3_object extends CI_Controller
+class S3 extends CI_Controller
 {
   function __construct()
   {
@@ -18,6 +18,11 @@ class S3_object extends CI_Controller
 
   function index()
   {
+    redirect('s3/object');
+  }
+
+  function object()
+  {
     $prefix = $this->input->get('prefix');
 
     $this->load->helper('number');
@@ -30,7 +35,7 @@ class S3_object extends CI_Controller
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('s3_object/list', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('s3/list', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 
@@ -44,7 +49,7 @@ class S3_object extends CI_Controller
     if (empty($prefixes[ $prefix ]))
     {
       $local_view_data['prefixes'] = $prefixes;
-      $view_data['main_content'] = $this->load->view('s3_object/upload_select', $local_view_data, TRUE);
+      $view_data['main_content'] = $this->load->view('s3/upload_select', $local_view_data, TRUE);
     }
     else
     {
@@ -69,13 +74,13 @@ class S3_object extends CI_Controller
           show_error($this->lib_s3_object->get_error_message());
         }
 
-        $redirect_url = 's3-object/index?prefix='.urlencode($prefix.'/');
+        $redirect_url = 's3/object?prefix='.urlencode($prefix.'/');
 
         $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Uploaded</strong>: '.$s3_object_url]);
         redirect($redirect_url);
       }
 
-      $view_data['main_content'] = $this->load->view('s3_object/upload', $local_view_data, TRUE);
+      $view_data['main_content'] = $this->load->view('s3/upload', $local_view_data, TRUE);
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
