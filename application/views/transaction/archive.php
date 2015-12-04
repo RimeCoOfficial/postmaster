@@ -2,8 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<?php $this->view('transaction/nav_tab'); ?>
-
 <h1>
   <?php echo $message['subject']; ?>
   <small>#<?php echo $message['message_id']; ?></small>

@@ -2,8 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<?php $this->view('transaction/nav_tab'); ?>
-
 <h1>Label <span class="pull-right label label-default"><?php echo $label['name']; ?></span></h1>
 
 <?php echo form_open(uri_string()); ?>

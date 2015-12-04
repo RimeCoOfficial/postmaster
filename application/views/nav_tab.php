@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <?php
-if (empty($nav_list)) $nav_list = [];
 if (empty($nav_base_uri)) $nav_base_uri = '';
+if (empty($nav_list)) $nav_list = [];
 
 $current_uri = explode('/', uri_string());
 

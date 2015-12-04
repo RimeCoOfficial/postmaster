@@ -28,6 +28,10 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
         <div class="col-xs-12">
 
           <header>
+            <?php
+            $this->load->config('nav', TRUE);
+            $navbar = $this->config->item('navbar', 'nav');
+            ?>
             <nav class="navbar navbar-default">
               <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -40,14 +44,7 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
                 <?php
                 if ($is_logged_in)
                 {
-                  $nav_list = [
-                    'stats'         => '<span class="glyphicon glyphicon-stats"></span>',
-                    'message'       => '<span class="glyphicon glyphicon-envelope"></span>',
-                    's3-object'     => '<span class="glyphicon glyphicon-open-file"></span>',
-                    'autoresponder' => 'Autoresponder',
-                    'campaign'      => 'Campaign',
-                    'transaction'   => 'Transaction',
-                  ];
+                  $nav_list = $navbar['left'];
                   $nav_selected = explode('/', uri_string());
                   $nav_selected = $nav_selected[0];
                   ?>
@@ -70,8 +67,12 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
                       <ul class="dropdown-menu">
-                        <li><?php echo anchor('settings', 'Settings'); ?></li>
-                        <li><?php echo anchor('auth/sign-out', 'Sign out'); ?></li>
+                        <?php $nav_list = $navbar['right']; ?>
+                        <?php foreach ($nav_list as $uri => $name): ?>
+                          <li>
+                            <a href="<?php echo base_url($uri); ?>"><?php echo $name; ?></a>
+                          </li>
+                        <?php endforeach; ?>
                       </ul>
                     </li>
                     <?php
@@ -88,9 +89,18 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
             </nav>
           </header>
 
-          <?php // $this->view('nav_tab'); ?>
-
-          <?php $this->view('alert'); ?>
+          <?php
+          $nav_tab = $this->config->item('nav_tab', 'nav');
+          if (!empty($nav_tab[ $nav_selected ]))
+          {
+            $nav = [
+              'nav_base_uri'  => $nav_selected,
+              'nav_list'      => $nav_tab[ $nav_selected ]
+            ];
+            $this->view('nav_tab', $nav);
+          }
+          ?>
+          <?php $this->view('alert', $nav); ?>
 
           <?php echo $main_content; ?>
 

@@ -2,8 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<?php $this->view('autoresponder/nav_tab'); ?>
-
 <h1>Messages <span><a href="<?php echo base_url('autoresponder/message/create'); ?>" class="btn btn-primary pull-right">Create</a></span></h1>
 
 <?php // var_dump($list); ?>
