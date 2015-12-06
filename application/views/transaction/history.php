@@ -14,12 +14,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="media">
             <div class="media-body">
               <h5 class="media-heading">
-                <code>In progress [request_id: <?php echo $request['request_id']; ?>]</code>
+                <code>Processing request [<?php echo $request['request_id']; ?>]</code>
                 <small>
                   <span class="text-uppercase"><?php echo $request['owner']; ?></span>
-                  #<?php echo $request['message_id']; ?>
+                  #<?php echo $request['message_id']; ?>,
 
-                  <?php echo date('M d, Y h:i A', strtotime($request['created'])); ?>
+                  requested <?php echo date('M d, Y h:i A', strtotime($request['created'])); ?>
 
                   <strong class="pull-right"><?php echo $request['to_email']; ?></strong>
                 </small>
@@ -39,11 +39,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php echo $request['subject']; ?>
                 <small>
                   <span class="text-uppercase"><?php echo $request['owner']; ?></span>
-                  #<?php echo $request['message_id']; ?>
+                  #<?php echo $request['message_id']; ?>,
 
                   <?php if ($request['sent'] != '1000-01-01 00:00:00') {
-                    echo date('M d, Y h:i A', strtotime($request['sent']));
-                  } ?>
+                    echo 'sent '.date('M d, Y h:i A', strtotime($request['sent']));
+                  }
+                  else
+                  {
+                     echo 'requested '.date('M d, Y h:i A', strtotime($request['created']));
+                  }
+                  ?>
 
                   <strong class="pull-right"><?php echo $request['to_email']; ?></strong>
                 </small>
