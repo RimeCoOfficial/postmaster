@@ -49,23 +49,23 @@ class Message extends CI_Controller
   function send($count = 99)
   {
     echo 'Start send'.PHP_EOL;
-    $this->load->library('lib_message_send');
+    $this->load->library('lib_message_archive');
 
     if (is_running() === FALSE)
     {
       lock();
       while (TRUE)
       {
-        $messages = $this->lib_message_send->get_to_send($count);
+        $messages = $this->lib_message_archive->get_unsent($count);
         if (empty($messages))
         {
           echo 'No task found!'.PHP_EOL;
           break;
         }
 
-        if (is_null($this->lib_message_send->send($messages)))
+        if (is_null($this->lib_message_archive->send($messages)))
         {
-          show_error($this->lib_message_send->get_error_message());
+          show_error($this->lib_message_archive->get_error_message());
         }
       }
       unlock();

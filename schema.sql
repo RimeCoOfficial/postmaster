@@ -102,10 +102,10 @@ CREATE TABLE IF NOT EXISTS message_request (
 -- --------------------------------------------------------
 
 --
--- Table structure for table message_send
+-- Table structure for table message_archive
 --
 
-CREATE TABLE IF NOT EXISTS message_send (
+CREATE TABLE IF NOT EXISTS message_archive (
   request_id              int                 NOT NULL,
   verify_id               varchar(64)         NOT NULL,
   from_name               varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,

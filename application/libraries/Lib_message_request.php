@@ -40,52 +40,52 @@ class Lib_message_request
 
   function process($message)
   {
-    $message_send = $this->init($message);
+    $message_archive = $this->init($message);
 
-    $message_send = $this->parse($message_send, $message);
+    $message_archive = $this->parse($message_archive, $message);
 
-    $message_send['body_text'] = $this->body_text($message_send['body_html']);
+    $message_archive['body_text'] = $this->body_text($message_archive['body_html']);
 
-    // print_r($message_send); die();
-    return $message_send;
+    // print_r($message_archive); die();
+    return $message_archive;
   }
 
   private function init($message)
   {
-    $message_send = [];
+    $message_archive = [];
 
     $verify_id = random_string('alnum', 64);
 
-    $message_send['request_id'] = $message['request_id'];
-    $message_send['verify_id'] = $verify_id;
-    $message_send['from_name'] = NULL; // getenv('email_source');
-    $message_send['from_email'] = getenv('email_source');
+    $message_archive['request_id'] = $message['request_id'];
+    $message_archive['verify_id'] = $verify_id;
+    $message_archive['from_name'] = NULL; // getenv('email_source');
+    $message_archive['from_email'] = getenv('email_source');
 
-    $message_send['to_name'] = $message['to_name'];
-    $message_send['to_email'] = $message['to_email'];
+    $message_archive['to_name'] = $message['to_name'];
+    $message_archive['to_email'] = $message['to_email'];
 
-    $message_send['reply_to_name'] = $message['reply_to_name'];
-    $message_send['reply_to_email'] = $message['reply_to_email'];
+    $message_archive['reply_to_name'] = $message['reply_to_name'];
+    $message_archive['reply_to_email'] = $message['reply_to_email'];
 
-    $message_send['subject'] = $message['subject'];
-    $message_send['body_html'] = $message['body_html'];
-    $message_send['body_text'] = '';
+    $message_archive['subject'] = $message['subject'];
+    $message_archive['body_html'] = $message['body_html'];
+    $message_archive['body_text'] = '';
 
-    $message_send['list_unsubscribe'] = 0;
+    $message_archive['list_unsubscribe'] = 0;
 
-    $message_send['priority'] = 0;
+    $message_archive['priority'] = 0;
     switch ($message['owner'])
     {
-      case 'transaction':   $message_send['priority'] = 15; break;
-      case 'campaign':      $message_send['priority'] = 10; break;
-      case 'autoresponder': $message_send['priority'] =  5; break;
+      case 'transaction':   $message_archive['priority'] = 15; break;
+      case 'campaign':      $message_archive['priority'] = 10; break;
+      case 'autoresponder': $message_archive['priority'] =  5; break;
       default:                                              break;
     }
 
-    return $message_send;
+    return $message_archive;
   }
 
-  private function parse($message_send, $message)
+  private function parse($message_archive, $message)
   {
     // 4. link-unsubscribe
     // 5. unsubscribe link = request_id + verify_id
@@ -99,8 +99,8 @@ class Lib_message_request
       '_reply_to_email' => $message['reply_to_email'],
       '_reply_to_name' => $message['reply_to_name'],
       '_tumblr_post_link' => $message['tumblr_post_id'],
-      '_unsubscribe_link' => base_url('_unsubscribe_link/'.$message_send['request_id'].'/'.$message_send['verify_id']),
-      '_web_version_link' => base_url('_web_version_link/'.$message_send['request_id'].'/'.$message_send['verify_id']),
+      '_unsubscribe_link' => base_url('_unsubscribe_link/'.$message_archive['request_id'].'/'.$message_archive['verify_id']),
+      '_web_version_link' => base_url('_web_version_link/'.$message_archive['request_id'].'/'.$message_archive['verify_id']),
       '_current_day' => date('l'),
       '_current_day_number' => date('N'),
       '_current_date' => date('j'),
@@ -116,16 +116,16 @@ class Lib_message_request
     $subject_vars = array_merge($subject_vars, $default_vars);
     
     $subject = $this->CI->parser->parse_string($message['subject'],  $subject_vars, TRUE);
-    $message_send['subject'] = $subject;
+    $message_archive['subject'] = $subject;
     $default_vars['_subject'] = $subject;
 
     // parse body
     $body_vars = !is_null($message['body_var_json']) ? json_decode($message['body_var_json'], TRUE) : [];
     $body_vars = array_merge($body_vars, $default_vars);
 
-    $message_send['body_html'] = $this->CI->parser->parse_string($message['body_html'],  $body_vars, TRUE);
+    $message_archive['body_html'] = $this->CI->parser->parse_string($message['body_html'],  $body_vars, TRUE);
 
-    return $message_send;
+    return $message_archive;
   }
 
   private function DOMinnerHTML(DOMNode $element) 

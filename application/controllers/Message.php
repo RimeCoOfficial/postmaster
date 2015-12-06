@@ -37,8 +37,8 @@ class Message extends CI_Controller
 
   public function archive($request_id, $verify_key)
   {
-    $this->load->library('lib_message_send');
-    $message = $this->lib_message_send->get($request_id, $verify_key);
+    $this->load->library('lib_message_archive');
+    $message = $this->lib_message_archive->get($request_id, $verify_key);
     if (empty($message)) show_404();
 
     echo $message['body_html'];

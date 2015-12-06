@@ -3,14 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use GuzzleHttp\Promise;
 
-class Lib_message_send
+class Lib_message_archive
 {
   private $error = array();
   
   function __construct($options = array())
   {
     $this->CI =& get_instance();
-    $this->CI->load->model('model_message_send');
+    $this->CI->load->model('model_message_archive');
   }
   
   /**
@@ -26,18 +26,18 @@ class Lib_message_send
 
   function get($request_id, $verify_id)
   {
-    return $this->CI->model_message_send->get($request_id, $verify_id);
+    return $this->CI->model_message_archive->get($request_id, $verify_id);
   }
 
   function get_list($owner)
   {
     $count = 100;
-    return $this->CI->model_message_send->get_list($owner, $count);
+    return $this->CI->model_message_archive->get_list($owner, $count);
   }
 
-  function get_to_send($count)
+  function get_unsent($count)
   {
-    return $this->CI->model_message_send->get_to_send($count);
+    return $this->CI->model_message_archive->get_unsent($count);
   }
 
   function send($messages)
@@ -86,7 +86,7 @@ class Lib_message_send
     }
 
     // mark sent
-    $this->CI->model_message_send->mark_sent($message_sent_list);
+    $this->CI->model_message_archive->mark_sent($message_sent_list);
 
     return TRUE;
   }

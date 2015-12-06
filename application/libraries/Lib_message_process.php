@@ -29,7 +29,7 @@ class Lib_message_process
 
   function process($messages)
   {
-    $message_send_list = [];
+    $message_archive_list = [];
     $message_processed_list = [];
     $message_process_html_list = [];
     
@@ -57,7 +57,7 @@ class Lib_message_process
         echo '('.$message['request_id'].') Processing message: '.$message['message_id'].' '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
 
         $this->CI->load->library('lib_message_request');
-        $message_send_list[] = $this->CI->lib_message_request->process($message);
+        $message_archive_list[] = $this->CI->lib_message_request->process($message);
         $message_processed_list[] = ['request_id' => $message['request_id'], 'processed' => date('Y-m-d H:i:s')];
       }
     }
@@ -70,8 +70,8 @@ class Lib_message_process
       $this->CI->model_message_request->mark_processed($message_processed_list);
 
       // send message
-      $this->CI->load->model('model_message_send');
-      $this->CI->model_message_send->store($message_send_list);
+      $this->CI->load->model('model_message_archive');
+      $this->CI->model_message_archive->store($message_archive_list);
 
       $this->CI->db->trans_complete();
     }

@@ -2,13 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>Requests</h1>
+<h1>History</h1>
 
-<?php if (empty($message_send_history)): ?>
+<?php if (empty($message_archive_list)): ?>
   <p class="lead text-muted">No message found</p>
 <?php else: ?>
   <div class="list-group">
-    <?php foreach ($message_send_history as $request): ?>
+    <?php foreach ($message_archive_list as $request): ?>
       <?php if (empty($request['verify_id'])): ?>
         <a class="list-group-item disabled">
           <div class="media">
