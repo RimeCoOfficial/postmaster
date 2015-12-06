@@ -26,8 +26,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </h5>
             </div>
 
-            <div class="media-right text-default">
-              <span class="media-object glyphicon glyphicon-record"></span>
+            <div class="media-right text-info">
+              <span class="media-object glyphicon glyphicon-transfer"></span>
             </div>
           </div>
         </a>
