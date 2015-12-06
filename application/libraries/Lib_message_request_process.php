@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Lib_message_history_process
+class Lib_message_request_process
 {
   private $error = array();
   

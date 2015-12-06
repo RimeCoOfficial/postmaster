@@ -21,23 +21,23 @@ class Message extends CI_Controller
   function process($count = 99)
   {
     echo 'Start process'.PHP_EOL;
-    $this->load->library('lib_message_history');
+    $this->load->library('lib_message_request');
 
     if (is_running() === FALSE)
     {
       lock();
       while (TRUE)
       {
-        $messages = $this->lib_message_history->get_to_process($count);
+        $messages = $this->lib_message_request->get_to_process($count);
         if (empty($messages))
         {
           echo 'No task found!'.PHP_EOL;
           break;
         }
 
-        if (is_null($this->lib_message_history->process($messages)))
+        if (is_null($this->lib_message_request->process($messages)))
         {
-          show_error($this->lib_message_history->get_error_message());
+          show_error($this->lib_message_request->get_error_message());
         }
       }
       unlock();

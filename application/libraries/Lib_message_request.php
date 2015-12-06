@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Lib_message_history
+class Lib_message_request
 {
   private $error = array();
   
   function __construct($options = array())
   {
     $this->CI =& get_instance();
-    $this->CI->load->model('model_message_history');
+    $this->CI->load->model('model_message_request');
   }
   
   /**
@@ -24,7 +24,7 @@ class Lib_message_history
 
   function add($message_id, $owner, $to_name, $to_email, $subject_var, $body_var)
   {
-    if (!$this->CI->model_message_history->can_add($message_id, $owner))
+    if (!$this->CI->model_message_request->can_add($message_id, $owner))
     {
       $this->error = ['status' => 401, 'message' => 'invalid message_id'];
       return NULL;
@@ -35,12 +35,12 @@ class Lib_message_history
     $subject_var_json = (is_array($subject_var) AND !empty($subject_var)) ? json_encode($subject_var) : NULL;
     $body_var_json    = (is_array($body_var)    AND !empty($body_var))    ? json_encode($body_var)    : NULL;
 
-    return $this->CI->model_message_history->add($message_id, $to_name, $to_email, $subject_var_json, $body_var_json);
+    return $this->CI->model_message_request->add($message_id, $to_name, $to_email, $subject_var_json, $body_var_json);
   }
 
   function get_to_process($count)
   {
-    return $this->CI->model_message_history->get_to_process($count);
+    return $this->CI->model_message_request->get_to_process($count);
   }
 
   function process($messages)
@@ -72,8 +72,8 @@ class Lib_message_history
       {
         echo '('.$message['history_id'].') Processing message: '.$message['message_id'].' '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
 
-        $this->CI->load->library('lib_message_history_process');
-        $message_send_list[] = $this->CI->lib_message_history_process->process($message);
+        $this->CI->load->library('lib_message_request_process');
+        $message_send_list[] = $this->CI->lib_message_request_process->process($message);
         $message_processed_list[] = ['history_id' => $message['history_id'], 'processed' => date('Y-m-d H:i:s')];
       }
     }
@@ -83,7 +83,7 @@ class Lib_message_history
       $this->CI->db->trans_start();
 
       // mark processed
-      $this->CI->model_message_history->mark_processed($message_processed_list);
+      $this->CI->model_message_request->mark_processed($message_processed_list);
 
       // send message
       $this->CI->load->model('model_message_send');

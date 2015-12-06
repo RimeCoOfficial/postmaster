@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Model_message_history extends CI_Model
+class Model_message_request extends CI_Model
 {
   private $message_table = 'message';
-  private $message_history_table = 'message_history';
+  private $message_request_table = 'message_request';
 
   function can_add($message_id, $owner)
   {
@@ -29,7 +29,7 @@ class Model_message_history extends CI_Model
     $this->db->set('subject_var_json', $subject_var_json);
     $this->db->set('body_var_json', $body_var_json);
 
-    $this->db->insert($this->message_history_table);
+    $this->db->insert($this->message_request_table);
     return $this->db->insert_id();
   }
 
@@ -38,16 +38,16 @@ class Model_message_history extends CI_Model
     $this->db->limit($count);
     $this->db->order_by('history_id', 'ASC');
 
-    $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->message_history_table.'.message_id');
+    $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->message_request_table.'.message_id');
 
     $this->db->where('processed', '1000-01-01 00:00:00');
 
-    $query = $this->db->get($this->message_history_table);
+    $query = $this->db->get($this->message_request_table);
     return $query->result_array();
   }
 
   function mark_processed($message_list)
   {
-    $this->db->update_batch($this->message_history_table, $message_list, 'history_id');
+    $this->db->update_batch($this->message_request_table, $message_list, 'history_id');
   }
 }

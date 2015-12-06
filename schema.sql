@@ -83,10 +83,10 @@ CREATE TABLE IF NOT EXISTS tumblr (
 -- --------------------------------------------------------
 
 --
--- Table structure for table message_history
+-- Table structure for table message_request
 --
 
-CREATE TABLE IF NOT EXISTS message_history (
+CREATE TABLE IF NOT EXISTS message_request (
   history_id              int                 NOT NULL  AUTO_INCREMENT,
   message_id              int                 NOT NULL,
   to_name                 varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,

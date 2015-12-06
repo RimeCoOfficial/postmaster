@@ -82,7 +82,7 @@ class Lib_transaction
 
   function add_message()
   {
-    $this->CI->load->library('lib_message_history');
+    $this->CI->load->library('lib_message_request');
 
     $message_id = $this->CI->input->post('message_id');
 
@@ -97,13 +97,13 @@ class Lib_transaction
     $subject_var = $this->CI->input->post('subject');
     $body_var = $this->CI->input->post('body');
     
-    if (is_null($history_id = $this->CI->lib_message_history->add(
+    if (is_null($history_id = $this->CI->lib_message_request->add(
       $message_id, 'transaction', $to_name, $to_email, $subject_var, $body_var)))
     {
-      $this->error = $this->CI->lib_message_history->get_error_message();
+      $this->error = $this->CI->lib_message_request->get_error_message();
       return NULL;
     }
 
-    return ['message_history_id' => $history_id];
+    return ['message_request_id' => $history_id];
   }
 }
