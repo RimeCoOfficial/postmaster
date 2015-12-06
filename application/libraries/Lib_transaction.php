@@ -104,6 +104,6 @@ class Lib_transaction
       return NULL;
     }
 
-    return ['message_request_id' => $request_id];
+    return ['request_id' => $request_id];
   }
 }
