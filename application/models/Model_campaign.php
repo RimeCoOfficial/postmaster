@@ -16,7 +16,7 @@ class Model_campaign extends CI_Model
   function get_latest()
   {
     $this->db->limit(1);
-    $this->db->where('email_sent_at', '1000-01-01 00:00:00');
+    $this->db->where('sent_at', '1000-01-01 00:00:00');
 
     $query = $this->db->get($this->campaign_table);
     return $query->row_array();
@@ -28,7 +28,7 @@ class Model_campaign extends CI_Model
     $this->db->order_by('news_id', 'ASC');
 
     $this->db->where('status IS NOT NULL');
-    $this->db->where('email_sent_at < ', 'CURRENT_TIMESTAMP()', FALSE);
+    $this->db->where('sent_at < ', 'CURRENT_TIMESTAMP()', FALSE);
 
     $query = $this->db->get($this->campaign_table);
     return $query->row_array();
@@ -52,7 +52,7 @@ class Model_campaign extends CI_Model
     $this->db->set('tumblr_html', $tumblr_html);
 
     $this->db->where('news_id', $news_id);
-    $this->db->where('email_sent_at', '1000-01-01 00:00:00');
+    $this->db->where('sent_at', '1000-01-01 00:00:00');
 
     $this->db->update($this->campaign_table);
     return $this->db->affected_rows();
@@ -67,15 +67,15 @@ class Model_campaign extends CI_Model
     return $this->db->affected_rows();
   }
 
-  function update_email_sent_at($news_id, $email_sent_at)
+  function update_sent_at($news_id, $sent_at)
   {
     $this->db->set('status', 'scheduled');
-    // $this->db->set('email_sent_at', 'CURRENT_TIMESTAMP()', FALSE);
-    $this->db->set('email_sent_at', $email_sent_at);
+    // $this->db->set('sent_at', 'CURRENT_TIMESTAMP()', FALSE);
+    $this->db->set('sent_at', $sent_at);
 
     $this->db->where('news_id', $news_id);
-    $this->db->where('email_sent_at', '1000-01-01 00:00:00');
-    // $this->db->where('\''.$email_sent_at.'\' > ', 'CURRENT_TIMESTAMP()', FALSE);
+    $this->db->where('sent_at', '1000-01-01 00:00:00');
+    // $this->db->where('\''.$sent_at.'\' > ', 'CURRENT_TIMESTAMP()', FALSE);
 
     $this->db->update($this->campaign_table);
     return $this->db->affected_rows();
@@ -95,8 +95,8 @@ class Model_campaign extends CI_Model
     $this->db->limit($count);
     $this->db->order_by('news_id', 'DESC');
 
-    $this->db->select('news_id, title, tumblr_post_id, email_sent_at, status, created');
-    $this->db->where('email_sent_at != ', '1000-01-01 00:00:00');
+    $this->db->select('news_id, title, tumblr_post_id, sent_at, status, created');
+    $this->db->where('sent_at != ', '1000-01-01 00:00:00');
 
     $query = $this->db->get($this->campaign_table);
     return $query->result_array();

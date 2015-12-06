@@ -49,8 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </a>
     <dl>
       <dt>Archive</dt>
-      <dd>Archived transaction wont accept any <strong>new</strong> requests.</dd>
-      <dd>But you can restore it later.</dd>
+      <dd>Archived transaction wont accept <strong>new</strong> requests.</dd>
+      <dd>But you can restore and use it later.</dd>
     </dl>
   </div>
 </div>

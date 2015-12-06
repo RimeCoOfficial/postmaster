@@ -12,11 +12,15 @@ class History extends CI_Controller
     {
       redirect();
     }
+
+    $this->load->library('lib_message_send');
   }
 
   function index()
   {
     $local_view_data = [];
+
+    $local_view_data['message_send_history'] = $this->lib_message_send->get_list('transaction');
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 

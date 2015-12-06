@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS tumblr (
 --
 
 CREATE TABLE IF NOT EXISTS message_request (
-  history_id              int                 NOT NULL  AUTO_INCREMENT,
+  request_id              int                 NOT NULL  AUTO_INCREMENT,
   message_id              int                 NOT NULL,
   to_name                 varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   to_email                varchar(256)        NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS message_request (
   body_var_json           text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   processed               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (history_id),
+  PRIMARY KEY (request_id),
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS message_request (
 --
 
 CREATE TABLE IF NOT EXISTS message_send (
-  history_id              int                 NOT NULL,
+  request_id              int                 NOT NULL,
   verify_id               varchar(64)         NOT NULL,
   from_name               varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   from_email              varchar(256)        NOT NULL,
@@ -119,10 +119,10 @@ CREATE TABLE IF NOT EXISTS message_send (
   body_text               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   list_unsubscribe        tinyint(1)          NOT NULL  DEFAULT 0,
   priority                tinyint unsigned              DEFAULT 0,
-  email_sent              datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  sent                    datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   amzn_message_id         varchar(256)                  DEFAULT NULL,
-  PRIMARY KEY (history_id),
-  FOREIGN KEY (history_id) REFERENCES message_history(history_id) ON UPDATE CASCADE ON DELETE CASCADE
+  PRIMARY KEY (request_id),
+  FOREIGN KEY (request_id) REFERENCES message_request(request_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------

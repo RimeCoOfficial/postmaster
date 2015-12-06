@@ -24,6 +24,17 @@ class Lib_message_send
     return $this->error;
   }
 
+  function get($request_id, $verify_id)
+  {
+    return $this->CI->model_message_send->get($request_id, $verify_id);
+  }
+
+  function get_list($owner)
+  {
+    $count = 100;
+    return $this->CI->model_message_send->get_list($owner, $count);
+  }
+
   function get_to_send($count)
   {
     return $this->CI->model_message_send->get_to_send($count);
@@ -38,12 +49,12 @@ class Lib_message_send
 
     foreach ($messages as $message)
     {
-      echo '('.$message['history_id'].') Sending message: '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
+      echo '('.$message['request_id'].') Sending message: '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
 
       // list_unsubscribe header
       // email_key
 
-      $promises[ $message['history_id'] ] = $ses_client->sendEmailAsync([
+      $promises[ $message['request_id'] ] = $ses_client->sendEmailAsync([
           'Destination' => [
           'ToAddresses' => [$message['to_email']],
         ],
@@ -63,14 +74,14 @@ class Lib_message_send
 
     // 2. save messege_id
     $message_sent_list = [];
-    foreach ($results as $history_id => $result)
+    foreach ($results as $request_id => $result)
     {
       if (!empty($result['@metadata']['statusCode']) AND $result['@metadata']['statusCode'] == 200
         AND !empty($result['MessageId'])
       )
       {
         $amzn_message_id = $result['MessageId'];
-        $message_sent_list[] = ['history_id' => $history_id, 'email_sent' => date('Y-m-d H:i:s'), 'amzn_message_id' => $amzn_message_id];
+        $message_sent_list[] = ['request_id' => $request_id, 'sent' => date('Y-m-d H:i:s'), 'amzn_message_id' => $amzn_message_id];
       }
     }
 

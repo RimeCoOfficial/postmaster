@@ -36,7 +36,7 @@ class Model_message_request extends CI_Model
   function get_to_process($count)
   {
     $this->db->limit($count);
-    $this->db->order_by('history_id', 'ASC');
+    $this->db->order_by('request_id', 'ASC');
 
     $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->message_request_table.'.message_id');
 
@@ -48,6 +48,6 @@ class Model_message_request extends CI_Model
 
   function mark_processed($message_list)
   {
-    $this->db->update_batch($this->message_request_table, $message_list, 'history_id');
+    $this->db->update_batch($this->message_request_table, $message_list, 'request_id');
   }
 }
