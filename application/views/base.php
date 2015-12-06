@@ -96,16 +96,23 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
 
           <footer class="text-muted">
             <hr>
-            <p class="pull-right">
-              <a href="https://rime.co" class="text-muted" target="_blank"><small>Made In India</small></a> 🇮🇳
+            
+            <p>
+              <span class="glyphicon glyphicon-barcode"></span>
+
+              <span class="pull-right">
+                <a href="https://rime.co/about" class="text-muted" target="_blank"><small>Made In India</small></a> 🇮🇳 
+              </span>
             </p>
 
-            <div class="clearfix"></div>
+            <!-- <div class="clearfix"></div> -->
 
             <dl>
               <dt>
                 Postmaster v1.0
-                <span class="label label-default">GitHub Wiki</span>
+                <a href="https://github.com/RimeOfficial/postmaster/wiki" target="_blank">
+                  <span class="label label-default">GitHub Wiki</span>
+                </a>
               </dt>
               <dd>Page rendered in <strong>{elapsed_time}</strong> seconds</dd>
               <dd>CodeIgniter Version <strong><?php echo CI_VERSION; ?></strong></dd>
