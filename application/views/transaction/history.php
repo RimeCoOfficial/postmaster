@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="media">
             <div class="media-body">
               <h5 class="media-heading">
-                <code>Processing request [<?php echo $request['request_id']; ?>]</code>
+                <code>[<?php echo $request['request_id']; ?>] Processing request</code>
                 <small>
                   <span class="text-uppercase"><?php echo $request['owner']; ?></span>
                   #<?php echo $request['message_id']; ?>,

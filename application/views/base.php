@@ -94,10 +94,23 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
 
           <?php echo $main_content; ?>
 
-          <footer>
+          <footer class="text-muted">
             <hr>
-            <p class="pull-right">🍀 <span class="label label-default">Postmaster v1.0</span> <span class="label label-default">GitHub Wiki</span></p>
-            <p>Page rendered in <strong>{elapsed_time}</strong> seconds.<?php echo  (ENVIRONMENT === 'development') ?  ' CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+            <p class="pull-right">
+              <a href="https://rime.co" class="text-muted" target="_blank"><small>Made In India</small></a> 🇮🇳
+            </p>
+
+            <div class="clearfix"></div>
+
+            <dl>
+              <dt>
+                Postmaster v1.0
+                <span class="label label-default">GitHub Wiki</span>
+              </dt>
+              <dd>Page rendered in <strong>{elapsed_time}</strong> seconds</dd>
+              <dd>CodeIgniter Version <strong><?php echo CI_VERSION; ?></strong></dd>
+            </dl>
+
           </footer>
         </div>
       </div>
