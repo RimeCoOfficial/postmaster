@@ -40,9 +40,7 @@ Wiki: https://github.com/RimeOfficial/postmaster/wiki
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">
-                  <img width="20" height="20" alt="Postmaster" src="https://github.com/RimeOfficial/postmaster/wiki/assets/img/logo.png">
-                </a>
+                <a class="navbar-brand">Postmaster</a>
               </div>
               <div id="navbar" class="navbar-collapse collapse">
                 <?php
