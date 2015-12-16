@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
 <!-- 
-Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
-<?php echo 'CodeIgniter Version ' . CI_VERSION; ?>.
+Fork: https://github.com/RimeOfficial/postmaster
+Wiki: https://github.com/RimeOfficial/postmaster/wiki
  -->
 <html lang="en">
   <head>
@@ -98,14 +98,6 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
 
           <footer class="text-muted">
             <hr>
-            
-            <p>
-              
-
-              <span class="pull-right">
-                <a href="https://rime.co/about" class="text-muted" target="_blank"><small>Made In India</small></a> 🇮🇳 
-              </span>
-            </p>
 
             <!-- <div class="clearfix"></div> -->
 
