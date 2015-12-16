@@ -41,7 +41,7 @@ Wiki: https://github.com/RimeOfficial/postmaster/wiki
                   <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand">
-                  <img alt="Brand" src="https://github.com/RimeOfficial/postmaster/wiki/assets/img/logo.png">
+                  <img width="20" height="20" alt="Postmaster" src="https://github.com/RimeOfficial/postmaster/wiki/assets/img/logo.png">
                 </a>
               </div>
               <div id="navbar" class="navbar-collapse collapse">
@@ -106,7 +106,7 @@ Wiki: https://github.com/RimeOfficial/postmaster/wiki
             <dl>
               <span class="glyphicon glyphicon-barcode"></span>
               <dt class="small pull-right">
-                v1.0
+                Postmaster v1.0
               </dt>
               <dd>Page rendered in <strong>{elapsed_time}</strong> seconds</dd>
               <dd>CodeIgniter Version <strong><?php echo CI_VERSION; ?></strong></dd>
