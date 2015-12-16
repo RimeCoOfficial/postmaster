@@ -23,6 +23,8 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
   </head>
   <body>
 
+    <a href="https://github.com/RimeOfficial/postmaster"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
+    
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
@@ -108,11 +110,8 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
             <!-- <div class="clearfix"></div> -->
 
             <dl>
-              <dt>
-                Postmaster v1.0
-                <a href="https://github.com/RimeOfficial/postmaster/wiki" target="_blank">
-                  <span class="label label-default">GitHub Wiki</span>
-                </a>
+              <dt class="small pull-right">
+                v1.0
               </dt>
               <dd>Page rendered in <strong>{elapsed_time}</strong> seconds</dd>
               <dd>CodeIgniter Version <strong><?php echo CI_VERSION; ?></strong></dd>
