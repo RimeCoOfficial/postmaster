@@ -40,7 +40,7 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url(); ?>">Postmaster</a>
+                <a class="navbar-brand">Postmaster</a>
               </div>
               <div id="navbar" class="navbar-collapse collapse">
                 <?php
@@ -100,7 +100,7 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
             <hr>
             
             <p>
-              <span class="glyphicon glyphicon-barcode"></span>
+              
 
               <span class="pull-right">
                 <a href="https://rime.co/about" class="text-muted" target="_blank"><small>Made In India</small></a> 🇮🇳 
@@ -110,6 +110,7 @@ Page rendered in {elapsed_time} seconds, Memory used {memory_usage}
             <!-- <div class="clearfix"></div> -->
 
             <dl>
+              <span class="glyphicon glyphicon-barcode"></span>
               <dt class="small pull-right">
                 v1.0
               </dt>
