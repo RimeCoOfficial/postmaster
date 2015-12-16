@@ -5,6 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- 
 Fork: https://github.com/RimeOfficial/postmaster
 Wiki: https://github.com/RimeOfficial/postmaster/wiki
+
+Page rendered in {elapsed_time} seconds
+CodeIgniter Version <?php echo CI_VERSION; ?>
  -->
 <html lang="en">
   <head>
@@ -22,9 +25,7 @@ Wiki: https://github.com/RimeOfficial/postmaster/wiki
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   </head>
   <body>
-
-    <a href="https://github.com/RimeOfficial/postmaster"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
-    
+   
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
@@ -40,7 +41,7 @@ Wiki: https://github.com/RimeOfficial/postmaster/wiki
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">Postmaster</a>
+                <a class="navbar-brand" href="<?php echo base_url('settings'); ?>">Postmaster</a>
               </div>
               <div id="navbar" class="navbar-collapse collapse">
                 <?php
@@ -101,14 +102,12 @@ Wiki: https://github.com/RimeOfficial/postmaster/wiki
 
             <!-- <div class="clearfix"></div> -->
 
-            <dl>
+            <p class="small">
               <span class="glyphicon glyphicon-barcode"></span>
-              <dt class="small pull-right">
+              <span class="pull-right">
                 Postmaster v1.0
-              </dt>
-              <dd>Page rendered in <strong>{elapsed_time}</strong> seconds</dd>
-              <dd>CodeIgniter Version <strong><?php echo CI_VERSION; ?></strong></dd>
-            </dl>
+              </span>
+            </p>
 
           </footer>
         </div>
