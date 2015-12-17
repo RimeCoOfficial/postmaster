@@ -45,12 +45,14 @@ CodeIgniter Version <?php echo CI_VERSION; ?>
                 if (!$is_logged_in)
                 {
                   ?>
-                  <a class="navbar-brand" href="<?php echo base_url('settings'); ?>">Postmaster</a>
+                  <a class="navbar-brand">Postmaster</a>
                   <?php
                 }
                 else
                 {
-                  <a class="navbar-brand visible-xs-inline" href="<?php echo base_url('settings'); ?>">Postmaster</a>
+                  ?>
+                  <a class="navbar-brand visible-xs-inline">Postmaster</a>
+                  <?php
                 }
                 ?>
               </div>
