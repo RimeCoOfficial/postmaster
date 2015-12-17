@@ -60,12 +60,11 @@ CodeIgniter Version <?php echo CI_VERSION; ?>
                 <?php
                 if ($is_logged_in)
                 {
-                  $nav_list = $navbar['left'];
                   $nav_selected = explode('/', uri_string());
                   $nav_selected = $nav_selected[0];
                   ?>
                   <ul class="nav navbar-nav">
-                    <?php foreach ($nav_list as $uri => $name): ?>
+                    <?php foreach ($navbar as $uri => $name): ?>
                     <li class="<?php if ($nav_selected == $uri) echo 'active'; ?>">
                       <a href="<?php echo base_url($uri); ?>"><?php echo $name; ?></a>
                     </li>
