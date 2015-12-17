@@ -41,7 +41,18 @@ CodeIgniter Version <?php echo CI_VERSION; ?>
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <!-- <a class="navbar-brand" href="<?php echo base_url('settings'); ?>">Postmaster</a> -->
+                <?php
+                if (!$is_logged_in)
+                {
+                  ?>
+                  <a class="navbar-brand" href="<?php echo base_url('settings'); ?>">Postmaster</a>
+                  <?php
+                }
+                else
+                {
+                  <a class="navbar-brand visible-xs-inline" href="<?php echo base_url('settings'); ?>">Postmaster</a>
+                }
+                ?>
               </div>
               <div id="navbar" class="navbar-collapse collapse">
                 <?php
