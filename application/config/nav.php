@@ -18,9 +18,9 @@ $config = [
       'autoresponder' => 'Autoresponder',
       'campaign'      => 'Campaign',
       'transaction'   => 'Transaction',
+      'settings'      => '<span class="glyphicon glyphicon-cog"></span>',
     ],
     'right' =>[
-      'settings'      => 'Settings',
       'auth/sign-out' => 'Sign out',
     ]
   ],
