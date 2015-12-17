@@ -110,14 +110,14 @@ CodeIgniter Version <?php echo CI_VERSION; ?>
 
           <?php echo $main_content; ?>
 
-          <footer class="text-muted">
-            <hr>
-
-            <!-- <div class="clearfix"></div> -->
+          <hr>
+          <footer>
 
             <p class="small">
-              <span class="glyphicon glyphicon-barcode"></span>
-              <strong class="pull-right">Postmaster v1.0</strong>
+              <a class="text-muted" href="https://github.com/RimeOfficial/postmaster">
+                <span class="glyphicon glyphicon-barcode"></span>
+                <strong class="pull-right">Postmaster v1.0</strong>
+              </a>
             </p>
 
           </footer>
