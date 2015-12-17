@@ -7,7 +7,7 @@ Fork: https://github.com/RimeOfficial/postmaster
 Wiki: https://github.com/RimeOfficial/postmaster/wiki
 
 Page rendered in {elapsed_time} seconds
-CodeIgniter Version <?php echo CI_VERSION; ?>
+CodeIgniter Version <?php echo CI_VERSION; ?> 
  -->
 <html lang="en">
   <head>
@@ -41,7 +41,7 @@ CodeIgniter Version <?php echo CI_VERSION; ?>
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url('settings'); ?>">Postmaster</a>
+                <!-- <a class="navbar-brand" href="<?php echo base_url('settings'); ?>">Postmaster</a> -->
               </div>
               <div id="navbar" class="navbar-collapse collapse">
                 <?php
@@ -104,9 +104,7 @@ CodeIgniter Version <?php echo CI_VERSION; ?>
 
             <p class="small">
               <span class="glyphicon glyphicon-barcode"></span>
-              <span class="pull-right">
-                Postmaster v1.0
-              </span>
+              <strong class="pull-right">Postmaster v1.0</strong>
             </p>
 
           </footer>
