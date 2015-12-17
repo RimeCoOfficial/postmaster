@@ -80,17 +80,7 @@ CodeIgniter Version <?php echo CI_VERSION; ?>
                   if ($is_logged_in)
                   {
                     ?>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span></a>
-                      <ul class="dropdown-menu">
-                        <?php $nav_list = $navbar['right']; ?>
-                        <?php foreach ($nav_list as $uri => $name): ?>
-                          <li>
-                            <a href="<?php echo base_url($uri); ?>"><?php echo $name; ?></a>
-                          </li>
-                        <?php endforeach; ?>
-                      </ul>
-                    </li>
+                    <li><a href="<?php echo base_url('auth/sign-out') ?>">Sign out</a></li>
                     <?php
                   }
                   else
