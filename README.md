@@ -18,6 +18,5 @@ AWS email server
 - [x] Auto (body + footer) `Plain text` email
 - [x] SNS, SQS - handle feedback (bounces, complaints, deliveries)
 - [x] Queuing and Multiple emails sending
-- [ ] ~~Post email to **Tumblr**~~
 - [ ] Email Campaign Archive
 - [x] Email stats - [ga-beacon](https://github.com/igrigorik/ga-beacon), [sitepoint.com](http://www.sitepoint.com/using-beacon-image-github-website-email-analytics/)
