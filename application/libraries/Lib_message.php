@@ -39,7 +39,7 @@ class Lib_message
 
   function modify($message_id, $owner, $subject, $published, $body_html_input, $reply_to_name, $reply_to_email)
   {
-    if (is_null($result = $this->_process_html($message_id, $subject, $body_html_input)))
+    if (is_null($result = $this->_process_html($message_id, $body_html_input)))
     {
       return NULL;
     }
@@ -48,7 +48,7 @@ class Lib_message
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
     $this->CI->model_message->update(
-      $message_id, $owner, $subject, $published, $result['body_html_input'], $result['body_html'], $reply_to_name, $reply_to_email
+      $message_id, $owner, $subject, $published, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
     );
     return TRUE;
   }
@@ -63,55 +63,16 @@ class Lib_message
     $this->CI->model_message->unarchive($message_id, $owner);
   }
 
-  function _process_html($message_id, $subject, $body_html_input)
+  function _process_html($message_id, $body_html_input)
   {
     $body_html = $body_html_input;
+
+    // 1. body_text
+    $body_text = $this->body_html_to_text($body_html);
 
     libxml_use_internal_errors(TRUE);
     $doc = new DOMDocument();
     $doc->loadHTML($body_html);
-
-    // 1. attachment inline-image=img.src file=a.href
-    $url_list = [];
-    $a_tags = $doc->getElementsByTagName('a');
-    foreach ($a_tags as $a_element)
-    {
-      $href = $a_element->getAttribute('href'); $url_list[ $href ] = $href;
-    }
-
-    $img_tags = $doc->getElementsByTagName('img');
-    foreach ($img_tags as $img_element)
-    {
-      $src = $img_element->getAttribute('src'); $url_list[ $src ] = $src;
-    }
-
-    if (!empty($url_list))
-    {
-      $this->CI->load->library('lib_s3_object');
-      if (is_null($attachments = $this->CI->lib_s3_object->attach($url_list)))
-      {
-        $this->error = $this->CI->lib_s3_object->get_error_message();
-        return NULL;
-      }
-
-      if (!empty($attachments))
-      {
-        // loop and update the urls
-        foreach ($a_tags as $a_element)
-        {
-          $href = $a_element->getAttribute('href');
-          if (!empty($attachments[ $href ])) $a_element->setAttribute('href', $attachments[ $href ]);
-        }
-
-        foreach ($img_tags as $img_element)
-        {
-          $src = $img_element->getAttribute('src');
-          if (!empty($attachments[ $src ])) $img_element->setAttribute('src', $attachments[ $src ]);
-        }
-
-        $body_html_input = $doc->saveHtml();
-      }
-    }
 
     // 2. a.target=_blank
     $a_tags = $doc->getElementsByTagName('a');
@@ -119,7 +80,7 @@ class Lib_message
 
     $body_html = $doc->saveHtml();
 
-    // 4. GA stats
+    // 3. GA stats
     // [![Analytics](https://ga-beacon.appspot.com/UA-XXXXX-X/your-repo/page-name)](https://github.com/igrigorik/ga-beacon)
     // @todo: campaign vars
     $ga_node_url = 'http://ga-beacon.appspot.com/'.getenv('ga').'/message-'.$message_id.'?pixel';
@@ -134,20 +95,50 @@ class Lib_message
 
     $body_html = $doc->saveHtml();
 
-    // 5. minify html
+    // 4. minify html
     $this->CI->load->library('composer/lib_html_minifier');
     $body_html = $this->CI->lib_html_minifier->process($body_html);
 
-    // 6. inline css
-    // @todo: download css file async
+    // 5. inline css
     $this->CI->load->library('composer/lib_css_to_inline');
     $body_html = $this->CI->lib_css_to_inline->convert($body_html);
 
-    // 7. upload images to s3
-    // @todo: download css file async
+    return compact('body_html', 'body_text');
+  }
 
-    // echo $body_html; die();
+  private function DOMinnerHTML(DOMNode $element) 
+  { 
+    $innerHTML = '';
+    $children  = $element->childNodes;
 
-    return compact('body_html_input', 'body_html');
+    foreach ($children as $child) $innerHTML .= $element->ownerDocument->saveHTML($child);
+
+    return $innerHTML; 
+  }
+
+  private function body_html_to_text($html)
+  {
+    libxml_use_internal_errors(TRUE);
+    $doc = new DOMDocument();
+    $doc->loadHTML($html);
+
+    $body_div = $doc->getElementById('body');
+    if (!is_null($body_div))
+    {
+      $body_div_html = $this->DOMinnerHTML($body_div);
+
+      $footer_div = $doc->getElementById('footer');
+      if (!is_null($footer_div))
+      {
+        $html = $this->DOMinnerHTML($footer_div);
+      }
+
+      $html = $body_div_html.(!empty($html) ? "<br><hr>".$html : '');
+    }
+
+    $this->CI->load->library('composer/lib_html_to_markdown');
+    $text = $this->CI->lib_html_to_markdown->convert($html);
+
+    return $text;
   }
 }

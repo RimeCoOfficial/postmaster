@@ -44,16 +44,17 @@ CREATE TABLE IF NOT EXISTS feedback (
 
 CREATE TABLE IF NOT EXISTS message (
   message_id              int                 NOT NULL  AUTO_INCREMENT,
-  owner                   varchar(64)         NOT NULL,
+  owner                   varchar(16)         NOT NULL,
 
   subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
   body_html_input         text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   body_html               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  body_text               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
 
   reply_to_name           varchar(128)                  DEFAULT NULL,
   reply_to_email          varchar(256)                  DEFAULT NULL,
 
-  ga_campaign_var         varchar(256)                  DEFAULT NULL,
+  ga_campaign_query       varchar(256)                  DEFAULT NULL,
 
   published               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',

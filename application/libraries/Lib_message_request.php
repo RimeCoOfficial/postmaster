@@ -44,8 +44,6 @@ class Lib_message_request
 
     $message_archive = $this->parse($message_archive, $message);
 
-    $message_archive['body_text'] = $this->body_text($message_archive['body_html']);
-
     // print_r($message_archive); die();
     return $message_archive;
   }
@@ -125,43 +123,8 @@ class Lib_message_request
     $body_vars = array_merge($body_vars, $default_vars);
 
     $message_archive['body_html'] = $this->CI->parser->parse_string($message['body_html'],  $body_vars, TRUE);
+    $message_archive['body_text'] = $this->CI->parser->parse_string($message['body_text'],  $body_vars, TRUE);
 
     return $message_archive;
-  }
-
-  private function DOMinnerHTML(DOMNode $element) 
-  { 
-    $innerHTML = '';
-    $children  = $element->childNodes;
-
-    foreach ($children as $child) $innerHTML .= $element->ownerDocument->saveHTML($child);
-
-    return $innerHTML; 
-  }
-
-  private function body_text($html)
-  {
-    libxml_use_internal_errors(TRUE);
-    $doc = new DOMDocument();
-    $doc->loadHTML($html);
-
-    $body_div = $doc->getElementById('body');
-    if (!is_null($body_div))
-    {
-      $body_div_html = $this->DOMinnerHTML($body_div);
-
-      $footer_div = $doc->getElementById('footer');
-      if (!is_null($footer_div))
-      {
-        $html = $this->DOMinnerHTML($footer_div);
-      }
-
-      $html = $body_div_html.(!empty($html) ? "<br><hr>".$html : '');
-    }
-
-    $this->CI->load->library('composer/lib_html_to_markdown');
-    $text = $this->CI->lib_html_to_markdown->convert($html);
-
-    return $text;
   }
 }
