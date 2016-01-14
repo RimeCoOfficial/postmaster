@@ -53,6 +53,8 @@ CREATE TABLE IF NOT EXISTS message (
   reply_to_name           varchar(128)                  DEFAULT NULL,
   reply_to_email          varchar(256)                  DEFAULT NULL,
 
+  ga_campaign_var         varchar(256)                  DEFAULT NULL,
+
   published               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
 

@@ -22,4 +22,4 @@ AWS email server
 - [x] Queuing and Multiple emails sending
 - [ ] ~~Post email to **Tumblr**~~
 - [ ] Email Campaign Archive http://us5.campaign-archive1.com/home/?u=7a4119030848c2be9c1f35bd7&id=5911dbab96
-- [ ] Email stats - [ga-beacon](https://github.com/igrigorik/ga-beacon), [sitepoint.com](http://www.sitepoint.com/using-beacon-image-github-website-email-analytics/)
+- [x] Email stats - [ga-beacon](https://github.com/igrigorik/ga-beacon), [sitepoint.com](http://www.sitepoint.com/using-beacon-image-github-website-email-analytics/)

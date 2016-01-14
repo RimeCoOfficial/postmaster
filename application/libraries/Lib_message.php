@@ -113,7 +113,9 @@ class Lib_message
     $body_html = $doc->saveHtml();
 
     // 4. GA stats
-    $ga_node_url = base_url('ga/{message_id}'); // @todo: campaign vars
+    // [![Analytics](https://ga-beacon.appspot.com/UA-XXXXX-X/your-repo/page-name)](https://github.com/igrigorik/ga-beacon)
+    // @todo: campaign vars
+    $ga_node_url = 'https://ga-beacon.appspot.com/'.getenv('ga').'/message-'.$message_id.'?pixel';
 
     $ga_node = $doc->createElement('img');
     $ga_node->setAttribute('src', $ga_node_url);
