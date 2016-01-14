@@ -53,31 +53,11 @@ CREATE TABLE IF NOT EXISTS message (
   reply_to_name           varchar(128)                  DEFAULT NULL,
   reply_to_email          varchar(256)                  DEFAULT NULL,
 
-  tumblr_post_id          varchar(256)                  DEFAULT 0, -- 1 = must be posted or filled
   published               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
 
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (message_id)
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
--- --------------------------------------------------------
-
---
--- Table structure for table tumblr
---
-
-CREATE TABLE IF NOT EXISTS tumblr (
-  x_account_id            varchar(256)        NOT NULL,
-  token                   text                NOT NULL,
-  token_secret            text                NOT NULL,
-  limit_used              int                           DEFAULT 0,
-
-  url                     text                          DEFAULT NULL,
-
-  updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (x_account_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------

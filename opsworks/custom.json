@@ -16,8 +16,6 @@
         "aws_region=us-east-1",
         "aws_s3_bucket=bucket",
         "ga=UA-XXXXXXXX-X",
-        "tumblr_client_id=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "tumblr_client_secret=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         "email_source=postmaster@mail.example.com",
         "email_admin=joe@example.com",
         "email_debug=joe@example.com",

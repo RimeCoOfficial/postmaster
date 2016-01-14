@@ -31,9 +31,6 @@ putenv('aws_region=us-east-1');
 
 putenv('ga=UA-XXXXXXXXX-X');
 
-putenv('tumblr_client_id=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-putenv('tumblr_client_secret=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-
 putenv('email_source=postmaster@mail.example.com');
 
 putenv('email_admin=foo@example.com');

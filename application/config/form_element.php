@@ -94,8 +94,6 @@ $config = array(
     'required'      => 1,
   ),
 
-  'post_to_tumblr'  => array('label' => 'Post to tumblr', 'rules' => 'integer'),
-
   'reply_to_name' => array(
     'label'         => 'Reply-to Name',
     'rules'         => 'max_length['.$reply_to_name_max_length.']|trim',

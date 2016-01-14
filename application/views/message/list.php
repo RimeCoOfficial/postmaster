@@ -65,7 +65,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <span class="text-uppercase"><?php echo $message['owner']; ?></span>
                 <?php echo $message['reply_to_name']; ?>
                 <?php echo $message['reply_to_email']; ?>
-                <?php if (!empty($message['tumblr_post_id'])) echo $message['tumblr_post_id']; ?>
                 <?php echo date('M d, Y h:i A', strtotime($message['created'])); ?>
               </small>
             </h5>

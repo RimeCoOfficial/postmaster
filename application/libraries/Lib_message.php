@@ -56,7 +56,7 @@ class Lib_message
     $this->CI->model_message->unarchive($message_id, $owner);
   }
 
-  function process_html($message_id, $subject, $body_html_input, $post_to_tumblr = 0)
+  function process_html($message_id, $subject, $body_html_input)
   {
     $body_html = $body_html_input;
 
@@ -111,17 +111,6 @@ class Lib_message
     foreach ($a_tags as $a_element) $a_element->setAttribute('target', '_blank');
 
     $body_html = $doc->saveHtml();
-
-    // 3. post to tumblr
-    if ($post_to_tumblr)
-    {
-      $this->CI->load->library('lib_tumblr');
-      if (is_null($this->CI->lib_tumblr->post($subject, $body_html)))
-      {
-        $this->error = $this->CI->lib_tumblr->get_error_message();
-        return NULL;
-      }
-    }
 
     // 4. GA stats
     $ga_node_url = base_url('ga/{message_id}'); // @todo: campaign vars

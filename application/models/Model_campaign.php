@@ -43,25 +43,15 @@ class Model_campaign extends CI_Model
     return $query->row_array();
   }
 
-  function update($news_id, $description, $title, $html, $txt, $tumblr_html)
+  function update($news_id, $description, $title, $html, $txt)
   {
     $this->db->set('title', $title);
     $this->db->set('description', $description);
     $this->db->set('html', $html);
     $this->db->set('txt', $txt);
-    $this->db->set('tumblr_html', $tumblr_html);
 
     $this->db->where('news_id', $news_id);
     $this->db->where('sent_at', '1000-01-01 00:00:00');
-
-    $this->db->update($this->campaign_table);
-    return $this->db->affected_rows();
-  }
-
-  function update_tumblr_post_id($news_id, $tumblr_post_id)
-  {
-    $this->db->set('tumblr_post_id', $tumblr_post_id);
-    $this->db->where('news_id', $news_id);
 
     $this->db->update($this->campaign_table);
     return $this->db->affected_rows();
@@ -95,7 +85,7 @@ class Model_campaign extends CI_Model
     $this->db->limit($count);
     $this->db->order_by('news_id', 'DESC');
 
-    $this->db->select('news_id, title, tumblr_post_id, sent_at, status, created');
+    $this->db->select('news_id, title, sent_at, status, created');
     $this->db->where('sent_at != ', '1000-01-01 00:00:00');
 
     $query = $this->db->get($this->campaign_table);

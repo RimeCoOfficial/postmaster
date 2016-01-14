@@ -98,7 +98,6 @@ class Lib_message_request
       '_to_name' => $message['to_name'],
       '_reply_to_email' => $message['reply_to_email'],
       '_reply_to_name' => $message['reply_to_name'],
-      '_tumblr_post_link' => $message['tumblr_post_id'],
       '_unsubscribe_link' => base_url('_unsubscribe_link/'.$message_archive['request_id'].'/'.$message_archive['verify_id']),
       '_web_version_link' => base_url('_web_version_link/'.$message_archive['request_id'].'/'.$message_archive['verify_id']),
       '_current_day' => date('l'),
