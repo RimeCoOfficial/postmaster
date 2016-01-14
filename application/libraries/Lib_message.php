@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use Sunra\PhpSimple\HtmlDomParser;
+
 class Lib_message
 {
   private $error = array();
@@ -67,74 +69,66 @@ class Lib_message
   {
     $body_html = $body_html_input;
 
-    // 1. body_text
+    // 1. html to text
     $body_text = $this->body_html_to_text($body_html);
 
-    libxml_use_internal_errors(TRUE);
-    $doc = new DOMDocument();
-    $doc->loadHTML($body_html);
+    $dom = HtmlDomParser::str_get_html($body_html);
 
     // 2. a.target=_blank
-    $a_tags = $doc->getElementsByTagName('a');
-    foreach ($a_tags as $a_element) $a_element->setAttribute('target', '_blank');
+    $anchor_url_list = [];
+    foreach($dom->find('a') as $anchor)
+    {
+      $anchor_url_list[] = $anchor->href;
+      $anchor->target = '_blank';
+    }
 
-    $body_html = $doc->saveHtml();
+    $body_html = $dom->innertext;
 
     // 3. GA stats
     // [![Analytics](https://ga-beacon.appspot.com/UA-XXXXX-X/your-repo/page-name)](https://github.com/igrigorik/ga-beacon)
     // @todo: campaign vars
-    $ga_node_url = 'http://ga-beacon.appspot.com/'.getenv('ga').'/message-'.$message_id.'?pixel';
+    $ga_beacon = [
+      'v' => 1, 't' => 'event', 'ec' => 'email', 'ea' => 'open',
+      'tid' => getenv('ga'),
+      'cid' => random_string('md5'),
+      'mid' => $message_id
+    ];
+    $ga_beacon_html = '<img alt="GA" width="1px" height="1px" src="'.'https://www.google-analytics.com/collect?'.http_build_query($ga_beacon).'">';
 
-    $ga_node = $doc->createElement('img');
-    $ga_node->setAttribute('src', $ga_node_url);
-    $ga_node->setAttribute('alt', 'GA');
+    $body_html = str_replace('</body>', $ga_beacon_html.'</body>', $body_html, $replace_count);
 
-    $body_element = $doc->getElementsByTagName('body')->item(0);
-    if (!empty($body_element))  $body_element->appendChild($ga_node);
-    else                        $doc->appendChild($ga_node);
-
-    $body_html = $doc->saveHtml();
+    if (!$replace_count) $body_html .= $ga_beacon_html;
 
     // 4. minify html
-    // $this->CI->load->library('composer/lib_html_minifier');
-    // $body_html = $this->CI->lib_html_minifier->process($body_html);
+    $this->CI->load->library('composer/lib_html_minifier');
+    $body_html = $this->CI->lib_html_minifier->process($body_html);
 
     // 5. inline css
     $this->CI->load->library('composer/lib_css_to_inline');
     $body_html = $this->CI->lib_css_to_inline->convert($body_html);
 
-    // $body_text = $this->body_html_to_text($body_html);
+    // 6. restore href (since urls are encoded by dom in css inline)
+    //    {_unsubscribe_link} => %7B_unsubscribe_link%7D
+    $dom = HtmlDomParser::str_get_html($body_html);
+    $count = 0;
+    foreach($dom->find('a') as $anchor)
+    {
+      $anchor->href = $anchor_url_list[ $count ];
+      $count += 1;
+    }
+
+    $body_html = $dom->innertext;
 
     return compact('body_html', 'body_text');
   }
 
-  private function DOMinnerHTML(DOMNode $element) 
-  { 
-    $innerHTML = '';
-    $children  = $element->childNodes;
-
-    foreach ($children as $child) $innerHTML .= $element->ownerDocument->saveHTML($child);
-
-    return $innerHTML; 
-  }
-
   private function body_html_to_text($html)
   {
-    libxml_use_internal_errors(TRUE);
-    $doc = new DOMDocument();
-    $doc->loadHTML($html);
-
-    $text_area_div = $doc->getElementById('text-area');
-    if (!is_null($text_area_div))
+    $dom = HtmlDomParser::str_get_html($html);
+    if (!is_null($html_dom = $dom->find('div[id=text-area]', 0)))
     {
-      $html = $this->DOMinnerHTML($text_area_div);
+      $html = $html_dom->innertext;
     }
-
-    // $this->CI->load->library('composer/lib_html_to_markdown');
-    // $text = $this->CI->lib_html_to_markdown->convert($html);
-
-    // $this->CI->load->library('composer/lib_html_minifier');
-    // $html = $this->CI->lib_html_minifier->process($html);
 
     $text = strip_tags($html);
 
