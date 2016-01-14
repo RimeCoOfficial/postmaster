@@ -39,10 +39,17 @@ class Lib_message
 
   function modify($message_id, $owner, $subject, $published, $body_html_input, $reply_to_name, $reply_to_email)
   {
+    if (is_null($result = $this->_process_html($message_id, $subject, $body_html_input)))
+    {
+      return NULL;
+    }
+
     if (empty($reply_to_name)) $reply_to_name = NULL;
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
-    $this->CI->model_message->update($message_id, $owner, $subject, $published, $body_html_input, $reply_to_name, $reply_to_email);
+    $this->CI->model_message->update(
+      $message_id, $owner, $subject, $published, $result['body_html_input'], $result['body_html'], $reply_to_name, $reply_to_email
+    );
     return TRUE;
   }
 
@@ -56,7 +63,7 @@ class Lib_message
     $this->CI->model_message->unarchive($message_id, $owner);
   }
 
-  function process_html($message_id, $subject, $body_html_input)
+  function _process_html($message_id, $subject, $body_html_input)
   {
     $body_html = $body_html_input;
 
@@ -115,7 +122,7 @@ class Lib_message
     // 4. GA stats
     // [![Analytics](https://ga-beacon.appspot.com/UA-XXXXX-X/your-repo/page-name)](https://github.com/igrigorik/ga-beacon)
     // @todo: campaign vars
-    $ga_node_url = 'https://ga-beacon.appspot.com/'.getenv('ga').'/message-'.$message_id.'?pixel';
+    $ga_node_url = 'http://ga-beacon.appspot.com/'.getenv('ga').'/message-'.$message_id.'?pixel';
 
     $ga_node = $doc->createElement('img');
     $ga_node->setAttribute('src', $ga_node_url);
@@ -136,9 +143,11 @@ class Lib_message
     $this->CI->load->library('composer/lib_css_to_inline');
     $body_html = $this->CI->lib_css_to_inline->convert($body_html);
 
+    // 7. upload images to s3
+    // @todo: download css file async
+
     // echo $body_html; die();
 
-    $this->CI->model_message->update_html($message_id, $body_html_input, $body_html);
-    return TRUE;
+    return compact('body_html_input', 'body_html');
   }
 }

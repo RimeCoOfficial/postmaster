@@ -50,14 +50,20 @@ class Lib_transaction
 
   function modify($message_id, $label_id, $subject, $body_html_input, $reply_to_name, $reply_to_email)
   {
+    $this->CI->load->library('lib_message');
+
     if (empty($label_id)) $label_id = NULL;
 
     $this->CI->db->trans_start();
 
     $published = date('Y-m-d H:m:s');
-
-    $this->CI->load->library('lib_message');
-    $this->CI->lib_message->modify($message_id, 'transaction', $subject, $published, $body_html_input, $reply_to_name, $reply_to_email);
+    if (is_null($this->CI->lib_message->modify(
+      $message_id, 'transaction', $subject, $published, $body_html_input, $reply_to_name, $reply_to_email
+    )))
+    {
+      $this->error = $this->CI->lib_message->get_error_message();
+      return NULL;
+    }
 
     $this->CI->model_transaction->update($message_id, $label_id);
 

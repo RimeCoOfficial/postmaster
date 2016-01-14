@@ -31,35 +31,14 @@ class Lib_message_process
   {
     $message_archive_list = [];
     $message_processed_list = [];
-    $message_process_html_list = [];
     
     foreach ($messages as $message)
     {
-      if (!empty($message_process_html_list[ $message['message_id'] ]))
-      {
-        echo 'Already pre-processed HTML: '.$message['message_id'].' (Skipping..)'.PHP_EOL;
-      }
-      else if (is_null($message['body_html']))
-      {
-        echo 'Processing HTML message: '.$message['message_id'].PHP_EOL;
+      echo '('.$message['request_id'].') Processing message: '.$message['message_id'].' '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
 
-        $this->CI->load->library('lib_message');
-        if (is_null($this->CI->lib_message->process_html($message['message_id'], $message['subject'], $message['body_html_input'])))
-        {
-          // raise php error: user_error
-          continue;
-        }
-
-        $message_process_html_list[ $message['message_id'] ] = TRUE;
-      }
-      else
-      {
-        echo '('.$message['request_id'].') Processing message: '.$message['message_id'].' '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
-
-        $this->CI->load->library('lib_message_request');
-        $message_archive_list[] = $this->CI->lib_message_request->process($message);
-        $message_processed_list[] = ['request_id' => $message['request_id'], 'processed' => date('Y-m-d H:i:s')];
-      }
+      $this->CI->load->library('lib_message_request');
+      $message_archive_list[] = $this->CI->lib_message_request->process($message);
+      $message_processed_list[] = ['request_id' => $message['request_id'], 'processed' => date('Y-m-d H:i:s')];
     }
 
     if (!empty($message_processed_list))

@@ -108,6 +108,8 @@ class Lib_message_request
       '_current_year' => date('Y'),
     ];
 
+    // _campaign_archive_link
+
     $this->CI->load->library('parser');
 
     // parse subject
