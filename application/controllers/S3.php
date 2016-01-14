@@ -57,8 +57,6 @@ class S3 extends CI_Controller
 
       $local_view_data['prefix'] = $prefix;
 
-      $prefix = 'upload/'.$prefix;
-
       $this->load->library('upload', $config['upload']);
       if ( ! $this->upload->do_upload('upload_s3_object'))
       {
