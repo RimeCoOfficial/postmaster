@@ -96,12 +96,14 @@ class Lib_message
     $body_html = $doc->saveHtml();
 
     // 4. minify html
-    $this->CI->load->library('composer/lib_html_minifier');
-    $body_html = $this->CI->lib_html_minifier->process($body_html);
+    // $this->CI->load->library('composer/lib_html_minifier');
+    // $body_html = $this->CI->lib_html_minifier->process($body_html);
 
     // 5. inline css
     $this->CI->load->library('composer/lib_css_to_inline');
     $body_html = $this->CI->lib_css_to_inline->convert($body_html);
+
+    // $body_text = $this->body_html_to_text($body_html);
 
     return compact('body_html', 'body_text');
   }
@@ -122,22 +124,24 @@ class Lib_message
     $doc = new DOMDocument();
     $doc->loadHTML($html);
 
-    $body_div = $doc->getElementById('body');
-    if (!is_null($body_div))
+    $text_area_div = $doc->getElementById('text-area');
+    if (!is_null($text_area_div))
     {
-      $body_div_html = $this->DOMinnerHTML($body_div);
-
-      $footer_div = $doc->getElementById('footer');
-      if (!is_null($footer_div))
-      {
-        $html = $this->DOMinnerHTML($footer_div);
-      }
-
-      $html = $body_div_html.(!empty($html) ? "<br><hr>".$html : '');
+      $html = $this->DOMinnerHTML($text_area_div);
     }
 
-    $this->CI->load->library('composer/lib_html_to_markdown');
-    $text = $this->CI->lib_html_to_markdown->convert($html);
+    // $this->CI->load->library('composer/lib_html_to_markdown');
+    // $text = $this->CI->lib_html_to_markdown->convert($html);
+
+    // $this->CI->load->library('composer/lib_html_minifier');
+    // $html = $this->CI->lib_html_minifier->process($html);
+
+    $text = strip_tags($html);
+
+    // http://stackoverflow.com/a/2368546
+    $text = preg_replace('!\s+!', ' ', $text); // or '/\s+/'
+
+    $text = trim($text);
 
     return $text;
   }
