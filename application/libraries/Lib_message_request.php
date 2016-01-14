@@ -38,7 +38,42 @@ class Lib_message_request
     return $this->CI->model_message_request->add($message_id, $to_name, $to_email, $subject_var_json, $body_var_json);
   }
 
-  function process($message)
+  function get_to_process($count)
+  {
+    return $this->CI->model_message_request->get_to_process($count);
+  }
+
+  function process($messages)
+  {
+    $message_archive_list = [];
+    $message_processed_list = [];
+    
+    foreach ($messages as $message)
+    {
+      echo '('.$message['request_id'].') Processing message: '.$message['message_id'].' '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
+
+      $message_archive_list[] = $this->archive($message);
+      $message_processed_list[] = ['request_id' => $message['request_id'], 'processed' => date('Y-m-d H:i:s')];
+    }
+
+    if (!empty($message_processed_list))
+    {
+      $this->CI->db->trans_start();
+
+      // mark processed
+      $this->CI->model_message_request->mark_processed($message_processed_list);
+
+      // send message
+      $this->CI->load->model('model_message_archive');
+      $this->CI->model_message_archive->store($message_archive_list);
+
+      $this->CI->db->trans_complete();
+    }
+
+    return TRUE;
+  }
+
+  function archive($message)
   {
     $message_archive = $this->init($message);
 
