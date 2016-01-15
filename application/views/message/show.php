@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1><?php echo $message['subject']; ?>
+<h1>
+  <?php echo $message['subject']; ?>
+  <small>#<?php echo $message['message_id']; ?></small>
   <span class="pull-right label label-default"><?php echo $message['owner']; ?></span>
 </h1>
 
