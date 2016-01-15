@@ -98,7 +98,6 @@ class Lib_message
     $body_html = str_replace('</body>', $ga_beacon_html.'</body>', $body_html, $replace_count);
     if (!$replace_count) $body_html .= $ga_beacon_html;
 
-
     // 4. minify html
     $this->CI->load->library('composer/lib_html_minifier');
     $body_html = $this->CI->lib_html_minifier->process($body_html);
@@ -108,8 +107,7 @@ class Lib_message
     $body_html = $this->CI->lib_css_to_inline->convert($body_html);
 
     // 6. add <title>{_subject}</title>
-    $body_html = str_replace('</head>', '<title>{_subject}</title>'.'</head>', $body_html, $replace_count);
-    if (!$replace_count) $body_html .= $ga_beacon_html;
+    $body_html = str_replace('</head>', '<title>{_subject}</title>'.'</head>', $body_html);
 
     // 7. restore href (since urls are encoded by dom in css inline)
     //    {_unsubscribe_link} => %7B_unsubscribe_link%7D
