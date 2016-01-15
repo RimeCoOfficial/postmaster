@@ -26,13 +26,23 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function show($message_id = 0)
+  public function show($message_id = 0, $html_only = FALSE)
   {
     $message = $this->lib_message->get($message_id);
     if (empty($message)) show_404();
 
-    echo $message['body_html'];
-    die();
+    if ($html_only)
+    {
+      echo $message['body_html'];
+      die();
+    }
+
+    $local_view_data['message'] = $message;
+
+    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
+
+    $view_data['main_content'] = $this->load->view('message/show', $local_view_data, TRUE);
+    $this->load->view('base', $view_data);
   }
 
   public function archive($request_id, $verify_key)
