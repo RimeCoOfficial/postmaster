@@ -10,7 +10,7 @@ class Model_campaign extends CI_Model
   function create($message_id)
   {
     $this->db->set('message_id', $message_id);
-    $this->db->insert($this->transaction_table);
+    $this->db->insert($this->transactional_table);
   }
 
   function get_latest()

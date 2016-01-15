@@ -22,7 +22,7 @@ class label extends CI_Controller
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('transaction/label/list', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('transactional/label/list', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 
@@ -31,7 +31,7 @@ class label extends CI_Controller
     $local_view_data = [];
 
     $this->load->library('form_validation');
-    if ($this->form_validation->run('transaction/label/create'))
+    if ($this->form_validation->run('transactional/label/create'))
     {
       if (is_null($label_id = $this->lib_label->create(
         $this->form_validation->set_value('label')
@@ -41,13 +41,13 @@ class label extends CI_Controller
       }
       else
       {
-        redirect('transaction/label/modify/'.$label_id);
+        redirect('transactional/label/modify/'.$label_id);
       }
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('transaction/label/create', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('transactional/label/create', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 
@@ -60,7 +60,7 @@ class label extends CI_Controller
     $local_view_data['label'] = $label;
 
     $this->load->library('form_validation');
-    if ($this->form_validation->run('transaction/label/modify'))
+    if ($this->form_validation->run('transactional/label/modify'))
     {
       if (is_null($this->lib_label->modify(
         $label_id,
@@ -71,19 +71,19 @@ class label extends CI_Controller
       }
       else
       {
-        redirect('transaction/label/modify/'.$label_id);
+        redirect('transactional/label/modify/'.$label_id);
       }
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('transaction/label/modify', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('transactional/label/modify', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 
   public function delete($label_id = 0)
   {
     $this->lib_label->delete($label_id);
-    redirect('transaction/label');
+    redirect('transactional/label');
   }
 }

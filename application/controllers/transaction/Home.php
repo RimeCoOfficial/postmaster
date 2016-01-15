@@ -14,5 +14,5 @@ class Home extends CI_Controller
     }
   }
 
-  function index() { redirect('transaction/message'); }
+  function index() { redirect('transactional/message'); }
 }

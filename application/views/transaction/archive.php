@@ -16,7 +16,7 @@ Reply-to: <?php echo $message['reply_to_name']; ?> &lt;<?php echo $message['repl
 
 <div class="row">
   <div class="col-sm-2">
-    <a href="<?php echo base_url('transaction/message/unarchive/'.$message['message_id']); ?>" class="btn btn-primary btn-block">
+    <a href="<?php echo base_url('transactional/message/unarchive/'.$message['message_id']); ?>" class="btn btn-primary btn-block">
       Restore
     </a>
   </div>

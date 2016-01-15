@@ -76,9 +76,9 @@ $config = array(
 
   // 'message_owner'  => array(
   //   'label'         => 'Owner',
-  //   'rules'         => 'in_list[autoresponder,campaign,transaction]|required',
+  //   'rules'         => 'in_list[autoresponder,campaign,transactional]|required',
 
-  //   'options'       => ['autoresponder' => 'Autoresponder', 'campaign' => 'Campaign', 'transaction' => 'Transaction'],
+  //   'options'       => ['autoresponder' => 'Autoresponder', 'campaign' => 'Campaign', 'transactional' => 'Transactional'],
   //   'required'      => 1,
   // ),
 

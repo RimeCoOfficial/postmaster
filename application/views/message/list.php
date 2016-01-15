@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       //   // not published but archived ???
       //   // => not published = drafing stage
       //   // => campaign and autoresponder
-      //   // => transactions are always published
+      //   // => transactionals are always published
       //   // = draft is deleted
       //   // restore-able
       //   $is_link_gray = 'list-group-item-warning';
@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       // elseif ($message['published'] != '1000-01-01 00:00:00' AND $message['archived'] == '1000-01-01 00:00:00')
       // {
       //   // published and not archived = good to go!
-      //   // active transaction
+      //   // active transactional
       //   // campaign in progress
       //   // autoresponder in progress
       //   $is_link_gray = 'list-group-item-info';
@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       //   // published and archived
       //   // campaign is finished cant be not restored
       //   // autoresponder not required can be restored
-      //   // transactions not required can be restored
+      //   // transactionals not required can be restored
         
       //   $is_link_gray = '';
 

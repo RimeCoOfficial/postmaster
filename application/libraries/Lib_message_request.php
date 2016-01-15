@@ -109,7 +109,7 @@ class Lib_message_request
     $message_archive['priority'] = 0;
     switch ($message['owner'])
     {
-      case 'transaction':   $message_archive['priority'] = 15; break;
+      case 'transactional': $message_archive['priority'] = 15; break;
       case 'campaign':      $message_archive['priority'] = 10; break;
       case 'autoresponder': $message_archive['priority'] =  5; break;
       default:                                              break;

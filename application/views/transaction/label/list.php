@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>Labels <span><a href="<?php echo base_url('transaction/label/create'); ?>" class="btn btn-primary pull-right">New</a></span></h1>
+<h1>Labels <span><a href="<?php echo base_url('transactional/label/create'); ?>" class="btn btn-primary pull-right">New</a></span></h1>
 
 <?php // var_dump($label_list); ?>
 
@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
-              <?php echo anchor('transaction/label/modify/'.$label['label_id'], $label['name']); ?>
+              <?php echo anchor('transactional/label/modify/'.$label['label_id'], $label['name']); ?>
             </h5>
           </div>
       
@@ -66,6 +66,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
     modal.find('.modal-body strong').text(label_name)
-    modal.find('.modal-footer a').attr("href", '<?php echo base_url('transaction/label/delete'); ?>' + '/' + label_id)
+    modal.find('.modal-footer a').attr("href", '<?php echo base_url('transactional/label/delete'); ?>' + '/' + label_id)
   });
 </script>

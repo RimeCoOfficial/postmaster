@@ -44,12 +44,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </h3>
   </div>
   <div class="panel-body">
-    <a href="<?php echo base_url('transaction/message/archive/'.$message['message_id']); ?>" class="btn btn-warning pull-right">
+    <a href="<?php echo base_url('transactional/message/archive/'.$message['message_id']); ?>" class="btn btn-warning pull-right">
       <span class="glyphicon glyphicon-compressed"></span>
     </a>
     <dl>
       <dt>Archive</dt>
-      <dd>Archived transaction wont accept <strong>new</strong> requests.</dd>
+      <dd>Archived transactional wont accept <strong>new</strong> requests.</dd>
       <dd>But you can restore and use it again.</dd>
     </dl>
   </div>

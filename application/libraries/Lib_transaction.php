@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Lib_transaction
+class Lib_transactional
 {
   private $error = array();
   
   function __construct($options = array())
   {
     $this->CI =& get_instance();
-    $this->CI->load->model('model_transaction');
+    $this->CI->load->model('model_transactional');
   }
   
   /**
@@ -29,9 +29,9 @@ class Lib_transaction
     $published = date('Y-m-d H:m:s');
 
     $this->CI->load->library('lib_message');
-    $message_id = $this->CI->lib_message->create('transaction', $subject, $published);
+    $message_id = $this->CI->lib_message->create('transactional', $subject, $published);
     
-    $this->CI->model_transaction->create($message_id);
+    $this->CI->model_transactional->create($message_id);
 
     $this->CI->db->trans_complete();
 
@@ -40,12 +40,12 @@ class Lib_transaction
 
   function get($message_id)
   {
-    return $this->CI->model_transaction->get($message_id);
+    return $this->CI->model_transactional->get($message_id);
   }
 
   function get_list()
   {
-    return $this->CI->model_transaction->get_list();
+    return $this->CI->model_transactional->get_list();
   }
 
   function modify($message_id, $label_id, $subject, $body_html_input, $reply_to_name, $reply_to_email)
@@ -58,14 +58,14 @@ class Lib_transaction
 
     $published = date('Y-m-d H:m:s');
     if (is_null($this->CI->lib_message->modify(
-      $message_id, 'transaction', $subject, $published, $body_html_input, $reply_to_name, $reply_to_email
+      $message_id, 'transactional', $subject, $published, $body_html_input, $reply_to_name, $reply_to_email
     )))
     {
       $this->error = $this->CI->lib_message->get_error_message();
       return NULL;
     }
 
-    $this->CI->model_transaction->update($message_id, $label_id);
+    $this->CI->model_transactional->update($message_id, $label_id);
 
     $this->CI->db->trans_complete();
 
@@ -75,14 +75,14 @@ class Lib_transaction
   function archive($message_id)
   {
     $this->CI->load->library('lib_message');
-    $this->CI->lib_message->archive($message_id, 'transaction');
+    $this->CI->lib_message->archive($message_id, 'transactional');
     return TRUE;
   }
 
   function unarchive($message_id)
   {
     $this->CI->load->library('lib_message');
-    $this->CI->lib_message->unarchive($message_id, 'transaction');
+    $this->CI->lib_message->unarchive($message_id, 'transactional');
     return TRUE;
   }
 
@@ -104,7 +104,7 @@ class Lib_transaction
     $body_var = $this->CI->input->post('body');
     
     if (is_null($request_id = $this->CI->lib_message_request->add(
-      $message_id, 'transaction', $to_name, $to_email, $subject_var, $body_var)))
+      $message_id, 'transactional', $to_name, $to_email, $subject_var, $body_var)))
     {
       $this->error = $this->CI->lib_message_request->get_error_message();
       return NULL;

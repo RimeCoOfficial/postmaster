@@ -16,7 +16,7 @@ $config = [
     's3'            => '<span class="glyphicon glyphicon-open-file"></span>',
     'autoresponder' => 'Autoresponder',
     'campaign'      => 'Campaign',
-    'transaction'   => 'Transaction',
+    'transactional' => 'Transactional',
     'settings'      => '<span class="glyphicon glyphicon-cog"></span>',
   ],
   'nav_tab' => [
@@ -34,7 +34,7 @@ $config = [
       'lists'   => 'Lists',
       'history' => 'History',
     ],
-    'transaction' => [
+    'transactional' => [
       'message' => 'Messages',
       'label'   => 'Labels',
       'history' => 'History',

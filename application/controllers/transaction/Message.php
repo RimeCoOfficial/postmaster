@@ -13,16 +13,16 @@ class Message extends CI_Controller
       redirect();
     }
 
-    $this->load->library('lib_transaction');
+    $this->load->library('lib_transactional');
   }
 
   public function index($filter = NULL)
   {
-    $local_view_data['list'] = $this->lib_transaction->get_list();
+    $local_view_data['list'] = $this->lib_transactional->get_list();
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('transaction/list', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('transactional/list', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 
@@ -33,27 +33,27 @@ class Message extends CI_Controller
     $this->load->library('form_validation');
     if ($this->form_validation->run())
     {
-      if (is_null($message_id = $this->lib_transaction->create(
+      if (is_null($message_id = $this->lib_transactional->create(
         $this->form_validation->set_value('subject')
       )))
       {
-        show_error($this->lib_transaction->get_error_message());
+        show_error($this->lib_transactional->get_error_message());
       }
       else
       {
-        redirect('transaction/message/modify/'.$message_id);
+        redirect('transactional/message/modify/'.$message_id);
       }
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('transaction/create', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('transactional/create', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 
   public function modify($message_id = 0)
   {
-    $message = $this->lib_transaction->get($message_id);
+    $message = $this->lib_transactional->get($message_id);
     if (empty($message)) show_404();
 
     $local_view_data = [];
@@ -61,7 +61,7 @@ class Message extends CI_Controller
 
     if ($message['archived'] != '1000-01-01 00:00:00')
     {
-      $view_data['main_content'] = $this->load->view('transaction/archive', $local_view_data, TRUE);
+      $view_data['main_content'] = $this->load->view('transactional/archive', $local_view_data, TRUE);
     }
     else
     {
@@ -73,9 +73,9 @@ class Message extends CI_Controller
       set_dropdown_options('label_id', $label_keys);
 
       $this->load->library('form_validation');
-      if ($this->form_validation->run('transaction/message/modify'))
+      if ($this->form_validation->run('transactional/message/modify'))
       {
-        if (is_null($this->lib_transaction->modify(
+        if (is_null($this->lib_transactional->modify(
           $message_id,
           $this->form_validation->set_value('label_id'),
           $this->form_validation->set_value('subject'),
@@ -84,15 +84,15 @@ class Message extends CI_Controller
           $this->form_validation->set_value('reply_to_email')
         )))
         {
-          show_error($this->lib_transaction->get_error_message());
+          show_error($this->lib_transactional->get_error_message());
         }
         else
         {
-          redirect('transaction/message/modify/'.$message_id);
+          redirect('transactional/message/modify/'.$message_id);
         }
       }
 
-      $view_data['main_content'] = $this->load->view('transaction/modify', $local_view_data, TRUE);
+      $view_data['main_content'] = $this->load->view('transactional/modify', $local_view_data, TRUE);
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
@@ -101,13 +101,13 @@ class Message extends CI_Controller
 
   public function archive($message_id = 0)
   {
-    $this->lib_transaction->archive($message_id);
-    redirect('transaction/message/modify/'.$message_id);
+    $this->lib_transactional->archive($message_id);
+    redirect('transactional/message/modify/'.$message_id);
   }
 
   public function unarchive($message_id = 0)
   {
-    $this->lib_transaction->unarchive($message_id);
-    redirect('transaction/message/modify/'.$message_id);
+    $this->lib_transactional->unarchive($message_id);
+    redirect('transactional/message/modify/'.$message_id);
   }
 }
