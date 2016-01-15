@@ -185,10 +185,10 @@ INSERT INTO `ci_postmaster`.`label` (`name`) VALUES ('auth'), ('feedback'), ('no
 -- --------------------------------------------------------
 
 --
--- Table structure for table transaction
+-- Table structure for table transactional
 --
 
-CREATE TABLE IF NOT EXISTS transaction (
+CREATE TABLE IF NOT EXISTS transactional (
   message_id              int                 NOT NULL,
   label_id                int                           DEFAULT NULL,
   PRIMARY KEY (message_id),
