@@ -8,7 +8,6 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
-composer.lock
 /vendor/
 /nbproject/
 
