@@ -96,8 +96,8 @@ class Lib_message
     $ga_beacon_html = '<img alt="GA" width="1px" height="1px" src="'.'https://www.google-analytics.com/collect?'.http_build_query($ga_beacon).'">';
 
     $body_html = str_replace('</body>', $ga_beacon_html.'</body>', $body_html, $replace_count);
-
     if (!$replace_count) $body_html .= $ga_beacon_html;
+
 
     // 4. minify html
     $this->CI->load->library('composer/lib_html_minifier');
@@ -107,7 +107,11 @@ class Lib_message
     $this->CI->load->library('composer/lib_css_to_inline');
     $body_html = $this->CI->lib_css_to_inline->convert($body_html);
 
-    // 6. restore href (since urls are encoded by dom in css inline)
+    // 6. add <title>{_subject}</title>
+    $body_html = str_replace('</head>', '<title>{_subject}</title>'.'</head>', $body_html, $replace_count);
+    if (!$replace_count) $body_html .= $ga_beacon_html;
+
+    // 7. restore href (since urls are encoded by dom in css inline)
     //    {_unsubscribe_link} => %7B_unsubscribe_link%7D
     $dom = HtmlDomParser::str_get_html($body_html);
     $count = 0;
@@ -124,11 +128,11 @@ class Lib_message
 
   private function body_html_to_text($html)
   {
-    $dom = HtmlDomParser::str_get_html($html);
-    if (!is_null($html_dom = $dom->find('div[id=text-area]', 0)))
-    {
-      $html = $html_dom->innertext;
-    }
+    // $dom = HtmlDomParser::str_get_html($html);
+    // if (!is_null($html_dom = $dom->find('div[id=text-area]', 0)))
+    // {
+    //   $html = $html_dom->innertext;
+    // }
 
     $text = strip_tags($html);
 
