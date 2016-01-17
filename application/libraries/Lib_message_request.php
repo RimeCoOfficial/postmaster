@@ -22,7 +22,7 @@ class Lib_message_request
     return $this->error;
   }
 
-  function add($message_id, $owner, $to_name, $to_email, $subject_var, $body_var)
+  function add($message_id, $owner, $to_name, $to_email, $pseudo_var)
   {
     if (!$this->CI->model_message_request->can_add($message_id, $owner))
     {
@@ -32,10 +32,9 @@ class Lib_message_request
 
     if (empty($to_name)) $to_name = NULL;
 
-    $subject_var_json = (is_array($subject_var) AND !empty($subject_var)) ? json_encode($subject_var) : NULL;
-    $body_var_json    = (is_array($body_var)    AND !empty($body_var))    ? json_encode($body_var)    : NULL;
+    $pseudo_var_json = (is_array($pseudo_var) AND !empty($pseudo_var)) ? json_encode($pseudo_var) : NULL;
 
-    return $this->CI->model_message_request->add($message_id, $to_name, $to_email, $subject_var_json, $body_var_json);
+    return $this->CI->model_message_request->add($message_id, $to_name, $to_email, $pseudo_var_json);
   }
 
   function get_to_process($count)
@@ -145,20 +144,18 @@ class Lib_message_request
 
     $this->CI->load->library('parser');
 
-    // parse subject
-    $subject_vars = !is_null($message['subject_var_json']) ? json_decode($message['subject_var_json'], TRUE) : [];
-    $subject_vars = array_merge($subject_vars, $default_vars);
+    $pseudo_var = !is_null($message['pseudo_var_json']) ? json_decode($message['pseudo_var_json'], TRUE) : [];
+    $pseudo_var = array_merge($pseudo_var, $default_vars);
     
-    $subject = $this->CI->parser->parse_string($message['subject'],  $subject_vars, TRUE);
+    // parse subject
+    $subject = $this->CI->parser->parse_string($message['subject'],  $pseudo_var, TRUE);
     $message_archive['subject'] = $subject;
-    $default_vars['_subject'] = $subject;
+    
+    $pseudo_var['_subject'] = $subject;
 
     // parse body
-    $body_vars = !is_null($message['body_var_json']) ? json_decode($message['body_var_json'], TRUE) : [];
-    $body_vars = array_merge($body_vars, $default_vars);
-
-    $message_archive['body_html'] = $this->CI->parser->parse_string($message['body_html'],  $body_vars, TRUE);
-    $message_archive['body_text'] = $this->CI->parser->parse_string($message['body_text'],  $body_vars, TRUE);
+    $message_archive['body_html'] = $this->CI->parser->parse_string($message['body_html'],  $pseudo_var, TRUE);
+    $message_archive['body_text'] = $this->CI->parser->parse_string($message['body_text'],  $pseudo_var, TRUE);
 
     return $message_archive;
   }

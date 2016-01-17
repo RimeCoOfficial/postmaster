@@ -36,4 +36,4 @@ putenv('email_source=postmaster@mail.rime.co');
 putenv('email_admin=founders@rime.co');
 putenv('email_debug=debug@mail.rime.co');
 
-putenv('api_key=cd8e1e402307d3b5cad3a0de04d7f5bb');
+putenv('api_key=e07e342abbbf4215b84ce93abafe2cbd');

@@ -8,7 +8,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <span class="pull-right label label-default"><?php echo $message['owner']; ?></span>
 </h1>
 
-<p>Reply-to: <?php echo $message['reply_to_name']; ?> (<?php echo $message['reply_to_email']; ?>)</p>
+<p>
+  Reply-to:
+  <?php echo $message['reply_to_name']; ?>
+  <?php if (!empty($message['reply_to_email'])) echo '('.$message['reply_to_email'].')'; ?>
+</p>
 
 <h5>
   HTML

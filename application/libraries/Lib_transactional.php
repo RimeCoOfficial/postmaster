@@ -100,11 +100,10 @@ class Lib_transactional
       return NULL;
     }
 
-    $subject_var = $this->CI->input->post('subject');
-    $body_var = $this->CI->input->post('body');
+    $pseudo_var = $this->CI->input->post('pseudo_var');
     
     if (is_null($request_id = $this->CI->lib_message_request->add(
-      $message_id, 'transactional', $to_name, $to_email, $subject_var, $body_var)))
+      $message_id, 'transactional', $to_name, $to_email, $pseudo_var)))
     {
       $this->error = $this->CI->lib_message_request->get_error_message();
       return NULL;
