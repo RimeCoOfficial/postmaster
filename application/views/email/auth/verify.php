@@ -7,6 +7,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </p>
 
 <p>
-  Happy emailing!
+  Happy emailing!<br>
   &mdash; The <?php echo app_name(); ?>
 </p>
