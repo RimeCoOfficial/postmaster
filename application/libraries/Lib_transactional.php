@@ -100,10 +100,10 @@ class Lib_transactional
       return NULL;
     }
 
-    $pseudo_var = $this->CI->input->post('pseudo_var');
+    $pseudo_vars = $this->CI->input->post('pseudo_vars');
     
     if (is_null($request_id = $this->CI->lib_message_request->add(
-      $message_id, 'transactional', $to_name, $to_email, $pseudo_var)))
+      $message_id, 'transactional', $to_name, $to_email, $pseudo_vars)))
     {
       $this->error = $this->CI->lib_message_request->get_error_message();
       return NULL;
