@@ -46,13 +46,7 @@ class Lib_send_email
   function general($to, $subject = 'Untitled', $template, $data = [])
   {
     $message = $this->CI->load->view('email/'.$template, $data, TRUE);
-
-    $this->CI->load->library('composer/lib_html_to_markdown');
-    $alt_message = $this->CI->lib_html_to_markdown->convert($message);
-
-    $message = $this->CI->load->view('email/base', ['subject' => $subject, 'message' => $message], TRUE);
-
-    // var_dump($to); echo $message; die();
+    $alt_message = html_to_text($message);
 
     return $this->direct($to, $subject, $message, $alt_message);
   }

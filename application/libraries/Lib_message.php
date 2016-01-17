@@ -70,7 +70,7 @@ class Lib_message
     $body_html = $body_html_input;
 
     // 1. html to text
-    $body_text = $this->body_html_to_text($body_html);
+    $body_text = html_to_text($body_html);
 
     $dom = HtmlDomParser::str_get_html($body_html);
 
@@ -122,23 +122,5 @@ class Lib_message
     $body_html = $dom->innertext;
 
     return compact('body_html', 'body_text');
-  }
-
-  private function body_html_to_text($html)
-  {
-    // $dom = HtmlDomParser::str_get_html($html);
-    // if (!is_null($html_dom = $dom->find('div[id=text-area]', 0)))
-    // {
-    //   $html = $html_dom->innertext;
-    // }
-
-    $text = strip_tags($html);
-
-    // http://stackoverflow.com/a/2368546
-    $text = preg_replace('!\s+!', ' ', $text); // or '/\s+/'
-
-    $text = trim($text);
-
-    return $text;
   }
 }
