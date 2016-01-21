@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php else: ?>
   <div class="list-group">
     <?php foreach ($message_archive_list as $request): ?>
-      <?php if (empty($request['verify_id'])): ?>
+      <?php if (empty($request['web_version_key'])): ?>
         <a class="list-group-item disabled">
           <div class="media">
             <div class="media-body">
@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
         </a>
       <?php else: ?>
-        <a class="list-group-item" href="<?php echo base_url('message/archive/'.$request['request_id'].'/'.$request['verify_id']); ?>" target="_blank">
+        <a class="list-group-item" href="<?php echo base_url('message/archive/'.$request['request_id'].'/'.$request['web_version_key']); ?>" target="_blank">
           <div class="media">
             <div class="media-body">
               <h5 class="media-heading">

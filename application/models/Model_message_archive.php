@@ -12,14 +12,14 @@ class Model_message_archive extends CI_Model
     $this->db->insert_batch($this->message_archive_table, $message_list);
   }
 
-  function get($request_id, $verify_id)
+  function get($request_id, $web_version_key)
   {
     $this->db->select($this->message_archive_table.'.*');
     
     $this->db->limit(1);
 
     $this->db->where('request_id', $request_id);
-    $this->db->where('verify_id', $verify_id);
+    $this->db->where('web_version_key', $web_version_key);
 
     $query = $this->db->get($this->message_archive_table);
     return $query->row_array();
@@ -29,7 +29,7 @@ class Model_message_archive extends CI_Model
   {
     // $this->db->select($this->message_archive_table.'.*');
     $this->db->select($this->message_request_table.'.request_id');
-    $this->db->select($this->message_archive_table.'.verify_id');
+    $this->db->select($this->message_archive_table.'.web_version_key');
     $this->db->select($this->message_archive_table.'.subject');
     $this->db->select($this->message_archive_table.'.sent');
     $this->db->select($this->message_request_table.'.to_name');

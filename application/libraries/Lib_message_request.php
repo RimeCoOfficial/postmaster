@@ -86,10 +86,9 @@ class Lib_message_request
   {
     $message_archive = [];
 
-    $verify_id = random_string('alnum', 64);
-
     $message_archive['request_id'] = $message['request_id'];
-    $message_archive['verify_id'] = $verify_id;
+    $message_archive['web_version_key'] = random_string('alnum', 64);
+    $message_archive['unsubscribe_key'] = random_string('alnum', 64);
     $message_archive['from_name'] = NULL; // getenv('email_source');
     $message_archive['from_email'] = getenv('email_source');
 
@@ -120,7 +119,6 @@ class Lib_message_request
   private function parse($message_archive, $message)
   {
     // 4. link-unsubscribe
-    // 5. unsubscribe link = request_id + verify_id
 
     // {unsubscribe} {web_version}
 
@@ -130,8 +128,8 @@ class Lib_message_request
       '_to_name' => $message['to_name'],
       '_reply_to_email' => $message['reply_to_email'],
       '_reply_to_name' => $message['reply_to_name'],
-      '_unsubscribe_link' => base_url('_unsubscribe_link/'.$message_archive['request_id'].'/'.$message_archive['verify_id']),
-      '_web_version_link' => base_url('_web_version_link/'.$message_archive['request_id'].'/'.$message_archive['verify_id']),
+      '_web_version_link' => base_url('message/archive/'.$message_archive['request_id'].'/'.$message_archive['web_version_key']),
+      '_unsubscribe_link' => base_url('message/unsubscribe/'.$message_archive['request_id'].'/'.$message_archive['unsubscribe_key']),
       '_current_day' => date('l'),
       '_current_day_number' => date('N'),
       '_current_date' => date('j'),

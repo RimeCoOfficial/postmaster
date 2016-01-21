@@ -24,9 +24,9 @@ class Lib_message_archive
     return $this->error;
   }
 
-  function get($request_id, $verify_id)
+  function get($request_id, $web_version_key)
   {
-    return $this->CI->model_message_archive->get($request_id, $verify_id);
+    return $this->CI->model_message_archive->get($request_id, $web_version_key);
   }
 
   function get_list($owner)

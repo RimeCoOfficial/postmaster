@@ -45,10 +45,10 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function archive($request_id, $verify_key)
+  public function archive($request_id, $web_version_key)
   {
     $this->load->library('lib_message_archive');
-    $message = $this->lib_message_archive->get($request_id, $verify_key);
+    $message = $this->lib_message_archive->get($request_id, $web_version_key);
     if (empty($message)) show_404();
 
     echo $message['body_html'];
