@@ -55,7 +55,8 @@ CREATE TABLE IF NOT EXISTS message (
   reply_to_email          varchar(256)                  DEFAULT NULL,
 
   ga_campaign_query       varchar(256)                  DEFAULT NULL,
-
+  list_unsubscribe        tinyint(1)          NOT NULL  DEFAULT 0,
+  
   published               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
 
@@ -76,7 +77,7 @@ CREATE TABLE IF NOT EXISTS message_request (
   to_email                varchar(256)        NOT NULL,
   pseudo_vars_json         text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   processed               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (request_id),
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
@@ -117,10 +118,19 @@ CREATE TABLE IF NOT EXISTS message_archive (
 CREATE TABLE IF NOT EXISTS list (
   list_id                 int                 NOT NULL  AUTO_INCREMENT,
   name                    varchar(32)                   DEFAULT NULL,
+  unsubscribe_link        varchar(256)                  DEFAULT NULL,
   PRIMARY KEY (list_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
-INSERT INTO `ci_postmaster`.`list` (`name`) VALUES ('announcement'), ('request-invitation'), ('newsletter'), ('tips');
+INSERT INTO `ci_postmaster`.`list` (`name`) VALUES
+  -- @debug: do not remove ✊
+  ('debug'),
+  -- Camapaign
+  ('announcement'), ('newsletter'), ('debug'),
+  -- Autoresponder
+  ('requested-invitation'), ('tips'), ('debug'),
+  -- Transactional
+  ('auth'), ('notification'), ('report'), ('invite'), ('debug');
 
 -- --------------------------------------------------------
 
@@ -129,11 +139,13 @@ INSERT INTO `ci_postmaster`.`list` (`name`) VALUES ('announcement'), ('request-i
 --
 
 CREATE TABLE IF NOT EXISTS list_subscribed (
-  email_id                varchar(256)        NOT NULL,
+  to_name                 varchar(64)         NOT NULL,
+  to_email                varchar(256)        NOT NULL,
   list_id                 int                 NOT NULL  AUTO_INCREMENT,
-  subscribed              datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  uid                     varchar(64)                   DEFAULT NULL,
+  -- subscribed              datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP, -- DEFAULT '1000-01-01 00:00:00',
   unsubscribed            datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (email_id, list_id),
   FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
@@ -170,28 +182,13 @@ CREATE TABLE IF NOT EXISTS campaign (
 -- --------------------------------------------------------
 
 --
--- Table structure for table label
---
-
-CREATE TABLE IF NOT EXISTS label (
-  label_id                int                 NOT NULL  AUTO_INCREMENT,
-  name                    varchar(32)         NOT NULL  UNIQUE,
-  color                   varchar(8)                    DEFAULT NULL,
-  PRIMARY KEY (label_id)
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
-INSERT INTO `ci_postmaster`.`label` (`name`) VALUES ('auth'), ('feedback'), ('notification'), ('invite'), ('report'), ('test');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table transactional
 --
 
 CREATE TABLE IF NOT EXISTS transactional (
   message_id              int                 NOT NULL,
-  label_id                int                           DEFAULT NULL,
+  list_id                 int                 NOT NULL,
   PRIMARY KEY (message_id),
-  FOREIGN KEY (label_id) REFERENCES label(label_id) ON UPDATE CASCADE ON DELETE SET NULL,
+  FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
