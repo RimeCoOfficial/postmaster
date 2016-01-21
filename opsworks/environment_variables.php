@@ -31,9 +31,9 @@ putenv('aws_s3_bucket=rime-mail');
 
 putenv('ga=UA-XXXXXXXXX-X');
 
-putenv('email_source=postmaster@mail.rime.co');
+putenv('email_source=postmaster@example.com');
 
-putenv('email_admin=founders@rime.co');
-putenv('email_debug=debug@mail.rime.co');
+putenv('email_admin=postmaster@example.com');
+putenv('email_debug=debug-postmaster@example.com');
 
 putenv('api_key=e07e342abbbf4215b84ce93abafe2cbd');

@@ -16,9 +16,9 @@
         "aws_region=us-east-1",
         "aws_s3_bucket=bucket",
         "ga=UA-XXXXXXXX-X",
-        "email_source=postmaster@mail.example.com",
-        "email_admin=joe@example.com",
-        "email_debug=joe@example.com",
+        "email_source=postmaster@example.com",
+        "email_admin=postmaster@example.com",
+        "email_debug=debug-postmaster@example.com",
         "api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
       ]
     },
