@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS feedback (
   type                    varchar(64)                   DEFAULT NULL,
   timestamp               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   message_json            text                          DEFAULT NULL,
-  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (email_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
