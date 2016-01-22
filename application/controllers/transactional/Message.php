@@ -66,11 +66,11 @@ class Message extends CI_Controller
     else
     {
       $this->load->library('lib_list_unsubscribe');
-      $list_list = $this->lib_list_unsubscribe->get_list();
+      $list_unsubscribe = $this->lib_list_unsubscribe->get_list();
 
-      $list_keys = [NULL => '&mdash;'];
-      foreach ($list_list as $list) $list_keys[ $list['list_id'] ] = $list['name'];
-      set_dropdown_options('list_id', $list_keys);
+      $list_unsubscribe_keys = [NULL => '&mdash;'];
+      foreach ($list_unsubscribe as $list) $list_unsubscribe_keys[ $list['list_id'] ] = $list['list'];
+      set_dropdown_options('list_id', $list_unsubscribe_keys);
 
       $this->load->library('form_validation');
       if ($this->form_validation->run('transactional/message/modify'))
