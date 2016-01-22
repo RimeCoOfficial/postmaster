@@ -13,7 +13,7 @@ $env_var_is_hidden = [
   'AWS_PHP_CACHE_DIR' => FALSE,
   'aws_account_id'    => FALSE,
   'aws_access_key'    => FALSE,
-  'aws_secret_key'    => 1,
+  'aws_secret_key'    => TRUE,
   'aws_region'        => FALSE,
   'aws_s3_bucket'     => FALSE,
   'ga'                => FALSE,
@@ -21,7 +21,7 @@ $env_var_is_hidden = [
   'email_admin'       => FALSE,
   'email_debug'       => FALSE,
   'email_source'      => FALSE,
-  'api_key'           => 1,
+  'api_key'           => TRUE,
 ];
 ?>
 
@@ -52,17 +52,28 @@ $env_var_is_hidden = [
     <tbody>
       <?php foreach ($env_var_is_hidden as $env_var => $is_hidden): ?>
       <tr>
-        <th scope="row"><code><?php echo $env_var; ?></code></th>
+        <th scope="row"><strong><?php echo $env_var; ?></strong></th>
         <td>
-          <?php
-          $value = getenv($env_var);
-          if ($is_hidden)
-          {
-            $len = strlen($value);
-            for ($i = 0; $i < $len; $i++) echo '✱'; // HEAVY ASTERISK: Zapf Dingbats
-          }
-          else echo $value;
-          ?>
+          <code>
+            <?php
+            $value = getenv($env_var);
+            if ($is_hidden)
+            {
+              echo substr($value, 0, 4);
+              echo '<small>';
+              $len = strlen($value);
+
+              // ✱ HEAVY ASTERISK: Zapf Dingbats
+              // ✕ MULTIPLICATION X
+              // • BULLET
+              // ● BLACK CIRCLE
+              // ○ WHITE CIRCLE
+              for ($i = 4; $i < $len; $i++) echo '•';
+              echo '<small>';
+            }
+            else echo $value;
+            ?>
+          </code>
         </td>
       </tr>
       <?php endforeach; ?>
