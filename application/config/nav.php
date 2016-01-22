@@ -13,6 +13,7 @@ $config = [
   'navbar' => [
     'stats'         => '<span class="glyphicon glyphicon-stats"></span>',
     'message'       => '<span class="glyphicon glyphicon-envelope"></span>',
+    'list-unsubscribe' => '<span class="glyphicon glyphicon-list"></span>',
     's3'            => '<span class="glyphicon glyphicon-open-file"></span>',
     'autoresponder' => 'Autoresponder',
     'campaign'      => 'Campaign',
@@ -20,23 +21,24 @@ $config = [
     'settings'      => '<span class="glyphicon glyphicon-cog"></span>',
   ],
   'nav_tab' => [
+    // 'message' => [
+    //   'index' => 'Messages',
+    //   'list'    => 'List',
+    // ],
     's3' => [
       'upload'  => 'Upload',
-      'object'   => 'Objects',
+      'object'  => 'Objects',
     ],
     'autoresponder' => [
       'message' => 'Messages',
-      'lists'   => 'Lists',
       'history' => 'History',
     ],
     'campaign' => [
       'message' => 'Messages',
-      'lists'   => 'Lists',
       'history' => 'History',
     ],
     'transactional' => [
       'message' => 'Messages',
-      'label'   => 'Labels',
       'history' => 'History',
     ]
   ],

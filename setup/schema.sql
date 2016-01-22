@@ -111,33 +111,33 @@ CREATE TABLE IF NOT EXISTS message_archive (
 -- --------------------------------------------------------
 
 --
--- Table structure for table list
+-- Table structure for table list_unsubscribe
 --
 
-CREATE TABLE IF NOT EXISTS list (
+CREATE TABLE IF NOT EXISTS list_unsubscribe (
   list_id                 int                 NOT NULL  AUTO_INCREMENT,
-  name                    varchar(32)                   DEFAULT NULL,
+  list                    varchar(32)         NOT NULL  UNIQUE,
   unsubscribe_link        varchar(256)                  DEFAULT NULL,
   PRIMARY KEY (list_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
-INSERT INTO `ci_postmaster`.`list` (`name`) VALUES
-  -- @debug: do not remove ✊
-  ('debug'),
+INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`) VALUES
+  -- @debug: do not remove test ✊
+  ('test'),
   -- Camapaign
-  ('announcement'), ('newsletter'), ('debug'),
+  ('announcement'), ('newsletter'),
   -- Autoresponder
-  ('requested-invitation'), ('tips'), ('debug'),
+  ('requested-invitation'), ('tips'),
   -- Transactional
-  ('auth'), ('notification'), ('report'), ('invite'), ('debug');
+  ('auth'), ('notification'), ('report'), ('invite');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table list_subscribed
+-- Table structure for table list_unsubscribe_recipient
 --
 
-CREATE TABLE IF NOT EXISTS list_subscribed (
+CREATE TABLE IF NOT EXISTS list_unsubscribe_recipient (
   to_name                 varchar(64)         NOT NULL,
   to_email                varchar(256)        NOT NULL,
   list_id                 int                 NOT NULL  AUTO_INCREMENT,
@@ -145,8 +145,8 @@ CREATE TABLE IF NOT EXISTS list_subscribed (
   -- subscribed              datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP, -- DEFAULT '1000-01-01 00:00:00',
   unsubscribed            datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (email_id, list_id),
-  FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE
+  PRIMARY KEY (to_email, list_id),
+  FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS autoresponder (
   list_id                 int                 NOT NULL,
   time_str                varchar(64)                   DEFAULT NULL, -- now, +1 day http://php.net/manual/en/function.strtotime.php
   PRIMARY KEY (message_id),
-  FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS campaign (
   message_id              int                 NOT NULL,
   list_id                 int                 NOT NULL,
   PRIMARY KEY (message_id),
-  FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
@@ -188,6 +188,56 @@ CREATE TABLE IF NOT EXISTS transactional (
   message_id              int                 NOT NULL,
   list_id                 int                 NOT NULL,
   PRIMARY KEY (message_id),
-  FOREIGN KEY (list_id) REFERENCES list(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+
+
+-- @todo: ALTER
+
+-- Check all delete list_unsubscribe
+ALTER TABLE list_unsubscribe AUTO_INCREMENT = 1
+
+ALTER TABLE `list_unsubscribe` CHANGE `name` `list` VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin NULL;
+ALTER TABLE `list_unsubscribe` ADD `unsubscribe_link` VARCHAR(256) NULL DEFAULT NULL AFTER `list`;
+
+CREATE TABLE IF NOT EXISTS list_unsubscribe (
+  list_id                 int                 NOT NULL  AUTO_INCREMENT,
+  list                    varchar(32)         NOT NULL  UNIQUE,
+  unsubscribe_link        varchar(256)                  DEFAULT NULL,
+  PRIMARY KEY (list_id)
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`) VALUES
+  -- @debug: do not remove test ✊
+  ('test'),
+  -- Camapaign
+  ('announcement'), ('newsletter'),
+  -- Autoresponder
+  ('requested-invitation'), ('tips'),
+  -- Transactional
+  ('auth'), ('notification'), ('report'), ('invite');
+
+CREATE TABLE IF NOT EXISTS list_unsubscribe_recipient (
+  to_name                 varchar(64)         NOT NULL,
+  to_email                varchar(256)        NOT NULL,
+  list_id                 int                 NOT NULL  AUTO_INCREMENT,
+  uid                     varchar(64)                   DEFAULT NULL,
+  -- subscribed              datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP, -- DEFAULT '1000-01-01 00:00:00',
+  unsubscribed            datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (to_email, list_id),
+  FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+ALTER TABLE `transactional` CHANGE `label_id` `list_id` INT(11) NULL DEFAULT NULL;
+
+ALTER TABLE `transactional` DROP FOREIGN KEY `transactional_ibfk_1`; ALTER TABLE `transactional` ADD CONSTRAINT `transactional_ibfk_1` FOREIGN KEY (`list_id`) REFERENCES `ci_postmaster`.`list`(`list_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+UPDATE `transactional` SET `list_id`=1 WHERE 1;
+
+DROP TABLE label;
+
+-- Rename list => list_unsubscribe
+-- Rename list_subscribed => list_unsubscribe_recipient
+

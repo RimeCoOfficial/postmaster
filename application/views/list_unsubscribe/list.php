@@ -2,27 +2,33 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>Labels <span><a href="<?php echo base_url('transactional/label/create'); ?>" class="btn btn-primary pull-right">New</a></span></h1>
+<h1>
+  List-unsubscribe
+  <span><a href="<?php echo base_url('list-unsubscribe/create'); ?>" class="btn btn-primary pull-right">New</a></span>
+</h1>
 
-<?php // var_dump($label_list); ?>
+<?php // var_dump($list_unsubscribe); ?>
 
-<?php if (!empty($label_list)): ?>
+<?php if (!empty($list_unsubscribe)): ?>
   <div class="list-group">
-    <?php foreach ($label_list as $key => $label): ?>
+    <?php foreach ($list_unsubscribe as $list): ?>
       <div class="list-group-item">
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
-              <?php echo anchor('transactional/label/modify/'.$label['label_id'], $label['name']); ?>
+              <?php echo anchor('list-unsubscribe/modify/'.$list['list_id'], $list['list']); ?>
+              <small>
+                #<?php echo $list['list_id']; ?>
+              </small>
             </h5>
           </div>
       
           <div class="media-right">
             <a class="text-danger"
               data-toggle="modal"
-              data-target="#label-delete-modal"
-              data-label-id="<?php echo $label['label_id']; ?>"
-              data-label-name="<?php echo $label['name']; ?>"
+              data-target="#list-delete-modal"
+              data-list-id="<?php echo $list['list_id']; ?>"
+              data-list="<?php echo $list['list']; ?>"
               href="#"><span class="media-object glyphicon glyphicon-trash"></span>
             </a>
           </div>
@@ -34,12 +40,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <?php endif; ?>
 
 
-<div class="modal fade" id="label-delete-modal" tabindex="-1" role="dialog" aria-labelledby="label-delete-modal-label" aria-hidden="true">
+<div class="modal fade" id="list-delete-modal" tabindex="-1" role="dialog" aria-labelledby="list-delete-modal-label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="label-delete-modal-label">Delete Label</h4>
+        <h4 class="modal-title" id="list-delete-modal-label">Delete List</h4>
       </div>
       <div class="modal-body">
         <p>
@@ -58,14 +64,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <script type="text/javascript">
-  $('#label-delete-modal').on('show.bs.modal', function (event) {
+  $('#list-delete-modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
-    var label_name = button.data('label-name') // Extract info from data-* attributes
-    var label_id = button.data('label-id') // Extract info from data-* attributes
+    var list = button.data('list') // Extract info from data-* attributes
+    var list_id = button.data('list-id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    modal.find('.modal-body strong').text(label_name)
-    modal.find('.modal-footer a').attr("href", '<?php echo base_url('transactional/label/delete'); ?>' + '/' + label_id)
+    modal.find('.modal-body strong').text(list)
+    modal.find('.modal-footer a').attr("href", '<?php echo base_url('list-unsubscribe/delete'); ?>' + '/' + list_id)
   });
 </script>

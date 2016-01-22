@@ -25,9 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php echo $transactional['reply_to_email']; ?>
               </small>
 
-              <?php if (!empty($transactional['label'])): ?>
+              <?php if (!empty($transactional['list'])): ?>
                 <span class="pull-right label label-default">
-                  <?php echo $transactional['label']; ?>
+                  <?php echo $transactional['list']; ?>
                 </span>
               <?php endif; ?>
             </h5>

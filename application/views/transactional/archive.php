@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <?php echo $message['subject']; ?>
   <small>#<?php echo $message['message_id']; ?></small>
 
-  <span class="pull-right label label-default"><?php echo $message['label']; ?></span>
+  <span class="pull-right label label-default"><?php echo $message['list']; ?></span>
 </h1>
 
 <div class="jumbotron">

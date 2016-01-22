@@ -65,19 +65,19 @@ class Message extends CI_Controller
     }
     else
     {
-      $this->load->library('lib_label');
-      $label_list = $this->lib_label->get_list();
+      $this->load->library('lib_list_unsubscribe');
+      $list_list = $this->lib_list_unsubscribe->get_list();
 
-      $label_keys = [NULL => '&mdash;'];
-      foreach ($label_list as $label) $label_keys[ $label['label_id'] ] = $label['name'];
-      set_dropdown_options('label_id', $label_keys);
+      $list_keys = [NULL => '&mdash;'];
+      foreach ($list_list as $list) $list_keys[ $list['list_id'] ] = $list['name'];
+      set_dropdown_options('list_id', $list_keys);
 
       $this->load->library('form_validation');
       if ($this->form_validation->run('transactional/message/modify'))
       {
         if (is_null($this->lib_transactional->modify(
           $message_id,
-          $this->form_validation->set_value('label_id'),
+          $this->form_validation->set_value('list_id'),
           $this->form_validation->set_value('subject'),
           $this->form_validation->set_value('body_html_input'),
           $this->form_validation->set_value('reply_to_name'),

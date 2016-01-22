@@ -2,15 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>Label <span class="pull-right label label-default"><?php echo $label['name']; ?></span></h1>
+<h1>New List-unsubscribe</h1>
 
 <?php echo form_open(uri_string()); ?>
 
-<?php $this->view('form/input', array('id' => 'label', 'value' => $label['name'])); ?>
+<?php $this->view('form/input', array('id' => 'label', 'value' => NULL)); ?>
 
 <div class="row">
   <div class="col-sm-5">
-    <button type="submit" class="btn btn-primary btn-block">Modify</button>
+    <button type="submit" class="btn btn-primary btn-block">Create</button>
   </div>
 </div>
 

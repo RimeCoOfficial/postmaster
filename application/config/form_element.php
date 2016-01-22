@@ -22,7 +22,7 @@ $body_html_input_max_length = 99000;
 
 $reply_to_name_max_length   =    64;
 
-$label_max_length           =    32;
+$list_max_length            =    32;
 $subject_max_length         =   128;
 
 $config = array(
@@ -45,19 +45,19 @@ $config = array(
     'type'          => 'file',
   ),
 
-  'label' => array(
-    'label'         => 'Label',
-    'rules'         => 'strtolower|max_length['.$label_max_length.']|trim|alpha_dash|required',
+  'list' => array(
+    'label'         => 'List-unsubscribe',
+    'rules'         => 'strtolower|max_length['.$list_max_length.']|trim|alpha_dash|required',
 
-    'max_length'    => $label_max_length,
+    'max_length'    => $list_max_length,
     
     // html5 tag - not supported in Internet Explorer 9 and earlier versions.
     'placeholder'   => 'Don\'t worry, you can change it later.',
     'required'      => 1,
   ),
 
-  'label_id' => array(
-    'label'         => 'Label',
+  'list_id' => array(
+    'label'         => 'List-unsubscribe id',
     'rules'         => 'in_list[]|integer',
 
     'options'       => NULL,

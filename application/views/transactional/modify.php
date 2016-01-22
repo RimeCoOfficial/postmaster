@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <h1>
   <?php echo $message['subject']; ?>
   <small>#<?php echo $message['message_id']; ?></small>
-  <span class="pull-right label label-default"><?php echo $message['label']; ?></span>
+  <span class="pull-right label label-default"><?php echo $message['list']; ?></span>
 </h1>
 
 <?php // var_dump($message); ?>
@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php $this->view('form/input', array('id' => 'subject', 'value' => $message['subject'])); ?>
 
-<?php $this->view('form/dropdown', array('id' => 'label_id', 'value' => $message['label_id'])); ?>
+<?php $this->view('form/dropdown', array('id' => 'list_id', 'value' => $message['list_id'])); ?>
 
 <?php $this->view('form/input', array('id' => 'reply_to_name', 'value' => $message['reply_to_name'])); ?>
 <?php $this->view('form/input', array('id' => 'reply_to_email', 'value' => $message['reply_to_email'])); ?>

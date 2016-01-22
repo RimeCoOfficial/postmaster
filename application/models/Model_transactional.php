@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Model_transactional extends CI_Model
 {
   private $transactional_table = 'transactional';
-  private $label_table = 'label';
+  private $list_unsubscribe_table = 'list_unsubscribe';
   private $message_table = 'message';
 
   function create($message_id)
@@ -18,11 +18,11 @@ class Model_transactional extends CI_Model
     $this->db->limit(1);
 
     $this->db->select($this->message_table.'.*');
-    $this->db->select($this->label_table.'.label_id');
-    $this->db->select($this->label_table.'.name AS label');
+    $this->db->select($this->list_unsubscribe_table.'.list_id');
+    $this->db->select($this->list_unsubscribe_table.'.list');
 
     $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->transactional_table.'.message_id');
-    $this->db->join($this->label_table, $this->label_table.'.label_id = '.$this->transactional_table.'.label_id', 'LEFT');
+    $this->db->join($this->list_unsubscribe_table, $this->list_unsubscribe_table.'.list_id = '.$this->transactional_table.'.list_id', 'LEFT');
 
     $this->db->where($this->transactional_table.'.message_id', $message_id);
     $query = $this->db->get($this->transactional_table);
@@ -34,12 +34,12 @@ class Model_transactional extends CI_Model
     $this->db->limit(50);
 
     $this->db->select($this->message_table.'.*');
-    $this->db->select($this->label_table.'.name AS label');
+    $this->db->select($this->list_unsubscribe_table.'.list');
 
     $this->db->order_by($this->message_table.'.message_id', 'DESC');
 
     $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->transactional_table.'.message_id');
-    $this->db->join($this->label_table, $this->label_table.'.label_id = '.$this->transactional_table.'.label_id', 'LEFT');
+    $this->db->join($this->list_unsubscribe_table, $this->list_unsubscribe_table.'.list_id = '.$this->transactional_table.'.list_id', 'LEFT');
 
     // $this->db->where('published >', '1000-01-01 00:00:00');
     
@@ -47,9 +47,9 @@ class Model_transactional extends CI_Model
     return $query->result_array();
   }
 
-  function update($message_id, $label_id)
+  function update($message_id, $list_id)
   {
-    $this->db->set('label_id', $label_id);
+    $this->db->set('list_id', $list_id);
 
     $this->db->where('message_id', $message_id);
 
