@@ -16,10 +16,9 @@ class Settings extends CI_Controller
 
   public function index($filter = NULL)
   {
-    phpinfo(INFO_ENVIRONMENT);
-    // $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
+    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    // $view_data['main_content'] = $this->load->view('settings', NULL, TRUE);
-    // $this->load->view('base', $view_data);
+    $view_data['main_content'] = $this->load->view('settings', NULL, TRUE);
+    $this->load->view('base', $view_data);
   }
 }

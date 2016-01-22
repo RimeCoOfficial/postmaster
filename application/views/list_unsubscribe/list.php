@@ -3,9 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <h1>
-  List-unsubscribe
+  List-Unsubscribe
   <span><a href="<?php echo base_url('list-unsubscribe/create'); ?>" class="btn btn-primary pull-right">New</a></span>
 </h1>
+
+<div class="well well-lg">
+  <h4>What is it?</h4>
+  <p>
+    The <a href="http://www.list-unsubscribe.com/" target="_blank" class="alert-link">List-unsubscribe</a> header is an optional chunk of text that email publishers and marketers can include in the header portion of the messages they send. Recipients don't see the header itself, they see an Unsubscribe button they can click if they would like to automatically stop future messages. 
+  </p>
+</div>
+
+<h4></h4>
+<p>
+  
+</p>
 
 <?php // var_dump($list_unsubscribe); ?>
 

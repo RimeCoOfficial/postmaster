@@ -42,38 +42,31 @@ CodeIgniter Version <?php echo CI_VERSION; ?>
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
                 </button>
-                <?php
-                if (!$is_logged_in)
-                {
-                  ?>
-                  <a class="navbar-brand">Postmaster</a>
-                  <?php
-                }
-                else
-                {
-                  ?>
-                  <a class="navbar-brand visible-xs-inline">Postmaster</a>
-                  <?php
-                }
-                ?>
+                
+                <a class="navbar-brand">Postmaster</a>
               </div>
               <div id="navbar" class="navbar-collapse collapse">
-                <?php
-                if ($is_logged_in)
-                {
-                  $nav_selected = explode('/', uri_string());
-                  $nav_selected = $nav_selected[0];
-                  ?>
-                  <ul class="nav navbar-nav">
-                    <?php foreach ($navbar as $uri => $name): ?>
-                    <li class="<?php if ($nav_selected == $uri) echo 'active'; ?>">
-                      <a href="<?php echo base_url($uri); ?>"><?php echo $name; ?></a>
-                    </li>
-                    <?php endforeach; ?>
-                  </ul>
+                <ul class="nav navbar-nav">
+                  
                   <?php
-                }
-                ?>
+                  if ($is_logged_in)
+                  {
+                    $nav_selected = explode('/', uri_string());
+                    $nav_selected = $nav_selected[0];
+                    
+                    foreach ($navbar as $uri => $name): ?>
+                      <li class="<?php if ($nav_selected == $uri) echo 'active'; ?>">
+                        <a href="<?php echo base_url($uri); ?>"><?php echo $name; ?></a>
+                      </li>
+                    <?php endforeach;
+                  }
+                  ?>
+                  <!-- <li>
+                    <a href="https://github.com/Rimeofficial/postmaster" title="Fork me on GitHub" target="_blank">
+                      <span class="glyphicon glyphicon-cutlery"></span>
+                    </a>
+                  </li> -->
+                </ul>
                 
                 <ul class="nav navbar-nav navbar-right">
                   <?php
@@ -104,9 +97,11 @@ CodeIgniter Version <?php echo CI_VERSION; ?>
           <footer>
 
             <p class="small">
+              <a class="text-muted" href="http://wiki.rime.co/postmaster">
+                <span class="glyphicon glyphicon-info-sign"></span>
+              </a>
               <a class="text-muted" href="https://github.com/RimeOfficial/postmaster">
-                <span class="glyphicon glyphicon-barcode"></span>
-                <strong class="pull-right">Postmaster v1.0</strong>
+                <strong class="pull-right"><?php echo app_name(); ?> v1.0</strong>
               </a>
             </p>
 

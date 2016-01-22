@@ -10,36 +10,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $config = [
-  'navbar' => [
-    'stats'         => '<span class="glyphicon glyphicon-stats"></span>',
-    'message'       => '<span class="glyphicon glyphicon-envelope"></span>',
-    'list-unsubscribe' => '<span class="glyphicon glyphicon-list"></span>',
-    's3'            => '<span class="glyphicon glyphicon-open-file"></span>',
-    'autoresponder' => 'Autoresponder',
-    'campaign'      => 'Campaign',
-    'transactional' => 'Transactional',
-    'settings'      => '<span class="glyphicon glyphicon-cog"></span>',
+    'navbar' => [
+    'stats'         => 'Stats',
+    'list-unsubscribe' => 'List-Unsubscribe',
+    'message'       => 'Message',
+    's3'            => 'S3',
+    'settings'      => 'Settings',
   ],
   'nav_tab' => [
-    // 'message' => [
-    //   'index' => 'Messages',
-    //   'list'    => 'List',
-    // ],
     's3' => [
       'upload'  => 'Upload',
       'object'  => 'Objects',
     ],
-    'autoresponder' => [
-      'message' => 'Messages',
-      'history' => 'History',
-    ],
-    'campaign' => [
-      'message' => 'Messages',
-      'history' => 'History',
-    ],
-    'transactional' => [
-      'message' => 'Messages',
-      'history' => 'History',
-    ]
+    // 'autoresponder' => [
+    //   'message' => 'Messages',
+    //   'history' => 'History',
+    // ],
+    // 'campaign' => [
+    //   'message' => 'Messages',
+    //   'history' => 'History',
+    // ],
+    // 'transactional' => [
+    //   'message' => 'Messages',
+    //   'history' => 'History',
+    // ]
   ],
 ];
