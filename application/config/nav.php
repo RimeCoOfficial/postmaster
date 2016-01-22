@@ -11,11 +11,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config = [
     'navbar' => [
-    'stats'         => 'Stats',
-    'list-unsubscribe' => 'List-Unsubscribe',
-    'message'       => 'Message',
-    's3'            => 'S3',
-    'settings'      => 'Settings',
+    'stats'             => 'Stats',
+    'list-unsubscribe'  => 'List-unsubscribe',
+    'message'           => 'Message',
+    's3'                => 'S3',
+    'settings'          => 'Settings',
   ],
   'nav_tab' => [
     's3' => [
