@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Transactional extends CI_Controller
+class Message extends CI_Controller
 {
   function __construct()
   {
@@ -12,14 +12,14 @@ class Transactional extends CI_Controller
     $this->load->library('lib_api');
     if (is_null($this->lib_api->check_api_key())) output_error($this->lib_api->get_error_message());
 
-    $this->load->library('lib_transactional');
+    $this->load->library('lib_message');
   }
 
-  public function send($message_id = 0)
+  public function request_transactional($message_id = 0)
   {
-    if (is_null($result = $this->lib_transactional->add_message()))
+    if (is_null($result = $this->lib_message->add_request()))
     {
-      output_error($this->lib_transactional->get_error_message());
+      output_error($this->lib_message->get_error_message());
     }
 
     output($result);

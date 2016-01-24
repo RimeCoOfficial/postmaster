@@ -2,7 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>Messages</h1>
+<h1>
+  Messages
+  <span><a href="<?php echo base_url('message/create'); ?>" class="btn btn-primary pull-right">New</a></span>
+</h1>
 
 <?php // var_dump($list); ?>
 
@@ -69,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </small>
 
               <span class="pull-right label label-default">
-                <?php echo $message['owner']; ?>
+                <?php echo $message['list']; ?>
               </span>
             </h5>
           </div>

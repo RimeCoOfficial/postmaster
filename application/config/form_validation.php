@@ -11,11 +11,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config = array(
   // 'controller/method'            => ['value1', 'value2'],
 
-  'list_unsubscribe/create'         => ['list'],
-  'list_unsubscribe/modify'         => ['list'],
+  'list_unsubscribe/create' => ['list'],
+  'list_unsubscribe/modify' => ['list'],
 
-  'transactional/message/create'    => ['subject'],
-  'transactional/message/modify'    => ['list_id', 'subject', 'reply_to_name', 'reply_to_email', 'body_html_input', 'list_id'],
+  'message/create' => ['list_id', 'subject', 'owner'],
+  'message/modify' => ['list_id', 'subject', 'owner', 'reply_to_name', 'reply_to_email', 'body_html_input'],
 );
 
 if ( ! function_exists('fill_element'))

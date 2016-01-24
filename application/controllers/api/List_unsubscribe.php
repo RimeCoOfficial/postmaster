@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Campaign extends CI_Controller
+class List_unsubscribe extends CI_Controller
 {
   public function subscribe($list_id)
   {}

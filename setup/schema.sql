@@ -38,12 +38,55 @@ CREATE TABLE IF NOT EXISTS feedback (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table list_unsubscribe
+--
+
+CREATE TABLE IF NOT EXISTS list_unsubscribe (
+  list_id                 int                 NOT NULL  AUTO_INCREMENT,
+  list                    varchar(32)         NOT NULL  UNIQUE,
+  unsubscribe_link        varchar(256)                  DEFAULT NULL,
+  PRIMARY KEY (list_id)
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`) VALUES
+  -- @debug: do not remove test ✊
+  ('test'),
+  -- Camapaign
+  ('announcement'), ('newsletter'),
+  -- Autoresponder
+  ('requested-invitation'), ('tips'),
+  -- Transactional
+  ('auth'), ('notification'), ('report'), ('invite');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table list_unsubscribe_recipient
+--
+
+CREATE TABLE IF NOT EXISTS list_unsubscribe_recipient (
+  to_name                 varchar(64)         NOT NULL,
+  to_email                varchar(256)        NOT NULL,
+  list_id                 int                 NOT NULL  AUTO_INCREMENT,
+  uid                     varchar(64)                   DEFAULT NULL,
+  -- subscribed              datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP, -- DEFAULT '1000-01-01 00:00:00',
+  unsubscribed            datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (to_email, list_id),
+  FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table message
 --
 
 CREATE TABLE IF NOT EXISTS message (
   message_id              int                 NOT NULL  AUTO_INCREMENT,
-  owner                   varchar(16)         NOT NULL,
+  list_id                 int                 NOT NULL,
+  owner                   varchar(16)         NOT NULL, -- autoresponder, campaign, transactional
 
   subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
   body_html_input         text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
@@ -56,11 +99,13 @@ CREATE TABLE IF NOT EXISTS message (
   ga_campaign_query       varchar(256)                  DEFAULT NULL,
   list_unsubscribe        tinyint(1)          NOT NULL  DEFAULT 0,
   
-  published               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  -- published               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  published_str           varchar(256)                  DEFAULT NULL, -- now, '1000-01-01 00:00:00'
   archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
 
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (message_id)
+  PRIMARY KEY (message_id),
+  FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE RESTRICT ON DELETE RESTRICT
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -108,43 +153,10 @@ CREATE TABLE IF NOT EXISTS message_archive (
   FOREIGN KEY (request_id) REFERENCES message_request(request_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
--- --------------------------------------------------------
 
---
--- Table structure for table list_unsubscribe
---
+-- @ALTER
 
-CREATE TABLE IF NOT EXISTS list_unsubscribe (
-  list_id                 int                 NOT NULL  AUTO_INCREMENT,
-  list                    varchar(32)         NOT NULL  UNIQUE,
-  unsubscribe_link        varchar(256)                  DEFAULT NULL,
-  PRIMARY KEY (list_id)
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
-INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`) VALUES
-  -- @debug: do not remove test ✊
-  ('test'),
-  -- Camapaign
-  ('announcement'), ('newsletter'),
-  -- Autoresponder
-  ('requested-invitation'), ('tips'),
-  -- Transactional
-  ('auth'), ('notification'), ('report'), ('invite');
-
--- --------------------------------------------------------
-
---
--- Table structure for table list_unsubscribe_recipient
---
-
-CREATE TABLE IF NOT EXISTS list_unsubscribe_recipient (
-  to_name                 varchar(64)         NOT NULL,
-  to_email                varchar(256)        NOT NULL,
-  list_id                 int                 NOT NULL  AUTO_INCREMENT,
-  uid                     varchar(64)                   DEFAULT NULL,
-  -- subscribed              datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP, -- DEFAULT '1000-01-01 00:00:00',
-  unsubscribed            datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (to_email, list_id),
-  FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE CASCADE ON DELETE CASCADE
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+ALTER TABLE `message` ADD `list_id` INT NOT NULL AFTER `message_id`;
+ALTER TABLE `message` ADD INDEX(`list_id`);
+UPDATE `message` SET `list_id`=1 WHERE 1;
+ALTER TABLE `message` ADD FOREIGN KEY (`list_id`) REFERENCES `ci_postmaster`.`list_unsubscribe`(`list_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;

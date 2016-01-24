@@ -23,6 +23,8 @@ $body_html_input_max_length = 99000;
 $reply_to_name_max_length   =    64;
 
 $list_max_length            =    32;
+$message_owner_options      = ['autoresponder' => 'Autoresponder', 'campaign' => 'Campaign', 'transactional' => 'Transactional'];
+
 $subject_max_length         =   128;
 
 $config = array(
@@ -57,10 +59,22 @@ $config = array(
   ),
 
   'list_id' => array(
-    'label'         => 'List-unsubscribe id',
-    'rules'         => 'in_list[]|integer',
+    'label'         => 'List-unsubscribe ID',
+    'rules'         => 'trim|is_natural_no_zero|greater_than[0]|required',
 
-    'options'       => NULL,
+    'max_length'    => $reply_to_name_max_length,
+    
+    // html5 tag - not supported in Internet Explorer 9 and earlier versions.
+    'placeholder'   => 'List-unsubscribe id without the hash (eg. 1 for list-unsubscribe: test #1)',
+    'required'      => 1,
+  ),
+
+  'owner' => array(
+    'label'         => 'Genre',
+    'rules'         => 'trim|in_list['.implode(',', array_keys($message_owner_options)).']|required',
+
+    'options'       => $message_owner_options,
+    'required'      => 1,
   ),
 
   'subject' => array(

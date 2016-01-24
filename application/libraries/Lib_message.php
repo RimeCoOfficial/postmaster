@@ -34,13 +34,20 @@ class Lib_message
     return $this->CI->model_message->get_list();
   }
 
-  function create($owner, $subject, $published = '1000-01-01 00:00:00')
+  function create($subject, $owner, $list_id, $published = '1000-01-01 00:00:00')
   {
-    return $this->CI->model_message->create($owner, $subject, $published);
+    if ($owner == 'transactional') $published = date('Y-m-d H:m:s');
+
+    return $this->CI->model_message->create($subject, $owner, $list_id, $published);
   }
 
-  function modify($message_id, $owner, $subject, $published, $body_html_input, $reply_to_name, $reply_to_email)
+  function modify($message_id, $subject, $owner, $list_id, $published, $body_html_input, $reply_to_name, $reply_to_email)
   {
+    // var_dump($message_id, $subject, $owner, $list_id, $published, $body_html_input, $reply_to_name, $reply_to_email); die();
+
+    $published = '1000-01-01 00:00:00';
+    if ($owner == 'transactional') $published = date('Y-m-d H:m:s');
+
     if (is_null($result = $this->_process_html($message_id, $body_html_input)))
     {
       return NULL;
@@ -50,19 +57,22 @@ class Lib_message
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
     $this->CI->model_message->update(
-      $message_id, $owner, $subject, $published, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
+      $message_id, $subject, $owner, $list_id, $published, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
     );
+    
     return TRUE;
   }
 
   function archive($message_id, $owner)
   {
     $this->CI->model_message->archive($message_id, $owner);
+    return TRUE;
   }
 
   function unarchive($message_id, $owner)
   {
     $this->CI->model_message->unarchive($message_id, $owner);
+    return TRUE;
   }
 
   function _process_html($message_id, $body_html_input)
@@ -122,5 +132,31 @@ class Lib_message
     $body_html = $dom->innertext;
 
     return compact('body_html', 'body_text');
+  }
+
+  function add_request()
+  {
+    $this->CI->load->library('lib_message_request');
+
+    $message_id = $this->CI->input->post('message_id');
+
+    $to_name = $this->CI->input->post('to_name');
+
+    if (is_null($to_email = valid_email($this->CI->input->post('to_email'))))
+    {
+      $this->error = ['status' => 401, 'message' => 'invalid email address in to_email'];
+      return NULL;
+    }
+
+    $pseudo_vars = $this->CI->input->post('pseudo_vars');
+    
+    if (is_null($request_id = $this->CI->lib_message_request->add(
+      $message_id, 'transactional', $to_name, $to_email, $pseudo_vars)))
+    {
+      $this->error = $this->CI->lib_message_request->get_error_message();
+      return NULL;
+    }
+
+    return ['request_id' => $request_id];
   }
 }

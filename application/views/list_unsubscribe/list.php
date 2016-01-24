@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </small>
             </h5>
           </div>
-      
+          
           <div class="media-right">
             <a class="text-danger"
               data-toggle="modal"

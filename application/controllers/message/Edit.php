@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Message extends CI_Controller
+class Edit extends CI_Controller
 {
   function __construct()
   {
@@ -12,15 +12,12 @@ class Message extends CI_Controller
     {
       redirect();
     }
+
+    $this->load->library('lib_message_archive');
   }
 
   function index()
   {
-    $local_view_data = [];
 
-    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
-
-    $view_data['main_content'] = $this->load->view('autoresponder/list', $local_view_data, TRUE);
-    $this->load->view('base', $view_data);
   }
 }
