@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php echo form_open(uri_string()); ?>
 
-<?php $this->view('form/input', array('id' => 'label', 'value' => NULL)); ?>
+<?php $this->view('form/input', array('id' => 'list', 'value' => NULL)); ?>
 
 <div class="row">
   <div class="col-sm-5">

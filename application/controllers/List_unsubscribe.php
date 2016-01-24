@@ -44,7 +44,7 @@ class List_unsubscribe extends CI_Controller
       }
       else
       {
-        redirect('list_unsubscribe/modify/'.$list_id);
+        redirect('list-unsubscribe/modify/'.$list_id);
       }
     }
 
@@ -74,7 +74,7 @@ class List_unsubscribe extends CI_Controller
       }
       else
       {
-        redirect('list_unsubscribe/modify/'.$list_id);
+        redirect('list-unsubscribe/modify/'.$list_id);
       }
     }
 
@@ -87,6 +87,6 @@ class List_unsubscribe extends CI_Controller
   public function delete($list_id = 0)
   {
     $this->lib_list_unsubscribe->delete($list_id);
-    redirect('list_unsubscribe');
+    redirect('list-unsubscribe');
   }
 }
