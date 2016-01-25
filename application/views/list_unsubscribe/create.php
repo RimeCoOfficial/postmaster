@@ -22,5 +22,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <ul>
   <li>It must be unique</li>
   <li>It must contain alpha-numeric, dashes and underscore</li>
-  <li>Examples: <code>newsletter</code> <code>notification</code> <code>announcement</code> <code>tip</code> <code>report</code></li>
+  <li>Examples: <code>newsletter</code> <code>notification</code> <code>announcement</code> <code>requested-invitation</code></li>
 </ul>
