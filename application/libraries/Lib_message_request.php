@@ -22,9 +22,9 @@ class Lib_message_request
     return $this->error;
   }
 
-  function add($message_id, $owner, $to_name, $to_email, $pseudo_vars)
+  function add($message_id, $type, $to_name, $to_email, $pseudo_vars)
   {
-    if (!$this->CI->model_message_request->can_add($message_id, $owner))
+    if (!$this->CI->model_message_request->can_add($message_id, $type))
     {
       $this->error = ['status' => 401, 'message' => 'invalid message_id'];
       return NULL;
@@ -105,7 +105,7 @@ class Lib_message_request
     $message_archive['list_unsubscribe'] = 0;
 
     $message_archive['priority'] = 0;
-    switch ($message['owner'])
+    switch ($message['type'])
     {
       case 'transactional': $message_archive['priority'] = 15; break;
       case 'campaign':      $message_archive['priority'] = 10; break;

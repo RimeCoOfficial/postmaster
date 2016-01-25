@@ -40,10 +40,10 @@ class Model_message extends CI_Model
     return $query->result_array();
   }
 
-  function create($subject, $owner, $list_id, $published)
+  function create($subject, $type, $list_id, $published)
   {
     $this->db->set('subject', $subject);
-    $this->db->set('owner', $owner);
+    $this->db->set('type', $type);
     $this->db->set('list_id', $list_id);
     $this->db->set('published', $published);
 
@@ -51,10 +51,10 @@ class Model_message extends CI_Model
     return $this->db->insert_id();
   }
 
-  function update($message_id, $subject, $owner, $list_id, $published, $body_html_input, $body_html, $body_text, $reply_to_name, $reply_to_email)
+  function update($message_id, $subject, $type, $list_id, $published, $body_html_input, $body_html, $body_text, $reply_to_name, $reply_to_email)
   {
     $this->db->set('subject', $subject);
-    $this->db->set('owner', $owner);
+    $this->db->set('type', $type);
     $this->db->set('list_id', $list_id);
     $this->db->set('reply_to_name', $reply_to_name);
     $this->db->set('reply_to_email', $reply_to_email);
@@ -70,23 +70,23 @@ class Model_message extends CI_Model
     $this->db->update($this->message_table);
   }
 
-  function archive($message_id, $owner)
+  function archive($message_id, $type)
   {
     $this->db->set('archived', 'CURRENT_TIMESTAMP()', FALSE);
     
     $this->db->where('message_id', $message_id);
-    $this->db->where('owner', $owner);
+    $this->db->where('type', $type);
     $this->db->where('archived', '1000-01-01 00:00:00');
 
     $this->db->update($this->message_table);
   }
 
-  function unarchive($message_id, $owner)
+  function unarchive($message_id, $type)
   {
     $this->db->set('archived', '1000-01-01 00:00:00');
     
     $this->db->where('message_id', $message_id);
-    $this->db->where('owner', $owner);
+    $this->db->where('type', $type);
     $this->db->where('archived !=', '1000-01-01 00:00:00');
 
     $this->db->update($this->message_table);

@@ -6,13 +6,13 @@ class Model_message_request extends CI_Model
   private $message_table = 'message';
   private $message_request_table = 'message_request';
 
-  function can_add($message_id, $owner)
+  function can_add($message_id, $type)
   {
     $this->db->limit(1);
 
     $this->db->where('message_id', $message_id);
 
-    if (!empty($owner)) $this->db->where('owner', $owner);
+    if (!empty($type)) $this->db->where('type', $type);
 
     $this->db->where('published !=', '1000-01-01 00:00:00');
     $this->db->where('archived', '1000-01-01 00:00:00');

@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <?php echo $message['subject']; ?>
               <small>
                 #<?php echo $message['message_id']; ?>
-                <span class="text-uppercase"><?php echo $message['owner']; ?></span>
+                <span class="text-uppercase"><?php echo $message['type']; ?></span>
                 <?php echo $message['reply_to_name']; ?>
                 <?php echo $message['reply_to_email']; ?>
                 <?php echo date('M d, Y h:i A', strtotime($message['created'])); ?>

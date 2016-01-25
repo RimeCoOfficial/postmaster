@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS list_unsubscribe (
   list                    varchar(32)         NOT NULL  UNIQUE,
   unsubscribe_link        varchar(256)                  DEFAULT NULL,
   -- archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  -- created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (list_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS list_unsubscribe_recipient (
 CREATE TABLE IF NOT EXISTS message (
   message_id              int                 NOT NULL  AUTO_INCREMENT,
   list_id                 int                 NOT NULL,
-  owner                   varchar(16)         NOT NULL, -- autoresponder, campaign, transactional
+  type                    varchar(16)         NOT NULL, -- autoresponder, campaign, transactional
 
   subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
   body_html_input         text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
@@ -154,11 +154,3 @@ CREATE TABLE IF NOT EXISTS message_archive (
   PRIMARY KEY (request_id),
   FOREIGN KEY (request_id) REFERENCES message_request(request_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
-
--- @ALTER
-
-ALTER TABLE `message` ADD `list_id` INT NOT NULL AFTER `message_id`;
-ALTER TABLE `message` ADD INDEX(`list_id`);
-UPDATE `message` SET `list_id`=1 WHERE 1;
-ALTER TABLE `message` ADD FOREIGN KEY (`list_id`) REFERENCES `ci_postmaster`.`list_unsubscribe`(`list_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;

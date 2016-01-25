@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <h5 class="media-heading">
                 <code>[<?php echo $request['request_id']; ?>] Processing request</code>
                 <small>
-                  <span class="text-uppercase"><?php echo $request['owner']; ?></span>
+                  <span class="text-uppercase"><?php echo $request['type']; ?></span>
                   #<?php echo $request['message_id']; ?>,
 
                   requested <?php echo date('M d, Y h:i A', strtotime($request['created'])); ?>
@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <h5 class="media-heading">
                 <?php echo $request['subject']; ?>
                 <small>
-                  <span class="text-uppercase"><?php echo $request['owner']; ?></span>
+                  <span class="text-uppercase"><?php echo $request['type']; ?></span>
                   #<?php echo $request['message_id']; ?>,
 
                   <?php if ($request['sent'] != '1000-01-01 00:00:00') {

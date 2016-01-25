@@ -63,7 +63,7 @@ class Message extends CI_Controller
     {
       if (is_null($message_id = $this->lib_message->create(
         $this->form_validation->set_value('subject'),
-        $this->form_validation->set_value('owner'),
+        $this->form_validation->set_value('type'),
         $this->form_validation->set_value('list_id')
       )))
       {
@@ -98,12 +98,12 @@ class Message extends CI_Controller
       $this->load->library('form_validation');
       if ($this->form_validation->run('message/modify'))
       {
-        // var_dump($this->form_validation->set_value('owner')); die();
+        // var_dump($this->form_validation->set_value('type')); die();
         
         if (is_null($this->lib_message->modify(
           $message_id,
           $this->form_validation->set_value('subject'),
-          $this->form_validation->set_value('owner'),
+          $this->form_validation->set_value('type'),
           $this->form_validation->set_value('list_id'),
           NULL,
           $this->form_validation->set_value('body_html_input'),
@@ -127,28 +127,28 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function archive($message_id = NULL, $owner = NULL)
+  public function archive($message_id = NULL, $type = NULL)
   {
-    if ($owner != 'transactional')
+    if ($type != 'transactional')
     {
       show_error('Unsupported achive type');
     }
     
-    if (is_null($this->lib_message->archive($message_id, $owner)))
+    if (is_null($this->lib_message->archive($message_id, $type)))
     {
       show_error($this->lib_message->get_error_message());
     }
     redirect('message/show/'.$message_id);
   }
 
-  public function unarchive($message_id = NULL, $owner = NULL)
+  public function unarchive($message_id = NULL, $type = NULL)
   {
-    if ($owner != 'transactional')
+    if ($type != 'transactional')
     {
       show_error('Unsupported achive type');
     }
     
-    if (is_null($this->lib_message->unarchive($message_id, $owner)))
+    if (is_null($this->lib_message->unarchive($message_id, $type)))
     {
       show_error($this->lib_message->get_error_message());
     }

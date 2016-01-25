@@ -23,7 +23,11 @@ $body_html_input_max_length = 99000;
 $reply_to_name_max_length   =    64;
 
 $list_max_length            =    32;
-$message_owner_options      = ['autoresponder' => 'Autoresponder', 'campaign' => 'Campaign', 'transactional' => 'Transactional'];
+$message_type_options       = [
+  'autoresponder' => 'Autoresponder',
+  'campaign'      => 'Campaign',
+  'transactional' => 'Transactional'
+];
 
 $subject_max_length         =   128;
 
@@ -69,11 +73,11 @@ $config = array(
     'required'      => 1,
   ),
 
-  'owner' => array(
+  'type' => array(
     'label'         => 'Genre',
-    'rules'         => 'trim|in_list['.implode(',', array_keys($message_owner_options)).']|required',
+    'rules'         => 'trim|in_list['.implode(',', array_keys($message_type_options)).']|required',
 
-    'options'       => $message_owner_options,
+    'options'       => $message_type_options,
     'required'      => 1,
   ),
 
@@ -88,8 +92,8 @@ $config = array(
     'required'      => 1,
   ),
 
-  // 'message_owner'  => array(
-  //   'label'         => 'Owner',
+  // 'message_type'  => array(
+  //   'label'         => 'type',
   //   'rules'         => 'in_list[autoresponder,campaign,transactional]|required',
 
   //   'options'       => ['autoresponder' => 'Autoresponder', 'campaign' => 'Campaign', 'transactional' => 'Transactional'],

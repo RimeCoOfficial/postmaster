@@ -29,10 +29,10 @@ class Lib_message_archive
     return $this->CI->model_message_archive->get($request_id, $web_version_key);
   }
 
-  function get_list($owner)
+  function get_list($type)
   {
     $count = 100;
-    return $this->CI->model_message_archive->get_list($owner, $count);
+    return $this->CI->model_message_archive->get_list($type, $count);
   }
 
   function get_unsent($count)

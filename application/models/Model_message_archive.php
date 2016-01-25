@@ -25,7 +25,7 @@ class Model_message_archive extends CI_Model
     return $query->row_array();
   }
 
-  function get_list($owner, $count)
+  function get_list($type, $count)
   {
     // $this->db->select($this->message_archive_table.'.*');
     $this->db->select($this->message_request_table.'.request_id');
@@ -36,7 +36,7 @@ class Model_message_archive extends CI_Model
     $this->db->select($this->message_request_table.'.to_email');
     $this->db->select($this->message_request_table.'.created');
     $this->db->select($this->message_table.'.message_id');
-    $this->db->select($this->message_table.'.owner');
+    $this->db->select($this->message_table.'.type');
 
     $this->db->limit($count);
     $this->db->order_by($this->message_request_table.'.request_id', 'DESC');
@@ -46,7 +46,7 @@ class Model_message_archive extends CI_Model
     $this->db->join($this->message_archive_table, $this->message_request_table.'.request_id = '.$this->message_archive_table.'.request_id', 'LEFT');
     $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->message_request_table.'.message_id');
 
-    $this->db->where('owner', $owner);
+    $this->db->where('type', $type);
 
     $query = $this->db->get($this->message_request_table);
     return $query->result_array();

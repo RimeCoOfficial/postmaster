@@ -14,8 +14,8 @@ $config = array(
   'list_unsubscribe/create' => ['list'],
   'list_unsubscribe/modify' => ['list'],
 
-  'message/create' => ['list_id', 'subject', 'owner'],
-  'message/modify' => ['list_id', 'subject', 'owner', 'reply_to_name', 'reply_to_email', 'body_html_input'],
+  'message/create' => ['list_id', 'subject', 'type'],
+  'message/modify' => ['list_id', 'subject', 'type', 'reply_to_name', 'reply_to_email', 'body_html_input'],
 );
 
 if ( ! function_exists('fill_element'))

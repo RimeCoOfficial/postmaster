@@ -34,19 +34,19 @@ class Lib_message
     return $this->CI->model_message->get_list();
   }
 
-  function create($subject, $owner, $list_id, $published = '1000-01-01 00:00:00')
+  function create($subject, $type, $list_id, $published = '1000-01-01 00:00:00')
   {
-    if ($owner == 'transactional') $published = date('Y-m-d H:m:s');
+    if ($type == 'transactional') $published = date('Y-m-d H:m:s');
 
-    return $this->CI->model_message->create($subject, $owner, $list_id, $published);
+    return $this->CI->model_message->create($subject, $type, $list_id, $published);
   }
 
-  function modify($message_id, $subject, $owner, $list_id, $published, $body_html_input, $reply_to_name, $reply_to_email)
+  function modify($message_id, $subject, $type, $list_id, $published, $body_html_input, $reply_to_name, $reply_to_email)
   {
-    // var_dump($message_id, $subject, $owner, $list_id, $published, $body_html_input, $reply_to_name, $reply_to_email); die();
+    // var_dump($message_id, $subject, $type, $list_id, $published, $body_html_input, $reply_to_name, $reply_to_email); die();
 
     $published = '1000-01-01 00:00:00';
-    if ($owner == 'transactional') $published = date('Y-m-d H:m:s');
+    if ($type == 'transactional') $published = date('Y-m-d H:m:s');
 
     if (is_null($result = $this->_process_html($message_id, $body_html_input)))
     {
@@ -57,21 +57,21 @@ class Lib_message
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
     $this->CI->model_message->update(
-      $message_id, $subject, $owner, $list_id, $published, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
+      $message_id, $subject, $type, $list_id, $published, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
     );
     
     return TRUE;
   }
 
-  function archive($message_id, $owner)
+  function archive($message_id, $type)
   {
-    $this->CI->model_message->archive($message_id, $owner);
+    $this->CI->model_message->archive($message_id, $type);
     return TRUE;
   }
 
-  function unarchive($message_id, $owner)
+  function unarchive($message_id, $type)
   {
-    $this->CI->model_message->unarchive($message_id, $owner);
+    $this->CI->model_message->unarchive($message_id, $type);
     return TRUE;
   }
 

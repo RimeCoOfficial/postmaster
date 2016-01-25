@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   List-unsubscribe: <?php echo anchor('list-unsubcribe/#', $message['list']); ?>
 
   <a href="<?php echo base_url('message/#'); ?>">
-    <span class="pull-right label label-default"><?php echo $message['owner']; ?></span>
+    <span class="pull-right label label-default"><?php echo $message['type']; ?></span>
   </a>
 </p>
 
@@ -76,7 +76,7 @@ if ($message['archived'] == '1000-01-01 00:00:00')
       <h3 class="panel-title">Warning Zone</h3>
     </div>
     <div class="panel-body">
-      <a href="<?php echo base_url('message/archive/'.$message['message_id'].'/'.$message['owner']); ?>" class="btn btn-warning pull-right">
+      <a href="<?php echo base_url('message/archive/'.$message['message_id'].'/'.$message['type']); ?>" class="btn btn-warning pull-right">
         <!-- <span class="glyphicon glyphicon-compressed"></span> -->
         <span class="glyphicon glyphicon-trash"></span>
       </a>
@@ -94,13 +94,13 @@ else
   ?>
   <div class="panel panel-default">
     <div class="panel-body">
-      <a href="<?php echo base_url('message/unarchive/'.$message['message_id'].'/'.$message['owner']); ?>" class="btn btn-primary pull-right">
+      <a href="<?php echo base_url('message/unarchive/'.$message['message_id'].'/'.$message['type']); ?>" class="btn btn-primary pull-right">
         <!-- <span class="glyphicon glyphicon-compressed"></span> -->
         <span class="glyphicon glyphicon-repeat"></span>
       </a>
       <dl>
         <dt>Unrchive</dt>
-        <dd>Restore messages and use it again.</dd>
+        <dd>Restore messages to use it again.</dd>
       </dl>
     </div>
   </div>
