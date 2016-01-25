@@ -91,7 +91,7 @@ class Message extends CI_Controller
 
     if ($message['archived'] != '1000-01-01 00:00:00')
     {
-      $view_data['main_content'] = $this->load->view('message/archive', $local_view_data, TRUE);
+      redirect('message/show/'.$message_id);
     }
     else
     {
@@ -115,7 +115,8 @@ class Message extends CI_Controller
         }
         else
         {
-          redirect('message/modify/'.$message_id);
+          $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Updated:</strong> Message is successfuly updated']);
+          redirect('message/show/'.$message_id);
         }
       }
 
@@ -126,15 +127,31 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function archive($message_id = 0)
+  public function archive($message_id = NULL, $owner = NULL)
   {
-    $this->lib_message->archive_transactional($message_id);
-    redirect('message/modify/'.$message_id);
+    if ($owner != 'transactional')
+    {
+      show_error('Unsupported achive type');
+    }
+    
+    if (is_null($this->lib_message->archive($message_id, $owner)))
+    {
+      show_error($this->lib_message->get_error_message());
+    }
+    redirect('message/show/'.$message_id);
   }
 
-  public function unarchive($message_id = 0)
+  public function unarchive($message_id = NULL, $owner = NULL)
   {
-    $this->lib_message->unarchive_transactional($message_id);
-    redirect('message/modify/'.$message_id);
+    if ($owner != 'transactional')
+    {
+      show_error('Unsupported achive type');
+    }
+    
+    if (is_null($this->lib_message->unarchive($message_id, $owner)))
+    {
+      show_error($this->lib_message->get_error_message());
+    }
+    redirect('message/show/'.$message_id);
   }
 }

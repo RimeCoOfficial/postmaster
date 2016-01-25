@@ -45,6 +45,8 @@ CREATE TABLE IF NOT EXISTS list_unsubscribe (
   list_id                 int                 NOT NULL  AUTO_INCREMENT,
   list                    varchar(32)         NOT NULL  UNIQUE,
   unsubscribe_link        varchar(256)                  DEFAULT NULL,
+  -- archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  -- created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (list_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
