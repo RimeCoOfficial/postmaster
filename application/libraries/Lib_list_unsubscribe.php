@@ -68,7 +68,7 @@ class Lib_list_unsubscribe
     return $this->CI->model_list_unsubscribe->create($name);
   }
 
-  function modify($list_id, $name)
+  function update($list_id, $name)
   {
     if ( ! $this->CI->model_list_unsubscribe->is_available($name, $list_id))
     {
@@ -76,7 +76,7 @@ class Lib_list_unsubscribe
       return NULL;
     }
 
-    $this->CI->model_list_unsubscribe->modify($list_id, $name);
+    $this->CI->model_list_unsubscribe->update($list_id, $name);
     return TRUE;
   }
 

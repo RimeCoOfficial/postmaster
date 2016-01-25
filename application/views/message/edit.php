@@ -24,11 +24,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="row">
   <div class="col-sm-5">
-    <button type="submit" class="btn btn-primary btn-block">Modify</button>
+    <button type="submit" class="btn btn-primary btn-block">Update</button>
   </div>
   <div class="col-sm-7">
     <p class="h6">
-      <a href="<?php echo base_url('message/show/'.$message['message_id'].'/1'); ?>" target="_blank">Show HTML</a>
+      <a href="<?php echo base_url('message/view/'.$message['message_id'].'/1'); ?>" target="_blank">Show HTML</a>
     </p>
   </div>
 </div>

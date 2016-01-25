@@ -35,7 +35,7 @@ class Message extends CI_Controller
 
   }
 
-  public function show($message_id = 0, $html_only = FALSE)
+  public function view($message_id = 0, $html_only = FALSE)
   {
     $message = $this->lib_message->get($message_id);
     if (empty($message)) show_404();
@@ -50,7 +50,7 @@ class Message extends CI_Controller
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('message/show', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('message/view', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 
@@ -71,7 +71,7 @@ class Message extends CI_Controller
       }
       else
       {
-        redirect('message/modify/'.$message_id);
+        redirect('message/edit/'.$message_id);
       }
     }
 
@@ -81,7 +81,7 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function modify($message_id = 0)
+  public function edit($message_id = 0)
   {
     $message = $this->lib_message->get($message_id);
     if (empty($message)) show_404();
@@ -91,16 +91,16 @@ class Message extends CI_Controller
 
     if ($message['archived'] != '1000-01-01 00:00:00')
     {
-      redirect('message/show/'.$message_id);
+      redirect('message/view/'.$message_id);
     }
     else
     {
       $this->load->library('form_validation');
-      if ($this->form_validation->run('message/modify'))
+      if ($this->form_validation->run('message/edit'))
       {
         // var_dump($this->form_validation->set_value('type')); die();
         
-        if (is_null($this->lib_message->modify(
+        if (is_null($this->lib_message->update(
           $message_id,
           $this->form_validation->set_value('subject'),
           $this->form_validation->set_value('type'),
@@ -116,11 +116,11 @@ class Message extends CI_Controller
         else
         {
           $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Updated:</strong> Message is successfuly updated']);
-          redirect('message/show/'.$message_id);
+          redirect('message/view/'.$message_id);
         }
       }
 
-      $view_data['main_content'] = $this->load->view('message/modify', $local_view_data, TRUE);
+      $view_data['main_content'] = $this->load->view('message/edit', $local_view_data, TRUE);
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
@@ -138,7 +138,7 @@ class Message extends CI_Controller
     {
       show_error($this->lib_message->get_error_message());
     }
-    redirect('message/show/'.$message_id);
+    redirect('message/view/'.$message_id);
   }
 
   public function unarchive($message_id = NULL, $type = NULL)
@@ -152,6 +152,6 @@ class Message extends CI_Controller
     {
       show_error($this->lib_message->get_error_message());
     }
-    redirect('message/show/'.$message_id);
+    redirect('message/view/'.$message_id);
   }
 }

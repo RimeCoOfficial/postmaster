@@ -57,7 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       // $is_link_gray = $message['archived'] != '1000-01-01 00:00:00';
       // var_dump($is_link_gray);
       ?>
-      <a class="list-group-item" href="<?php echo base_url('message/show/'.$message['message_id']); ?>">
+      <a class="list-group-item" href="<?php echo base_url('message/view/'.$message['message_id']); ?>">
 
         <div class="media">
           <div class="media-body">
@@ -65,14 +65,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <?php echo $message['subject']; ?>
               <small>
                 #<?php echo $message['message_id']; ?>
-                <span class="text-uppercase"><?php echo $message['type']; ?></span>
+                <span class="text-uppercase"><?php echo $message['list']; ?></span>
                 <?php echo $message['reply_to_name']; ?>
                 <?php echo $message['reply_to_email']; ?>
                 <?php echo date('M d, Y h:i A', strtotime($message['created'])); ?>
               </small>
 
               <span class="pull-right label label-default">
-                <?php echo $message['list']; ?>
+                <?php echo $message['type']; ?>
               </span>
             </h5>
           </div>

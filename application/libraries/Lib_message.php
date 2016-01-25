@@ -41,7 +41,7 @@ class Lib_message
     return $this->CI->model_message->create($subject, $type, $list_id, $published);
   }
 
-  function modify($message_id, $subject, $type, $list_id, $published, $body_html_input, $reply_to_name, $reply_to_email)
+  function update($message_id, $subject, $type, $list_id, $published, $body_html_input, $reply_to_name, $reply_to_email)
   {
     // var_dump($message_id, $subject, $type, $list_id, $published, $body_html_input, $reply_to_name, $reply_to_email); die();
 

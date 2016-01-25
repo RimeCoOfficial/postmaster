@@ -12,10 +12,10 @@ $config = array(
   // 'controller/method'            => ['value1', 'value2'],
 
   'list_unsubscribe/create' => ['list'],
-  'list_unsubscribe/modify' => ['list'],
+  'list_unsubscribe/edit' => ['list'],
 
-  'message/create' => ['list_id', 'subject', 'type'],
-  'message/modify' => ['list_id', 'subject', 'type', 'reply_to_name', 'reply_to_email', 'body_html_input'],
+  'message/create'  => ['list_id', 'subject', 'type'],
+  'message/edit'    => ['list_id', 'subject', 'type', 'reply_to_name', 'reply_to_email', 'body_html_input'],
 );
 
 if ( ! function_exists('fill_element'))

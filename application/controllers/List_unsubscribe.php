@@ -44,7 +44,7 @@ class List_unsubscribe extends CI_Controller
       }
       else
       {
-        redirect('list-unsubscribe/modify/'.$list_id);
+        redirect('list-unsubscribe/edit/'.$list_id);
       }
     }
 
@@ -54,7 +54,7 @@ class List_unsubscribe extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function modify($list_id = 0)
+  public function edit($list_id = 0)
   {
     $list_unsubscribe = $this->lib_list_unsubscribe->get($list_id);
     if (empty($list_unsubscribe)) show_404();
@@ -63,9 +63,9 @@ class List_unsubscribe extends CI_Controller
     $local_view_data['list_unsubscribe'] = $list_unsubscribe;
 
     $this->load->library('form_validation');
-    if ($this->form_validation->run('list_unsubscribe/modify'))
+    if ($this->form_validation->run('list_unsubscribe/edit'))
     {
-      if (is_null($this->lib_list_unsubscribe->modify(
+      if (is_null($this->lib_list_unsubscribe->update(
         $list_id,
         $this->form_validation->set_value('list')
       )))
@@ -74,13 +74,13 @@ class List_unsubscribe extends CI_Controller
       }
       else
       {
-        redirect('list-unsubscribe/modify/'.$list_id);
+        redirect('list-unsubscribe/edit/'.$list_id);
       }
     }
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
-    $view_data['main_content'] = $this->load->view('list_unsubscribe/modify', $local_view_data, TRUE);
+    $view_data['main_content'] = $this->load->view('list_unsubscribe/edit', $local_view_data, TRUE);
     $this->load->view('base', $view_data);
   }
 

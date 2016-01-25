@@ -54,7 +54,7 @@ class Model_list_unsubscribe extends CI_Model
     return $this->db->insert_id();
   }
 
-  function modify($list_id, $list, $reply_to_name, $reply_to_email)
+  function update($list_id, $list, $reply_to_name, $reply_to_email)
   {
     $this->db->set('list', $list);
 
