@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
   <div class="col-sm-7">
     <p class="h6">
-      <a href="<?php echo base_url('message/view/'.$message['message_id'].'/1'); ?>" target="_blank">Show HTML</a>
+      <a href="<?php echo base_url('message/view-html/'.$message['message_id']); ?>" target="_blank">Show HTML</a>
     </p>
   </div>
 </div>

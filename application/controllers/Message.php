@@ -35,6 +35,11 @@ class Message extends CI_Controller
 
   }
 
+  public function view_html($message_id = 0)
+  {
+    $this->view($message_id, 1);
+  }
+
   public function view($message_id = 0, $html_only = FALSE)
   {
     $message = $this->lib_message->get($message_id);

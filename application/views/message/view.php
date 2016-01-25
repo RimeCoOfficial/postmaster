@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <p class="small pull-right">
   <a data-toggle="modal" data-target="#htmlModal" href="#">HTML</a>
-  <a href="<?php echo base_url('message/view/'.$message['message_id'].'/1'); ?>" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>
+  <a href="<?php echo base_url('message/view-html/'.$message['message_id']); ?>" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>
 </p>
 <div class="clearfix"></div>
 <div class="well well-lg"><?php echo $message['body_text']; ?></div>
