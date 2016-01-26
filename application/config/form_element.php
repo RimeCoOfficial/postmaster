@@ -74,7 +74,7 @@ $config = array(
   ),
 
   'type' => array(
-    'label'         => 'Genre',
+    'label'         => 'Type',
     'rules'         => 'trim|in_list['.implode(',', array_keys($message_type_options)).']|required',
 
     'options'       => $message_type_options,
@@ -109,6 +109,17 @@ $config = array(
     
     // html5 tag - not supported in Internet Explorer 9 and earlier versions.
     'placeholder'   => 'Tell something about this mail in HTML ('.$body_html_input_max_length.' characters)',
+    'required'      => 1,
+  ),
+
+  'php_datetime_str' => array(
+    'label'         => 'PHP datetime',
+    'rules'         => 'max_length[24]|trim|required', // '1000-01-01 00:00:00'[19]
+    'max_length'    => $email_max_length,
+    
+    // html5 tag - not supported in Internet Explorer 9 and earlier versions.
+    'placeholder'   => 'A date/time string.',
+    'help'          => 'A date/time string. Valid formats are explained in <a href="http://php.net/manual/en/datetime.formats.php" target="_blank">Date and Time Formats</a>.',
     'required'      => 1,
   ),
 

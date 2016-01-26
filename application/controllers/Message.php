@@ -16,7 +16,7 @@ class Message extends CI_Controller
     $this->load->library('lib_message');
   }
 
-  public function index($type = NULL)
+  public function index($filter = NULL) // list-unsubscribe, type
   {
     $local_view_data['list'] = $this->lib_message->get_list();
 
@@ -32,7 +32,6 @@ class Message extends CI_Controller
 
     // $view_data['main_content'] = $this->load->view('message/list', $local_view_data, TRUE);
     // $this->load->view('base', $view_data);
-
   }
 
   public function view_html($message_id = 0)
@@ -96,67 +95,100 @@ class Message extends CI_Controller
 
     if ($message['archived'] != '1000-01-01 00:00:00')
     {
-      redirect('message/view/'.$message_id);
+      show_error('The message is archived and can not be modified');
     }
-    else
-    {
-      $this->load->library('form_validation');
-      if ($this->form_validation->run('message/edit'))
-      {
-        // var_dump($this->form_validation->set_value('type')); die();
-        
-        if (is_null($this->lib_message->update(
-          $message_id,
-          $this->form_validation->set_value('subject'),
-          $this->form_validation->set_value('type'),
-          $this->form_validation->set_value('list_id'),
-          NULL,
-          $this->form_validation->set_value('body_html_input'),
-          $this->form_validation->set_value('reply_to_name'),
-          $this->form_validation->set_value('reply_to_email')
-        )))
-        {
-          show_error($this->lib_message->get_error_message_transactional());
-        }
-        else
-        {
-          $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<strong>Updated:</strong> Message is successfuly updated']);
-          redirect('message/view/'.$message_id);
-        }
-      }
 
-      $view_data['main_content'] = $this->load->view('message/edit', $local_view_data, TRUE);
+    $this->load->library('form_validation');
+    if ($this->form_validation->run('message/edit'))
+    {
+      if (is_null($this->lib_message->update(
+        $message,
+        $this->form_validation->set_value('subject'),
+        $this->form_validation->set_value('type'),
+        $this->form_validation->set_value('list_id'),
+        $this->form_validation->set_value('body_html_input'),
+        $this->form_validation->set_value('reply_to_name'),
+        $this->form_validation->set_value('reply_to_email')
+      )))
+      {
+        show_error($this->lib_message->get_error_message());
+      }
+      else
+      {
+        $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<abbr class="text-nowrap pull-right" title="Patience Young Grasshopper&#13;http://emojicons.com/e/patience-young-grasshopper">&nbsp; ┬─┬﻿ ノ( ゜-゜ノ)</abbr>
+          <strong>Updated:</strong> Message is successfuly updated']);
+        redirect('message/view/'.$message_id);
+      }
     }
+
+    $view_data['main_content'] = $this->load->view('message/edit', $local_view_data, TRUE);
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
     $this->load->view('base', $view_data);
   }
 
-  public function archive($message_id = NULL, $type = NULL)
+  public function publish($message_id = NULL)
   {
-    if ($type != 'transactional')
+    $message = $this->lib_message->get($message_id);
+    if (empty($message)) show_404();
+
+    $local_view_data = [];
+    $local_view_data['message'] = $message;
+
+    if ($message['archived'] != '1000-01-01 00:00:00')
     {
-      show_error('Unsupported achive type');
+      show_error('The message is archived and can not be modified');
+    }
+
+    $this->load->library('form_validation');
+
+    if ($message['type'] == 'transactional')
+    {
+      $this->form_validation->set_data(['php_datetime_str' => 'now']);
     }
     
-    if (is_null($this->lib_message->archive($message_id, $type)))
+    if ($this->form_validation->run('message/publish'))
     {
-      show_error($this->lib_message->get_error_message());
+      if (is_null($this->lib_message->publish($message, $this->form_validation->set_value('php_datetime_str'))))
+      {
+        show_error($this->lib_message->get_error_message());
+      }
+      else
+      {
+        $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<abbr class="text-nowrap pull-right" title="Magical Table Flipping&#13;http://emojicons.com/e/magical-table-flipping">&nbsp; (/¯◡ ‿ ◡)/¯ ~ ┻━┻</abbr>
+          <strong>Hooah</strong> /ˈhuːɑː/ Message was successfuly published']);
+        redirect('message/view/'.$message_id);
+      }
     }
-    redirect('message/view/'.$message_id);
+
+    $view_data['main_content'] = $this->load->view('message/publish', $local_view_data, TRUE);
+
+    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
+    $this->load->view('base', $view_data);
   }
 
-  public function unarchive($message_id = NULL, $type = NULL)
+  public function revert($message_id = NULL)
   {
-    if ($type != 'transactional')
+    $message = $this->lib_message->get($message_id);
+    if (empty($message)) show_404();
+
+    $local_view_data = [];
+    $local_view_data['message'] = $message;
+
+    if ($message['archived'] != '1000-01-01 00:00:00')
     {
-      show_error('Unsupported achive type');
+      show_error('The message is archived and can not be modified');
     }
-    
-    if (is_null($this->lib_message->unarchive($message_id, $type)))
+
+    if (is_null($this->lib_message->revert($message)))
     {
       show_error($this->lib_message->get_error_message());
     }
-    redirect('message/view/'.$message_id);
+    else
+    {
+      $this->session->set_flashdata('alert', ['type' => 'warning', 'message' => '<abbr class="text-nowrap pull-right" title="Flipping Tables&#13;http://emojicons.com/e/flipping-tables">&nbsp; (╯°□°)╯︵ ┻━┻</abbr>
+        <strong>Revert</strong> Message has been revert to draft']);
+      redirect('message/view/'.$message_id);
+    }
   }
 }

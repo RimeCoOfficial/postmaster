@@ -21,14 +21,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <?php if (!empty($message['reply_to_email'])) echo '('.$message['reply_to_email'].')'; ?>
 </p>
 
-
+<div class="well well-lg"><?php echo $message['body_text']; ?></div>
 
 <p class="small pull-right">
   <a data-toggle="modal" data-target="#htmlModal" href="#">HTML</a>
   <a href="<?php echo base_url('message/view-html/'.$message['message_id']); ?>" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>
 </p>
-<div class="clearfix"></div>
-<div class="well well-lg"><?php echo $message['body_text']; ?></div>
 
 <!-- Modal -->
 <div class="modal fade" id="htmlModal" tabindex="-1" role="dialog" aria-labelledby="htmlModalLabel">
@@ -50,58 +48,121 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </div>
 
-
+<div class="clearfix"></div>
 
 <?php
+// drafting - Edit, Publish
+// published - Edit, Draft
+// archived - info
+
 if ($message['archived'] == '1000-01-01 00:00:00')
 {
   ?>
   <div class="panel panel-default">
-    <!-- <div class="panel-heading">
+    <div class="panel-heading">
       <h3 class="panel-title">Edit</h3>
-    </div> -->
+    </div>
     <div class="panel-body">
-      <a href="<?php echo base_url('message/edit/'.$message['message_id']); ?>" class="btn btn-primary pull-right">
-        <span class="glyphicon glyphicon-edit"></span>
-      </a>
-      <dl>
-        <dt>Edit</dt>
-        <dd>Make changes!</dd>
-      </dl>
+      <div class="media">
+        <div class="media-body">
+          <p>Make changes!</p>
+        </div>
+        <div class="media-right">
+          <a href="<?php echo base_url('message/edit/'.$message['message_id']); ?>" class="btn btn-primary">
+            <div class="media-object">
+              <span class="glyphicon glyphicon-edit"></span>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="panel panel-warning">
-    <div class="panel-heading">
-      <h3 class="panel-title">Warning Zone</h3>
-    </div>
-    <div class="panel-body">
-      <a href="<?php echo base_url('message/archive/'.$message['message_id'].'/'.$message['type']); ?>" class="btn btn-warning pull-right">
-        <!-- <span class="glyphicon glyphicon-compressed"></span> -->
-        <span class="glyphicon glyphicon-trash"></span>
-      </a>
-      <dl>
-        <dt>Archive</dt>
-        <dd>Archived messages wont accept <strong>new</strong> requests.</dd>
-        <dd>But you can restore and use it again.</dd>
-      </dl>
-    </div>
-  </div>
   <?php
+  if (is_null($message['published_tds']))
+  {
+    // drafting
+    ?>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Publish</h3>
+      </div>
+      <div class="panel-body">
+        <div class="media">
+          <div class="media-body">
+            <p>Send emails!</p>
+          </div>
+          <div class="media-right">
+            <a href="<?php echo base_url('message/publish/'.$message['message_id']); ?>" class="btn btn-primary">
+              <div class="media-object">
+                <span class="glyphicon glyphicon-send"></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php
+  }
+  else
+  {
+    // published
+    ?>
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Warning Zone</h3>
+      </div>
+      <div class="panel-body">
+        <div class="media">
+          <div class="media-body">
+            <h5 class="media-heading">Revert</h5>
+            <ul class="list-unstyled-disabled">
+              <li>Unpublished messages wont accept <strong>new</strong> requests.</li>
+              <li>But you can publish and use it again.</li>
+              <li>If you want to make some changes to the content use <strong>Edit</strong>.</li>
+            </ul>
+          </div>
+          <div class="media-right">
+            <a href="<?php echo base_url('message/revert/'.$message['message_id']); ?>" class="btn btn-warning">
+              <div class="media-object">
+                <span class="glyphicon glyphicon-ban-circle"></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php
+  }
 }
 else
 {
   ?>
   <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Archive</h3>
+    </div>
     <div class="panel-body">
-      <a href="<?php echo base_url('message/unarchive/'.$message['message_id'].'/'.$message['type']); ?>" class="btn btn-primary pull-right">
-        <!-- <span class="glyphicon glyphicon-compressed"></span> -->
-        <span class="glyphicon glyphicon-repeat"></span>
-      </a>
-      <dl>
-        <dt>Unrchive</dt>
-        <dd>Restore messages to use it again.</dd>
-      </dl>
+      
+      <div class="media">
+
+        <div class="media-body">
+          <p>
+            The message has been archived.
+            <abbr title="<?php
+              // Tuesday 8:53 AM, Jan 26 2016
+              echo date('l g:i A, M j Y', strtotime($message['archived']));
+              ?>">
+              @todo: x days ago
+            </abbr>
+          </p>
+        </div>
+         <div class="media-right">
+          <div class="media-object">
+            <span class="glyphicon glyphicon-ok-circle"></span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <?php

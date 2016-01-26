@@ -16,6 +16,7 @@ $config = array(
 
   'message/create'  => ['list_id', 'subject', 'type'],
   'message/edit'    => ['list_id', 'subject', 'type', 'reply_to_name', 'reply_to_email', 'body_html_input'],
+  'message/publish' => ['php_datetime_str'],
 );
 
 if ( ! function_exists('fill_element'))

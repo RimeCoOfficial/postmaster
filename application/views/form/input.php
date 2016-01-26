@@ -50,6 +50,10 @@ if (!empty($error[ $element['name'] ])) $element['id'] = 'inputError';
     <?php endif; ?>
   
   <?php if (!empty($error[ $element['name'] ])): ?>
-    <span class="help-block"><?php echo $error[ $element['name'] ]; ?></span>
+    <p class="help-block"><?php echo $error[ $element['name'] ]; ?></p>
   <?php endif; ?>
 </div>
+
+<?php if (!empty($element_config['help'])): ?>
+  <p class="help-block"><?php echo $element_config['help']; ?></p>
+<?php endif; ?>

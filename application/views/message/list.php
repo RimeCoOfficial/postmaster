@@ -18,32 +18,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       // active list-group-item-success list-group-item-info list-group-item-warning list-group-item-danger
       // $is_link_gray = '';
 
-      // if ($message['published'] == '1000-01-01 00:00:00' AND $message['archived'] == '1000-01-01 00:00:00')
+      // if ($message['published_tds'] == '1000-01-01 00:00:00' AND $message['archived'] == '1000-01-01 00:00:00')
       // {
       //   // camapign and autoresponder drafting stage
       //   $is_link_gray = '';
       // }
-      // elseif ($message['published'] == '1000-01-01 00:00:00' AND $message['archived'] != '1000-01-01 00:00:00')
+      // elseif ($message['published_tds'] == '1000-01-01 00:00:00' AND $message['archived'] != '1000-01-01 00:00:00')
       // {
-      //   // not published but archived ???
-      //   // => not published = drafing stage
+      //   // not published_tds but archived ???
+      //   // => not published_tds = drafing stage
       //   // => campaign and autoresponder
-      //   // => transactionals are always published
+      //   // => transactionals are always published_tds
       //   // = draft is deleted
       //   // restore-able
       //   $is_link_gray = 'list-group-item-warning';
       // }
-      // elseif ($message['published'] != '1000-01-01 00:00:00' AND $message['archived'] == '1000-01-01 00:00:00')
+      // elseif ($message['published_tds'] != '1000-01-01 00:00:00' AND $message['archived'] == '1000-01-01 00:00:00')
       // {
-      //   // published and not archived = good to go!
+      //   // published_tds and not archived = good to go!
       //   // active transactional
       //   // campaign in progress
       //   // autoresponder in progress
       //   $is_link_gray = 'list-group-item-info';
       // }
-      // elseif ($message['published'] != '1000-01-01 00:00:00' AND $message['archived'] != '1000-01-01 00:00:00')
+      // elseif ($message['published_tds'] != '1000-01-01 00:00:00' AND $message['archived'] != '1000-01-01 00:00:00')
       // {
-      //   // published and archived
+      //   // published_tds and archived
       //   // campaign is finished cant be not restored
       //   // autoresponder not required can be restored
       //   // transactionals not required can be restored
@@ -57,28 +57,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       // $is_link_gray = $message['archived'] != '1000-01-01 00:00:00';
       // var_dump($is_link_gray);
       ?>
-      <a class="list-group-item" href="<?php echo base_url('message/view/'.$message['message_id']); ?>">
+      <!--  -->
 
+      <div class="list-group-item">
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
-              <?php echo $message['subject']; ?>
+              <a  href="<?php echo base_url('message/view/'.$message['message_id']); ?>">
+                <?php echo $message['subject']; ?>
+              </a>
               <small>
                 #<?php echo $message['message_id']; ?>
-                <span class="text-uppercase"><?php echo $message['list']; ?></span>
+                
+                <span class="text-uppercase"><?php echo anchor('message/view/list-unsubscribe/'.$message['list'], $message['list']); ?></span>
+
                 <?php echo $message['reply_to_name']; ?>
                 <?php echo $message['reply_to_email']; ?>
                 <?php echo date('M d, Y h:i A', strtotime($message['created'])); ?>
               </small>
 
-              <span class="pull-right label label-default">
-                <?php echo $message['type']; ?>
-              </span>
+              <a href="<?php echo base_url('message/view/type/'.$message['type']); ?>">
+                <span class="pull-right label label-default">
+                  <?php echo $message['type']; ?>
+                </span>
+              </a>
             </h5>
           </div>
         </div>
-
-      </a>
+      </div>
     <?php endforeach; ?>
   </div>
 <?php endif; ?>

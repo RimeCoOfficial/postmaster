@@ -21,7 +21,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php $this->view('form/textarea', array('id' => 'body_html_input', 'value' => $message['body_html_input'])); ?>
 
-
 <div class="row">
   <div class="col-sm-5">
     <button type="submit" class="btn btn-primary btn-block">Update</button>

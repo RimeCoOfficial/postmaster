@@ -34,21 +34,25 @@ class Lib_message
     return $this->CI->model_message->get_list();
   }
 
-  function create($subject, $type, $list_id, $published = '1000-01-01 00:00:00')
+  function create($subject, $type, $list_id)
   {
-    if ($type == 'transactional') $published = date('Y-m-d H:m:s');
+    if ($type == 'transactional') $published_tds = 0;
 
-    return $this->CI->model_message->create($subject, $type, $list_id, $published);
+    return $this->CI->model_message->create($subject, $type, $list_id, $published_tds);
   }
 
-  function update($message_id, $subject, $type, $list_id, $published, $body_html_input, $reply_to_name, $reply_to_email)
+  function update($message, $subject, $type, $list_id, $body_html_input, $reply_to_name, $reply_to_email)
   {
-    // var_dump($message_id, $subject, $type, $list_id, $published, $body_html_input, $reply_to_name, $reply_to_email); die();
+    if ($message['archived'] != '1000-01-01 00:00:00')
+    {
+      $this->error = ['message' => 'Didn&#8217;t I told you! The message is archived and can not be modified'];
+      return NULL;
+    }
 
-    $published = '1000-01-01 00:00:00';
-    if ($type == 'transactional') $published = date('Y-m-d H:m:s');
+    $published_tds = $message['published_tds'];
+    if ($type != $message['type'])  $published_tds = NULL; // save as draft
 
-    if (is_null($result = $this->_process_html($message_id, $body_html_input)))
+    if (is_null($result = $this->_process_html($message['message_id'], $body_html_input)))
     {
       return NULL;
     }
@@ -57,23 +61,67 @@ class Lib_message
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
     $this->CI->model_message->update(
-      $message_id, $subject, $type, $list_id, $published, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
+      $message['message_id'], $subject, $type, $list_id, $published_tds, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
     );
     
+    return $message;
+  }
+
+  function publish($message, $php_datetime_str)
+  {
+    $date_from_str = '1000-01-01 00:00:00';
+    $date_from = strtotime($date_from_str);
+
+    switch ($message['type'])
+    {
+      case 'autoresponder':
+      case 'transactional':
+        $date_to = strtotime($php_datetime_str, $date_from);
+        break;
+      
+      case 'campaign':
+        $date_to = strtotime($php_datetime_str, strtotime('now'));
+        break;
+    }
+
+    if (!$date_to)
+    {
+      $this->error = ['message' => 'strtotime returned bool(false). Valid formats are explained in [Date and Time Formats](http://php.net/manual/en/datetime.formats.php).'];
+      return NULL;
+    }
+
+    // Difference in seconds
+    // Autoresponder: +1 day = 86400
+    // Campaign:      +1 day = 32064136828
+    // Transactional: now = 0
+    $diff_in_seconds = $date_to - $date_from;
+
+    $this->CI->model_message->update_publish($message['message_id'], $diff_in_seconds);
     return TRUE;
   }
 
-  function archive($message_id, $type)
+  function revert($message)
   {
-    $this->CI->model_message->archive($message_id, $type);
+    if ($message['archived'] != '1000-01-01 00:00:00')
+    {
+      show_error('The message is archived and can not be modified');
+    }
+
+    $this->CI->model_message->update_publish($message['message_id'], NULL);
     return TRUE;
   }
 
-  function unarchive($message_id, $type)
-  {
-    $this->CI->model_message->unarchive($message_id, $type);
-    return TRUE;
-  }
+  // function archive($message_id, $type)
+  // {
+  //   $this->CI->model_message->archive($message_id, $type);
+  //   return TRUE;
+  // }
+
+  // function unarchive($message_id, $type)
+  // {
+  //   $this->CI->model_message->unarchive($message_id, $type);
+  //   return TRUE;
+  // }
 
   function _process_html($message_id, $body_html_input)
   {

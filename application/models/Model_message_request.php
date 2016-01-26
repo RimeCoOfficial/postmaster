@@ -14,11 +14,11 @@ class Model_message_request extends CI_Model
 
     if (!empty($type)) $this->db->where('type', $type);
 
-    $this->db->where('published !=', '1000-01-01 00:00:00');
+    $this->db->where('published_tds IS NOT NULL');
     $this->db->where('archived', '1000-01-01 00:00:00');
 
     $query = $this->db->get($this->message_table);
-    return $query->num_rows() == 1;
+    return $query->num_rows() > 0;
   }
 
   function add($message_id, $to_name, $to_email, $pseudo_vars_json)

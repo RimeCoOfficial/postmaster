@@ -30,28 +30,28 @@ class Model_message extends CI_Model
     $this->db->select($this->message_table.'.*');
     $this->db->select($this->list_unsubscribe_table.'.list');
 
-    // $this->db->where($this->message_table.'.message_id', $message_id);
-
     $this->db->order_by($this->message_table.'.message_id', 'DESC');
 
     $this->db->join($this->list_unsubscribe_table, $this->list_unsubscribe_table.'.list_id = '.$this->message_table.'.list_id');
+
+    // $this->db->where('published_tds >', '1000-01-01 00:00:00');
 
     $query = $this->db->get($this->message_table);
     return $query->result_array();
   }
 
-  function create($subject, $type, $list_id, $published)
+  function create($subject, $type, $list_id, $published_tds)
   {
     $this->db->set('subject', $subject);
     $this->db->set('type', $type);
     $this->db->set('list_id', $list_id);
-    $this->db->set('published', $published);
+    $this->db->set('published_tds', $published_tds);
 
     $this->db->insert($this->message_table);
     return $this->db->insert_id();
   }
 
-  function update($message_id, $subject, $type, $list_id, $published, $body_html_input, $body_html, $body_text, $reply_to_name, $reply_to_email)
+  function update($message_id, $subject, $type, $list_id, $published_tds, $body_html_input, $body_html, $body_text, $reply_to_name, $reply_to_email)
   {
     $this->db->set('subject', $subject);
     $this->db->set('type', $type);
@@ -62,7 +62,17 @@ class Model_message extends CI_Model
     $this->db->set('body_html', $body_html);
     $this->db->set('body_text', $body_text);
 
-    $this->db->set('published', $published);
+    $this->db->set('published_tds', $published_tds);
+
+    $this->db->where('message_id', $message_id);
+    $this->db->where('archived', '1000-01-01 00:00:00');
+
+    $this->db->update($this->message_table);
+  }
+
+  function update_publish($message_id, $published_tds)
+  {
+    $this->db->set('published_tds', $published_tds);
 
     $this->db->where('message_id', $message_id);
     $this->db->where('archived', '1000-01-01 00:00:00');
@@ -91,31 +101,4 @@ class Model_message extends CI_Model
 
     $this->db->update($this->message_table);
   }
-
-  // function get_list()
-  // {
-  //   $this->db->limit(50);
-
-  //   $this->db->select($this->message_table.'.*');
-  //   $this->db->select($this->list_unsubscribe_table.'.list');
-
-  //   $this->db->order_by($this->message_table.'.message_id', 'DESC');
-
-  //   $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->transactional_table.'.message_id');
-  //   $this->db->join($this->list_unsubscribe_table, $this->list_unsubscribe_table.'.list_id = '.$this->transactional_table.'.list_id', 'LEFT');
-
-  //   // $this->db->where('published >', '1000-01-01 00:00:00');
-    
-  //   $query = $this->db->get($this->transactional_table);
-  //   return $query->result_array();
-  // }
-
-  // function update($message_id, $list_id)
-  // {
-  //   $this->db->set('list_id', $list_id);
-
-  //   $this->db->where('message_id', $message_id);
-
-  //   $this->db->update($this->transactional_table);
-  // }
 }

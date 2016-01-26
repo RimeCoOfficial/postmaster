@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS list_unsubscribe_recipient (
   uid                     varchar(64)                   DEFAULT NULL,
   -- subscribed              datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP, -- DEFAULT '1000-01-01 00:00:00',
   unsubscribed            datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (to_email, list_id),
   FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
@@ -101,10 +101,9 @@ CREATE TABLE IF NOT EXISTS message (
   ga_campaign_query       varchar(256)                  DEFAULT NULL,
   list_unsubscribe        tinyint(1)          NOT NULL  DEFAULT 0,
   
-  -- published               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  published_str           varchar(256)                  DEFAULT NULL, -- now, '1000-01-01 00:00:00'
-  archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  published_tds           bigint                        DEFAULT NULL, -- tds = Time Difference in Seconds. NULL = Draft
 
+  archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (message_id),
   FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE RESTRICT ON DELETE RESTRICT
@@ -115,6 +114,8 @@ CREATE TABLE IF NOT EXISTS message (
 --
 -- Table structure for table message_request
 --
+
+-- @todo: list_recipent_id
 
 CREATE TABLE IF NOT EXISTS message_request (
   request_id              int                 NOT NULL  AUTO_INCREMENT,
