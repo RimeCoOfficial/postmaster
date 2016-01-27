@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="row">
   <div class="col-sm-5">
-    <a data-toggle="modal" data-target="#sendTestModal" href="#" class="btn btn-primary btn-block">Send test email</a>
+    <a data-toggle="modal" data-target="#sendTestModal" href="#" class="btn btn-default btn-block">Send test mail</a>
   </div>
   <div class="col-sm-7">
     <p class="h6">
