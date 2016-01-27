@@ -4,7 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <h1>
   List-unsubscribe
-  <span><a href="<?php echo base_url('list-unsubscribe/create'); ?>" class="btn btn-primary pull-right">New</a></span>
+  
+  <span class="pull-right">
+    <a href="<?php echo base_url('list-unsubscribe/create'); ?>" class="btn btn-primary">New</a>
+  </span>
 </h1>
 
 <div class="well well-lg">

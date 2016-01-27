@@ -4,7 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <h1>
   Messages
-  <span><a href="<?php echo base_url('message/create'); ?>" class="btn btn-primary pull-right">New</a></span>
+
+  <span class="pull-right">
+    <a href="<?php echo base_url('message/create'); ?>" class="btn btn-primary">New</a>
+  </span>
 </h1>
 
 <?php // var_dump($list); ?>
@@ -76,11 +79,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php echo date('M d, Y h:i A', strtotime($message['created'])); ?>
               </small>
 
-              <a href="<?php echo base_url('message/view/type/'.$message['type']); ?>">
-                <span class="pull-right label label-default">
-                  <?php echo $message['type']; ?>
-                </span>
-              </a>
+              <span class="pull-right">
+                <a href="<?php echo base_url('message/view/type/'.$message['type']); ?>">
+                  <span class="label label-default">
+                    <?php echo $message['type']; ?>
+                  </span>
+                </a>
+              </span>
             </h5>
           </div>
         </div>

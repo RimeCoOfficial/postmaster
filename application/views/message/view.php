@@ -5,14 +5,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <h1>
   <?php echo $message['subject']; ?>
   <small>#<?php echo $message['message_id']; ?></small>
+
+  <?php if ($message['archived'] == '1000-01-01 00:00:00'): ?>
+    <span class="pull-right">
+      <a href="<?php echo base_url('message/edit/'.$message['message_id']); ?>" class="btn btn-default">Edit</a>
+    </span>
+  <?php endif; ?>
 </h1>
 
 <p class="lead">
   List-unsubscribe: <?php echo anchor('list-unsubcribe/#', $message['list']); ?>
 
-  <a href="<?php echo base_url('message/#'); ?>">
-    <span class="pull-right label label-default"><?php echo $message['type']; ?></span>
-  </a>
+  <span class="pull-right">
+    <a href="<?php echo base_url('message/#'); ?>">
+      <span class="label label-default"><?php echo $message['type']; ?></span>
+    </a>
+  </span>
 </p>
 
 <p>
@@ -23,10 +31,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="well well-lg"><?php echo $message['body_text']; ?></div>
 
-<p class="small pull-right">
-  <a data-toggle="modal" data-target="#htmlModal" href="#">HTML</a>
-  <a href="<?php echo base_url('message/view-html/'.$message['message_id']); ?>" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>
-</p>
+<div class="row">
+  <div class="col-sm-5">
+    <a data-toggle="modal" data-target="#sendTestModal" href="#" class="btn btn-primary btn-block">Send test email</a>
+  </div>
+  <div class="col-sm-7">
+    <p class="h6">
+      <a data-toggle="modal" data-target="#htmlModal" href="#">HTML</a>
+      <a href="<?php echo base_url('message/view-html/'.$message['message_id']); ?>" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>
+    </p>
+  </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="htmlModal" tabindex="-1" role="dialog" aria-labelledby="htmlModalLabel">
@@ -48,7 +63,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </div>
 
-<div class="clearfix"></div>
+<?php $this->view('message/send_test'); ?>
+
+<br>
+<br>
 
 <?php
 // drafting - Edit, Publish
@@ -58,7 +76,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if ($message['archived'] == '1000-01-01 00:00:00')
 {
   ?>
-  <div class="panel panel-default">
+  <!-- <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Edit</h3>
     </div>
@@ -76,7 +94,7 @@ if ($message['archived'] == '1000-01-01 00:00:00')
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <?php
   if (is_null($message['published_tds']))
@@ -166,23 +184,3 @@ else
   <?php
 }
 ?>
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Send test email</h3>
-  </div>
-  <div class="panel-body">
-    <div class="media">
-      <div class="media-body">
-        <p><samp>(づ￣ ³￣)づ</samp></p>
-      </div>
-      <div class="media-right">
-        <a href="<?php echo base_url('message/send-test/'.$message['message_id']); ?>" class="btn btn-default">
-          <div class="media-object">
-            <span class="glyphicon glyphicon-envelope"></span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>

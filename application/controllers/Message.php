@@ -219,10 +219,5 @@ class Message extends CI_Controller
         redirect('message/view/'.$message_id);
       }
     }
-
-    $view_data['main_content'] = $this->load->view('message/send_test', $local_view_data, TRUE);
-
-    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
-    $this->load->view('base', $view_data);
   }
 }

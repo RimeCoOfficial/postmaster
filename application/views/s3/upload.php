@@ -4,7 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <h1>
   Upload S3 object
-  <span class="pull-right label label-default"><?php echo $prefix; ?></span>
+
+  <span class="pull-right">
+    <span class="label label-default"><?php echo $prefix; ?></span>
+  </span>
 </h1>
 
 <?php
