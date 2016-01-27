@@ -68,7 +68,7 @@ if ($message['archived'] == '1000-01-01 00:00:00')
           <p>Make changes!</p>
         </div>
         <div class="media-right">
-          <a href="<?php echo base_url('message/edit/'.$message['message_id']); ?>" class="btn btn-primary">
+          <a href="<?php echo base_url('message/edit/'.$message['message_id']); ?>" class="btn btn-default">
             <div class="media-object">
               <span class="glyphicon glyphicon-edit"></span>
             </div>
@@ -143,9 +143,7 @@ else
       <h3 class="panel-title">Archive</h3>
     </div>
     <div class="panel-body">
-      
       <div class="media">
-
         <div class="media-body">
           <p>
             The message has been archived.
@@ -168,3 +166,23 @@ else
   <?php
 }
 ?>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Send test email</h3>
+  </div>
+  <div class="panel-body">
+    <div class="media">
+      <div class="media-body">
+        <p><samp>(づ￣ ³￣)づ</samp></p>
+      </div>
+      <div class="media-right">
+        <a href="<?php echo base_url('message/send-test/'.$message['message_id']); ?>" class="btn btn-default">
+          <div class="media-object">
+            <span class="glyphicon glyphicon-envelope"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,11 +14,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </p>
 </div>
 
-<h4></h4>
-<p>
-  
-</p>
-
 <?php // var_dump($list_unsubscribe); ?>
 
 <?php if (!empty($list_unsubscribe)): ?>
@@ -47,8 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       </div>
     <?php endforeach; ?>
-  </tbody>
-</table>
+  </div>
 <?php endif; ?>
 
 

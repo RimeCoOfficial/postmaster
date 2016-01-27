@@ -21,14 +21,15 @@ class Lib_send_email
     return $this->error;
   }
 
-  function direct($to, $subject = '', $body_html = '', $body_text = '')
+  function direct($to_email, $subject = '', $body_html = '', $body_text = '')
   {
+    return 1;
     $this->CI->load->library('composer/lib_aws');
     $ses_client = $this->CI->lib_aws->get_ses();
 
     $result = $ses_client->sendEmail([
       'Destination' => [
-        'ToAddresses' => [$to],
+        'ToAddresses' => [$to_email],
       ],
       'Message' => [
         'Body' => [
@@ -43,11 +44,11 @@ class Lib_send_email
     return $result['MessageId'];
   }
 
-  function general($to, $subject = 'Untitled', $template, $data = [])
+  function general($to_email, $subject = 'Untitled', $template, $data = [])
   {
     $message = $this->CI->load->view('email/'.$template, $data, TRUE);
     $alt_message = html_to_text($message);
 
-    return $this->direct($to, $subject, $message, $alt_message);
+    return $this->direct($to_email, $subject, $message, $alt_message);
   }
 }

@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS feedback (
 --
 
 CREATE TABLE IF NOT EXISTS list_unsubscribe (
-  list_id                 int                 NOT NULL  AUTO_INCREMENT,
+  list_id                 int                 NOT NULL  AUTO_INCREMENT, -- for internal use only
   list                    varchar(32)         NOT NULL  UNIQUE,
   unsubscribe_link        varchar(256)                  DEFAULT NULL,
   -- archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
@@ -67,17 +67,19 @@ INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS list_unsubscribe_recipient (
-  to_name                 varchar(64)         NOT NULL,
+  list_recipent_id        int                 NOT NULL  AUTO_INCREMENT UNIQUE, -- ga_cid for internal use only
+  list_id                 int                 NOT NULL,
   to_email                varchar(256)        NOT NULL,
-  list_id                 int                 NOT NULL  AUTO_INCREMENT,
-  uid                     varchar(64)                   DEFAULT NULL,
-  -- subscribed              datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP, -- DEFAULT '1000-01-01 00:00:00',
+  to_name                 varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  custom_id               varchar(256)        NOT NULL,                 -- ga_uid default=list_recipent_id default:111 custom:222
+  metadata                text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   unsubscribed            datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  subscribed              datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (to_email, list_id),
   FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
 
 -- --------------------------------------------------------
 
@@ -122,7 +124,7 @@ CREATE TABLE IF NOT EXISTS message_request (
   message_id              int                 NOT NULL,
   to_name                 varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   to_email                varchar(256)        NOT NULL,
-  pseudo_vars_json         text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  pseudo_vars_json        text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   processed               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (request_id),
@@ -150,6 +152,29 @@ CREATE TABLE IF NOT EXISTS message_archive (
   body_text               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   list_unsubscribe        tinyint(1)          NOT NULL  DEFAULT 0,
   priority                tinyint unsigned              DEFAULT 0,
+  sent                    datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  amzn_message_id         varchar(256)                  DEFAULT NULL,
+  PRIMARY KEY (request_id),
+  FOREIGN KEY (request_id) REFERENCES message_request(request_id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table message_archive
+--
+
+CREATE TABLE IF NOT EXISTS message_archive_system (
+  request_id              int                 NOT NULL,
+  web_version_key         varchar(64)         NOT NULL,
+  unsubscribe_key         varchar(64)         NOT NULL,
+  to_name                 varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  to_email                varchar(256)        NOT NULL,
+  reply_to_name           varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  reply_to_email          varchar(256)                  DEFAULT NULL,
+  subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
+  body_html               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  body_text               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   sent                    datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   amzn_message_id         varchar(256)                  DEFAULT NULL,
   PRIMARY KEY (request_id),

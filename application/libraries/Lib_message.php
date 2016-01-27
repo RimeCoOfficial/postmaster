@@ -142,9 +142,23 @@ class Lib_message
 
     $body_html = $dom->innertext;
 
-    // 3. GA stats
-    // [![Analytics](https://ga-beacon.appspot.com/UA-XXXXX-X/your-repo/page-name)](https://github.com/igrigorik/ga-beacon)
-    // @todo: campaign vars
+    // @todo: 2. GA stats (event: click)
+    // Campaign Source    [list]
+    // Campaign Name      [message_id]
+    // Campaign Medium    email
+    // Campaign Content   textlink
+
+    // 3. GA stats (event: open)
+    // Version            v=1
+    // Tracking ID        tid=UA-XXXXX-Y
+    // Client ID          cid=[list_recipient_id]
+    // User ID            uid=[user_id]
+    // Events             t=event&ec=email&ea=open
+    // Campaign Source    cs=[list]  
+    // Campaign Medium    cm=email  
+    // Campaign Name      cn=[message_id]
+    // Document Title     dt=[subject]
+    // Document Encoding  de=UTF-8
     $ga_beacon = [
       'v' => 1, 't' => 'event', 'ec' => 'email', 'ea' => 'open',
       'tid' => getenv('ga'),

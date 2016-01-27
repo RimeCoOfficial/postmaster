@@ -15,6 +15,6 @@ class List_unsubscribe extends CI_Controller
   public function active_subscriber_count()
   {}
 
-  public function create_campaign()
+  public function recipient_info()
   {}
 }

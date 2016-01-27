@@ -191,4 +191,38 @@ class Message extends CI_Controller
       redirect('message/view/'.$message_id);
     }
   }
+
+  public function send_test($message_id = NULL)
+  {
+    $message = $this->lib_message->get($message_id);
+    if (empty($message)) show_404();
+
+    $local_view_data = [];
+    $local_view_data['message'] = $message;
+
+    $this->load->library('form_validation');
+    if ($this->form_validation->run('message/send_test'))
+    {
+      $to_email = $this->form_validation->set_value('email');
+
+      $this->load->library('lib_send_email');
+      if (is_null($this->lib_send_email->direct(
+        $to_email, $message['subject'], $message['body_html'], $message['body_text']
+      )))
+      {
+        show_error($this->lib_message->get_error_message());
+      }
+      else
+      {
+        $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<abbr class="text-nowrap pull-right" title="Glomp&#13;http://emojicons.com/e/glomp">&nbsp; (づ￣ ³￣)づ</abbr>
+          <strong>On its way!</strong> Check your inbox ('.$to_email.')']);
+        redirect('message/view/'.$message_id);
+      }
+    }
+
+    $view_data['main_content'] = $this->load->view('message/send_test', $local_view_data, TRUE);
+
+    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
+    $this->load->view('base', $view_data);
+  }
 }
