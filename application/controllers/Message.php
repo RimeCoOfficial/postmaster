@@ -214,7 +214,7 @@ class Message extends CI_Controller
       }
       else
       {
-        $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<abbr class="text-nowrap pull-right" title="Glomp&#13;http://emojicons.com/e/glomp">&nbsp; (づ￣ ³￣)づ</abbr>
+        $this->session->set_flashdata('alert', ['type' => 'info', 'message' => '<abbr class="text-nowrap pull-right" title="Glomp&#13;http://emojicons.com/e/glomp">&nbsp; (づ￣ ³￣)づ</abbr>
           <strong>On its way!</strong> Check your inbox ('.$to_email.')']);
         redirect('message/view/'.$message_id);
       }

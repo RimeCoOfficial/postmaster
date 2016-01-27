@@ -23,7 +23,6 @@ class Lib_send_email
 
   function direct($to_email, $subject = '', $body_html = '', $body_text = '')
   {
-    return 1;
     $this->CI->load->library('composer/lib_aws');
     $ses_client = $this->CI->lib_aws->get_ses();
 
