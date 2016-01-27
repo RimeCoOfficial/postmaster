@@ -156,30 +156,17 @@ if ($message['archived'] == '1000-01-01 00:00:00')
 else
 {
   ?>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Archive</h3>
-    </div>
-    <div class="panel-body">
-      <div class="media">
-        <div class="media-body">
-          <p>
-            The message has been archived.
-            <abbr title="<?php
-              // Tuesday 8:53 AM, Jan 26 2016
-              echo date('l g:i A, M j Y', strtotime($message['archived']));
-              ?>">
-              @todo: x days ago
-            </abbr>
-          </p>
-        </div>
-         <div class="media-right">
-          <div class="media-object">
-            <span class="glyphicon glyphicon-ok-circle"></span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="alert alert-info" role="alert">
+    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+    <!-- &nbsp; -->
+    <span class="sr-only">Archived:</span>
+    The message has been archived.
+    <abbr title="<?php
+      // Tuesday 8:53 AM, Jan 26 2016
+      echo date('l g:i A, M j Y', strtotime($message['archived']));
+      ?>">
+      @todo: x days ago
+    </abbr>
   </div>
   <?php
 }

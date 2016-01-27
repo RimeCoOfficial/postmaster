@@ -23,6 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <?php echo form_close(); ?>
       </div>
+      <div class="modal-footer text-danger">
+        <strong>Don't spam:</strong>
+        Test mail won't be logged or checked against list-unsubcription
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      </div>
     </div>
   </div>
 </div>
