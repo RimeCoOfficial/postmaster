@@ -39,16 +39,13 @@ class Lib_message
     return $this->CI->model_message->create($subject, $list_id);
   }
 
-  function update($message, $subject, $list_id, $body_html_input, $reply_to_name, $reply_to_email)
+  function update($message, $subject, $body_html_input, $reply_to_name, $reply_to_email)
   {
     if ($message['archived'] != '1000-01-01 00:00:00')
     {
       $this->error = ['message' => 'Didn&#8217;t I told you! The message is archived and can not be modified'];
       return NULL;
     }
-
-    $published_tds = $message['published_tds'];
-    if ($list_id != $message['list_id'])  $published_tds = NULL; // back to draft
 
     if (is_null($result = $this->_process_html($message['message_id'], $body_html_input)))
     {
@@ -59,7 +56,7 @@ class Lib_message
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
     $this->CI->model_message->update(
-      $message['message_id'], $subject, $list_id, $published_tds, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
+      $message['message_id'], $subject, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
     );
     
     return $message;

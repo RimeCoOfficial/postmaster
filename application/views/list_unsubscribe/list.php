@@ -49,8 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               data-list="<?php echo $list['list']; ?>"
               href="#"><span class="media-object glyphicon glyphicon-trash"></span>
             </a> -->
-            <a href="<?php echo base_url('list-unsubscribe/edit/'.$list['list_id']); ?>">
-              <span class="media-object glyphicon glyphicon-edit"></span>
+            <a href="<?php echo base_url('message/create/'.$list['list_id']); ?>">
+              <span class="media-object glyphicon glyphicon-plus"></span>
             </a>
           </div>
         </div>

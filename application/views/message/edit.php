@@ -7,13 +7,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <small>#<?php echo $message['message_id']; ?></small>
 </h1>
 
+<p class="lead">
+  List-unsubscribe: <?php echo anchor('list-unsubcribe/#', $message['list']); ?>
+
+  <span class="pull-right">
+    <a href="<?php echo base_url('message/#'); ?>">
+      <span class="label label-default"><?php echo $message['type']; ?></span>
+    </a>
+  </span>
+</p>
+
 <?php // var_dump($message); ?>
 
 <?php echo form_open(uri_string()); ?>
 
 <?php $this->view('form/input', array('id' => 'subject', 'value' => $message['subject'])); ?>
-
-<?php $this->view('form/input', array('id' => 'list_id', 'value' => $message['list_id'])); ?>
 
 <?php $this->view('form/input', array('id' => 'reply_to_name', 'value' => $message['reply_to_name'])); ?>
 <?php $this->view('form/input', array('id' => 'reply_to_email', 'value' => $message['reply_to_email'])); ?>

@@ -58,16 +58,25 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function create()
+  public function create($list_id)
   {
+    $this->load->library('lib_list_unsubscribe');
+    $list_unsubscribe = $this->lib_list_unsubscribe->get($list_id);
+
+    if (empty($list_unsubscribe))
+    {
+      show_error('List id: '.$list_id.' not found');
+    }
+
     $local_view_data = [];
+    $local_view_data['list_unsubscribe'] = $list_unsubscribe;
 
     $this->load->library('form_validation');
     if ($this->form_validation->run())
     {
       if (is_null($message_id = $this->lib_message->create(
         $this->form_validation->set_value('subject'),
-        $this->form_validation->set_value('list_id')
+        $list_id
       )))
       {
         show_error($this->lib_message->get_error_message());
@@ -103,7 +112,6 @@ class Message extends CI_Controller
       if (is_null($this->lib_message->update(
         $message,
         $this->form_validation->set_value('subject'),
-        $this->form_validation->set_value('list_id'),
         $this->form_validation->set_value('body_html_input'),
         $this->form_validation->set_value('reply_to_name'),
         $this->form_validation->set_value('reply_to_email')

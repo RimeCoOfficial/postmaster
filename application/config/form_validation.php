@@ -14,8 +14,8 @@ $config = array(
   'list_unsubscribe/create' => ['list', 'type'],
   'list_unsubscribe/edit'   => ['list'],
 
-  'message/create'          => ['list_id', 'subject'],
-  'message/edit'            => ['list_id', 'subject', 'reply_to_name', 'reply_to_email', 'body_html_input'],
+  'message/create'          => ['subject'],
+  'message/edit'            => ['subject', 'reply_to_name', 'reply_to_email', 'body_html_input'],
   'message/publish'         => ['php_datetime_str'],
   'message/send_test'       => ['email'],
 );

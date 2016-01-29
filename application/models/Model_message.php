@@ -51,17 +51,14 @@ class Model_message extends CI_Model
     return $this->db->insert_id();
   }
 
-  function update($message_id, $subject, $list_id, $published_tds, $body_html_input, $body_html, $body_text, $reply_to_name, $reply_to_email)
+  function update($message_id, $subject, $body_html_input, $body_html, $body_text, $reply_to_name, $reply_to_email)
   {
     $this->db->set('subject', $subject);
-    $this->db->set('list_id', $list_id);
     $this->db->set('reply_to_name', $reply_to_name);
     $this->db->set('reply_to_email', $reply_to_email);
     $this->db->set('body_html_input', $body_html_input);
     $this->db->set('body_html', $body_html);
     $this->db->set('body_text', $body_text);
-
-    $this->db->set('published_tds', $published_tds);
 
     $this->db->where('message_id', $message_id);
     $this->db->where('archived', '1000-01-01 00:00:00');

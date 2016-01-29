@@ -32,9 +32,6 @@ class Lib_list_unsubscribe
       $this->error = ['status' => 401, 'message' => 'invalid email address in to_email'];
       return NULL;
     }
-
-
-
   }
 
   function store($email_id, $status = array())
@@ -89,7 +86,7 @@ class Lib_list_unsubscribe
       $this->error = ['message' => 'list: "'.$list.'" has already beed created, pick a different list'];
       return NULL;
     }
-
+    
     $this->CI->model_list_unsubscribe->update($list_id, $list);
     return TRUE;
   }

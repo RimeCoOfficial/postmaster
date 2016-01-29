@@ -62,17 +62,6 @@ $config = array(
     'required'      => 1,
   ),
 
-  'list_id' => array(
-    'label'         => 'List-unsubscribe ID',
-    'rules'         => 'trim|is_natural_no_zero|greater_than[0]|required',
-
-    'max_length'    => $reply_to_name_max_length,
-    
-    // html5 tag - not supported in Internet Explorer 9 and earlier versions.
-    'placeholder'   => 'List-unsubscribe id without the hash (eg. 1 for list-unsubscribe: test #1)',
-    'required'      => 1,
-  ),
-
   'type' => array(
     'label'         => 'Type',
     'rules'         => 'trim|in_list['.implode(',', array_keys($message_type_options)).']|required',

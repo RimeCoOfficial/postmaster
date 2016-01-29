@@ -2,13 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>
-  Messages
-
-  <span class="pull-right">
-    <a href="<?php echo base_url('message/create'); ?>" class="btn btn-primary">New</a>
-  </span>
-</h1>
+<h1>Messages</h1>
 
 <?php // var_dump($list); ?>
 
