@@ -64,11 +64,11 @@ class Model_list_unsubscribe extends CI_Model
     $this->db->update($this->list_unsubscribe_table);
   }
 
-  function delete($list_id)
-  {
-    $this->db->where('list_id', $list_id);
-    $this->db->delete($this->list_unsubscribe_table);
+  // function delete($list_id)
+  // {
+  //   $this->db->where('list_id', $list_id);
+  //   $this->db->delete($this->list_unsubscribe_table);
 
-    return $this->db->affected_rows() > 0;
-  }
+  //   return $this->db->affected_rows() > 0;
+  // }
 }

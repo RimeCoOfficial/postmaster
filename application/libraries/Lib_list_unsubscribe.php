@@ -94,8 +94,8 @@ class Lib_list_unsubscribe
     return TRUE;
   }
 
-  function delete($list_id)
-  {
-    return $this->CI->model_list_unsubscribe->delete($list_id);
-  }
+  // function delete($list_id)
+  // {
+  //   return $this->CI->model_list_unsubscribe->delete($list_id);
+  // }
 }

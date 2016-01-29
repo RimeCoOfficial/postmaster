@@ -85,9 +85,9 @@ class List_unsubscribe extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function delete($list_id = 0)
-  {
-    $this->lib_list_unsubscribe->delete($list_id);
-    redirect('list-unsubscribe');
-  }
+  // public function delete($list_id = 0)
+  // {
+  //   $this->lib_list_unsubscribe->delete($list_id);
+  //   redirect('list-unsubscribe');
+  // }
 }

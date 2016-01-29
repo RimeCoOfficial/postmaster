@@ -42,12 +42,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
           
           <div class="media-right">
-            <a class="text-danger"
+            <!-- <a class="text-danger"
               data-toggle="modal"
               data-target="#list-delete-modal"
               data-list-id="<?php echo $list['list_id']; ?>"
               data-list="<?php echo $list['list']; ?>"
               href="#"><span class="media-object glyphicon glyphicon-trash"></span>
+            </a> -->
+            <a href="<?php echo base_url('list-unsubscribe/edit/'.$list['list_id']); ?>">
+              <span class="media-object glyphicon glyphicon-edit"></span>
             </a>
           </div>
         </div>
