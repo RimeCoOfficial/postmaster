@@ -46,15 +46,16 @@ class Model_list_unsubscribe extends CI_Model
     return $query->num_rows() == 0;
   }
 
-  function create($list, $reply_to_name, $reply_to_email)
+  function create($list, $type)
   {
     $this->db->set('list', $list);
+    $this->db->set('type', $type);
     
     $this->db->insert($this->list_unsubscribe_table);
     return $this->db->insert_id();
   }
 
-  function update($list_id, $list, $reply_to_name, $reply_to_email)
+  function update($list_id, $list)
   {
     $this->db->set('list', $list);
 

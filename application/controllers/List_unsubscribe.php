@@ -37,7 +37,8 @@ class List_unsubscribe extends CI_Controller
     if ($this->form_validation->run('list_unsubscribe/create'))
     {
       if (is_null($list_id = $this->lib_list_unsubscribe->create(
-        $this->form_validation->set_value('list')
+        $this->form_validation->set_value('list'),
+        $this->form_validation->set_value('type')
       )))
       {
         show_error($this->lib_list_unsubscribe->get_error_message());

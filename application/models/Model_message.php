@@ -12,6 +12,7 @@ class Model_message extends CI_Model
 
     $this->db->select($this->message_table.'.*');
     $this->db->select($this->list_unsubscribe_table.'.list');
+    $this->db->select($this->list_unsubscribe_table.'.type');
 
     $this->db->where($this->message_table.'.message_id', $message_id);
 
@@ -29,6 +30,7 @@ class Model_message extends CI_Model
     
     $this->db->select($this->message_table.'.*');
     $this->db->select($this->list_unsubscribe_table.'.list');
+    $this->db->select($this->list_unsubscribe_table.'.type');
 
     $this->db->order_by($this->message_table.'.message_id', 'DESC');
 
@@ -40,21 +42,18 @@ class Model_message extends CI_Model
     return $query->result_array();
   }
 
-  function create($subject, $type, $list_id, $published_tds)
+  function create($subject, $list_id)
   {
     $this->db->set('subject', $subject);
-    $this->db->set('type', $type);
     $this->db->set('list_id', $list_id);
-    $this->db->set('published_tds', $published_tds);
 
     $this->db->insert($this->message_table);
     return $this->db->insert_id();
   }
 
-  function update($message_id, $subject, $type, $list_id, $published_tds, $body_html_input, $body_html, $body_text, $reply_to_name, $reply_to_email)
+  function update($message_id, $subject, $list_id, $published_tds, $body_html_input, $body_html, $body_text, $reply_to_name, $reply_to_email)
   {
     $this->db->set('subject', $subject);
-    $this->db->set('type', $type);
     $this->db->set('list_id', $list_id);
     $this->db->set('reply_to_name', $reply_to_name);
     $this->db->set('reply_to_email', $reply_to_email);

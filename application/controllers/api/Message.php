@@ -15,6 +15,14 @@ class Message extends CI_Controller
     $this->load->library('lib_message');
   }
 
+  /*
+  curl -X POST -i http://postmaster.example.com/api/message/request-transactional -d \
+  "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
+  &message_id=1\
+  &list_recipent_id=\
+  &email_id=nemo@example.com\
+  &pseudo_vars[foo]=bar"
+  */
   public function request_transactional($message_id = 0)
   {
     if (is_null($result = $this->lib_message->add_request()))

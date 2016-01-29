@@ -34,14 +34,12 @@ class Lib_message
     return $this->CI->model_message->get_list();
   }
 
-  function create($subject, $type, $list_id)
+  function create($subject, $list_id)
   {
-    if ($type == 'transactional') $published_tds = 0;
-
-    return $this->CI->model_message->create($subject, $type, $list_id, $published_tds);
+    return $this->CI->model_message->create($subject, $list_id);
   }
 
-  function update($message, $subject, $type, $list_id, $body_html_input, $reply_to_name, $reply_to_email)
+  function update($message, $subject, $list_id, $body_html_input, $reply_to_name, $reply_to_email)
   {
     if ($message['archived'] != '1000-01-01 00:00:00')
     {
@@ -50,7 +48,7 @@ class Lib_message
     }
 
     $published_tds = $message['published_tds'];
-    if ($type != $message['type'])  $published_tds = NULL; // save as draft
+    if ($list_id != $message['list_id'])  $published_tds = NULL; // back to draft
 
     if (is_null($result = $this->_process_html($message['message_id'], $body_html_input)))
     {
@@ -61,7 +59,7 @@ class Lib_message
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
     $this->CI->model_message->update(
-      $message['message_id'], $subject, $type, $list_id, $published_tds, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
+      $message['message_id'], $subject, $list_id, $published_tds, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
     );
     
     return $message;

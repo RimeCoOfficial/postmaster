@@ -67,7 +67,6 @@ class Message extends CI_Controller
     {
       if (is_null($message_id = $this->lib_message->create(
         $this->form_validation->set_value('subject'),
-        $this->form_validation->set_value('type'),
         $this->form_validation->set_value('list_id')
       )))
       {
@@ -104,7 +103,6 @@ class Message extends CI_Controller
       if (is_null($this->lib_message->update(
         $message,
         $this->form_validation->set_value('subject'),
-        $this->form_validation->set_value('type'),
         $this->form_validation->set_value('list_id'),
         $this->form_validation->set_value('body_html_input'),
         $this->form_validation->set_value('reply_to_name'),
