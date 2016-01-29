@@ -194,11 +194,16 @@ class Lib_message
     return compact('body_html', 'body_text');
   }
 
-  function add_request()
+  function add_request($message_id)
   {
     $this->CI->load->library('lib_message_request');
 
-    $message_id = $this->CI->input->post('message_id');
+    $list_recipient_id = $this->CI->input->post('list_recipient_id');
+    if (empty($list_recipient_id))
+    {
+      $this->error = ['status' => 401, 'message' => 'missing parameter list_recipient_id'];
+      return NULL;
+    }
 
     $to_name = $this->CI->input->post('to_name');
 
@@ -210,8 +215,18 @@ class Lib_message
 
     $pseudo_vars = $this->CI->input->post('pseudo_vars');
     
+    $message = $this->CI->model_message->get($message_id);
+    if ($message['type'] != 'transactional')
+    {
+      $this->error = ['status' => 401, 'message' => 'the message type is not transactional'];
+      return NULL;
+    }
+
+    $this->CI->load->library('lib_list_recipient');
+    $list_recipient = $this->CI->lib_list_recipient->get($message['list_id'], $list_recipient_id, $to_name, $to_email);
+
     if (is_null($request_id = $this->CI->lib_message_request->add(
-      $message_id, 'transactional', $to_name, $to_email, $pseudo_vars)))
+      $message_id, $list_recipient['auto_recipient_id'], $to_name, $to_email, $pseudo_vars)))
     {
       $this->error = $this->CI->lib_message_request->get_error_message();
       return NULL;

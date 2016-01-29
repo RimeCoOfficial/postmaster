@@ -6,14 +6,11 @@ class Model_message_request extends CI_Model
   private $message_table = 'message';
   private $message_request_table = 'message_request';
 
-  function can_add($message_id, $type)
+  function can_add($message_id)
   {
     $this->db->limit(1);
 
     $this->db->where('message_id', $message_id);
-
-    if (!empty($type)) $this->db->where('type', $type);
-
     $this->db->where('published_tds IS NOT NULL');
     $this->db->where('archived', '1000-01-01 00:00:00');
 
@@ -21,9 +18,10 @@ class Model_message_request extends CI_Model
     return $query->num_rows() > 0;
   }
 
-  function add($message_id, $to_name, $to_email, $pseudo_vars_json)
+  function add($message_id, $auto_recipient_id, $to_name, $to_email, $pseudo_vars_json)
   {
     $this->db->set('message_id', $message_id);
+    $this->db->set('auto_recipient_id', $auto_recipient_id);
     $this->db->set('to_name', $to_name);
     $this->db->set('to_email', $to_email);
     $this->db->set('pseudo_vars_json', $pseudo_vars_json);

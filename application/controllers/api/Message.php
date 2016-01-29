@@ -16,16 +16,23 @@ class Message extends CI_Controller
   }
 
   /*
-  curl -X POST -i http://postmaster.example.com/api/message/request-transactional -d \
-  "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
-  &message_id=1\
-  &list_recipent_id=\
-  &email_id=nemo@example.com\
-  &pseudo_vars[foo]=bar"
+curl -X POST -i http://postmaster.example.com/api/message/transactional/1 -d \
+"key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
+&list_recipient_id=visitor-fd876f8cd6a58277fc664d47ea10ad19\
+&to_name=John Doe\
+&to_email=johndoe@example.com\
+&pseudo_vars[foo]=bar"
+
+curl -X POST -i http://localhost/postmaster/api/message/transactional/1 -d \
+"key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
+&list_recipient_id=visitor-fd876f8cd6a58277fc664d47ea10ad19\
+&to_name=John Doe\
+&to_email=johndoe@example.com\
+&pseudo_vars[foo]=bar"
   */
-  public function request_transactional($message_id = 0)
+  public function transactional($message_id = 0)
   {
-    if (is_null($result = $this->lib_message->add_request()))
+    if (is_null($result = $this->lib_message->add_request($message_id)))
     {
       output_error($this->lib_message->get_error_message());
     }

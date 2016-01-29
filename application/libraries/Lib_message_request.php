@@ -22,9 +22,9 @@ class Lib_message_request
     return $this->error;
   }
 
-  function add($message_id, $type, $to_name, $to_email, $pseudo_vars)
+  function add($message_id, $auto_recipient_id, $to_name, $to_email, $pseudo_vars)
   {
-    if (!$this->CI->model_message_request->can_add($message_id, $type))
+    if (!$this->CI->model_message_request->can_add($message_id))
     {
       $this->error = ['status' => 401, 'message' => 'invalid message_id'];
       return NULL;
@@ -34,7 +34,7 @@ class Lib_message_request
 
     $pseudo_vars_json = (is_array($pseudo_vars) AND !empty($pseudo_vars)) ? json_encode($pseudo_vars) : NULL;
 
-    return $this->CI->model_message_request->add($message_id, $to_name, $to_email, $pseudo_vars_json);
+    return $this->CI->model_message_request->add($message_id, $auto_recipient_id, $to_name, $to_email, $pseudo_vars_json);
   }
 
   function get_to_process($count)
