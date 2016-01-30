@@ -51,11 +51,11 @@ CREATE TABLE IF NOT EXISTS list_unsubscribe (
 
 INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`, `type`) VALUES
   -- Transactional
-  ('auth', 'transactional'), ('notification', 'transactional'), ('report', 'transactional'), ('invite', 'transactional'),
+  ('report', 'transactional'), ('account', 'transactional'), ('notification', 'transactional'), ('invite', 'transactional'),
   -- Camapaign
   ('announcement', 'campaign'), ('newsletter', 'campaign'),
   -- Autoresponder
-  ('request-invitation', 'autoresponder'), ('tips', 'autoresponder');
+  ('requested-invite', 'autoresponder'), ('tips', 'autoresponder');
 
 -- --------------------------------------------------------
 
