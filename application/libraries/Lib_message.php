@@ -130,19 +130,18 @@ class Lib_message
       'campaign_source' => $message['list'].'-'.$message['message_id'],
       'campaign_name' => $message['message_id'].' '.$message['subject'],
       'campaign_medium' => 'email',
-      'campaign_content' => 'link',
     ];
 
     // 2. GA stats (event: click)
     // Campaign Source    utm_source=[list]
     // Campaign Name      utm_campaign=[message_id]
     // Campaign Medium    utm_medium=email
-    // Campaign Content   utm_content=textlink
-    $ga_textlink = [
+    // Campaign Content   utm_content=hyperlink
+    $ga_hyperlink = [
       'utm_source' => $ga_vars['campaign_source'],
       'utm_campaign' => $ga_vars['campaign_name'],
       'utm_medium' => $ga_vars['campaign_medium'],
-      'utm_content'  => $ga_vars['campaign_content'],
+      'utm_content'  => 'hyperlink',
     ];
 
     // 3. GA stats (event: open)
@@ -154,7 +153,8 @@ class Lib_message
     // Campaign Source    cs=[list]
     // Campaign Name      cn=[message_id]
     // Campaign Medium    cm=email
-    // Document Title     dt=[subject]
+    // Document Path      dp=/email/open/{_request_id}
+    // Document Title     dt=[subject] The document title (&dt) should be the subject line of the email.
     // Document Encoding  de=UTF-8
     $ga_beacon = [
       'v' => 1, 't' => 'event', 'ec' => 'email', 'ea' => 'open',
@@ -167,7 +167,7 @@ class Lib_message
       'dt'  => $message['subject'], 'de'  => 'UTF-8',
     ];
     $ga_beacon_url = 'https://www.google-analytics.com/collect?'.http_build_query($ga_beacon);
-    $ga_beacon_url .= '&cid={_request_id}&uid={_list_recipient_id}';
+    $ga_beacon_url .= '&dp=/email/open/{_request_id}&cid={_request_id}&uid={_list_recipient_id}';
     $ga_beacon_html = '<img alt="GA" width="1px" height="1px" src="'.$ga_beacon_url.'">';
 
     $body_html = str_replace('</body>', $ga_beacon_html.'</body>', $body_html, $replace_count);
@@ -205,8 +205,22 @@ class Lib_message
     $count = 0;
     foreach($dom->find('a') as $a)
     {
-      // $ga_query_link = $a_href_list[ $count ] ga_textlink
-      $a->href = $a_href_list[ $count ];
+      $a_href = $a_href_list[ $count ];
+
+      switch ($a_href) {
+        case '{_unsubscribe_link}':
+        case '{_web_version_link}':
+        case '{_campaign_archive_link}': break;
+        
+        default:
+          $ga_click_query = '?'.http_build_query($ga_hyperlink);
+
+          $a_href = str_replace('?', $ga_click_query, $a_href, $replace_count);
+          if (!$replace_count) $a_href .= $ga_click_query;
+          break;
+      }
+
+      $a->href = $a_href;
       $count += 1;
     }
 
