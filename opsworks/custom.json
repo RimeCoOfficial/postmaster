@@ -19,7 +19,10 @@
         "email_source=postmaster@example.com",
         "email_admin=postmaster@example.com",
         "email_debug=debug-postmaster@example.com",
-        "api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        "api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "app_name=Example",
+        "app_base_url=http://localhost/example",
+        "app_unsubscribe_uri="
       ]
     },
     "cron_jobs": [
