@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Model_message_request extends CI_Model
 {
   private $message_table = 'message';
+  private $list_unsubscribe_table = 'list_unsubscribe';
+  private $list_recipient_table = 'list_recipient';
   private $message_request_table = 'message_request';
 
   function can_add($message_id)
@@ -35,7 +37,15 @@ class Model_message_request extends CI_Model
     $this->db->limit($count);
     $this->db->order_by('request_id', 'ASC');
 
+    $this->db->select($this->message_table.'.*');
+    $this->db->select($this->message_request_table.'.*');
+    $this->db->select($this->list_unsubscribe_table.'.list');
+    $this->db->select($this->list_unsubscribe_table.'.type');
+    $this->db->select($this->list_recipient_table.'.list_recipient_id');
+
     $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->message_request_table.'.message_id');
+    $this->db->join($this->list_unsubscribe_table, $this->list_unsubscribe_table.'.list_id = '.$this->message_table.'.list_id');
+    $this->db->join($this->list_recipient_table, $this->list_recipient_table.'.auto_recipient_id = '.$this->message_request_table.'.auto_recipient_id');
 
     $this->db->where('processed', '1000-01-01 00:00:00');
 

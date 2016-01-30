@@ -47,7 +47,7 @@ class Lib_message
       return NULL;
     }
 
-    if (is_null($result = $this->_process_html($message['message_id'], $body_html_input)))
+    if (is_null($result = $this->_process_html($message, $body_html_input)))
     {
       return NULL;
     }
@@ -118,52 +118,75 @@ class Lib_message
   //   return TRUE;
   // }
 
-  function _process_html($message_id, $body_html_input)
+  function _process_html($message, $body_html_input)
   {
     $body_html = $body_html_input;
 
     // 1. html to text
     $body_text = html_to_text($body_html);
 
-    $dom = HtmlDomParser::str_get_html($body_html);
+    $ga_vars = [
+      'tracking_id' => getenv('ga'),
+      'campaign_source' => $message['list'].'-'.$message['message_id'],
+      'campaign_name' => $message['message_id'].' '.$message['subject'],
+      'campaign_medium' => 'email',
+      'campaign_content' => 'link',
+    ];
 
-    // 2. a.target=_blank
-    $anchor_url_list = [];
-    foreach($dom->find('a') as $anchor)
-    {
-      $anchor_url_list[] = $anchor->href;
-      $anchor->target = '_blank';
-    }
-
-    $body_html = $dom->innertext;
-
-    // @todo: 2. GA stats (event: click)
-    // Campaign Source    [list]
-    // Campaign Name      [message_id]
-    // Campaign Medium    email
-    // Campaign Content   textlink
+    // 2. GA stats (event: click)
+    // Campaign Source    utm_source=[list]
+    // Campaign Name      utm_campaign=[message_id]
+    // Campaign Medium    utm_medium=email
+    // Campaign Content   utm_content=textlink
+    $ga_textlink = [
+      'utm_source' => $ga_vars['campaign_source'],
+      'utm_campaign' => $ga_vars['campaign_name'],
+      'utm_medium' => $ga_vars['campaign_medium'],
+      'utm_content'  => $ga_vars['campaign_content'],
+    ];
 
     // 3. GA stats (event: open)
     // Version            v=1
-    // Tracking ID        tid=UA-XXXXX-Y
-    // Client ID          cid=[list_recipient_id]
-    // User ID            uid=[user_id]
     // Events             t=event&ec=email&ea=open
-    // Campaign Source    cs=[list]  
-    // Campaign Medium    cm=email  
+    // Tracking ID        tid=UA-XXXXX-Y
+    // Client ID          cid=[list_id]
+    // User ID            uid=[list_recipient_id]
+    // Campaign Source    cs=[list]
     // Campaign Name      cn=[message_id]
+    // Campaign Medium    cm=email
     // Document Title     dt=[subject]
     // Document Encoding  de=UTF-8
     $ga_beacon = [
       'v' => 1, 't' => 'event', 'ec' => 'email', 'ea' => 'open',
-      'tid' => getenv('ga'),
-      'cid' => random_string('md5'),
-      'mid' => $message_id
+      'tid' => $ga_vars['tracking_id'],
+      // 'cid' => md5($message['list_id'].random_string()),
+      // 'uid' => '{list_recipient_id}',
+      'cs'  => $ga_vars['campaign_source'],
+      'cn'  => $ga_vars['campaign_name'],
+      'cm'  => $ga_vars['campaign_medium'],
+      'dt'  => $message['subject'], 'de'  => 'UTF-8',
     ];
-    $ga_beacon_html = '<img alt="GA" width="1px" height="1px" src="'.'https://www.google-analytics.com/collect?'.http_build_query($ga_beacon).'">';
+    $ga_beacon_url = 'https://www.google-analytics.com/collect?'.http_build_query($ga_beacon);
+    $ga_beacon_url .= '&cid={_request_id}&uid={_list_recipient_id}';
+    $ga_beacon_html = '<img alt="GA" width="1px" height="1px" src="'.$ga_beacon_url.'">';
 
     $body_html = str_replace('</body>', $ga_beacon_html.'</body>', $body_html, $replace_count);
     if (!$replace_count) $body_html .= $ga_beacon_html;
+
+    $dom = HtmlDomParser::str_get_html($body_html);
+
+    // 3. a.target=_blank
+    $a_href_list = [];
+    foreach($dom->find('a') as $a)
+    {
+      $a_href_list[] = $a->href;
+      $a->target = '_blank';
+    }
+
+    $img_src_list = [];
+    foreach($dom->find('img') as $img) $img_src_list[] = $img->src;
+
+    $body_html = $dom->innertext;
 
     // 4. minify html
     $this->CI->load->library('composer/lib_html_minifier');
@@ -180,11 +203,15 @@ class Lib_message
     //    {_unsubscribe_link} => %7B_unsubscribe_link%7D
     $dom = HtmlDomParser::str_get_html($body_html);
     $count = 0;
-    foreach($dom->find('a') as $anchor)
+    foreach($dom->find('a') as $a)
     {
-      $anchor->href = $anchor_url_list[ $count ];
+      // $ga_query_link = $a_href_list[ $count ] ga_textlink
+      $a->href = $a_href_list[ $count ];
       $count += 1;
     }
+
+    $count = 0;
+    foreach($dom->find('img') as $img) { $img->src = $img_src_list[ $count ]; $count += 1; }
 
     $body_html = $dom->innertext;
 

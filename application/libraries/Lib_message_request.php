@@ -74,15 +74,15 @@ class Lib_message_request
 
   function archive($message)
   {
-    $message_archive = $this->init($message);
+    $message_archive = $this->_init($message);
 
-    $message_archive = $this->parse($message_archive, $message);
+    $message_archive = $this->_parse($message_archive, $message);
 
     // print_r($message_archive); die();
     return $message_archive;
   }
 
-  private function init($message)
+  private function _init($message)
   {
     $message_archive = [];
 
@@ -116,14 +116,16 @@ class Lib_message_request
     return $message_archive;
   }
 
-  private function parse($message_archive, $message)
+  private function _parse($message_archive, $message)
   {
     // 4. link-unsubscribe
 
     // {unsubscribe} {web_version}
 
     $default_vars = [
+      '_request_id' => $message_archive['request_id'],
       '_subject' => $message['subject'],
+      '_list_recipient_id' => $message['list_recipient_id'],
       '_to_email' => $message['to_email'],
       '_to_name' => $message['to_name'],
       '_reply_to_email' => $message['reply_to_email'],
