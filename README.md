@@ -17,5 +17,5 @@ AWS email server
 - [x] Auto (body + footer) `Plain text` email
 - [x] SNS, SQS - handle feedback (bounces, complaints, deliveries)
 - [x] Queuing and Multiple emails sending
-- [ ] Campaign Archive - web/campaign/<message_id>
+- [ ] Campaign Archive - web/campaign/{message_id}
 - [x] Google Analytics (click and open)
