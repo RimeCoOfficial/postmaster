@@ -102,7 +102,7 @@ class Lib_message_request
     $message_archive['body_html'] = $message['body_html'];
     $message_archive['body_text'] = '';
 
-    $message_archive['list_unsubscribe'] = 0;
+    $message_archive['list_unsubscribe'] = NULL;
 
     $message_archive['priority'] = 0;
     switch ($message['type'])
@@ -122,9 +122,12 @@ class Lib_message_request
 
     // {unsubscribe} {web_version}
 
-    $client_unsubscribe_url = getenv('app_unsubscribe_uri');
-    if (empty($client_unsubscribe_url)) $client_unsubscribe_url = base_url('web/unsubscribe?');
-    else $client_unsubscribe_url = getenv('app_base_url').$client_unsubscribe_url;
+    $list_unsubscribe_url = getenv('app_unsubscribe_uri');
+    if (empty($list_unsubscribe_url)) $list_unsubscribe_url = base_url('web/unsubscribe?');
+    else $list_unsubscribe_url = getenv('app_base_url').$list_unsubscribe_url;
+
+    $list_unsubscribe_url .= 'request_id='.$message_archive['request_id'].'&unsubscribe_key='.$message_archive['unsubscribe_key'];
+    $list_unsubscribe_url = $message['list_unsubscribe'] ? $list_unsubscribe_url : NULL;
 
     $default_vars = [
       '_request_id' => $message_archive['request_id'],
@@ -135,7 +138,7 @@ class Lib_message_request
       '_reply_to_email' => $message['reply_to_email'],
       '_reply_to_name' => $message['reply_to_name'],
       '_web_version_link' => base_url('web/message/'.$message_archive['request_id'].'/'.$message_archive['web_version_key']),
-      '_unsubscribe_link' => $client_unsubscribe_url.'archive_id='.$message_archive['request_id'].'&unsubscribe_key='.$message_archive['unsubscribe_key'],
+      '_unsubscribe_link' => $list_unsubscribe_url,
       '_current_day' => date('l'),
       '_current_day_number' => date('N'),
       '_current_date' => date('j'),
@@ -143,7 +146,7 @@ class Lib_message_request
       '_current_month_number' => date('n'),
       '_current_year' => date('Y'),
       '_app_name' => getenv('app_name'),
-      '_app_base_url' => getenv('app_base_url')
+      '_app_base_url' => getenv('app_base_url'),
     ];
 
     // _campaign_archive_link
@@ -162,6 +165,8 @@ class Lib_message_request
     // parse body
     $message_archive['body_html'] = $this->CI->parser->parse_string($message['body_html'],  $pseudo_vars, TRUE);
     $message_archive['body_text'] = $this->CI->parser->parse_string($message['body_text'],  $pseudo_vars, TRUE);
+
+    $message_archive['list_unsubscribe'] = $list_unsubscribe_url;
 
     return $message_archive;
   }

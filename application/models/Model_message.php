@@ -51,7 +51,7 @@ class Model_message extends CI_Model
     return $this->db->insert_id();
   }
 
-  function update($message_id, $subject, $body_html_input, $body_html, $body_text, $reply_to_name, $reply_to_email)
+  function update($message_id, $subject, $body_html_input, $body_html, $body_text, $reply_to_name, $reply_to_email, $list_unsubscribe)
   {
     $this->db->set('subject', $subject);
     $this->db->set('reply_to_name', $reply_to_name);
@@ -59,6 +59,7 @@ class Model_message extends CI_Model
     $this->db->set('body_html_input', $body_html_input);
     $this->db->set('body_html', $body_html);
     $this->db->set('body_text', $body_text);
+    $this->db->set('list_unsubscribe', $list_unsubscribe);
 
     $this->db->where('message_id', $message_id);
     $this->db->where('archived', '1000-01-01 00:00:00');

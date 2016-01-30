@@ -55,8 +55,10 @@ class Lib_message
     if (empty($reply_to_name)) $reply_to_name = NULL;
     if (empty($reply_to_email)) $reply_to_email = NULL;
 
+    $list_unsubscribe = strpos($result['body_html'], '{_unsubscribe_link}') !== false;
+
     $this->CI->model_message->update(
-      $message['message_id'], $subject, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email
+      $message['message_id'], $subject, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email, $list_unsubscribe
     );
     
     return $message;

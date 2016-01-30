@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS list_unsubscribe (
   list_id                 int                 NOT NULL  AUTO_INCREMENT, -- for internal use only
   list                    varchar(32)         NOT NULL  UNIQUE,
   type                    varchar(16)         NOT NULL,                 -- autoresponder, campaign, transactional
-  unsubscribe_link        varchar(256)                  DEFAULT NULL,
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (list_id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
@@ -152,7 +151,7 @@ CREATE TABLE IF NOT EXISTS message_archive (
   subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
   body_html               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   body_text               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
-  list_unsubscribe        tinyint(1)          NOT NULL  DEFAULT 0,
+  list_unsubscribe        text                          DEFAULT NULL,
   priority                tinyint unsigned              DEFAULT 0,
   sent                    datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   amzn_message_id         varchar(256)                  DEFAULT NULL,
