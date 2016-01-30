@@ -13,9 +13,9 @@ putenv('db_password=root');
 
 // Debug keys
 putenv('AWS_PHP_CACHE_DIR=/tmp/aws-cache');
-putenv('aws_account_id=111111111111');
-putenv('aws_access_key=XXXXXXXXXXXXXXXXXXXX');
-putenv('aws_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+putenv('aws_account_id=667785696107');
+putenv('aws_access_key=AKIAJQ42S46BKBVQ66EQ');
+putenv('aws_secret_key=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');
 
 // US East (N. Virginia)        us-east-1
 // US West (Oregon)             us-west-2
@@ -26,14 +26,14 @@ putenv('aws_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 // Asia Pacific (Sydney)        ap-southeast-2
 // Asia Pacific (Tokyo)         ap-northeast-1
 // South America (Sao Paulo)    sa-east-1
-putenv('aws_region=xx-xxxx-1');
-putenv('aws_s3_bucket=bucket');
+putenv('aws_region=us-east-1');
+putenv('aws_s3_bucket=rime-mail');
 
-putenv('ga=UA-XXXXXXXXX-1');
+putenv('ga=UA-XXXXXXXXX-X');
 
-putenv('email_source=postmaster@example.com');
+putenv('email_source=postmaster@rime.co');
 
-putenv('email_admin=admin@example.com');
-putenv('email_debug=debug-postmaster@example.com');
+putenv('email_admin=suvozit@rime.co');
+putenv('email_debug=debug-postmaster@rime.co');
 
-putenv('api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+putenv('api_key=ce1bb981e00cacca2d248261a0a4a530');

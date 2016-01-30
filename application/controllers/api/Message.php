@@ -22,6 +22,13 @@ curl -X POST -i http://postmaster.example.com/api/message/transactional/1 -d \
 &to_name=John Doe\
 &to_email=johndoe@example.com\
 &pseudo_vars[foo]=bar"
+
+curl -X POST -i http://localhost/postmaster/api/message/transactional/1 -d \
+"key=ce1bb981e00cacca2d248261a0a4a530\
+&list_recipient_id=visitor-fd876f8cd6a58277fc664d47ea10ad19\
+&to_name=John Doe\
+&to_email=johndoe@example.com\
+&pseudo_vars[foo]=bar"
   */
   public function transactional($message_id = 0)
   {

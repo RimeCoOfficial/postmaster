@@ -29,7 +29,7 @@ class Lib_message_archive
     return $this->CI->model_message_archive->get($request_id, $web_version_key);
   }
 
-  function get_list($type)
+  function get_list($type = NULL)
   {
     $count = 100;
     return $this->CI->model_message_archive->get_list($type, $count);

@@ -6,6 +6,7 @@ class Model_message_archive extends CI_Model
   private $message_archive_table = 'message_archive';
   private $message_request_table = 'message_request';
   private $message_table = 'message';
+  private $list_unsubscribe_table = 'list_unsubscribe';
 
   function store($message_list)
   {
@@ -36,7 +37,9 @@ class Model_message_archive extends CI_Model
     $this->db->select($this->message_request_table.'.to_email');
     $this->db->select($this->message_request_table.'.created');
     $this->db->select($this->message_table.'.message_id');
-    $this->db->select($this->message_table.'.type');
+    $this->db->select($this->message_table.'.list_id');
+    $this->db->select($this->list_unsubscribe_table.'.type');
+    $this->db->select($this->list_unsubscribe_table.'.list');
 
     $this->db->limit($count);
     $this->db->order_by($this->message_request_table.'.request_id', 'DESC');
@@ -45,8 +48,9 @@ class Model_message_archive extends CI_Model
 
     $this->db->join($this->message_archive_table, $this->message_request_table.'.request_id = '.$this->message_archive_table.'.request_id', 'LEFT');
     $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->message_request_table.'.message_id');
+    $this->db->join($this->list_unsubscribe_table, $this->list_unsubscribe_table.'.list_id = '.$this->message_table.'.list_id');
 
-    $this->db->where('type', $type);
+    if (!empty($type)) $this->db->where('type', $type);
 
     $query = $this->db->get($this->message_request_table);
     return $query->result_array();

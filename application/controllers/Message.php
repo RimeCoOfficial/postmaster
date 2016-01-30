@@ -58,6 +58,16 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
+  public function archive($request_id = NULL, $web_version_key = NULL)
+  {
+    $this->load->library('lib_message_archive');
+    $message = $this->lib_message_archive->get($request_id, $web_version_key);
+    if (empty($message)) show_404();
+  
+    echo $message['body_html'];
+    die();
+  }
+
   public function create($list_id)
   {
     $this->load->library('lib_list_unsubscribe');

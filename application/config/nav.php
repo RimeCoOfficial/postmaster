@@ -22,10 +22,10 @@ $config = [
       'upload'  => 'Upload',
       'object'  => 'Objects',
     ],
-    // 'autoresponder' => [
-    //   'message' => 'Messages',
-    //   'history' => 'History',
-    // ],
+    'stats' => [
+      'index' => 'Feedback',
+      'history' => 'History',
+    ],
     // 'campaign' => [
     //   'message' => 'Messages',
     //   'history' => 'History',

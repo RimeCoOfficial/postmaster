@@ -21,7 +21,7 @@ $nav_tab = $this->config->item('nav_tab', 'nav');
   $current_uri = explode('/', uri_string());
 
   $nav_selected = !empty($current_uri[0]) AND $current_uri[0] == $nav_base_uri;
-  if ($nav_selected) $nav_selected = !empty($current_uri[1]) ? $current_uri[1] : 'home';
+  if ($nav_selected) $nav_selected = !empty($current_uri[1]) ? $current_uri[1] : 'index';
   ?>
 
   <?php if (!empty($nav_list)): ?>

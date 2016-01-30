@@ -51,8 +51,6 @@ CREATE TABLE IF NOT EXISTS list_unsubscribe (
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`, `type`) VALUES
-  -- @debug: do not remove test ✊
-  ('test', 'transactional'),
   -- Transactional
   ('auth', 'transactional'), ('notification', 'transactional'), ('report', 'transactional'), ('invite', 'transactional'),
   -- Camapaign
@@ -72,8 +70,8 @@ INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`, `type`) VALUES
 --                - visitor - email_id + name + md5(email_id)
 
 CREATE TABLE IF NOT EXISTS list_recipient (
-  auto_recipient_id        int                 NOT NULL  AUTO_INCREMENT UNIQUE,  -- for internal use only
-  list_recipient_id        varchar(256)        NOT NULL,                         -- ga_uid
+  auto_recipient_id       int                 NOT NULL  AUTO_INCREMENT UNIQUE,  -- for internal use only
+  list_recipient_id       varchar(256)        NOT NULL,                         -- ga_uid
   to_name                 varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   to_email                varchar(256)        NOT NULL,
   list_id                 int                 NOT NULL,
