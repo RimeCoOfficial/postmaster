@@ -124,7 +124,7 @@ class Lib_message_request
 
     $client_unsubscribe_url = getenv('app_unsubscribe_uri');
     if (empty($client_unsubscribe_url)) $client_unsubscribe_url = base_url('web/unsubscribe?');
-    else $client_unsubscribe_url = getenv('app_base_url').$client_unsubscribe_url
+    else $client_unsubscribe_url = getenv('app_base_url').$client_unsubscribe_url;
 
     $default_vars = [
       '_request_id' => $message_archive['request_id'],
