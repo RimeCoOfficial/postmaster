@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="col-sm-7">
     <p class="h6">
       <a data-toggle="modal" data-target="#htmlModal" href="#">HTML</a>
-      <a href="<?php echo base_url('message/view-html/'.$message['message_id']); ?>" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>
+      <a href="<?php echo base_url('message/view/'.$message['message_id'].'/html'); ?>" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>
     </p>
   </div>
 </div>
