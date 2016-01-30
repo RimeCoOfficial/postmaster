@@ -37,3 +37,9 @@ putenv('email_admin=suvozit@rime.co');
 putenv('email_debug=debug-postmaster@rime.co');
 
 putenv('api_key=ce1bb981e00cacca2d248261a0a4a530');
+
+putenv('client_name=Example');
+putenv('client_host=http://localhost/example');
+// apend a query  http://localhost/example/email/unsubscribe?
+//                http://localhost/example/email/unsubscribe?archive_id=XXXX&unsubscribe_key=YYYY
+putenv('client_unsubscribe_url=http://localhost/example/email/unsubscribe?');

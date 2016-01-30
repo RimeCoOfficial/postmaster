@@ -76,7 +76,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           {
             ?>
             <div class="media-right">
-              <a class="text-<?php echo ($request['sent'] == '1000-01-01 00:00:00' ? 'info' : 'success'); ?>" href="<?php echo base_url('message/archive/'.$request['request_id'].'/'.$request['web_version_key']); ?>" target="_blank">
+              <a class="text-<?php echo ($request['sent'] == '1000-01-01 00:00:00' ? 'info' : 'success'); ?>" href="<?php echo base_url('web/message/'.$request['request_id'].'/'.$request['web_version_key']); ?>" target="_blank">
                 <span class="media-object glyphicon glyphicon-<?php echo ($request['sent'] == '1000-01-01 00:00:00' ? 'hourglass' : 'ok-sign'); ?>"></span>
               </a>
             </div>
