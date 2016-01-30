@@ -4,18 +4,18 @@ AWS email server
 
 ## Features
 
-- [ ] Autoresponders emails (Drip campaign)
-- [ ] Campaign emails
-- [ ] Transcational emails
-- [ ] Lists (unsubscribe-able and not unsubscribe-able)
-- [ ] Auto `List-Unsubscribe` headers
+- [ ] List-unsubscribe
+  - [ ] Autoresponders
+  - [ ] Campaign
+  - [x] Transcational
 - [ ] API Access
 - [x] Upload attachments to S3 (`YYYYMMDD-HHMMSS_file_name.ext`)
-- [x] Admin login for campaigns
+- [x] Admin login
+- [ ] Auto `List-Unsubscribe` headers
 - [x] Auto inline CSS
 - [x] Minify HTML
 - [x] Auto (body + footer) `Plain text` email
 - [x] SNS, SQS - handle feedback (bounces, complaints, deliveries)
 - [x] Queuing and Multiple emails sending
-- [ ] Email Campaign Archive
-- [x] Email stats - [ga-beacon](https://github.com/igrigorik/ga-beacon), [sitepoint.com](http://www.sitepoint.com/using-beacon-image-github-website-email-analytics/)
+- [ ] Campaign Archive - web/campaign/<message_id>
+- [x] Google Analytics (click and open)
