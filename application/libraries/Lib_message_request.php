@@ -122,8 +122,9 @@ class Lib_message_request
 
     // {unsubscribe} {web_version}
 
-    $client_unsubscribe_url = getenv('client_unsubscribe_url');
+    $client_unsubscribe_url = getenv('app_unsubscribe_uri');
     if (empty($client_unsubscribe_url)) $client_unsubscribe_url = base_url('web/unsubscribe?');
+    else $client_unsubscribe_url = getenv('app_base_url').$client_unsubscribe_url
 
     $default_vars = [
       '_request_id' => $message_archive['request_id'],
@@ -141,6 +142,8 @@ class Lib_message_request
       '_current_month' => date('F'),
       '_current_month_number' => date('n'),
       '_current_year' => date('Y'),
+      '_app_name' => getenv('app_name'),
+      '_app_base_url' => getenv('app_base_url')
     ];
 
     // _campaign_archive_link

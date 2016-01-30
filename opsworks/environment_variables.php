@@ -38,8 +38,10 @@ putenv('email_debug=debug-postmaster@rime.co');
 
 putenv('api_key=ce1bb981e00cacca2d248261a0a4a530');
 
-putenv('client_name=Example');
-putenv('client_host=http://localhost/example');
-// apend a query  http://localhost/example/email/unsubscribe?
-//                http://localhost/example/email/unsubscribe?archive_id=XXXX&unsubscribe_key=YYYY
-putenv('client_unsubscribe_url=http://localhost/example/email/unsubscribe?');
+putenv('app_name=Example');
+putenv('app_base_url=http://localhost/example');
+putenv('app_unsubscribe_uri=');
+// for custom unsubscribe page, apend a query to uri
+//    /email/unsubscribe?
+//    /email/unsubscribe?archive_id=XXXX&unsubscribe_key=YYYY
+// putenv('app_unsubscribe_uri=/email/unsubscribe?');
