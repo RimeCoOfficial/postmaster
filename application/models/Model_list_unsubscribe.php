@@ -64,11 +64,13 @@ class Model_list_unsubscribe extends CI_Model
     $this->db->update($this->list_unsubscribe_table);
   }
 
-  // function delete($list_id)
+  // function archive($list_id)
   // {
+  //   $this->db->set('archived', 'CURRENT_TIMESTAMP()', FALSE);
+    
   //   $this->db->where('list_id', $list_id);
-  //   $this->db->delete($this->list_unsubscribe_table);
+  //   $this->db->where('archived', '1000-01-01 00:00:00');
 
-  //   return $this->db->affected_rows() > 0;
+  //   $this->db->update($this->list_unsubscribe_table);
   // }
 }

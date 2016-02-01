@@ -23,41 +23,6 @@ class Lib_list_unsubscribe
     return $this->error;
   }
 
-  function subscribe($list)
-  {
-    $to_name = $this->CI->input->post('to_name');
-
-    if (is_null($to_email = valid_email($this->CI->input->post('to_email'))))
-    {
-      $this->error = ['status' => 401, 'message' => 'invalid email address in to_email'];
-      return NULL;
-    }
-  }
-
-  function store($email_id, $status = array())
-  {
-    // $status['campaign']     = isset($status['campaign']) ? $status['campaign'] : 1;
-    // $status['tips']         = 1;
-    // $status['newsletter']   = isset($status['newsletter']) ? $status['newsletter'] : 1;
-    // $status['promotion']    = isset($status['promotion']) ? $status['promotion'] : 1;
-    // $status['notification'] = isset($status['notification']) ? $status['notification'] : 1;
-    // $status['announcement'] = isset($status['announcement']) ? $status['announcement'] : 1;
-    // $status['digest']       = 1;
-
-    // return $this->CI->model_email_status->store($email_id, $status);
-  }
-
-  function unsubscribe($email_id, $type)
-  {
-    // $this->CI->load->library('email/lib_send_email');
-
-    // if ($this->CI->lib_send_email->can_unsubscribe($type))
-    // {
-    //   $status[ $type ] = 0;
-    //   return $this->CI->model_email_status->store($email_id, $status);
-    // }
-  }
-
   function get($list_id)
   {
     return $this->CI->model_list_unsubscribe->get($list_id);
@@ -91,8 +56,8 @@ class Lib_list_unsubscribe
     return TRUE;
   }
 
-  // function delete($list_id)
+  // function archive($list_id)
   // {
-  //   return $this->CI->model_list_unsubscribe->delete($list_id);
+  //   return $this->CI->model_list_unsubscribe->archive($list_id);
   // }
 }

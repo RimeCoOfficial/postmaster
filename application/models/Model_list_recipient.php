@@ -25,4 +25,26 @@ class Model_list_recipient extends CI_Model
     $this->db->insert($this->list_recipient_table);
     return $this->db->insert_id();
   }
+
+  function subscribe($auto_recipient_id, $subscribed)
+  {
+    $this->db->set('subscribed', $subscribed);
+
+    $this->db->where('auto_recipient_id', $auto_recipient_id);
+    $this->db->where('subscribed <', $subscribed);
+
+    $this->db->update($this->list_recipient_table);
+    return $this->db->affected_rows() > 0;
+  }
+
+  function unsubscribe($auto_recipient_id, $unsubscribed)
+  {
+    $this->db->set('unsubscribed', $unsubscribed);
+
+    $this->db->where('auto_recipient_id', $auto_recipient_id);
+    $this->db->where('unsubscribed <', $unsubscribed);
+
+    $this->db->update($this->list_recipient_table);
+    return $this->db->affected_rows() > 0;
+  }
 }
