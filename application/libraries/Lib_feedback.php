@@ -55,49 +55,48 @@ class Lib_feedback
         if (!empty($message_body['Message']))
         {
           $ses_message = json_decode($message_body['Message'], TRUE);
-          // var_dump($ses_message);
 
-          if (!empty($ses_message['mail']['destination'][0]))
+          $state = array();
+
+          if (!empty($ses_message['bounce']))
           {
-            // $email_id = $ses_message['mail']['destination'][0];
-            // $email_id = strtolower($email_id);
-            
-            $this->CI->load->helper('email');
-            if (is_null($email_id = valid_email($ses_message['mail']['destination'][0])))
-            {
-              throw new Exception("Not a valid email: ".$ses_message['mail']['destination'][0], 1);
-            }
+            $state['state'] = 'bounce';
+            $state['type'] = strtolower($ses_message['bounce']['bounceSubType'].'/'.$ses_message['bounce']['bounceType']);
+            $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['bounce']['timestamp']));
 
-            $state = array();
-
-            if (!empty($ses_message['bounce']))
-            {
-              $state['state'] = 'bounce';
-              $state['type'] = strtolower($ses_message['bounce']['bounceSubType'].'/'.$ses_message['bounce']['bounceType']);
-              $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['bounce']['timestamp']));
-            }
-
-            if (!empty($ses_message['complaint']))
-            {
-              $state['state'] = 'complaint';
-              $state['type'] = $ses_message['complaint']['complaintFeedbackType'];
-              $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['complaint']['timestamp']));
-            }
-
-            if (!empty($ses_message['delivery']))
-            {
-              $state['state'] = 'delivery';
-              $state['type'] = $ses_message['delivery']['smtpResponse'];
-              $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['delivery']['timestamp']));
-            }
-
-            $state['message_json'] = $message_body['Message'];
-
-            $this->CI->model_feedback->store($email_id);
-            $this->CI->model_feedback->update($email_id, $state);
-
-            echo "\t- ".'Email: '.$email_id.', state: '.$state['state'].', type: '.$state['type'].PHP_EOL;
+            $email_id = $ses_message['bounce']['bouncedRecipients'][0]['emailAddress'];
           }
+
+          if (!empty($ses_message['complaint']))
+          {
+            $state['state'] = 'complaint';
+            $state['type'] = $ses_message['complaint']['complaintFeedbackType'];
+            $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['complaint']['timestamp']));
+
+            $email_id = $ses_message['complaint']['complainedRecipients'][0]['emailAddress'];
+          }
+
+          if (!empty($ses_message['delivery']))
+          {
+            $state['state'] = 'delivery';
+            $state['type'] = $ses_message['delivery']['smtpResponse'];
+            $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['delivery']['timestamp']));
+
+            $email_id = $ses_message['delivery']['recipients'][0];
+          }
+
+          $state['message_json'] = $message_body['Message'];
+          
+          $this->CI->load->helper('email');
+          if (is_null($email_id = valid_email($email_id)))
+          {
+            throw new Exception("Not a valid email: ".$email_id, 1);
+          }
+
+          $this->CI->model_feedback->store($email_id);
+          $this->CI->model_feedback->update($email_id, $state);
+
+          echo "\t- ".'Email: '.$email_id.', state: '.$state['state'].', type: '.$state['type'].PHP_EOL;
         }
       }
 

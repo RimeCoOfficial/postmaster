@@ -8,6 +8,7 @@ Wiki: https://github.com/RimeOfficial/postmaster/wiki
 
 Page rendered in {elapsed_time} seconds
 CodeIgniter Version <?php echo CI_VERSION; ?> 
+PHP version <?php echo phpversion(); ?> 
  -->
 <html lang="en">
   <head>
