@@ -113,9 +113,9 @@ function ses_raw_email($message)
   $subject = mb_encode_mimeheader($subject, 'UTF-8');
   $msg .= "Subject: $subject\n";
   
-  if (!empty($message['list-unsubscribe'])) $msg .= 'List-Unsubscribe:'.$message['list-unsubscribe'];
+  if (!empty($message['list_unsubscribe'])) $msg .= 'List-Unsubscribe: '.$message['list_unsubscribe']."\n";
 
-  $msg .= 'X-Mailer: '.$client_name.' via '.app_name();
+  $msg .= 'X-Mailer: '.$client_name.' via '.app_name()."\n";
   
   $msg .= "MIME-Version: 1.0\n";
   $msg .= "Content-Type: multipart/mixed;\n";
