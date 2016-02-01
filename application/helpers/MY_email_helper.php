@@ -63,3 +63,93 @@ function report_error($subject, $template, $data)
     $CI->lib_send_email->general(getenv('email_debug'), $subject, $template, $data);
   }
 }
+
+// http://www.codeproject.com/Articles/786596/How-to-Use-Amazon-SES-to-Send-Email-from-PHP
+// $params = array(
+//   "to" => "email1@gmail.com",
+//   "to" => "email1@gmail.com",
+//   "subject" => "Some subject",
+//   "message" => "<strong>Some email body</strong>",
+//   "from" => "sender@verifiedbyaws",
+//   //OPTIONAL
+//   "reply_to" => "reply_to@gmail.com",
+//   //OPTIONAL
+//   "files" => array(
+//     1 => array(
+//        "name" => "filename1",
+//       "filepath" => "/path/to/file1.txt",
+//       "mime" => "application/octet-stream"
+//     ),
+//     2 => array(
+//        "name" => "filename2",
+//       "filepath" => "/path/to/file2.txt",
+//       "mime" => "application/octet-stream"
+//     ),
+//   )
+// );
+function ses_raw_email($message)
+{
+  $client_name = getenv('app_name');
+
+  $to = !empty($message['to_name']) ? $message['to_name'].' <'.$message['to_email'].'>' : $message['to_email'];
+  $subject = $message['subject'];
+  $body_html = $message['body_html'];
+  $body_text = $message['body_text'];
+  $from = $client_name.' via '.app_name().' <'.getenv('email_source').'>';
+  $reply_to = NULL;
+
+  if (!empty($message['reply_to_email']))
+  {
+    $reply_to = (!empty($message['reply_to_name']) ? $message['reply_to_name'] : $client_name).' <'.$message['reply_to_email'].'>';
+  }
+
+  $msg = '';
+  $msg = "To: $to\n";
+  $msg .= "From: $from\n";
+
+  if (!empty($reply_to)) $msg .= "Reply-To: $reply_to\n";
+
+  // in case you have funny characters in the subject
+  $subject = mb_encode_mimeheader($subject, 'UTF-8');
+  $msg .= "Subject: $subject\n";
+  
+  if (!empty($message['list-unsubscribe'])) $msg .= 'List-Unsubscribe:'.$message['list-unsubscribe'];
+
+  $msg .= 'X-Mailer: '.$client_name.' via '.app_name();
+  
+  $msg .= "MIME-Version: 1.0\n";
+  $msg .= "Content-Type: multipart/mixed;\n";
+  $boundary = uniqid("_Part_".time(), true); //random unique string
+  $boundary2 = uniqid("_Part2_".time(), true); //random unique string
+  $msg .= " boundary=\"$boundary\"\n";
+  $msg .= "\n";
+
+  // now the actual body
+  $msg .= "--$boundary\n";
+
+  //since we are sending text and html emails with multiple attachments
+  //we must use a combination of mixed and alternative boundaries
+  //hence the use of boundary and boundary2
+  $msg .= "Content-Type: multipart/alternative;\n";
+  $msg .= " boundary=\"$boundary2\"\n";
+  $msg .= "\n";
+  $msg .= "--$boundary2\n";
+
+  // first, the plain text
+  $msg .= "Content-Type: text/plain; charset=utf-8\n";
+  $msg .= "Content-Transfer-Encoding: 7bit\n";
+  $msg .= "\n";
+  $msg .= $body_text; // strip_tags($body); //remove any HTML tags
+  $msg .= "\n";
+
+  // now, the html text
+  $msg .= "--$boundary2\n";
+  $msg .= "Content-Type: text/html; charset=utf-8\n";
+  $msg .= "Content-Transfer-Encoding: 7bit\n";
+  $msg .= "\n";
+  $msg .= $body_html;
+  $msg .= "\n";
+  $msg .= "--$boundary2--\n";
+
+  return $msg;
+}

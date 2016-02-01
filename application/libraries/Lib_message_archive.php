@@ -51,22 +51,23 @@ class Lib_message_archive
     {
       echo '('.$message['request_id'].') Sending message: '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
 
-      // list_unsubscribe header
-      // email_key
+      $raw_message = ses_raw_email($message);
+      // var_dump($raw_message); die();
 
-      $promises[ $message['request_id'] ] = $ses_client->sendEmailAsync([
-          'Destination' => [
-          'ToAddresses' => [$message['to_email']],
-        ],
-        'Message' => [
-          'Body' => [
-            'Html' => ['Data' => $message['body_html']],
-            'Text' => ['Data' => $message['body_text']],
-          ],
-          'Subject' => ['Data' => $message['subject']],
-        ],
-        'Source' => getenv('email_source'),
-      ]);
+      $email = [
+        // 'Source' => 'string',
+        // 'Destinations' => array('string', ... ),
+        // RawMessage is required
+        'RawMessage' => array(
+            // Data is required
+            'Data' => $raw_message,
+        ),
+        // 'FromArn' => 'string',
+        // 'SourceArn' => 'string',
+        // 'ReturnPathArn' => 'string',
+      ];
+
+      $promises[ $message['request_id'] ] = $ses_client->sendRawEmailAsync($email);
     }
 
     // Wait on both promises to complete and return the results.
