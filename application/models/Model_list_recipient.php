@@ -47,4 +47,15 @@ class Model_list_recipient extends CI_Model
     $this->db->update($this->list_recipient_table);
     return $this->db->affected_rows() > 0;
   }
+
+  function update_metadata($auto_recipient_id, $metadata_json, $metadata_updated)
+  {
+    $this->db->set('metadata_json', $metadata_json);
+
+    $this->db->where('auto_recipient_id', $auto_recipient_id);
+    $this->db->where('metadata_updated <', $metadata_updated);
+
+    $this->db->update($this->list_recipient_table);
+    return $this->db->affected_rows() > 0;
+  }
 }

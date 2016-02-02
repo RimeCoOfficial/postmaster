@@ -74,9 +74,10 @@ CREATE TABLE IF NOT EXISTS list_recipient (
   to_name                 varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   to_email                varchar(256)        NOT NULL,
   list_id                 int                 NOT NULL,
-  metadata_json           text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci, -- for campaign, autoresponder
-  unsubscribed            datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   subscribed              datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  unsubscribed            datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  metadata_json           text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci, -- for campaign, autoresponder
+  metadata_updated        datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (list_recipient_id, list_id),

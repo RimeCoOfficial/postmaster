@@ -36,7 +36,7 @@ class Lib_list_recipient
     return $list_recipient;
   }
 
-  function subscribe($list_id)
+  function api_verify_input($list_id, $method = NULL)
   {
     $list_recipient_id = $this->CI->input->post('list_recipient_id');
     if (empty($list_recipient_id))
@@ -53,54 +53,75 @@ class Lib_list_recipient
       return NULL;
     }
 
-    $subscribed = $this->CI->input->post('subscribed');
-    $subscribed = strtotime($subscribed);
+    $result = [];
+    $result['list_recipient_id'] = $list_recipient_id;
+    $result['to_name'] = $to_name;
+    $result['to_email'] = $to_email;
+    $result['to_name'] = $to_name;
 
-    if ($subscribed == FALSE)
+    $timestamp_param = NULL;
+    switch ($method)
     {
-      $this->error = ['status' => 401, 'message' => 'subscribed: parameter missing or ill formated'];
+      case 'subscribe': $timestamp_param = 'subscribed'; break;
+      case 'unsubscribe': $timestamp_param = 'unsubscribed'; break;
+      case 'update_metadata':
+        $timestamp_param = 'metadata_updated';
+
+        $metadata = $this->CI->input->post('metadata');
+        $metadata_json = (is_array($metadata) AND !empty($metadata)) ? json_encode($metadata) : NULL;
+        $result['metadata_json'] = $metadata_json;
+
+        break;
+    }
+
+    $timestamp = $this->CI->input->post($timestamp_param);
+    $timestamp = strtotime($timestamp);
+
+    if ($timestamp == FALSE)
+    {
+      $this->error = ['status' => 401, 'message' => $timestamp_param.': parameter missing or ill formated'];
       return NULL;
     }
 
-    $subscribed = date('Y-m-d H:i:s', $subscribed);
+    $timestamp = date('Y-m-d H:i:s', $timestamp);
+    $result[ $timestamp_param ] = $timestamp;
 
     $list_recipient = $this->get($list_id, $list_recipient_id, $to_name, $to_email);
-    $this->CI->model_list_recipient->subscribe($list_recipient['auto_recipient_id'], $subscribed);
-    
+    $result['list_recipient'] = $list_recipient;
+
+    return $result;
+  }
+
+  function subscribe($list_id)
+  {
+    if (is_null($result = $this->api_verify_input($list_id, 'subscribe')))
+    {
+      return NULL;
+    }
+
+    $this->CI->model_list_recipient->subscribe($result['list_recipient']['auto_recipient_id'], $result['subscribed']);
     return ['200' => 'OK'];
   }
 
   function unsubscribe($list_id)
   {
-    $list_recipient_id = $this->CI->input->post('list_recipient_id');
-    if (empty($list_recipient_id))
+    if (is_null($result = $this->api_verify_input($list_id, 'unsubscribe')))
     {
-      $this->error = ['status' => 401, 'message' => 'missing parameter list_recipient_id'];
       return NULL;
     }
 
-    $to_name = $this->CI->input->post('to_name');
+    $this->CI->model_list_recipient->unsubscribe($result['list_recipient']['auto_recipient_id'], $result['unsubscribed']);
+    return ['200' => 'OK'];
+  }
 
-    if (is_null($to_email = valid_email($this->CI->input->post('to_email'))))
+  function update_metadata($list_id)
+  {
+    if (is_null($result = $this->api_verify_input($list_id, 'update_metadata')))
     {
-      $this->error = ['status' => 401, 'message' => 'invalid email address in to_email'];
       return NULL;
     }
 
-    $unsubscribed = $this->CI->input->post('unsubscribed');
-    $unsubscribed = strtotime($unsubscribed);
-
-    if ($unsubscribed == FALSE)
-    {
-      $this->error = ['status' => 401, 'message' => 'unsubscribed: parameter missing or ill formated'];
-      return NULL;
-    }
-
-    $unsubscribed = date('Y-m-d H:i:s', $unsubscribed);
-
-    $list_recipient = $this->get($list_id, $list_recipient_id, $to_name, $to_email);
-    $this->CI->model_list_recipient->unsubscribe($list_recipient['auto_recipient_id'], $unsubscribed);
-    
+    $this->CI->model_list_recipient->update_metadata($result['list_recipient']['auto_recipient_id'], $result['metadata_json'], $result['metadata_updated']);
     return ['200' => 'OK'];
   }
 }
