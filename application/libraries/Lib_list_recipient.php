@@ -121,7 +121,14 @@ class Lib_list_recipient
       return NULL;
     }
 
-    $this->CI->model_list_recipient->update_metadata($result['list_recipient']['auto_recipient_id'], $result['metadata_json'], $result['metadata_updated']);
+    $update_other_lists = $this->CI->input->post('update_other_lists');
+    if ($update_other_lists == TRUE)
+    {
+      $update_list_recipient_id = $result['list_recipient']['list_recipient_id'];
+    }
+    else $update_list_recipient_id = FALSE;
+
+    $this->CI->model_list_recipient->update_metadata($result['list_recipient']['auto_recipient_id'], $result['metadata_json'], $result['metadata_updated'], $update_list_recipient_id);
     return ['200' => 'OK'];
   }
 }

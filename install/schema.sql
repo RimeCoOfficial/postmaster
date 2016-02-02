@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS feedback (
 --
 
 CREATE TABLE IF NOT EXISTS list_unsubscribe (
-  list_id                 int                 NOT NULL  AUTO_INCREMENT, -- for internal use only
+  list_id                 int                 NOT NULL  AUTO_INCREMENT, -- for internal use only??
   list                    varchar(32)         NOT NULL  UNIQUE,
   type                    varchar(16)         NOT NULL,                 -- autoresponder, campaign, transactional
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
@@ -51,11 +51,11 @@ CREATE TABLE IF NOT EXISTS list_unsubscribe (
 
 INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`, `type`) VALUES
   -- Transactional
-  ('report', 'transactional'), ('account', 'transactional'), ('notification', 'transactional'), ('invite', 'transactional'),
+  ('account', 'transactional'), ('report', 'transactional'), ('notification', 'transactional'), ('invite', 'transactional'), ('request-signup', 'transactional'),
   -- Camapaign
   ('announcement', 'campaign'), ('newsletter', 'campaign'),
   -- Autoresponder
-  ('requested-invite', 'autoresponder'), ('tips', 'autoresponder');
+  ('requested-signup', 'autoresponder'), ('tips', 'autoresponder');
 
 -- --------------------------------------------------------
 

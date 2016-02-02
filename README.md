@@ -9,19 +9,18 @@ AWS email server
   - [ ] Campaign
   - [x] Transcational
 
-- [ ] API Access  
+- [x] API Access  
  
 ```
   - [x] message/transactional
   - [x] list-unsubscribe/subscribe
   - [x] list-unsubscribe/unsubscribe
-  - [ ] list-unsubscribe/update
-  - [ ] list-unsubscribe/delete
+  - [x] list-unsubscribe/update-metadata
 ```
 
 - [x] Upload attachments to S3 (`YYYYMMDD-HHMMSS_file_name.ext`)
 - [x] Admin login
-- [x] Auto add [`List-Unsubscribe`](http://www.list-unsubscribe.com/) headers
+- [x] Auto add [`List-Unsubscribe`](http://www.list-unsubscribe.com/) headers (if body includes `{_unsubscribe_link}`)
 - [x] Auto inline CSS
 - [x] Minify HTML
 - [x] Auto `Plain text` email

@@ -60,7 +60,7 @@ curl -X POST -i http://localhost/postmaster/api/list-unsubscribe/update-metadata
 &metadata[username]=nemo\
 &metadata[location]=IN\
 &metadata_updated=2016-02-01 08:17:20\
-&update_other_lists=FALSE"
+&update_other_lists=1"
   */
   public function update_metadata($list_id = NULL)
   {

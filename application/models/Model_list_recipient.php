@@ -48,11 +48,13 @@ class Model_list_recipient extends CI_Model
     return $this->db->affected_rows() > 0;
   }
 
-  function update_metadata($auto_recipient_id, $metadata_json, $metadata_updated)
+  function update_metadata($auto_recipient_id, $metadata_json, $metadata_updated, $update_list_recipient_id = FALSE)
   {
     $this->db->set('metadata_json', $metadata_json);
 
-    $this->db->where('auto_recipient_id', $auto_recipient_id);
+    if ($update_list_recipient_id)  $this->db->where('list_recipient_id', $update_list_recipient_id);
+    else                            $this->db->where('auto_recipient_id', $auto_recipient_id);
+
     $this->db->where('metadata_updated <', $metadata_updated);
 
     $this->db->update($this->list_recipient_table);
