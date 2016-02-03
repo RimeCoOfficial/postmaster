@@ -12,10 +12,11 @@ AWS email server
 - [x] API Access  
  
 ```
-  - [x] message/transactional
-  - [x] list-unsubscribe/subscribe
-  - [x] list-unsubscribe/unsubscribe
-  - [x] list-unsubscribe/update-metadata
+  - [x] transactional/send
+  - [x] list-recipient/subscribe
+  - [x] list-recipient/unsubscribe
+  - [x] list-recipient/update-metadata
+  - [x] message-archive/get-info
 ```
 
 - [x] Upload attachments to S3 (`YYYYMMDD-HHMMSS_file_name.ext`)

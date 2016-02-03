@@ -7,6 +7,7 @@ class Model_message_archive extends CI_Model
   private $message_request_table = 'message_request';
   private $message_table = 'message';
   private $list_unsubscribe_table = 'list_unsubscribe';
+  private $list_recipient_table = 'list_recipient';
 
   function store($message_list)
   {
@@ -71,5 +72,24 @@ class Model_message_archive extends CI_Model
   function mark_sent($message_list)
   {
     $this->db->update_batch($this->message_archive_table, $message_list, 'request_id');
+  }
+
+  function get_info($request_id, $unsubscribe_key)
+  {
+    $this->db->select($this->list_recipient_table.'.list_recipient_id');
+    $this->db->select($this->message_request_table.'.to_name');
+    $this->db->select($this->message_request_table.'.to_email');
+    $this->db->select($this->message_request_table.'.message_id');
+
+    $this->db->limit(1);
+
+    $this->db->join($this->message_request_table, $this->message_request_table.'.request_id = '.$this->message_archive_table.'.request_id');
+    $this->db->join($this->list_recipient_table, $this->list_recipient_table.'.auto_recipient_id = '.$this->message_request_table.'.auto_recipient_id');
+
+    $this->db->where($this->message_archive_table.'.request_id', $request_id);
+    $this->db->where($this->message_archive_table.'.unsubscribe_key', $unsubscribe_key);
+
+    $query = $this->db->get($this->message_archive_table);
+    return $query->row_array();
   }
 }

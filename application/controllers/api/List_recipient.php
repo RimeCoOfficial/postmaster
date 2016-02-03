@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class List_unsubscribe extends CI_Controller
+class List_recipient extends CI_Controller
 {
   function __construct()
   {
@@ -16,9 +16,9 @@ class List_unsubscribe extends CI_Controller
   }
 
   /*
-curl -X POST -i http://localhost/postmaster/api/list-unsubscribe/subscribe/1 -d \
+curl -X POST -i http://localhost/postmaster/api/list-recipient/subscribe/1 -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
-&list_recipient_id=visitor-349c1e1bc65358a50d168f7d29ecd3e1\
+&list_recipient_id=visitor-349c1e1bc65358a50d168f7d29ecd3e1@live.com\
 &to_name=Shubhajit Saha\
 &to_email=suvozit@live.com\
 &subscribed=2016-02-01 08:17:20"
@@ -34,9 +34,9 @@ curl -X POST -i http://localhost/postmaster/api/list-unsubscribe/subscribe/1 -d 
   }
 
   /*
-curl -X POST -i http://localhost/postmaster/api/list-unsubscribe/unsubscribe/1 -d \
+curl -X POST -i http://localhost/postmaster/api/list-recipient/unsubscribe/1 -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
-&list_recipient_id=visitor-349c1e1bc65358a50d168f7d29ecd3e1\
+&list_recipient_id=visitor-349c1e1bc65358a50d168f7d29ecd3e1@live.com\
 &to_name=Shubhajit Saha\
 &to_email=suvozit@live.com\
 &unsubscribed=2016-02-01 08:17:20"
@@ -52,9 +52,9 @@ curl -X POST -i http://localhost/postmaster/api/list-unsubscribe/unsubscribe/1 -
   }
 
   /*
-curl -X POST -i http://localhost/postmaster/api/list-unsubscribe/update-metadata/1 -d \
+curl -X POST -i http://localhost/postmaster/api/list-recipient/update-metadata/1 -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
-&list_recipient_id=visitor-349c1e1bc65358a50d168f7d29ecd3e1\
+&list_recipient_id=visitor-349c1e1bc65358a50d168f7d29ecd3e1@live.com\
 &to_name=Shubhajit Saha\
 &to_email=suvozit@live.com\
 &metadata[username]=nemo\

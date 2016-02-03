@@ -91,4 +91,16 @@ class Lib_message_archive
 
     return TRUE;
   }
+
+  function get_info($request_id, $unsubscribe_key)
+  {
+    $recipient_info = $this->CI->model_message_archive->get_info($request_id, $unsubscribe_key);
+
+    if (!empty($recipient_info)) return $recipient_info;
+    else
+    {
+      $this->error = ['status' => 401, 'message' => 'invalid details ;('];
+      return NULL;
+    }
+  }
 }

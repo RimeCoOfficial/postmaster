@@ -70,7 +70,7 @@ INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`, `type`) VALUES
 
 CREATE TABLE IF NOT EXISTS list_recipient (
   auto_recipient_id       int                 NOT NULL  AUTO_INCREMENT UNIQUE,  -- for internal use only
-  list_recipient_id       varchar(256)        NOT NULL,                         -- ga_uid
+  list_recipient_id       varchar(512)        NOT NULL,                         -- ga_uid
   to_name                 varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   to_email                varchar(256)        NOT NULL,
   list_id                 int                 NOT NULL,
@@ -159,3 +159,6 @@ CREATE TABLE IF NOT EXISTS message_archive (
   PRIMARY KEY (request_id),
   FOREIGN KEY (request_id) REFERENCES message_request(request_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+-- ALTER
+ALTER TABLE `list_recipient` CHANGE `list_recipient_id` `list_recipient_id` VARCHAR(512) CHARACTER SET ascii COLLATE ascii_bin NOT NULL;
