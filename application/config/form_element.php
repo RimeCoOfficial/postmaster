@@ -53,7 +53,7 @@ $config = array(
 
   'list' => array(
     'label'         => 'List-unsubscribe',
-    'rules'         => 'strtolower|max_length['.$list_max_length.']|trim|alpha_dash|required',
+    'rules'         => 'max_length['.$list_max_length.']|trim|required',
 
     'max_length'    => $list_max_length,
     

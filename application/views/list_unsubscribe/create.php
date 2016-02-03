@@ -19,9 +19,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <br>
 
-<h4>Note: List-unsubscribe are one email recipient can unsubscribe</h4>
-<ul>
-  <li>It must be unique</li>
-  <li>It must contain alpha-numeric, dashes and underscore</li>
-  <li>Examples: <code>newsletter</code> <code>notification</code> <code>announcement</code> <code>requested-invitation</code></li>
-</ul>
+<dl>
+  <dt>Note: List-unsubscribe are one email recipient can unsubscribe</dt>
+  <dd>Type <strong>can't</strong> be changed later</dd>
+  <dd>Examples: <code>Newsletter</code> <code>Notification</code> <code>Announcement</code> <code>Requested Invitation</code></dd>
+</dl>

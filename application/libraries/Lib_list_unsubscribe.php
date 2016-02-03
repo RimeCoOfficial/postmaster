@@ -35,23 +35,11 @@ class Lib_list_unsubscribe
 
   function create($list, $type)
   {
-    if ( ! $this->CI->model_list_unsubscribe->is_available($list))
-    {
-      $this->error = ['message' => 'list: "'.$list.'" has already beed created, pick a different list name'];
-      return NULL;
-    }
-
     return $this->CI->model_list_unsubscribe->create($list, $type);
   }
 
   function update($list_id, $list)
   {
-    if ( ! $this->CI->model_list_unsubscribe->is_available($list, $list_id))
-    {
-      $this->error = ['message' => 'list: "'.$list.'" has already beed created, pick a different list'];
-      return NULL;
-    }
-    
     $this->CI->model_list_unsubscribe->update($list_id, $list);
     return TRUE;
   }

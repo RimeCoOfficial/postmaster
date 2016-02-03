@@ -37,15 +37,6 @@ class Model_list_unsubscribe extends CI_Model
     return $query->result_array();
   }
 
-  function is_available($list, $list_id = 0)
-  {
-    $this->db->where('list', $list);
-    $this->db->where('list_id !=', $list_id);
-
-    $query = $this->db->get($this->list_unsubscribe_table);
-    return $query->num_rows() == 0;
-  }
-
   function create($list, $type)
   {
     $this->db->set('list', $list);
