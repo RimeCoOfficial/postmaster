@@ -13,11 +13,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
+              <small>
+                #<?php echo $request['message_id']; ?>
+              </small>
               <?php
               if (empty($request['web_version_key']))
               {
                 ?>
-                <samp class="small">[<?php echo $request['request_id']; ?>] Processing request</samp>
+                <samp class="small">Processing request [<?php echo $request['request_id']; ?>]</samp>
                 <?php
               }
               else
@@ -29,30 +32,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php
               }
               ?>
-
-              <small>
-                #<?php echo $request['message_id']; ?>
-
-                <span class="text-uppercase">
-                  <a href="#" class="text-muted"><?php echo $request['list']; ?></a>
-                </span>
-
-                <strong>
-                  <a href="#" class="text-muted"><?php echo $request['to_email']; ?></a>
-                </strong>
-
-                <?php
-                if (empty($request['web_version_key']))
-                {
-                  echo 'requested '.date('M d, Y h:i A', strtotime($request['created']));
-                }
-                else
-                {
-                  echo 'sent '.date('M d, Y h:i A', strtotime($request['sent']));
-                }
-                ?>
-              </small>
             </h5>
+
+            <small>
+              <span class="text-uppercase">
+                <a href="#" class="text-muted"><?php echo $request['list']; ?></a>
+              </span>
+
+              <strong>
+                <a href="#" class="text-muted"><?php echo $request['to_email']; ?></a>
+              </strong>
+
+              <?php
+              if (empty($request['web_version_key']))
+              {
+                echo 'requested '.date('M d, Y h:i A', strtotime($request['created']));
+              }
+              else
+              {
+                echo 'sent '.date('M d, Y h:i A', strtotime($request['sent']));
+              }
+              ?>
+            </small>
           </div>
 
           <div class="media-right">

@@ -60,19 +60,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
+              <small>
+                #<?php echo $message['message_id']; ?>
+              </small>
               <a  href="<?php echo base_url('message/view/'.$message['message_id']); ?>">
                 <?php echo $message['subject']; ?>
               </a>
-              <small>
-                #<?php echo $message['message_id']; ?>
-                
-                <span class="text-uppercase"><?php echo anchor('message/view/list-unsubscribe/'.$message['list'], $message['list']); ?></span>
-
-                <?php echo $message['reply_to_name']; ?>
-                <?php echo $message['reply_to_email']; ?>
-                <?php echo date('M d, Y h:i A', strtotime($message['created'])); ?>
-              </small>
+              
             </h5>
+            <small>
+              <span class="text-uppercase"><?php echo anchor('message/view/list-unsubscribe/'.$message['list'], $message['list']); ?></span>
+
+              <?php echo $message['reply_to_name']; ?>
+              <?php echo $message['reply_to_email']; ?>
+              <?php echo date('M d, Y h:i A', strtotime($message['created'])); ?>
+            </small>
           </div>
 
           <div class="media-right">

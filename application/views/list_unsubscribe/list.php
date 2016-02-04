@@ -26,10 +26,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
-              <?php echo anchor('list-unsubscribe/edit/'.$list['list_id'], $list['list']); ?>
               <small>
                 #<?php echo $list['list_id']; ?>
               </small>
+
+              <?php echo anchor('list-unsubscribe/edit/'.$list['list_id'], $list['list']); ?>
             </h5>
           </div>
 
