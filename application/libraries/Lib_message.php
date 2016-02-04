@@ -217,7 +217,7 @@ class Lib_message
         default:
           $ga_click_query = '?'.http_build_query($ga_hyperlink);
 
-          $a_href = str_replace('?', $ga_click_query, $a_href, $replace_count);
+          $a_href = str_replace('?', $ga_click_query.'&', $a_href, $replace_count);
           if (!$replace_count) $a_href .= $ga_click_query;
           break;
       }

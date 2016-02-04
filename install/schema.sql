@@ -71,7 +71,7 @@ INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`, `type`) VALUES
 CREATE TABLE IF NOT EXISTS list_recipient (
   auto_recipient_id       int                 NOT NULL  AUTO_INCREMENT UNIQUE,  -- for internal use only
   list_recipient_id       varchar(512)        NOT NULL,                         -- ga_uid
-  to_name                 varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  to_name                 varchar(128)                  DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   to_email                varchar(256)        NOT NULL,
   list_id                 int                 NOT NULL,
   subscribed              datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS message_request (
   request_id              int                 NOT NULL  AUTO_INCREMENT, -- ga_cid
   message_id              int                 NOT NULL,
   auto_recipient_id       int                 NOT NULL,
-  to_name                 varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  to_name                 varchar(128)                  DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   to_email                varchar(256)        NOT NULL,
   pseudo_vars_json        text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   processed               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
@@ -143,11 +143,11 @@ CREATE TABLE IF NOT EXISTS message_archive (
   request_id              int                 NOT NULL,
   web_version_key         varchar(64)         NOT NULL,
   unsubscribe_key         varchar(64)         NOT NULL,
-  from_name               varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  from_name               varchar(128)                  DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   from_email              varchar(256)        NOT NULL,
-  to_name                 varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  to_name                 varchar(128)                  DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   to_email                varchar(256)        NOT NULL,
-  reply_to_name           varchar(64)                   DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
+  reply_to_name           varchar(128)                  DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   reply_to_email          varchar(256)                  DEFAULT NULL,
   subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
   body_html               text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
