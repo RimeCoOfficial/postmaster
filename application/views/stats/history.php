@@ -52,15 +52,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 }
                 ?>
               </small>
-
-              <span class="pull-right">
-                <a href="<?php echo base_url('#/'.$request['type']); ?>">
-                  <span class="label label-default">
-                    <?php echo $request['type']; ?>
-                  </span>
-                </a>
-              </span>
             </h5>
+          </div>
+
+          <div class="media-right">
+            <a href="<?php echo base_url('#/'.$request['type']); ?>">
+              <span class="media-object label label-default">
+                <?php echo $request['type']; ?>
+              </span>
+            </a>
           </div>
 
           <?php

@@ -72,15 +72,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php echo $message['reply_to_email']; ?>
                 <?php echo date('M d, Y h:i A', strtotime($message['created'])); ?>
               </small>
-
-              <span class="pull-right">
-                <a href="<?php echo base_url('message/view/type/'.$message['type']); ?>">
-                  <span class="label label-default">
-                    <?php echo $message['type']; ?>
-                  </span>
-                </a>
-              </span>
             </h5>
+          </div>
+
+          <div class="media-right">
+            <a href="<?php echo base_url('message/view/type/'.$message['type']); ?>">
+              <span class="media-object label label-default">
+                <?php echo $message['type']; ?>
+              </span>
+            </a>
           </div>
         </div>
       </div>

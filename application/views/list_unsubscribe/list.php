@@ -30,15 +30,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <small>
                 #<?php echo $list['list_id']; ?>
               </small>
-
-              <span class="pull-right">
-                <a href="<?php echo base_url('list-unsubscribe/view/type/'.$list['type']); ?>">
-                  <span class="label label-default">
-                    <?php echo $list['type']; ?>
-                  </span>
-                </a>
-              </span>
             </h5>
+          </div>
+
+          <div class="media-right">
+            <a href="<?php echo base_url('list-unsubscribe/view/type/'.$list['type']); ?>">
+              <span class="media-object label label-default">
+                <?php echo $list['type']; ?>
+              </span>
+            </a>
           </div>
           
           <div class="media-right">
