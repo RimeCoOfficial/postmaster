@@ -28,10 +28,10 @@ class Model_list_recipient extends CI_Model
 
   function subscribe($auto_recipient_id, $subscribed)
   {
-    $this->db->set('subscribed', $subscribed);
+    $this->db->set('unsubscribed', '1000-01-01 00:00:00');
 
     $this->db->where('auto_recipient_id', $auto_recipient_id);
-    $this->db->where('subscribed <', $subscribed);
+    $this->db->where('unsubscribed <', $subscribed);
 
     $this->db->update($this->list_recipient_table);
     return $this->db->affected_rows() > 0;

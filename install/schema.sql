@@ -74,12 +74,11 @@ CREATE TABLE IF NOT EXISTS list_recipient (
   to_name                 varchar(128)                  DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   to_email                varchar(256)        NOT NULL,
   list_id                 int                 NOT NULL,
-  subscribed              datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   unsubscribed            datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   metadata_json           text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci, -- for campaign, autoresponder
-  metadata_updated        datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  metadata_updated        datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   updated                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+  created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,                -- for autoresponder
   PRIMARY KEY (list_recipient_id, list_id),
   FOREIGN KEY (list_id) REFERENCES list_unsubscribe(list_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;

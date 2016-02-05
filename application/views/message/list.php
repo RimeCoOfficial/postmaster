@@ -66,8 +66,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <a  href="<?php echo base_url('message/view/'.$message['message_id']); ?>">
                 <?php echo $message['subject']; ?>
               </a>
-              
             </h5>
+            
             <small>
               <span class="text-uppercase"><?php echo anchor('message/view/list-unsubscribe/'.$message['list'], $message['list']); ?></span>
 
