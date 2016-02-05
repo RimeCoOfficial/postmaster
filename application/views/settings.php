@@ -49,7 +49,7 @@ $env_var_is_hidden = [
       </tr>
     </thead>
 
-    <tbody>
+    <tbody style="word-break: break-word;">
       <?php foreach ($env_var_is_hidden as $env_var => $is_hidden): ?>
       <tr>
         <th scope="row"><samp><?php echo $env_var; ?></samp></th>
