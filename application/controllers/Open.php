@@ -43,7 +43,7 @@ class Open extends CI_Controller
       $this->lib_list_recipient->unsubscribe_all($archive_info['list_recipient_id']);
     }
 
-    $view_data['main_content'] = $this->load->view('public/unsubscribe', NULL, TRUE);
-    $this->load->view('public/base', $view_data);
+    $view_data['main_content'] = $this->load->view('open/unsubscribe', NULL, TRUE);
+    $this->load->view('open/base', $view_data);
   }
 }

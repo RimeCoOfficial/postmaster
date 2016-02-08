@@ -43,19 +43,6 @@ PHP version <?php echo phpversion(); ?>
       <div class="row">
         <div class="col-xs-12">
 
-          <header>
-            <nav class="navbar navbar-default">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </button>
-                
-                <a class="navbar-brand">Postmaster</a>
-              </div>
-            </nav>
-          </header>
-
           <?php echo $main_content; ?>
 
           <hr>
@@ -74,12 +61,5 @@ PHP version <?php echo phpversion(); ?>
         </div>
       </div>
     </div>
-    
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </body>
 </html>
