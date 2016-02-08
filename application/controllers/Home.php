@@ -11,7 +11,9 @@ class Home extends CI_Controller
       redirect('stats');
     }
 
-    $view_data['main_content'] = $this->load->view('home', NULL, TRUE);
+    $view['is_logged_in'] = FALSE;
+
+    $view_data['main_content'] = $this->load->view('home', $view, TRUE);
     $this->load->view('base', $view_data);
   }
 }

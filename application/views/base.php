@@ -109,11 +109,10 @@ PHP version <?php echo phpversion(); ?>
           <footer>
 
             <p class="small">
+              <iframe src="https://ghbtns.com/github-btn.html?user=RimeOfficial&repo=postmaster&type=fork&count=true" frameborder="0" scrolling="0" width="130px" height="20px"></iframe>
+
               <a class="text-muted" href="http://pages.rime.co/postmaster">
-                <span class="glyphicon glyphicon-info-sign"></span>
-              </a>
-              <a class="text-muted" href="https://github.com/RimeOfficial/postmaster">
-                <strong class="pull-right"><?php echo app_name(); ?> v1.0</strong>
+                <img class="img-responsive pull-right" src="<?php echo base_url('gh-pages/images/apache2.svg'); ?>">
               </a>
             </p>
 
