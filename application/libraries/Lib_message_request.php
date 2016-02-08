@@ -120,10 +120,11 @@ class Lib_message_request
   {
     // 4. link-unsubscribe
 
-    // {unsubscribe} {web_version}
+    $web_version_link = 'open/message/';
+    $unsubscribe_link = 'open/unsubscribe?';
 
     $list_unsubscribe_url = getenv('app_unsubscribe_uri');
-    if (empty($list_unsubscribe_url)) $list_unsubscribe_url = base_url('web/unsubscribe?');
+    if (empty($list_unsubscribe_url)) $list_unsubscribe_url = base_url($unsubscribe_link);
     else $list_unsubscribe_url = getenv('app_base_url').$list_unsubscribe_url;
 
     $list_unsubscribe_url .= 'request_id='.$message_archive['request_id'].'&unsubscribe_key='.$message_archive['unsubscribe_key'];
@@ -137,7 +138,7 @@ class Lib_message_request
       '_to_name' => $message['to_name'],
       '_reply_to_email' => $message['reply_to_email'],
       '_reply_to_name' => $message['reply_to_name'],
-      '_web_version_link' => base_url('web/message/'.$message_archive['request_id'].'/'.$message_archive['web_version_key']),
+      '_web_version_link' => base_url($web_version_link.$message_archive['request_id'].'/'.$message_archive['web_version_key']),
       '_unsubscribe_link' => $list_unsubscribe_url,
       '_current_day' => date('l'),
       '_current_day_number' => date('N'),

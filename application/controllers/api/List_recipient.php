@@ -18,9 +18,9 @@ class List_recipient extends CI_Controller
   /*
 curl -X POST -i http://localhost/postmaster/api/list-recipient/subscribe/1 -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
-&list_recipient_id=visitor-349c1e1bc65358a50d168f7d29ecd3e1@live.com\
+&list_recipient_id=visitor-ecfa94f6c8ef80696ba6ee7d2434cbf7@suvozit.com\
 &to_name=Shubhajit Saha\
-&to_email=suvozit@live.com\
+&to_email=www@suvozit.com\
 &subscribed=2016-02-01 08:17:20"
   */
   public function subscribe($list_id = NULL)
@@ -36,9 +36,9 @@ curl -X POST -i http://localhost/postmaster/api/list-recipient/subscribe/1 -d \
   /*
 curl -X POST -i http://localhost/postmaster/api/list-recipient/unsubscribe/1 -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
-&list_recipient_id=visitor-349c1e1bc65358a50d168f7d29ecd3e1@live.com\
+&list_recipient_id=visitor-ecfa94f6c8ef80696ba6ee7d2434cbf7@suvozit.com\
 &to_name=Shubhajit Saha\
-&to_email=suvozit@live.com\
+&to_email=www@suvozit.com\
 &unsubscribed=2016-02-01 08:17:20"
   */
   public function unsubscribe($list_id = NULL)
@@ -54,9 +54,9 @@ curl -X POST -i http://localhost/postmaster/api/list-recipient/unsubscribe/1 -d 
   /*
 curl -X POST -i http://localhost/postmaster/api/list-recipient/update-metadata/1 -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
-&list_recipient_id=visitor-349c1e1bc65358a50d168f7d29ecd3e1@live.com\
+&list_recipient_id=visitor-ecfa94f6c8ef80696ba6ee7d2434cbf7@suvozit.com\
 &to_name=Shubhajit Saha\
-&to_email=suvozit@live.com\
+&to_email=www@suvozit.com\
 &metadata[username]=nemo\
 &metadata[location]=IN\
 &metadata_updated=2016-02-01 08:17:20\

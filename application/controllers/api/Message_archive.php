@@ -29,9 +29,9 @@ Content-Length: 172
 Content-Type: application/json; charset=utf-8
 
 {
-    "list_recipient_id": "visitor-349c1e1bc65358a50d168f7d29ecd3e1@live.com",
+    "list_recipient_id": "visitor-ecfa94f6c8ef80696ba6ee7d2434cbf7@suvozit.com",
     "to_name": "Shubhajit Saha",
-    "to_email": "suvozit@live.com",
+    "to_email": "www@suvozit.com",
     "message_id": "1"
 }
   */

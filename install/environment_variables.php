@@ -41,7 +41,7 @@ putenv('api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 putenv('app_name=Example');
 putenv('app_base_url=http://localhost/example');
 putenv('app_unsubscribe_uri=');
-// for custom unsubscribe page, apend a query to uri
+// for custom unsubscribe page, apend a query to uri with a question mark (?)
 //    /email/unsubscribe?
 //    /email/unsubscribe?archive_id=XXXX&unsubscribe_key=YYYY
 // putenv('app_unsubscribe_uri=/email/unsubscribe?');

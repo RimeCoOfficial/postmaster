@@ -60,4 +60,15 @@ class Model_list_recipient extends CI_Model
     $this->db->update($this->list_recipient_table);
     return $this->db->affected_rows() > 0;
   }
+
+  function unsubscribe_all($list_recipient_id, $unsubscribed)
+  {
+    $this->db->set('unsubscribed', $unsubscribed);
+
+    $this->db->where('list_recipient_id', $list_recipient_id);
+    $this->db->where('unsubscribed <', $unsubscribed);
+
+    $this->db->update($this->list_recipient_table);
+    return $this->db->affected_rows() > 0;
+  }
 }
