@@ -77,6 +77,7 @@ class Model_message_archive extends CI_Model
   function get_info($request_id, $unsubscribe_key)
   {
     $this->db->select($this->list_recipient_table.'.list_recipient_id');
+    $this->db->select($this->list_recipient_table.'.list_id');
     $this->db->select($this->message_request_table.'.to_name');
     $this->db->select($this->message_request_table.'.to_email');
     $this->db->select($this->message_request_table.'.message_id');
