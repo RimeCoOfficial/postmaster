@@ -105,7 +105,7 @@ PHP version <?php echo phpversion(); ?>
 
           <?php echo $main_content; ?>
 
-          <hr>
+          <!-- <hr> -->
           <footer>
 
             <p class="small">

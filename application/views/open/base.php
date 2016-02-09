@@ -45,19 +45,6 @@ PHP version <?php echo phpversion(); ?>
 
           <?php echo $main_content; ?>
 
-          <hr>
-          <footer>
-
-            <p class="small">
-              <a href="https://GitHub.com/RimeOfficial/postmaster">
-                <img class="img-responsive pull-left" src="<?php echo base_url('gh-pages/images/GitHub-Mark-32px.png'); ?>" width="20px">
-              </a>
-
-              <a href="http://pages.rime.co/postmaster">
-                <img class="img-responsive pull-right" src="<?php echo base_url('gh-pages/images/apache2.svg'); ?>">
-              </a>
-            </p>
-
           </footer>
         </div>
       </div>
