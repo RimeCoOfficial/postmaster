@@ -32,6 +32,11 @@ class Model_message_request extends CI_Model
     return $this->db->insert_id();
   }
 
+  function add_batch($request_list)
+  {
+    $this->db->insert_batch($this->message_request_table, $request_list);
+  }
+
   function get_to_process($count)
   {
     $this->db->limit($count);

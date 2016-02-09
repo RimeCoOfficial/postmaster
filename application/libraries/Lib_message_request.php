@@ -172,15 +172,6 @@ class Lib_message_request
 
     $pseudo_vars = !is_null($message['pseudo_vars_json']) ? json_decode($message['pseudo_vars_json'], TRUE) : [];
     $pseudo_vars = array_merge($pseudo_vars, $default_vars);
-
-    $metadata = !is_null($message['metadata_json']) ? json_decode($message['metadata_json'], TRUE) : [];
-    if (!empty($metadata))
-    {
-      $pseudo_metadata = [];
-      foreach ($metadata as $key => $value) $pseudo_metadata['_metadata_'.$key] = $value;
-
-      $pseudo_vars = array_merge($pseudo_vars, $pseudo_metadata);
-    }
     
     // parse subject
     $subject = $this->CI->parser->parse_string($message['subject'],  $pseudo_vars, TRUE);
