@@ -31,6 +31,6 @@ function s3_base_url($str = '')
 
 function asset_url($uri='')
 {
-  if (ENVIRONMENT !== 'production') return 'https://rimeofficial.github.io/postmaster/'.$uri;
-  else                              return base_url($uri);
+  if (ENVIRONMENT !== 'production') return base_url('gh-pages/'.$uri);
+  else                              return 'https://rimeofficial.github.io/postmaster/'.$uri;
 }
