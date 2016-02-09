@@ -43,7 +43,7 @@ $env_var_is_hidden = [
 <br>
 <br> -->
 
-<p class="lead"><?php echo $this->input->ip_address(); ?></p>
+<p class="lead"><abbr title="😘😘😘"><?php echo $this->input->ip_address(); ?></abbr></p>
 
 <div class="panel panel-default">
   <div class="panel-heading">Environment Vars</div>

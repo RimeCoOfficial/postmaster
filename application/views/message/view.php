@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <?php if (!empty($message['reply_to_email'])) echo '('.$message['reply_to_email'].')'; ?>
 </p>
 
-<div class="well well-lg"><?php echo $message['body_text']; ?></div>
+<p class="lead"><?php echo $message['body_text']; ?></p>
 
 <div class="row">
   <div class="col-sm-5">
