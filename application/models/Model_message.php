@@ -77,23 +77,21 @@ class Model_message extends CI_Model
     $this->db->update($this->message_table);
   }
 
-  function archive($message_id, $type)
+  function archive($message_id)
   {
     $this->db->set('archived', 'CURRENT_TIMESTAMP()', FALSE);
     
     $this->db->where('message_id', $message_id);
-    $this->db->where('type', $type);
     $this->db->where('archived', '1000-01-01 00:00:00');
 
     $this->db->update($this->message_table);
   }
 
-  function unarchive($message_id, $type)
+  function unarchive($message_id)
   {
     $this->db->set('archived', '1000-01-01 00:00:00');
     
     $this->db->where('message_id', $message_id);
-    $this->db->where('type', $type);
     $this->db->where('archived !=', '1000-01-01 00:00:00');
 
     $this->db->update($this->message_table);

@@ -18,7 +18,7 @@ class Message extends CI_Controller
 
   // cd ~/Sites/postmaster && php index.php task message process
   // cd /srv/www/postmaster/current && php index.php task message process
-  function process($count = 99)
+  function process($count = 999)
   {
     echo 'Start process'.PHP_EOL;
     $this->load->library('lib_message_request');
@@ -46,7 +46,7 @@ class Message extends CI_Controller
 
   // cd ~/Sites/postmaster && php index.php task message send
   // cd /srv/www/postmaster/current && php index.php task message send
-  function send($count = 99)
+  function send($count = 999)
   {
     echo 'Start send'.PHP_EOL;
     $this->load->library('lib_message_archive');

@@ -108,15 +108,15 @@ class Lib_message
     return TRUE;
   }
 
-  // function archive($message_id, $type)
-  // {
-  //   $this->CI->model_message->archive($message_id, $type);
-  //   return TRUE;
-  // }
+  function archive($message_id)
+  {
+    $this->CI->model_message->archive($message_id);
+    return TRUE;
+  }
 
-  // function unarchive($message_id, $type)
+  // function unarchive($message_id)
   // {
-  //   $this->CI->model_message->unarchive($message_id, $type);
+  //   $this->CI->model_message->unarchive($message_id);
   //   return TRUE;
   // }
 
