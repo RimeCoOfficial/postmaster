@@ -95,7 +95,7 @@ function ses_raw_email($message)
   $subject = $message['subject'];
   $body_html = $message['body_html'];
   $body_text = $message['body_text'];
-  $from = $client_name.' via '.app_name().' <'.getenv('email_source').'>';
+  $from = $client_name.' <'.getenv('email_source').'>';
   $reply_to = NULL;
 
   if (!empty($message['reply_to_email']))
