@@ -48,6 +48,7 @@ class Lib_send_email
     $message = $this->CI->load->view('email/'.$template, $data, TRUE);
     $alt_message = html_to_text($message);
 
-    return $this->direct($to_email, $subject, $message, $alt_message);
+    if (ENVIRONMENT === 'production') return $this->direct($to_email, $subject, $message, $alt_message);
+    else                              return TRUE;
   }
 }

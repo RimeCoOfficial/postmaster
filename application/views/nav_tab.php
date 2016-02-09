@@ -6,7 +6,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $nav_selected = explode('/', uri_string());
 $nav_selected = $nav_selected[0];
 
-$nav_tab = $this->config->item('nav_tab', 'nav');
+$nav_tab = [
+    'navbar' => [
+    'stats'             => 'Stats',
+    'list-unsubscribe'  => 'List-unsubscribe',
+    'message'           => 'Message',
+    's3'                => 'S3',
+    'settings'          => 'Settings',
+  ],
+  'nav_tab' => [
+    's3' => [
+      'upload'  => 'Upload',
+      'object'  => 'Objects',
+    ],
+    'stats' => [
+      'index' => 'Feedback',
+      'history' => 'History',
+    ]
+  ],
+];
+
 // var_dump($nav_selected); die();
 ?>
 

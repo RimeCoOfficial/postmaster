@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <?php
-if (ENVIRONMENT == 'development')
+if (ENVIRONMENT === 'development')
 {
   ?>
   <h1><samp><strong>CI_ENV</strong>=<span class="text-danger"><?php echo ENVIRONMENT; ?></span></samp></h1>
