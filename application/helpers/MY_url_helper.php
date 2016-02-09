@@ -28,3 +28,8 @@ function s3_base_url($str = '')
 
   return $url;
 }
+
+function asset_url($uri='')
+{
+  return 'https://rimeofficial.github.io/postmaster/'.$uri;
+}
