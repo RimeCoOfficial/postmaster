@@ -127,6 +127,35 @@ if ($message['archived'] == '1000-01-01 00:00:00')
   {
     // published
     ?>
+    
+    <p>
+      The message has been published 
+      <abbr title="published_tds=<?php echo $message['published_tds'] ?>">
+        <?php
+        switch ($message['type']) {
+          case 'autoresponder':
+            echo '+';
+            if      ($message['published_tds'] / (60*24*30) > 1) echo $message['published_tds'] / (60*24*30).' months';
+            else if ($message['published_tds'] / (60*24)    > 1) echo $message['published_tds'] / (60*24)   .' days';
+            else if ($message['published_tds'] / (60)       > 1) echo $message['published_tds'] / (60)      .' minutes';
+            else                                                 echo $message['published_tds']             .' seconds';
+            break;
+          
+          case 'campaign':
+            $date_from_str = '1000-01-01 00:00:00';
+            $date_from = strtotime($date_from_str);
+
+            echo date('Y-m-d H:i:s', $message['published_tds'] + $date_from);
+            break;
+
+          case 'transactional':
+            echo 'at zero (0)';
+            break;
+        }
+        ?>
+      </abbr>
+    </p>
+
     <div class="panel panel-warning">
       <div class="panel-heading">
         <h3 class="panel-title">Warning Zone</h3>
@@ -163,10 +192,11 @@ else
     <span class="sr-only">Archived:</span>
     The message has been archived.
     <abbr title="<?php
+      $archived_str = strtotime($message['archived']);
       // Tuesday 8:53 AM, Jan 26 2016
-      echo date('l g:i A, M j Y', strtotime($message['archived']));
+      echo date('l g:i A, M j Y', $archived_str);
       ?>">
-      @todo: x days ago
+      <?php echo time_ago($archived_str); ?>
     </abbr>
   </div>
   <?php

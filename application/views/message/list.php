@@ -60,7 +60,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
-              <a  href="<?php echo base_url('message/view/'.$message['message_id']); ?>">
+              <a href="<?php echo base_url('message/view/'.$message['message_id']); ?>"
+                class="<?php echo ($message['archived'] == '1000-01-01 00:00:00') ? '' : 'text-muted'; ?>"
+              >
                 <?php echo $message['subject']; ?>
               </a>
             </h5>
