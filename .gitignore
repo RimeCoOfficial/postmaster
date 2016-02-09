@@ -1,0 +1,6 @@
+application/*
+install/*
+vendor/*
+opsworks/*
+
+composer.lock
