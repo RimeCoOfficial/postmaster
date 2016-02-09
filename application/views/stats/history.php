@@ -13,9 +13,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
-              <small>
-                #<?php echo $request['message_id']; ?>
-              </small>
               <?php
               if (empty($request['web_version_key']))
               {
@@ -35,6 +32,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </h5>
 
             <small>
+              #<?php echo $request['message_id']; ?>
+              
               <span class="text-uppercase">
                 <a href="#" class="text-muted"><?php echo $request['list']; ?></a>
               </span>

@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <h1>
   <?php echo $message['subject']; ?>
-  <small>#<?php echo $message['message_id']; ?></small>
 
   <?php if ($message['archived'] == '1000-01-01 00:00:00'): ?>
     <span class="pull-right">
@@ -14,6 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </h1>
 
 <p class="lead">
+  #<?php echo $message['message_id']; ?>
+
   List-unsubscribe: <?php echo anchor('list-unsubcribe/#', $message['list']); ?>
 
   <span class="pull-right">
