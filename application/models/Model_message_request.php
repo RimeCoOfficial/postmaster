@@ -42,6 +42,9 @@ class Model_message_request extends CI_Model
     $this->db->select($this->list_unsubscribe_table.'.list');
     $this->db->select($this->list_unsubscribe_table.'.type');
     $this->db->select($this->list_recipient_table.'.list_recipient_id');
+    $this->db->select($this->list_recipient_table.'.to_name AS list_recipient_to_name');
+    $this->db->select($this->list_recipient_table.'.unsubscribed');
+    $this->db->select($this->list_recipient_table.'.metadata_json');
 
     $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->message_request_table.'.message_id');
     $this->db->join($this->list_unsubscribe_table, $this->list_unsubscribe_table.'.list_id = '.$this->message_table.'.list_id');

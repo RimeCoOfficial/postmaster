@@ -31,6 +31,14 @@ class Model_feedback extends CI_Model
     return $query->row_array();
   }
 
+  function get_batch($email_id_list)
+  {
+    $this->db->where_in('email_id', $email_id_list);
+
+    $query = $this->db->get($this->feedback_table);
+    return $query->result_array();
+  }
+
   function stats()
   {
     // SELECT state, COUNT(*) FROM feedback GROUP BY state;

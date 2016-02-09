@@ -46,12 +46,27 @@ class Lib_message_request
   {
     $message_archive_list = [];
     $message_processed_list = [];
+
+    $to_email_list = [];
+    foreach ($messages as $message) $to_email_list[ $message['to_email'] ] = $message['to_email'];
+
+    $this->CI->load->library('lib_feedback');
+    $feedback_list = $this->CI->lib_feedback->get_batch($to_email_list);
     
     foreach ($messages as $message)
     {
       echo '('.$message['request_id'].') Processing message: '.$message['message_id'].' '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
 
-      $message_archive_list[] = $this->archive($message);
+      // has unsubscribed
+      if ($message['unsubscribed'] == '1000-01-01 00:00:00')
+      {
+        // no bounce
+        if (empty($feedback_list[ $message['to_email'] ]) OR $feedback_list[ $message['to_email'] ] != 'bounce')
+        {
+          $message_archive_list[] = $this->archive($message);
+        }
+      }
+
       $message_processed_list[] = ['request_id' => $message['request_id'], 'processed' => date('Y-m-d H:i:s')];
     }
 
@@ -89,11 +104,14 @@ class Lib_message_request
     $message_archive['request_id'] = $message['request_id'];
     $message_archive['web_version_key'] = random_string('alnum', 64);
     $message_archive['unsubscribe_key'] = random_string('alnum', 64);
-    $message_archive['from_name'] = NULL; // getenv('email_source');
+    $message_archive['from_name'] = getenv('app_name');
     $message_archive['from_email'] = getenv('email_source');
 
     $message_archive['to_name'] = $message['to_name'];
     $message_archive['to_email'] = $message['to_email'];
+
+    // default to name
+    if (empty($message_archive['to_name'])) $message_archive['to_name'] = $message['list_recipient_to_name'];
 
     $message_archive['reply_to_name'] = $message['reply_to_name'];
     $message_archive['reply_to_email'] = $message['reply_to_email'];
@@ -110,7 +128,7 @@ class Lib_message_request
       case 'transactional': $message_archive['priority'] = 15; break;
       case 'campaign':      $message_archive['priority'] = 10; break;
       case 'autoresponder': $message_archive['priority'] =  5; break;
-      default:                                              break;
+      default:                                                 break;
     }
 
     return $message_archive;
@@ -118,8 +136,6 @@ class Lib_message_request
 
   private function _parse($message_archive, $message)
   {
-    // 4. link-unsubscribe
-
     $web_version_link = 'open/message/';
     $unsubscribe_link = 'open/unsubscribe?';
 
@@ -156,6 +172,15 @@ class Lib_message_request
 
     $pseudo_vars = !is_null($message['pseudo_vars_json']) ? json_decode($message['pseudo_vars_json'], TRUE) : [];
     $pseudo_vars = array_merge($pseudo_vars, $default_vars);
+
+    $metadata = !is_null($message['metadata_json']) ? json_decode($message['metadata_json'], TRUE) : [];
+    if (!empty($metadata))
+    {
+      $pseudo_metadata = [];
+      foreach ($metadata as $key => $value) $pseudo_metadata['_metadata_'.$key] = $value;
+
+      $pseudo_vars = array_merge($pseudo_vars, $pseudo_metadata);
+    }
     
     // parse subject
     $subject = $this->CI->parser->parse_string($message['subject'],  $pseudo_vars, TRUE);

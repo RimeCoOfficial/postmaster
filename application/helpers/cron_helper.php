@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-define('LOCK_DIR', '/tmp/ci');
-define('LOCK_SUFFIX', '.lock');
-
 function job_name()
 {
   $CI =& get_instance();

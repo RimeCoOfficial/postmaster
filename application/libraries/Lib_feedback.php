@@ -122,6 +122,16 @@ class Lib_feedback
     return $this->CI->model_feedback->get($email_id);
   }
 
+  function get_batch($email_id_list)
+  {
+    $email_id_list = $this->CI->model_feedback->get_batch($email_id_list);
+
+    $feedback_list = [];
+    foreach ($email_id_list as $feedback) $feedback_list[ $feedback['email_id'] ] = $feedback;
+    
+    return $feedback_list;
+  }
+
   function stats()
   {
     return $this->CI->model_feedback->stats();
