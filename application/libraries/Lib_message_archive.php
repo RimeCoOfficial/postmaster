@@ -77,6 +77,8 @@ class Lib_message_archive
     $message_sent_list = [];
     foreach ($results as $request_id => $result)
     {
+      echo '('.$request_id.') statusCode:'.$result['@metadata']['statusCode'].', MessageId:'.$result['MessageId'].PHP_EOL;
+      
       if (!empty($result['@metadata']['statusCode']) AND $result['@metadata']['statusCode'] == 200
         AND !empty($result['MessageId'])
       )

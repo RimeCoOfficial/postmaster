@@ -60,6 +60,7 @@ class Model_message_archive extends CI_Model
   function get_unsent($count)
   {
     $this->db->limit($count);
+    
     $this->db->order_by('request_id', 'ASC');
     $this->db->order_by('priority', 'DESC');
 
