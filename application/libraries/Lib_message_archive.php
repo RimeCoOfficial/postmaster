@@ -51,6 +51,9 @@ class Lib_message_archive
     {
       echo '('.$message['request_id'].') Sending message: '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
 
+      // @debug
+      $message['to_email'] = 'user-'.md5($message['to_email']).'@mail.rime.co';
+      
       $raw_message = ses_raw_email($message);
       // var_dump($raw_message); die();
 
