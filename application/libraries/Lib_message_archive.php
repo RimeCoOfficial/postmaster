@@ -56,20 +56,9 @@ class Lib_message_archive
       $message['to_email'] = 'user-'.md5($message['to_email']).'@mail.rime.co';
       
       $raw_message = ses_raw_email($message);
-      var_dump($raw_message); die();
+      // var_dump($raw_message); die();
 
-      $email = [
-        // 'Source' => 'string',
-        // 'Destinations' => array('string', ... ),
-        // RawMessage is required
-        'RawMessage' => array(
-            // Data is required
-            'Data' => $raw_message,
-        ),
-        // 'FromArn' => 'string',
-        // 'SourceArn' => 'string',
-        // 'ReturnPathArn' => 'string',
-      ];
+      $email = ['RawMessage' => array('Data' => $raw_message)];
 
       $promises[ $message['request_id'] ] = $ses_client->sendRawEmailAsync($email);
     }
@@ -85,23 +74,30 @@ class Lib_message_archive
       $error_msg = 'getAwsRequestId: '.$e->getAwsRequestId().', getAwsErrorType:'.$e->getAwsErrorType().', getAwsErrorCode:'.$e->getAwsErrorCode();
     }
 
-    // 2. save messege_id
-    $message_sent_list = [];
-    foreach ($results as $request_id => $result)
+    if (!empty($results))
     {
-      echo '('.$request_id.') statusCode:'.$result['@metadata']['statusCode'].', MessageId:'.$result['MessageId'].PHP_EOL;
-      
-      if (!empty($result['@metadata']['statusCode']) AND $result['@metadata']['statusCode'] == 200
-        AND !empty($result['MessageId'])
-      )
+      // 2. save messege_id
+      $message_sent_list = [];
+      foreach ($results as $request_id => $result)
       {
-        $amzn_message_id = $result['MessageId'];
-        $message_sent_list[] = ['request_id' => $request_id, 'sent' => date('Y-m-d H:i:s'), 'amzn_message_id' => $amzn_message_id];
+        echo '('.$request_id.') statusCode:'.$result['@metadata']['statusCode'].', MessageId:'.$result['MessageId'].PHP_EOL;
+        
+        if (!empty($result['@metadata']['statusCode']) AND $result['@metadata']['statusCode'] == 200
+          AND !empty($result['MessageId'])
+        )
+        {
+          $amzn_message_id = $result['MessageId'];
+          $message_sent_list[] = ['request_id' => $request_id, 'sent' => date('Y-m-d H:i:s'), 'amzn_message_id' => $amzn_message_id];
+        }
       }
+
+      die('pp');
+
+      // mark sent
+      if(!empty($message_sent_list)) $this->CI->model_message_archive->mark_sent($message_sent_list);
     }
 
-    // mark sent
-    $this->CI->model_message_archive->mark_sent($message_sent_list);
+    die('done');
 
     if (!empty($error_msg))
     {

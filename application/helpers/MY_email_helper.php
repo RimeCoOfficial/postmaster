@@ -65,38 +65,28 @@ function report_error($subject, $template, $data)
 }
 
 /*
-// http://www.enewsletterpro.com/articles/multi_part_mime_messages.asp
-
-X-sender: <sender@sendersdomain.com>
-X-receiver: <somerecipient@recipientdomain.com>
-From: "Senders Name" <sender@sendersdomain.com>
-To: "Recipient Name" <somerecipient@recipientdomain.com>
-Message-ID: <5bec11c119194c14999e592feb46e3cf@sendersdomain.com>
-Date: Sat, 24 Sep 2005 15:06:49 -0400
-Subject: Sample Multi-Part
+To:www@suvozit.com
+From:postmaster@rime.co
+Subject: Test
 MIME-Version: 1.0
-Content-Type: multipart/alternative; 
-boundary="----=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D"
+Content-type: Multipart/Mixed; boundary="173845068356bad52248f408.42032165"
 
-------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D
-Content-type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+--173845068356bad52248f408.42032165
+Content-type: Multipart/Alternative; boundary="alt-173845068356bad52248f408.42032165"
 
-Sample Text Content
-------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D
-Content-type: text/html; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+--alt-173845068356bad52248f408.42032165
+Content-Type: text/plain; charset="UTF-8"
 
-<html>
-<head>
-</head>
-<body>
-<div style=3D"FONT-SIZE: 10pt; FONT-FAMILY: Arial">Sample HTML =
-Content</div>
-</body>
-</html>
+This is the message body.
 
-------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D--
+--alt-173845068356bad52248f408.42032165
+Content-Type: text/html; charset="UTF-8"
+
+This is the <b>message</b> body.
+
+--alt-173845068356bad52248f408.42032165--
+
+--173845068356bad52248f408.42032165--
 */
 function ses_raw_email($message)
 {
@@ -119,8 +109,8 @@ function ses_raw_email($message)
   }
 
   $msg = '';
-  $msg .= 'From: '.$from."\n";
   $msg .= 'To: '.$to."\n";
+  $msg .= 'From: '.$from."\n";
 
   if (!empty($reply_to)) $msg .= 'Reply-To: '.$reply_to."\n";
 
@@ -132,25 +122,26 @@ function ses_raw_email($message)
 
   $msg .= 'X-Mailer: '.$client_name.' via '.app_name()."\n";
   
-  $boundary_hash = sha1(time()); //random unique strin
+  // random unique string
+  $boundary_hash = md5($message['request_id'].'.'.time());
 
   $msg .= 'MIME-Version: 1.0'."\n";
-  $msg .= 'Content-Type: multipart/mixed; boundary="'.$boundary.'"'."\n";
+  $msg .= 'Content-Type: Multipart/Mixed; boundary="'.$boundary_hash.'"'."\n";
 
   // now the actual body
   $msg .= "\n".'--'.$boundary_hash."\n";
+  $msg .= 'Content-type: Multipart/Alternative; boundary="alt-'.$boundary_hash.'"'."\n";
+  $msg .= "\n";
 
   // first, the plain text
-  $msg .= 'Content-Type: text/plain; charset=utf-8'."\n";
-  $msg .= 'Content-Transfer-Encoding: 7bit'."\n";
+  $msg .= 'Content-Type: text/plain; charset="UTF-8"'."\n";
   $msg .= "\n";
-  $msg .= $body_text; // strip_tags($body); //remove any HTML tags
+  $msg .= $body_text; // strip_tags($body); // remove any HTML tags
   $msg .= "\n";
 
   // now, the html text
-  $msg .= "\n".'--'.$boundary_hash."\n";
-  $msg .= 'Content-Type: text/html; charset=utf-8'."\n";
-  $msg .= 'Content-Transfer-Encoding: 7bit'."\n";
+  $msg .= "\n".'--alt-'.$boundary_hash."\n";
+  $msg .= 'Content-Type: text/html; charset="UTF-8"'."\n";
   $msg .= "\n";
   $msg .= $body_html;
   $msg .= "\n";
