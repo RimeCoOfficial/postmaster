@@ -45,8 +45,13 @@ PHP version <?php echo phpversion(); ?>
 
           <header>
             <?php
-            $this->load->config('nav', TRUE);
-            $navbar = $this->config->item('navbar', 'nav');
+            $navbar = $nav_tab = [
+              'stats'             => 'Stats',
+              'list-unsubscribe'  => 'List-unsubscribe',
+              'message'           => 'Message',
+              's3'                => 'S3',
+              'settings'          => 'Settings',
+            ];
             ?>
             <nav class="navbar navbar-default">
               <div class="navbar-header">

@@ -26,11 +26,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="media">
           <div class="media-body">
             <h5 class="media-heading">
-              <?php echo anchor('list-unsubscribe/edit/'.$list['list_id'], $list['list']); ?>
+              <?php echo anchor('list-unsubscribe/view/'.$list['list_id'], $list['list']); ?>
+              <small>#<?php echo $list['list_id']; ?></small>
             </h5>
-            <small>
-              #<?php echo $list['list_id']; ?>
-            </small>
           </div>
 
           <div class="media-right">
@@ -41,57 +39,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </a>
           </div>
           
-          <div class="media-right">
-            <!-- <a class="text-danger"
-              data-toggle="modal"
-              data-target="#list-delete-modal"
-              data-list-id="<?php echo $list['list_id']; ?>"
-              data-list="<?php echo $list['list']; ?>"
-              href="#"><span class="media-object glyphicon glyphicon-trash"></span>
-            </a> -->
+          <!-- <div class="media-right">
             <a href="<?php echo base_url('message/create/'.$list['list_id']); ?>">
               <span class="media-object glyphicon glyphicon-plus"></span>
             </a>
-          </div>
+          </div> -->
         </div>
       </div>
     <?php endforeach; ?>
   </div>
 <?php endif; ?>
-
-
-<div class="modal fade" id="list-delete-modal" tabindex="-1" role="dialog" aria-labelledby="list-delete-modal-label" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="list-delete-modal-label">Delete List-unsubscribe</h4>
-      </div>
-      <div class="modal-body">
-        <p>
-          Are you sure you want to delete <strong></strong>?
-        </p>
-      </div>
-      <div class="modal-footer">
-        <div class="row">
-          <div class="col-sm-5">
-            <a type="button" class="btn btn-danger btn-block" href="#">Delete</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-  $('#list-delete-modal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var list = button.data('list') // Extract info from data-* attributes
-    var list_id = button.data('list-id') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
-    modal.find('.modal-body strong').text(list)
-    modal.find('.modal-footer a').attr("href", '<?php echo base_url('list-unsubscribe/delete'); ?>' + '/' + list_id)
-  });
-</script>

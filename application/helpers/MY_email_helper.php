@@ -91,10 +91,10 @@ function ses_raw_email($message)
 {
   $client_name = getenv('app_name');
 
-  // $to = !empty($message['to_name']) ? $message['to_name'].' <'.$message['to_email'].'>' : $message['to_email'];
+  $to = !empty($message['to_name']) ? $message['to_name'].' <'.$message['to_email'].'>' : $message['to_email'];
   
   // @debug: send to debug
-  $to = 'debug-postmaster@rime.co';
+  // $to = 'www@suvozit.com';
 
   $subject = $message['subject'];
   $body_html = $message['body_html'];

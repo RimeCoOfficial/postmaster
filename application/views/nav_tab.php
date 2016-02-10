@@ -7,23 +7,14 @@ $nav_selected = explode('/', uri_string());
 $nav_selected = $nav_selected[0];
 
 $nav_tab = [
-    'navbar' => [
-    'stats'             => 'Stats',
-    'list-unsubscribe'  => 'List-unsubscribe',
-    'message'           => 'Message',
-    's3'                => 'S3',
-    'settings'          => 'Settings',
+  's3' => [
+    'upload'  => 'Upload',
+    'object'  => 'Objects',
   ],
-  'nav_tab' => [
-    's3' => [
-      'upload'  => 'Upload',
-      'object'  => 'Objects',
-    ],
-    'stats' => [
-      'index' => 'Feedback',
-      'history' => 'History',
-    ]
-  ],
+  'stats' => [
+    'index' => 'Feedback',
+    'history' => 'History',
+  ]
 ];
 
 // var_dump($nav_selected); die();
@@ -44,7 +35,7 @@ $nav_tab = [
   ?>
 
   <?php if (!empty($nav_list)): ?>
-    <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+    <ul class="nav nav-tabs nav-justified" style="margin-bottom: 20px;">
       <?php foreach ($nav_list as $uri => $name): ?>
       <li class="<?php if ($nav_selected == $uri) echo 'active'; ?>">
         <a href="<?php echo base_url($nav_base_uri.'/'.$uri); ?>"><?php echo $name; ?></a>
