@@ -167,27 +167,30 @@ class Message extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function revert($message_id = NULL)
+  public function archive($message_id = NULL)
   {
-    $message = $this->lib_message->get($message_id);
-    if (empty($message)) show_404();
-
-    $local_view_data = [];
-    $local_view_data['message'] = $message;
-
-    if ($message['archived'] != '1000-01-01 00:00:00')
-    {
-      show_error('The message is archived and can not be modified');
-    }
-
-    if (is_null($this->lib_message->revert($message)))
+    if (is_null($this->lib_message->archive($message_id)))
     {
       show_error($this->lib_message->get_error_message());
     }
     else
     {
       $this->session->set_flashdata('alert', ['type' => 'warning', 'message' => '<abbr class="text-nowrap pull-right" title="Flipping Tables&#13;http://emojicons.com/e/flipping-tables">&nbsp; (╯°□°)╯︵ ┻━┻</abbr>
-        <strong>Revert</strong> Message has been revert to draft']);
+        <strong>Archive</strong> Message has been archived']);
+      redirect('message/view/'.$message_id);
+    }
+  }
+
+  public function unarchive($message_id = NULL)
+  {
+    if (is_null($this->lib_message->unarchive($message_id)))
+    {
+      show_error($this->lib_message->get_error_message());
+    }
+    else
+    {
+      $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<abbr class="text-nowrap pull-right" title="Patience Young Grasshopper&#13;http://emojicons.com/e/patience-young-grasshopper">&nbsp; ┬─┬﻿ ノ( ゜-゜ノ)</abbr>
+        <strong>Archive</strong> Message has been revert to draft']);
       redirect('message/view/'.$message_id);
     }
   }

@@ -77,26 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if ($message['archived'] == '1000-01-01 00:00:00')
 {
   ?>
-  <!-- <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Edit</h3>
-    </div>
-    <div class="panel-body">
-      <div class="media">
-        <div class="media-body">
-          <p>Make changes!</p>
-        </div>
-        <div class="media-right">
-          <a href="<?php echo base_url('message/edit/'.$message['message_id']); ?>" class="btn btn-default">
-            <div class="media-object">
-              <span class="glyphicon glyphicon-edit"></span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
+  
   <?php
   if (is_null($message['published_tds']))
   {
@@ -127,77 +108,115 @@ if ($message['archived'] == '1000-01-01 00:00:00')
   {
     // published
     ?>
-    
-    <p>
-      The message has been published 
-      <abbr title="published_tds=<?php echo $message['published_tds'] ?>">
-        <?php
-        switch ($message['type']) {
-          case 'autoresponder':
-            echo '+';
-            if      ($message['published_tds'] / (60*24*30) > 1) echo $message['published_tds'] / (60*24*30).' months';
-            else if ($message['published_tds'] / (60*24)    > 1) echo $message['published_tds'] / (60*24)   .' days';
-            else if ($message['published_tds'] / (60)       > 1) echo $message['published_tds'] / (60)      .' minutes';
-            else                                                 echo $message['published_tds']             .' seconds';
-            break;
-          
-          case 'campaign':
-            $date_from_str = '1000-01-01 00:00:00';
-            $date_from = strtotime($date_from_str);
-
-            echo date('Y-m-d H:i:s', $message['published_tds'] + $date_from);
-            break;
-
-          case 'transactional':
-            echo 'at zero (0)';
-            break;
-        }
-        ?>
-      </abbr>
-    </p>
-
-    <div class="panel panel-warning">
+    <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Warning Zone</h3>
+        <h3 class="panel-title">Published</h3>
       </div>
       <div class="panel-body">
         <div class="media">
           <div class="media-body">
-            <h5 class="media-heading">Revert</h5>
-            <ul class="list-unstyled-disabled">
-              <li>Unpublished messages wont accept <strong>new</strong> requests.</li>
-              <li>But you can publish and use it again.</li>
-              <li>If you want to make some changes to the content use <strong>Edit</strong>.</li>
-            </ul>
+            <p>
+              The message has been published 
+              <abbr title="published_tds=<?php echo $message['published_tds'] ?>">
+                <?php
+                switch ($message['type']) {
+                  case 'autoresponder':
+                    echo '+';
+                    if      ($message['published_tds'] / (60*24*30) > 1) echo $message['published_tds'] / (60*24*30).' months';
+                    else if ($message['published_tds'] / (60*24)    > 1) echo $message['published_tds'] / (60*24)   .' days';
+                    else if ($message['published_tds'] / (60)       > 1) echo $message['published_tds'] / (60)      .' minutes';
+                    else                                                 echo $message['published_tds']             .' seconds';
+                    break;
+                  
+                  case 'campaign':
+                    $date_from_str = '1000-01-01 00:00:00';
+                    $date_from = strtotime($date_from_str);
+
+                    echo date('Y-m-d H:i:s', $message['published_tds'] + $date_from). ' GMT';
+                    break;
+
+                  case 'transactional':
+                    echo 'at zero (0)';
+                    break;
+                }
+                ?>
+              </abbr>
+            </p>
           </div>
           <div class="media-right">
-            <a href="<?php echo base_url('message/revert/'.$message['message_id']); ?>" class="btn btn-warning">
+            <a href="<?php echo base_url('message/publish/'.$message['message_id']); ?>" class="btn btn-default">
               <div class="media-object">
-                <span class="glyphicon glyphicon-ban-circle"></span>
+                <span class="glyphicon glyphicon-refresh"></span>
               </div>
             </a>
           </div>
         </div>
       </div>
     </div>
+
+    <?php if ($message['type'] != 'campaign'): ?>
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <h3 class="panel-title">Warning Zone</h3>
+        </div>
+        <div class="panel-body">
+          <div class="media">
+            <div class="media-body">
+              <h5 class="media-heading">Archive</h5>
+              <ul class="list-unstyled-disabled">
+                <li>Archived messages wont accept <strong>new</strong> requests.</li>
+                <li>But you can unarchive and use it again.</li>
+                <li>If you want to make some changes to the content use <strong>Edit</strong>.</li>
+              </ul>
+            </div>
+            <div class="media-right">
+              <a href="<?php echo base_url('message/archive/'.$message['message_id']); ?>" class="btn btn-warning">
+                <div class="media-object">
+                  <span class="glyphicon glyphicon-volume-off"></span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php endif; ?>
+
     <?php
   }
 }
 else
 {
   ?>
-  <div class="alert alert-info" role="alert">
-    <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-    <!-- &nbsp; -->
-    <span class="sr-only">Archived:</span>
-    The message has been archived.
-    <abbr title="<?php
-      $archived_str = strtotime($message['archived']);
-      // Tuesday 8:53 AM, Jan 26 2016
-      echo date('l g:i A, M j Y', $archived_str);
-      ?>">
-      <?php echo time_ago($archived_str); ?>
-    </abbr>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Archived</h3>
+    </div>
+    <div class="panel-body">
+      <div class="media">
+        <div class="media-body">
+          <p>
+            The message has been archived.
+            <abbr title="<?php
+              $archived_str = strtotime($message['archived']);
+              // Tuesday 8:53 AM, Jan 26 2016
+              echo time_ago($archived_str);
+              ?>">
+              <?php echo date('l g:i A, M j Y', $archived_str); ?> GMT
+            </abbr>
+          </p>
+        </div>
+
+        <?php if ($message['type'] != 'campaign'): ?>
+          <div class="media-right">
+            <a href="<?php echo base_url('message/unarchive/'.$message['message_id']); ?>" class="btn btn-default">
+              <div class="media-object">
+                <span class="glyphicon glyphicon-volume-up"></span>
+              </div>
+            </a>
+          </div>
+        <?php endif; ?>
+      </div>
+    </div>
   </div>
   <?php
 }

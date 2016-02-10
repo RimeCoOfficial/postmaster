@@ -4,39 +4,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <h1>
   <?php echo $message['subject']; ?>
-  <small>#<?php echo $message['message_id']; ?></small>
 </h1>
 
-<div class="well">
-  <div class="label label-default pull-right"><?php echo $message['type']; ?></div>
+<p class="lead">
+  #<?php echo $message['message_id']; ?>
+  
+  List-unsubscribe: <?php echo anchor('list-unsubcribe/#', $message['list']); ?>
 
-  <dl class="dl-horizontal">
-  <?php
-  switch ($message['type']) {
-    case 'autoresponder':
-      ?>
-      <dt><a href="http://php.net/manual/en/datetime.formats.relative.php" target="_blank">Relative Formats</a></dt>
-      <dd>"now"</dd>
-      <?php
-      break;
-
-    case 'campaign':
-      ?>
-      <dt><a href="http://php.net/manual/en/datetime.formats.time.php" target="_blank">Time Formats</a></dt>
-      <dd>"4 am", "4:08:37 am"</dd>
-      <dt><a href="http://php.net/manual/en/datetime.formats.date.php" target="_blank">Date Formats</a></dt>
-      <dd>"July 1st", "2008/06/30", "08-06-30"</dd>
-      <dt><a href="http://php.net/manual/en/datetime.formats.relative.php" target="_blank">Compound Formats</a></dt>
-      <dd>"20080701T22:38:07", "@1215282385"</dd>
-      <?php
-      break;
-    
-    case 'transactional':
-      break;
-  }
-  ?>
-  </dl>
-</div>
+  <span class="pull-right">
+    <a href="<?php echo base_url('message/#'); ?>">
+      <span class="label label-default"><?php echo $message['type']; ?></span>
+    </a>
+  </span>
+</p>
 
 <?php echo form_open(uri_string()); ?>
 
@@ -46,11 +26,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="col-sm-5">
     <button type="submit" class="btn btn-primary btn-block">Publish</button>
   </div>
-  <div class="col-sm-7">
-    <p class="h6">
-      <a href="<?php echo base_url('message/view/'.$message['message_id'].'/html'); ?>" target="_blank">Show HTML</a>
-    </p>
-  </div>
 </div>
 
 <?php echo form_close(); ?>
+
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Supported Date and Time Formats</div>
+  <table class="table table-striped">
+    <thead>
+      <tr><th>Formats</th> <th>Examples</th></tr>
+    </thead>
+
+    <tbody>
+      <?php
+      if ($message['type'] == 'campaign')
+      {
+        ?>
+        <tr>
+          <th scope="row"><a href="http://php.net/manual/en/datetime.formats.time.php" target="_blank">Time Formats</a></th>
+          <td>"4 am", "4:08:37 am"</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="http://php.net/manual/en/datetime.formats.date.php" target="_blank">Date Formats</a></th>
+          <td>"July 1st", "2008/06/30", "08-06-30"</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="http://php.net/manual/en/datetime.formats.relative.php" target="_blank">Compound Formats</a></th>
+          <td>"20080701T22:38:07", "@1215282385"</td>
+        </tr>
+        <?php
+      }
+      ?>
+
+      <tr>
+        <th scope="row"><a href="http://php.net/manual/en/datetime.formats.relative.php" target="_blank">Relative Formats</a></th>
+        <td>"now", "yesterday noon", "+5 weeks"</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

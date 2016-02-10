@@ -97,28 +97,43 @@ class Lib_message
     return TRUE;
   }
 
-  function revert($message)
-  {
-    if ($message['archived'] != '1000-01-01 00:00:00')
-    {
-      show_error('The message is archived and can not be modified');
-    }
-
-    $this->CI->model_message->update_publish($message['message_id'], NULL);
-    return TRUE;
-  }
-
   function archive($message_id)
   {
+    $message = $this->get($message_id);
+    if (empty($message))
+    {
+      $this->error = ['message' => 'invalid message id'];
+      return NULL;
+    }
+
+    if ($message['type'] == 'campaign')
+    {
+      $this->error = ['message' => 'campaign messages are archived automatically'];
+      return NULL;
+    }
+
     $this->CI->model_message->archive($message_id);
     return TRUE;
   }
 
-  // function unarchive($message_id)
-  // {
-  //   $this->CI->model_message->unarchive($message_id);
-  //   return TRUE;
-  // }
+  function unarchive($message_id)
+  {
+    $message = $this->get($message_id);
+    if (empty($message))
+    {
+      $this->error = ['message' => 'invalid message id'];
+      return NULL;
+    }
+
+    if ($message['type'] == 'campaign')
+    {
+      $this->error = ['message' => 'campaign messages are archived automatically'];
+      return NULL;
+    }
+
+    $this->CI->model_message->unarchive($message_id);
+    return TRUE;
+  }
 
   function _process_html($message, $body_html_input)
   {

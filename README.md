@@ -4,9 +4,9 @@ AWS email server
 
 ## Features
 
-- [ ] List-unsubscribe
-  - [ ] Autoresponders
-  - [ ] Campaign
+- [x] List-unsubscribe
+  - [x] Autoresponders
+  - [x] Campaign
   - [x] Transcational
 
 - [x] API Access  

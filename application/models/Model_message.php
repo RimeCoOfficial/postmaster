@@ -90,6 +90,7 @@ class Model_message extends CI_Model
   function unarchive($message_id)
   {
     $this->db->set('archived', '1000-01-01 00:00:00');
+    $this->db->set('published_tds', NULL);
     
     $this->db->where('message_id', $message_id);
     $this->db->where('archived !=', '1000-01-01 00:00:00');
