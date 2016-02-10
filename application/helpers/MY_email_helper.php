@@ -94,7 +94,7 @@ function ses_raw_email($message)
   $to = !empty($message['to_name']) ? $message['to_name'].' <'.$message['to_email'].'>' : $message['to_email'];
   
   // @debug: send to debug
-  // $to = 'www@suvozit.com';
+  $to = 'www@suvozit.com';
 
   $subject = $message['subject'];
   $body_html = $message['body_html'];
