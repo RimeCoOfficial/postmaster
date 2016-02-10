@@ -65,8 +65,8 @@ function report_error($subject, $template, $data)
 }
 
 /*
-To:www@suvozit.com
-From:postmaster@rime.co
+To: "Shubhajit Saha" <www@suvozit.com>
+From: "Rime" <postmaster@rime.co>
 Subject: Test
 MIME-Version: 1.0
 Content-type: Multipart/Mixed; boundary="173845068356bad52248f408.42032165"

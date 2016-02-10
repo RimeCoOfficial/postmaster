@@ -53,7 +53,7 @@ class Lib_message_archive
       echo '('.$message['request_id'].') Sending message: '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
 
       // @debug: send to *@mail.rime.co
-      $message['to_email'] = 'user-'.md5($message['to_email']).'@mail.rime.co';
+      // $message['to_email'] = 'user-'.md5($message['to_email']).'@mail.rime.co';
       
       $raw_message = ses_raw_email($message);
       // var_dump($raw_message); die();
@@ -64,12 +64,9 @@ class Lib_message_archive
     }
 
     // Wait on both promises to complete and return the results.
-    try
-    {
+    try {
       $results = Promise\unwrap($promises);
-    }
-    catch (AwsException $e)
-    {
+    } catch (AwsException $e) {
       // handle the error.
       $error_msg = 'getAwsRequestId: '.$e->getAwsRequestId().', getAwsErrorType:'.$e->getAwsErrorType().', getAwsErrorCode:'.$e->getAwsErrorCode();
     }
@@ -91,13 +88,9 @@ class Lib_message_archive
         }
       }
 
-      die('pp');
-
       // mark sent
       if(!empty($message_sent_list)) $this->CI->model_message_archive->mark_sent($message_sent_list);
     }
-
-    die('done');
 
     if (!empty($error_msg))
     {
