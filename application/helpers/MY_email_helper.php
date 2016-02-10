@@ -132,15 +132,13 @@ function ses_raw_email($message)
 
   $msg .= 'X-Mailer: '.$client_name.' via '.app_name()."\n";
   
-  $msg .= 'MIME-Version: 1.0'."\n";
-  $msg .= 'Content-Type: multipart/mixed;'."\n";
-  
   $boundary_hash = sha1(time()); //random unique strin
-  $msg .= "\t".'boundary="'.$boundary_hash.'"'."\n";
-  $msg .= "\n";
+
+  $msg .= 'MIME-Version: 1.0'."\n";
+  $msg .= 'Content-Type: multipart/mixed; boundary="'.$boundary.'"'."\n";
 
   // now the actual body
-  $msg .= '--'.$boundary_hash."\n";
+  $msg .= "\n".'--'.$boundary_hash."\n";
 
   // first, the plain text
   $msg .= 'Content-Type: text/plain; charset=utf-8'."\n";
@@ -150,13 +148,13 @@ function ses_raw_email($message)
   $msg .= "\n";
 
   // now, the html text
-  $msg .= '--'.$boundary_hash."\n";
+  $msg .= "\n".'--'.$boundary_hash."\n";
   $msg .= 'Content-Type: text/html; charset=utf-8'."\n";
   $msg .= 'Content-Transfer-Encoding: 7bit'."\n";
   $msg .= "\n";
   $msg .= $body_html;
   $msg .= "\n";
-  $msg .= '--'.$boundary_hash.'--'."\n";
+  $msg .= "\n".'--'.$boundary_hash.'--'."\n";
 
   return $msg;
 }
