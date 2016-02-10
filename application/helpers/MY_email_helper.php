@@ -64,34 +64,45 @@ function report_error($subject, $template, $data)
   }
 }
 
-// http://www.codeproject.com/Articles/786596/How-to-Use-Amazon-SES-to-Send-Email-from-PHP
-// $params = array(
-//   "to" => "email1@gmail.com",
-//   "to" => "email1@gmail.com",
-//   "subject" => "Some subject",
-//   "message" => "<strong>Some email body</strong>",
-//   "from" => "sender@verifiedbyaws",
-//   //OPTIONAL
-//   "reply_to" => "reply_to@gmail.com",
-//   //OPTIONAL
-//   "files" => array(
-//     1 => array(
-//        "name" => "filename1",
-//       "filepath" => "/path/to/file1.txt",
-//       "mime" => "application/octet-stream"
-//     ),
-//     2 => array(
-//        "name" => "filename2",
-//       "filepath" => "/path/to/file2.txt",
-//       "mime" => "application/octet-stream"
-//     ),
-//   )
-// );
+/*
+// http://www.enewsletterpro.com/articles/multi_part_mime_messages.asp
+
+X-sender: <sender@sendersdomain.com>
+X-receiver: <somerecipient@recipientdomain.com>
+From: "Senders Name" <sender@sendersdomain.com>
+To: "Recipient Name" <somerecipient@recipientdomain.com>
+Message-ID: <5bec11c119194c14999e592feb46e3cf@sendersdomain.com>
+Date: Sat, 24 Sep 2005 15:06:49 -0400
+Subject: Sample Multi-Part
+MIME-Version: 1.0
+Content-Type: multipart/alternative; 
+boundary="----=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D"
+
+------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D
+Content-type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Sample Text Content
+------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D
+Content-type: text/html; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+</head>
+<body>
+<div style=3D"FONT-SIZE: 10pt; FONT-FAMILY: Arial">Sample HTML =
+Content</div>
+</body>
+</html>
+
+------=_NextPart_DC7E1BB5_1105_4DB3_BAE3_2A6208EB099D--
+*/
 function ses_raw_email($message)
 {
   $client_name = getenv('app_name');
 
-  $to = !empty($message['to_name']) ? $message['to_name'].' <'.$message['to_email'].'>' : $message['to_email'];
+  $to = !empty($message['to_name']) ? '"'.$message['to_name'].'" <'.$message['to_email'].'>' : $message['to_email'];
   
   // @debug: send to debug
   // $to = 'www@suvozit.com';
@@ -99,7 +110,7 @@ function ses_raw_email($message)
   $subject = $message['subject'];
   $body_html = $message['body_html'];
   $body_text = $message['body_text'];
-  $from = $message['from_name'].' <'.$message['from_email'].'>';
+  $from = !empty($message['from_name']) ? '"'.$message['from_name'].'" <'.$message['from_email'].'>' : $message['from_email'];
   $reply_to = NULL;
 
   if (!empty($message['reply_to_email']))
@@ -108,52 +119,44 @@ function ses_raw_email($message)
   }
 
   $msg = '';
-  $msg = "To: $to\n";
-  $msg .= "From: $from\n";
+  $msg .= 'From: '.$from."\n";
+  $msg .= 'To: '.$to."\n";
 
-  if (!empty($reply_to)) $msg .= "Reply-To: $reply_to\n";
+  if (!empty($reply_to)) $msg .= 'Reply-To: '.$reply_to."\n";
 
   // in case you have funny characters in the subject
   $subject = mb_encode_mimeheader($subject, 'UTF-8');
-  $msg .= "Subject: $subject\n";
+  $msg .= 'Subject: '.$subject."\n";
   
   if (!empty($message['list_unsubscribe'])) $msg .= 'List-Unsubscribe: '.$message['list_unsubscribe']."\n";
 
   $msg .= 'X-Mailer: '.$client_name.' via '.app_name()."\n";
   
-  $msg .= "MIME-Version: 1.0\n";
-  $msg .= "Content-Type: multipart/mixed;\n";
-  $boundary = uniqid("_Part_".time(), true); //random unique string
-  $boundary2 = uniqid("_Part2_".time(), true); //random unique string
-  $msg .= " boundary=\"$boundary\"\n";
+  $msg .= 'MIME-Version: 1.0'."\n";
+  $msg .= 'Content-Type: multipart/mixed;'."\n";
+  
+  $boundary_hash = sha1(time()); //random unique strin
+  $msg .= "\t".'boundary="'.$boundary_hash.'"'."\n";
   $msg .= "\n";
 
   // now the actual body
-  $msg .= "--$boundary\n";
-
-  //since we are sending text and html emails with multiple attachments
-  //we must use a combination of mixed and alternative boundaries
-  //hence the use of boundary and boundary2
-  $msg .= "Content-Type: multipart/alternative;\n";
-  $msg .= " boundary=\"$boundary2\"\n";
-  $msg .= "\n";
-  $msg .= "--$boundary2\n";
+  $msg .= '--'.$boundary_hash."\n";
 
   // first, the plain text
-  $msg .= "Content-Type: text/plain; charset=utf-8\n";
-  $msg .= "Content-Transfer-Encoding: 7bit\n";
+  $msg .= 'Content-Type: text/plain; charset=utf-8'."\n";
+  $msg .= 'Content-Transfer-Encoding: 7bit'."\n";
   $msg .= "\n";
   $msg .= $body_text; // strip_tags($body); //remove any HTML tags
   $msg .= "\n";
 
   // now, the html text
-  $msg .= "--$boundary2\n";
-  $msg .= "Content-Type: text/html; charset=utf-8\n";
-  $msg .= "Content-Transfer-Encoding: 7bit\n";
+  $msg .= '--'.$boundary_hash."\n";
+  $msg .= 'Content-Type: text/html; charset=utf-8'."\n";
+  $msg .= 'Content-Transfer-Encoding: 7bit'."\n";
   $msg .= "\n";
   $msg .= $body_html;
   $msg .= "\n";
-  $msg .= "--$boundary2--\n";
+  $msg .= '--'.$boundary_hash.'--'."\n";
 
   return $msg;
 }

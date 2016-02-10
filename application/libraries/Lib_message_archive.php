@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 use GuzzleHttp\Promise;
+use Aws\Exception\AwsException;
 
 class Lib_message_archive
 {
@@ -51,11 +52,11 @@ class Lib_message_archive
     {
       echo '('.$message['request_id'].') Sending message: '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
 
-      // @debug
+      // @debug: send to *@mail.rime.co
       $message['to_email'] = 'user-'.md5($message['to_email']).'@mail.rime.co';
       
       $raw_message = ses_raw_email($message);
-      // var_dump($raw_message); die();
+      var_dump($raw_message); die();
 
       $email = [
         // 'Source' => 'string',
@@ -74,7 +75,15 @@ class Lib_message_archive
     }
 
     // Wait on both promises to complete and return the results.
-    $results = Promise\unwrap($promises);
+    try
+    {
+      $results = Promise\unwrap($promises);
+    }
+    catch (AwsException $e)
+    {
+      // handle the error.
+      $error_msg = 'getAwsRequestId: '.$e->getAwsRequestId().', getAwsErrorType:'.$e->getAwsErrorType().', getAwsErrorCode:'.$e->getAwsErrorCode();
+    }
 
     // 2. save messege_id
     $message_sent_list = [];
@@ -93,6 +102,12 @@ class Lib_message_archive
 
     // mark sent
     $this->CI->model_message_archive->mark_sent($message_sent_list);
+
+    if (!empty($error_msg))
+    {
+      $this->error = ['message' => $error_msg];
+      return NULL;
+    }
 
     return TRUE;
   }
