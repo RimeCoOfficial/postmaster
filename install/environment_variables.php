@@ -4,7 +4,7 @@
  */
 putenv('FOO=BAR');
 
-putenv('ci_cache_dir=/tmp/ci/');
+putenv('ci_cache_dir=tmp/ci/');
 putenv('ci_base_url=http://localhost/postmaster');
 putenv('ci_proxy_ips=');
 
@@ -13,7 +13,7 @@ putenv('db_username=root');
 putenv('db_password=root');
 
 // Debug keys
-putenv('AWS_PHP_CACHE_DIR=/tmp/aws-cache/');
+putenv('AWS_PHP_CACHE_DIR=tmp/aws-cache/');
 putenv('aws_account_id=111111111111');
 putenv('aws_access_key=XXXXXXXXXXXXXXXXXXXX');
 putenv('aws_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
