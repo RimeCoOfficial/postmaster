@@ -27,12 +27,11 @@ CREATE TABLE IF NOT EXISTS ci_sessions (
 --
 
 CREATE TABLE IF NOT EXISTS feedback (
-  email_id                varchar(256)        NOT NULL  UNIQUE,
-  state                   varchar(32)                   DEFAULT NULL, -- latest status: delivery, bounce, complaint
-  type                    varchar(64)                   DEFAULT NULL,
-  timestamp               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  message_json            text                          DEFAULT NULL,
-  PRIMARY KEY (email_id)
+  to_email                varchar(128)        NOT NULL,
+  type                    varchar(16)                   DEFAULT NULL, -- latest status: delivery, bounce, complaint
+  sub_type                varchar(64)                   DEFAULT NULL,
+  recieved                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  PRIMARY KEY (to_email)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 -- --------------------------------------------------------
@@ -154,7 +153,13 @@ CREATE TABLE IF NOT EXISTS message_archive (
   list_unsubscribe        text                          DEFAULT NULL,
   priority                tinyint unsigned              DEFAULT 0,
   sent                    datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  amzn_message_id         varchar(256)                  DEFAULT NULL,
+  ses_message_id          varchar(256)                  DEFAULT NULL,
+  ses_feedback_json       text                          DEFAULT NULL, -- @todo: store it to s3 and thrash later
   PRIMARY KEY (request_id),
   FOREIGN KEY (request_id) REFERENCES message_request(request_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+
+-- @ALTER:
+ALTER TABLE `message_archive` CHANGE `amzn_message_id` `ses_message_id` VARCHAR(256) CHARACTER SET ascii COLLATE ascii_bin NULL DEFAULT NULL;
+ALTER TABLE `message_archive` ADD `ses_feedback_json` TEXT NULL DEFAULT NULL AFTER `ses_message_id`;

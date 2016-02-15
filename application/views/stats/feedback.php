@@ -23,9 +23,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       $total += $s['count'];
       ?>
       <tr>
-        <th scope="row"><?php echo $s['state']; ?></th>
-        <td><?php echo $s['type']; ?></td>
-        <td><?php echo $s['timestamp']; ?></td>
+        <th scope="row" class="text-capitalize"><?php echo $s['type']; ?></th>
+        <td><samp><?php echo $s['sub_type']; ?></samp></td>
+        <td><?php echo $s['recieved']; ?></td>
         <td><?php echo $s['count']; ?></td>
       </tr>
       <?php

@@ -94,4 +94,15 @@ class Model_message_archive extends CI_Model
     $query = $this->db->get($this->message_archive_table);
     return $query->row_array();
   }
+
+  function set_ses_message($ses_message_id, $to_email, $ses_feedback_json)
+  {
+    $this->db->where('ses_message_id', $ses_message_id);
+    $this->db->where('to_email', $to_email);
+
+    $this->db->set('ses_feedback_json', $ses_feedback_json);
+
+    $this->db->update($this->message_archive_table);
+    return $this->db->affected_rows() > 0;
+  }
 }

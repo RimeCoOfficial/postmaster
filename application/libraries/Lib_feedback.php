@@ -38,7 +38,7 @@ class Lib_feedback
 
     $result = $sqs_client->receiveMessage(array(
       'QueueUrl' => $queue_url,
-      'MaxNumberOfMessages' => 10,
+      'MaxNumberOfMessages' => 9, // MaxNumberOfMessages: Must be between 1 and 10, if provided.
     ));
 
     if (empty($result['Messages']))
@@ -46,64 +46,62 @@ class Lib_feedback
       exit('@kill-task: No task found');
     }
 
-    foreach ($result['Messages'] as $message)
+    foreach ($result['Messages'] as $sqs_message)
     {
-      if (!empty($message['Body']))
+      if (!empty($sqs_message['Body']))
       {
-        $message_body = json_decode($message['Body'], TRUE);
-
-        if (!empty($message_body['Message']))
+        $sns_message = json_decode($sqs_message['Body'], TRUE);
+        if (!empty($sns_message['Message']))
         {
-          $ses_message = json_decode($message_body['Message'], TRUE);
+          $feedback = NULL;
 
-          $state = array();
-
+          $ses_message = json_decode($sns_message['Message'], TRUE);
           if (!empty($ses_message['bounce']))
           {
-            $state['state'] = 'bounce';
-            $state['type'] = strtolower($ses_message['bounce']['bounceSubType'].'/'.$ses_message['bounce']['bounceType']);
-            $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['bounce']['timestamp']));
-
-            $email_id = $ses_message['bounce']['bouncedRecipients'][0]['emailAddress'];
+            $feedback = [
+              'type' => 'bounce',
+              'sub_type' => $ses_message['bounce']['bounceSubType'].', '.$ses_message['bounce']['bounceType'],
+              'to_email' => $ses_message['bounce']['bouncedRecipients'][0]['emailAddress'],
+            ];
           }
-
-          if (!empty($ses_message['complaint']))
+          elseif (!empty($ses_message['complaint']))
           {
-            $state['state'] = 'complaint';
-            $state['type'] = $ses_message['complaint']['complaintFeedbackType'];
-            $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['complaint']['timestamp']));
-
-            $email_id = $ses_message['complaint']['complainedRecipients'][0]['emailAddress'];
+            $feedback = [
+              'type' => 'complaint',
+              'sub_type' => $ses_message['complaint']['complaintFeedbackType'],
+              'to_email' => $ses_message['complaint']['complainedRecipients'][0]['emailAddress'],
+            ];
           }
-
-          if (!empty($ses_message['delivery']))
+          elseif (!empty($ses_message['delivery']))
           {
-            $state['state'] = 'delivery';
-            $state['type'] = $ses_message['delivery']['smtpResponse'];
-            $state['timestamp'] = date('Y-m-d H:i:s', strtotime($ses_message['delivery']['timestamp']));
-
-            $email_id = $ses_message['delivery']['recipients'][0];
+            $feedback = [
+              'type' => 'delivery',
+              'sub_type' => $ses_message['delivery']['smtpResponse'],
+              'to_email' => $ses_message['delivery']['recipients'][0],
+            ];
           }
-
-          $state['message_json'] = $message_body['Message'];
           
-          $this->CI->load->helper('email');
-          if (is_null($email_id = valid_email($email_id)))
+          if (!empty($feedback))
           {
-            throw new Exception("Not a valid email: ".$email_id, 1);
+            $feedback['sub_type'] = !empty($feedback['sub_type']) ? character_limiter($feedback['sub_type'], 64) : NULL;
+            $feedback['recieved'] = date('Y-m-d H:i:s', strtotime($ses_message['mail']['timestamp']));
+
+            $this->CI->load->model('model_message_archive');
+            $this->CI->model_message_archive->set_ses_message($ses_message['mail']['messageId'], $feedback['to_email'], $sns_message['Message']);
+
+            $this->CI->model_feedback->store($feedback['to_email']);
+            $this->CI->model_feedback->update($feedback);
+
+            echo "\t".'Email address: '.$feedback['to_email'].', '.$feedback['type'].' ['.$feedback['sub_type'].']'.PHP_EOL;
           }
-
-          $this->CI->model_feedback->store($email_id);
-          $this->CI->model_feedback->update($email_id, $state);
-
-          echo "\t- ".'Email: '.$email_id.', state: '.$state['state'].', type: '.$state['type'].PHP_EOL;
+          else print_r($ses_message);
         }
       }
 
-      if (!empty($message['ReceiptHandle']))
+      if (!empty($sqs_message['ReceiptHandle']))
       {
-        echo "\t- ".'Delete message: '.$message['ReceiptHandle'].PHP_EOL;
-        $receipt_handle = $message['ReceiptHandle'];
+        echo "\t".'Delete message SQS: '.$sqs_message['ReceiptHandle'].PHP_EOL;
+        $receipt_handle = $sqs_message['ReceiptHandle'];
 
         $sqs_client->deleteMessage(array(
           // QueueUrl is required
@@ -117,19 +115,19 @@ class Lib_feedback
     return TRUE;
   }
 
-  function get($email_id)
+  function get($to_email)
   {
-    return $this->CI->model_feedback->get($email_id);
+    return $this->CI->model_feedback->get($to_email);
   }
 
-  function get_batch($email_id_list)
+  function get_batch($to_email_list)
   {
-    $email_id_list = $this->CI->model_feedback->get_batch($email_id_list);
+    $feedback_list = $this->CI->model_feedback->get_batch($to_email_list);
 
-    $feedback_list = [];
-    foreach ($email_id_list as $feedback) $feedback_list[ $feedback['email_id'] ] = $feedback;
+    $feedback_type_list = [];
+    foreach ($feedback_list as $feedback) $feedback_type_list[ $feedback['to_email'] ] = $feedback['type'];
     
-    return $feedback_list;
+    return $feedback_type_list;
   }
 
   function stats()

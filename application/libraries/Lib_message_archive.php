@@ -83,8 +83,8 @@ class Lib_message_archive
           AND !empty($result['MessageId'])
         )
         {
-          $amzn_message_id = $result['MessageId'];
-          $message_sent_list[] = ['request_id' => $request_id, 'sent' => date('Y-m-d H:i:s'), 'amzn_message_id' => $amzn_message_id];
+          $ses_message_id = $result['MessageId'];
+          $message_sent_list[] = ['request_id' => $request_id, 'sent' => date('Y-m-d H:i:s'), 'ses_message_id' => $ses_message_id];
         }
       }
 
