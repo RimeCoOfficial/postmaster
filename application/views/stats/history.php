@@ -22,11 +22,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               }
               else
               {
-                ?>
-                <a  href="<?php echo base_url('#'); ?>">
-                  <?php echo $request['subject']; ?>
-                </a>
-                <?php
+                // $request['ses_feedback_json'] = json_encode(['value' => 'value']);
+
+                if (!empty($request['ses_feedback_json']))
+                {
+                  $collapse_id = 'collapseExample'.$request['request_id'];
+                  ?>
+                  <a class="" role="button" data-toggle="collapse" href="#<?php echo $collapse_id; ?>" aria-expanded="false" aria-controls="collapseExample">
+                    <?php echo $request['subject']; ?>
+                  </a>
+                  <?php
+                }
+                else echo $request['subject'];
               }
               ?>
             </h5>
@@ -53,6 +60,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               }
               ?>
             </small>
+
+            <?php
+            if (!empty($request['ses_feedback_json']))
+            {
+              ?>
+              <div class="collapse" id="<?php echo $collapse_id; ?>">
+                <?php
+                $data = json_decode($request['ses_feedback_json']);
+                $json_string = json_encode($data, JSON_PRETTY_PRINT);
+                ?>
+                <pre><?php echo $json_string; ?></pre>
+              </div>
+              <?php
+            }
+            ?>
           </div>
 
           <div class="media-right">

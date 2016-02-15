@@ -34,6 +34,7 @@ class Model_archive extends CI_Model
     $this->db->select($this->archive_table.'.web_version_key');
     $this->db->select($this->archive_table.'.subject');
     $this->db->select($this->archive_table.'.sent');
+    $this->db->select($this->archive_table.'.ses_feedback_json');
     $this->db->select($this->request_table.'.to_name');
     $this->db->select($this->request_table.'.to_email');
     $this->db->select($this->request_table.'.created');
