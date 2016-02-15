@@ -36,6 +36,11 @@ class Lib_recipient
     return $recipient;
   }
 
+  function get_list($list_id, $count = 99)
+  {
+    return $this->CI->model_recipient->get_list($list_id, $count);
+  }
+
   function api_verify_input($list_id, $timestamp_param = NULL)
   {
     $recipient_id = $this->CI->input->post('recipient_id');

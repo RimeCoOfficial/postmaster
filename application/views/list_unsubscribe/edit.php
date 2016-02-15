@@ -4,14 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <h1>
   <?php echo $list_unsubscribe['list']; ?>
+</h1>
+
+<p class="lead">
   <small>#<?php echo $list_unsubscribe['list_id']; ?></small>
 
    <span class="pull-right">
-    <a href="<?php echo base_url('list-unsubscribe/#'); ?>">
-      <span class="label label-default"><?php echo $list_unsubscribe['type']; ?></span>
-    </a>
+    <span class="label label-default"><?php echo $list_unsubscribe['type']; ?></span>
   </span>
-</h1>
+</p>
 
 <?php echo form_open(uri_string()); ?>
 

@@ -70,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <small>
               #<?php echo $message['message_id']; ?>
               
-              <span class="text-uppercase"><?php echo anchor('message/view/list-unsubscribe/'.$message['list'], $message['list']); ?></span>
+              <span class="text-uppercase"><?php echo anchor('message?filter=list_id:'.$message['list_id'], $message['list']); ?></span>
 
               <?php echo $message['reply_to_name']; ?>
               <?php echo $message['reply_to_email']; ?>
@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
 
           <div class="media-right">
-            <a href="<?php echo base_url('message/view/type/'.$message['type']); ?>">
+            <a href="<?php echo base_url('message?filter=list_type:'.$message['type']); ?>">
               <span class="media-object label label-default">
                 <?php echo $message['type']; ?>
               </span>

@@ -85,6 +85,23 @@ class List_unsubscribe extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
+  public function recipients($list_id = 0)
+  {
+    $list_unsubscribe = $this->lib_list_unsubscribe->get($list_id);
+    if (empty($list_unsubscribe)) show_404();
+
+    $local_view_data = [];
+    $local_view_data['list_unsubscribe'] = $list_unsubscribe;
+
+    $this->load->library('lib_recipient');
+    $local_view_data['recipient_list'] = $this->lib_recipient->get_list($list_id);
+
+    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
+
+    $view_data['main_content'] = $this->load->view('list_unsubscribe/recipients', $local_view_data, TRUE);
+    $this->load->view('base', $view_data);
+  }
+
   // public function delete($list_id = 0)
   // {
   //   $this->lib_list_unsubscribe->delete($list_id);

@@ -30,9 +30,8 @@ class Lib_archive
     return $this->CI->model_archive->get($request_id, $web_version_key);
   }
 
-  function get_list($type = NULL)
+  function get_list($type = NULL, $count = 99)
   {
-    $count = 100;
     return $this->CI->model_archive->get_list($type, $count);
   }
 

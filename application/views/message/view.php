@@ -18,9 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   List-unsubscribe: <?php echo anchor('list-unsubcribe/#', $message['list']); ?>
 
   <span class="pull-right">
-    <a href="<?php echo base_url('message/#'); ?>">
-      <span class="label label-default"><?php echo $message['type']; ?></span>
-    </a>
+    <span class="label label-default"><?php echo $message['type']; ?></span>
   </span>
 </p>
 

@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>Request History</h1>
+<h1>Requests</h1>
 
 <?php if (empty($archive_list)): ?>
   <p class="lead text-muted">No message found</p>
@@ -35,11 +35,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               #<?php echo $request['message_id']; ?>
               
               <span class="text-uppercase">
-                <a href="#" class="text-muted"><?php echo $request['list']; ?></a>
+                <a href="<?php echo base_url('stats/history?filter=list_id:'.$request['list_id']); ?>" class="text-muted"><?php echo $request['list']; ?></a>
               </span>
 
               <strong>
-                <a href="#" class="text-muted"><?php echo $request['to_email']; ?></a>
+                <a href="<?php echo base_url('stats/history?filter=to_email:'.urlencode($request['to_email'])); ?>" class="text-muted"><?php echo $request['to_email']; ?></a>
               </strong>
 
               <?php
@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
 
           <div class="media-right">
-            <a href="<?php echo base_url('#/'.$request['type']); ?>">
+            <a href="<?php echo base_url('stats/history?filter=list_type:'.$request['type']); ?>">
               <span class="media-object label label-default">
                 <?php echo $request['type']; ?>
               </span>

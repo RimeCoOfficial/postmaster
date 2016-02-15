@@ -15,6 +15,18 @@ class Model_recipient extends CI_Model
     return $query->row_array();
   }
 
+  function get_list($list_id, $count)
+  {
+    $this->db->limit($count);
+
+    $this->db->order_by('updated', 'DESC');
+
+    $this->db->where('list_id', $list_id);
+
+    $query = $this->db->get($this->recipient_table);
+    return $query->result_array();
+  }
+
   function create($list_id, $recipient_id, $to_name, $to_email)
   {
     $this->db->set('list_id', $list_id);
