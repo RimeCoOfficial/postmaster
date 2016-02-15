@@ -59,7 +59,7 @@ date_default_timezone_set('GMT');
  */
     // define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-    require_once __DIR__ . '/exe/environment_variables.php';
+    require_once __DIR__ . '/opsworks/environment_variables.php';
     define('ENVIRONMENT', getenv('CI_ENV') ? getenv('CI_ENV') : 'development');  
 
 /*

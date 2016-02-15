@@ -1,7 +1,7 @@
 {
   "custom_env": {
     "postmaster": {
-      "path_to_vars": "exe",
+      "path_to_vars": "opsworks",
       "env_vars" : [
         "CI_ENV=production",
         "ci_cache_dir=/srv/www/postmaster/current/application/cache/",
