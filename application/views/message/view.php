@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <p class="lead">
   #<?php echo $message['message_id']; ?>
 
-  List-unsubscribe: <?php echo anchor('list-unsubcribe/#', $message['list']); ?>
+  List-unsubscribe: <?php echo $message['list']; ?>
 
   <span class="pull-right">
     <span class="label label-default"><?php echo $message['type']; ?></span>
@@ -93,7 +93,7 @@ if ($message['archived'] == '1000-01-01 00:00:00')
           <div class="media-right">
             <a href="<?php echo base_url('message/publish/'.$message['message_id']); ?>" class="btn btn-primary">
               <div class="media-object">
-                <span class="glyphicon glyphicon-send"></span>
+                <span class="glyphicon glyphicon-floppy-saved"></span>
               </div>
             </a>
           </div>
@@ -144,7 +144,7 @@ if ($message['archived'] == '1000-01-01 00:00:00')
           <div class="media-right">
             <a href="<?php echo base_url('message/publish/'.$message['message_id']); ?>" class="btn btn-default">
               <div class="media-object">
-                <span class="glyphicon glyphicon-refresh"></span>
+                <span class="glyphicon glyphicon-floppy-saved"></span>
               </div>
             </a>
           </div>
@@ -170,7 +170,7 @@ if ($message['archived'] == '1000-01-01 00:00:00')
             <div class="media-right">
               <a href="<?php echo base_url('message/archive/'.$message['message_id']); ?>" class="btn btn-warning">
                 <div class="media-object">
-                  <span class="glyphicon glyphicon-volume-off"></span>
+                  <span class="glyphicon glyphicon-floppy-remove"></span>
                 </div>
               </a>
             </div>
@@ -208,7 +208,7 @@ else
           <div class="media-right">
             <a href="<?php echo base_url('message/unarchive/'.$message['message_id']); ?>" class="btn btn-default">
               <div class="media-object">
-                <span class="glyphicon glyphicon-volume-up"></span>
+                <span class="glyphicon glyphicon-floppy-open"></span>
               </div>
             </a>
           </div>

@@ -29,7 +29,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="row">
   <div class="col-sm-5">
-    <button type="submit" class="btn btn-primary btn-block">Update</button>
+    <button type="submit" class="btn btn-primary btn-block">
+      <span class="glyphicon glyphicon-floppy-save"></span>
+    </button>
   </div>
   <div class="col-sm-7">
     <p class="h6">

@@ -32,11 +32,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
 
           <div class="media-right">
-            <a href="<?php echo base_url('list-unsubscribe?filter=list_type:'.$list['type']); ?>">
+            <!-- <a href="<?php echo base_url('list-unsubscribe?filter=list_type:'.$list['type']); ?>"> -->
               <span class="media-object label label-default">
                 <?php echo $list['type']; ?>
               </span>
-            </a>
+            <!-- </a> -->
           </div>
           
           <div class="media-right small">

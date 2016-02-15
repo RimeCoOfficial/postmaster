@@ -11,14 +11,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </h1>
 
 <p class="lead">
-  <small>#<?php echo $list_unsubscribe['list_id']; ?></small>
+  #<?php echo $list_unsubscribe['list_id']; ?>
 
-   <span class="pull-right">
+  Created <?php echo $list_unsubscribe['created']; ?> GMT
+
+  <span class="pull-right">
     <span class="label label-default"><?php echo $list_unsubscribe['type']; ?></span>
   </span>
 </p>
 
-<h2>Recipients</h2>
+<!-- <h2>Recipients</h2> -->
 
 <?php // var_dump($recipient_list); ?>
 <?php
@@ -32,7 +34,7 @@ else
 {
   ?>
   <table class="table table-striped table-condensed">
-    <!-- <caption>Optional table caption.</caption> -->
+    <caption>Recent recipients</caption>
     <thead> <tr> <th>#</th> <th>Address</th> <th><samp>list_id, unsubscribed, metadata_updated</samp></th> </tr> </thead>
     <tbody>
       <?php

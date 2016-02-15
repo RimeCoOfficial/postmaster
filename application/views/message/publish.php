@@ -9,12 +9,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <p class="lead">
   #<?php echo $message['message_id']; ?>
   
-  List-unsubscribe: <?php echo anchor('list-unsubcribe/#', $message['list']); ?>
+  List-unsubscribe: <?php echo $message['list']; ?>
 
   <span class="pull-right">
-    <a href="<?php echo base_url('message/#'); ?>">
+    <!-- <a href="<?php echo base_url('message/#'); ?>"> -->
       <span class="label label-default"><?php echo $message['type']; ?></span>
-    </a>
+    <!-- </a> -->
   </span>
 </p>
 

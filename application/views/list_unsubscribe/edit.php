@@ -7,9 +7,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </h1>
 
 <p class="lead">
-  <small>#<?php echo $list_unsubscribe['list_id']; ?></small>
+  #<?php echo $list_unsubscribe['list_id']; ?>
 
-   <span class="pull-right">
+  Created <?php echo $list_unsubscribe['created']; ?> GMT
+  
+  <span class="pull-right">
     <span class="label label-default"><?php echo $list_unsubscribe['type']; ?></span>
   </span>
 </p>

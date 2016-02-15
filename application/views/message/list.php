@@ -70,7 +70,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <small>
               #<?php echo $message['message_id']; ?>
               
-              <span class="text-uppercase"><?php echo anchor('message?filter=list_id:'.$message['list_id'], $message['list']); ?></span>
+              <!-- <span><?php echo anchor('message?filter=list_id:'.$message['list_id'], $message['list']); ?></span> -->
+              <?php echo $message['list']; ?>
 
               <?php echo $message['reply_to_name']; ?>
               <?php echo $message['reply_to_email']; ?>
@@ -79,11 +80,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
 
           <div class="media-right">
-            <a href="<?php echo base_url('message?filter=list_type:'.$message['type']); ?>">
+            <!-- <a href="<?php echo base_url('message?filter=list_type:'.$message['type']); ?>"> -->
               <span class="media-object label label-default">
                 <?php echo $message['type']; ?>
               </span>
-            </a>
+            <!-- </a> -->
+          </div>
+
+          <div class="media-right">
+            <?php
+            $title = NULL;
+            $icon = NULL;
+            $is_primary = 'muted';
+            if ($message['archived'] != '1000-01-01 00:00:00')  { $title = 'Archived';  $icon = 'disk';  }
+            else if (!is_null($message['published_tds']))       { $title = 'Published'; $icon = 'saved'; }
+            else                                                { $title = 'Draft';     $icon = 'save';  $is_primary = 'primary'; }
+            ?>
+            <div class="text-<?php echo $is_primary; ?>" title="<?php echo $title; ?>">
+              <span class="media-object glyphicon glyphicon-floppy-<?php echo $icon; ?>" aria-hidden="true"></span>
+            </div>
           </div>
         </div>
       </div>
