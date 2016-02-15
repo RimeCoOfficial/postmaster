@@ -166,7 +166,7 @@ class Lib_message
     // Events             t=event&ec=email&ea=open
     // Tracking ID        tid=UA-XXXXX-Y
     // Client ID          cid=[list_id]
-    // User ID            uid=[list_recipient_id]
+    // User ID            uid=[recipient_id]
     // Campaign Source    cs=[list]
     // Campaign Name      cn=[message_id]
     // Campaign Medium    cm=email
@@ -177,14 +177,14 @@ class Lib_message
       'v' => 1, 't' => 'event', 'ec' => 'email', 'ea' => 'open',
       'tid' => $ga_vars['tracking_id'],
       // 'cid' => md5($message['list_id'].random_string()),
-      // 'uid' => '{list_recipient_id}',
+      // 'uid' => '{recipient_id}',
       'cs'  => $ga_vars['campaign_source'],
       'cn'  => $ga_vars['campaign_name'],
       'cm'  => $ga_vars['campaign_medium'],
       'dt'  => $message['subject'], 'de'  => 'UTF-8',
     ];
     $ga_beacon_url = 'https://www.google-analytics.com/collect?'.http_build_query($ga_beacon);
-    $ga_beacon_url .= '&dp=/email/open/{_request_id}&cid={_request_id}&uid={_list_recipient_id}';
+    $ga_beacon_url .= '&dp=/email/open/{_request_id}&cid={_request_id}&uid={_recipient_id}';
     $ga_beacon_html = '<img alt="GA" width="1px" height="1px" src="'.$ga_beacon_url.'">';
 
     $body_html = str_replace('</body>', $ga_beacon_html.'</body>', $body_html, $replace_count);
@@ -251,12 +251,12 @@ class Lib_message
 
   function add_request($message_id)
   {
-    $this->CI->load->library('lib_message_request');
+    $this->CI->load->library('lib_request');
 
-    $list_recipient_id = $this->CI->input->post('list_recipient_id');
-    if (empty($list_recipient_id))
+    $recipient_id = $this->CI->input->post('recipient_id');
+    if (empty($recipient_id))
     {
-      $this->error = ['status' => 401, 'message' => 'missing parameter list_recipient_id'];
+      $this->error = ['status' => 401, 'message' => 'missing parameter recipient_id'];
       return NULL;
     }
 
@@ -277,13 +277,13 @@ class Lib_message
       return NULL;
     }
 
-    $this->CI->load->library('lib_list_recipient');
-    $list_recipient = $this->CI->lib_list_recipient->get($message['list_id'], $list_recipient_id, $to_name, $to_email);
+    $this->CI->load->library('lib_recipient');
+    $recipient = $this->CI->lib_recipient->get($message['list_id'], $recipient_id, $to_name, $to_email);
 
-    if (is_null($request_id = $this->CI->lib_message_request->add(
-      $message_id, $list_recipient['auto_recipient_id'], $to_name, $to_email, $pseudo_vars)))
+    if (is_null($request_id = $this->CI->lib_request->add(
+      $message_id, $recipient['auto_recipient_id'], $to_name, $to_email, $pseudo_vars)))
     {
-      $this->error = $this->CI->lib_message_request->get_error_message();
+      $this->error = $this->CI->lib_request->get_error_message();
       return NULL;
     }
 

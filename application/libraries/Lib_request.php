@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Lib_message_request
+class Lib_request
 {
   private $error = array();
   
   function __construct($options = array())
   {
     $this->CI =& get_instance();
-    $this->CI->load->model('model_message_request');
+    $this->CI->load->model('model_request');
   }
   
   /**
@@ -24,7 +24,7 @@ class Lib_message_request
 
   function add($message_id, $auto_recipient_id, $to_name, $to_email, $pseudo_vars)
   {
-    if (!$this->CI->model_message_request->can_add($message_id))
+    if (!$this->CI->model_request->can_add($message_id))
     {
       $this->error = ['status' => 401, 'message' => 'invalid message_id'];
       return NULL;
@@ -34,17 +34,17 @@ class Lib_message_request
 
     $pseudo_vars_json = (is_array($pseudo_vars) AND !empty($pseudo_vars)) ? json_encode($pseudo_vars) : NULL;
 
-    return $this->CI->model_message_request->add($message_id, $auto_recipient_id, $to_name, $to_email, $pseudo_vars_json);
+    return $this->CI->model_request->add($message_id, $auto_recipient_id, $to_name, $to_email, $pseudo_vars_json);
   }
 
   function get_to_process($count)
   {
-    return $this->CI->model_message_request->get_to_process($count);
+    return $this->CI->model_request->get_to_process($count);
   }
 
   function process($messages)
   {
-    $message_archive_list = [];
+    $archive_list = [];
     $message_processed_list = [];
 
     $to_email_list = [];
@@ -56,14 +56,14 @@ class Lib_message_request
     foreach ($messages as $message)
     {
       echo '('.$message['request_id'].') Processing message: '.$message['message_id'].' '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
-
+      
       // has unsubscribed
       if ($message['unsubscribed'] == '1000-01-01 00:00:00')
       {
         // no bounce
         if (empty($feedback_list[ $message['to_email'] ]) OR $feedback_list[ $message['to_email'] ] != 'bounce')
         {
-          $message_archive_list[] = $this->archive($message);
+          $archive_list[] = $this->archive($message);
         }
       }
 
@@ -75,11 +75,14 @@ class Lib_message_request
       $this->CI->db->trans_start();
 
       // mark processed
-      $this->CI->model_message_request->mark_processed($message_processed_list);
+      $this->CI->model_request->mark_processed($message_processed_list);
 
-      // send message
-      $this->CI->load->model('model_message_archive');
-      $this->CI->model_message_archive->store($message_archive_list);
+      if (!empty($archive_list))
+      {
+        // send message
+        $this->CI->load->model('model_archive');
+        $this->CI->model_archive->store($archive_list);
+      }
 
       $this->CI->db->trans_complete();
     }
@@ -89,52 +92,52 @@ class Lib_message_request
 
   function archive($message)
   {
-    $message_archive = $this->_init($message);
+    $archive = $this->_init($message);
 
-    $message_archive = $this->_parse($message_archive, $message);
+    $archive = $this->_parse($archive, $message);
 
-    // print_r($message_archive); die();
-    return $message_archive;
+    // print_r($archive); die();
+    return $archive;
   }
 
   private function _init($message)
   {
-    $message_archive = [];
+    $archive = [];
 
-    $message_archive['request_id'] = $message['request_id'];
-    $message_archive['web_version_key'] = random_string('alnum', 64);
-    $message_archive['unsubscribe_key'] = random_string('alnum', 64);
-    $message_archive['from_name'] = getenv('app_name');
-    $message_archive['from_email'] = getenv('email_source');
+    $archive['request_id'] = $message['request_id'];
+    $archive['web_version_key'] = random_string('alnum', 64);
+    $archive['unsubscribe_key'] = random_string('alnum', 64);
+    $archive['from_name'] = getenv('app_name');
+    $archive['from_email'] = getenv('email_source');
 
-    $message_archive['to_name'] = $message['to_name'];
-    $message_archive['to_email'] = $message['to_email'];
+    $archive['to_name'] = $message['to_name'];
+    $archive['to_email'] = $message['to_email'];
 
     // default to name
-    if (empty($message_archive['to_name'])) $message_archive['to_name'] = $message['list_recipient_to_name'];
+    if (empty($archive['to_name'])) $archive['to_name'] = $message['recipient_to_name'];
 
-    $message_archive['reply_to_name'] = $message['reply_to_name'];
-    $message_archive['reply_to_email'] = $message['reply_to_email'];
+    $archive['reply_to_name'] = $message['reply_to_name'];
+    $archive['reply_to_email'] = $message['reply_to_email'];
 
-    $message_archive['subject'] = $message['subject'];
-    $message_archive['body_html'] = $message['body_html'];
-    $message_archive['body_text'] = '';
+    $archive['subject'] = $message['subject'];
+    $archive['body_html'] = $message['body_html'];
+    $archive['body_text'] = '';
 
-    $message_archive['list_unsubscribe'] = NULL;
+    $archive['list_unsubscribe'] = NULL;
 
-    $message_archive['priority'] = 0;
+    $archive['priority'] = 0;
     switch ($message['type'])
     {
-      case 'transactional': $message_archive['priority'] = 15; break;
-      case 'campaign':      $message_archive['priority'] = 10; break;
-      case 'autoresponder': $message_archive['priority'] =  5; break;
+      case 'transactional': $archive['priority'] = 15; break;
+      case 'campaign':      $archive['priority'] = 10; break;
+      case 'autoresponder': $archive['priority'] =  5; break;
       default:                                                 break;
     }
 
-    return $message_archive;
+    return $archive;
   }
 
-  private function _parse($message_archive, $message)
+  private function _parse($archive, $message)
   {
     $web_version_link = 'open/message/';
     $unsubscribe_link = 'open/unsubscribe?';
@@ -143,18 +146,18 @@ class Lib_message_request
     if (empty($list_unsubscribe_url)) $list_unsubscribe_url = base_url($unsubscribe_link);
     else $list_unsubscribe_url = getenv('app_base_url').$list_unsubscribe_url;
 
-    $list_unsubscribe_url .= 'request_id='.$message_archive['request_id'].'&unsubscribe_key='.$message_archive['unsubscribe_key'];
+    $list_unsubscribe_url .= 'request_id='.$archive['request_id'].'&unsubscribe_key='.$archive['unsubscribe_key'];
     $list_unsubscribe_url = $message['list_unsubscribe'] ? $list_unsubscribe_url : NULL;
 
     $default_vars = [
-      '_request_id' => $message_archive['request_id'],
+      '_request_id' => $archive['request_id'],
       '_subject' => $message['subject'],
-      '_list_recipient_id' => $message['list_recipient_id'],
+      '_recipient_id' => $message['recipient_id'],
       '_to_email' => $message['to_email'],
       '_to_name' => $message['to_name'],
       '_reply_to_email' => $message['reply_to_email'],
       '_reply_to_name' => $message['reply_to_name'],
-      '_web_version_link' => base_url($web_version_link.$message_archive['request_id'].'/'.$message_archive['web_version_key']),
+      '_web_version_link' => base_url($web_version_link.$archive['request_id'].'/'.$archive['web_version_key']),
       '_unsubscribe_link' => $list_unsubscribe_url,
       '_current_day' => date('l'),
       '_current_day_number' => date('N'),
@@ -175,16 +178,16 @@ class Lib_message_request
     
     // parse subject
     $subject = $this->CI->parser->parse_string($message['subject'],  $pseudo_vars, TRUE);
-    $message_archive['subject'] = $subject;
+    $archive['subject'] = $subject;
     
     $pseudo_vars['_subject'] = $subject;
 
     // parse body
-    $message_archive['body_html'] = $this->CI->parser->parse_string($message['body_html'],  $pseudo_vars, TRUE);
-    $message_archive['body_text'] = $this->CI->parser->parse_string($message['body_text'],  $pseudo_vars, TRUE);
+    $archive['body_html'] = $this->CI->parser->parse_string($message['body_html'],  $pseudo_vars, TRUE);
+    $archive['body_text'] = $this->CI->parser->parse_string($message['body_text'],  $pseudo_vars, TRUE);
 
-    $message_archive['list_unsubscribe'] = $list_unsubscribe_url;
+    $archive['list_unsubscribe'] = $list_unsubscribe_url;
 
-    return $message_archive;
+    return $archive;
   }
 }

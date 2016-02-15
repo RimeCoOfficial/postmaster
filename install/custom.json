@@ -44,14 +44,14 @@
       },
 
       {
-        "name"    : "scheduled_messages autoresponder",
+        "name"    : "scheduled autoresponder",
         "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
-        "command" : "cd /srv/www/postmaster/current && php index.php task scheduled_messages autoresponder"
+        "command" : "cd /srv/www/postmaster/current && php index.php task scheduled autoresponder"
       },
       {
-        "name"    : "scheduled_messages campaign",
+        "name"    : "scheduled campaign",
         "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
-        "command" : "cd /srv/www/postmaster/current && php index.php task scheduled_messages campaign"
+        "command" : "cd /srv/www/postmaster/current && php index.php task scheduled campaign"
       },
 
       {

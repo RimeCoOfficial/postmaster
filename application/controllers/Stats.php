@@ -31,8 +31,8 @@ class Stats extends CI_Controller
   {
     $local_view_data = [];
 
-    $this->load->library('lib_message_archive');
-    $local_view_data['message_archive_list'] = $this->lib_message_archive->get_list();
+    $this->load->library('lib_archive');
+    $local_view_data['archive_list'] = $this->lib_archive->get_list();
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 
