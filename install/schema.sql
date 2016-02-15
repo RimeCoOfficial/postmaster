@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS archive (
   from_name               varchar(128)                  DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   from_email              varchar(256)        NOT NULL,
   to_name                 varchar(128)                  DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
-  to_email                varchar(256)        NOT NULL  INDEX,
+  to_email                varchar(256)        NOT NULL,
   reply_to_name           varchar(128)                  DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   reply_to_email          varchar(256)                  DEFAULT NULL,
   subject                 varchar(128)        NOT NULL  COLLATE utf8mb4_unicode_ci,
