@@ -30,7 +30,9 @@ function valid_email($str)
 
 function report_error($subject, $template, $data)
 {
-  if (!is_null($CI =& get_instance()) AND ENVIRONMENT === 'production')
+  $email_debug = getenv('email_debug');
+
+  if (!is_null($CI =& get_instance()) AND ENVIRONMENT === 'production' AND !empty($email_debug))
   {
     $data['debug_backtrace'] = NULL;
     $data['backtrace'] = array();
@@ -60,7 +62,7 @@ function report_error($subject, $template, $data)
     $data['server']   = is_cli() ? NULL : $CI->input->server(NULL);
     
     $CI->load->library('lib_send_email');
-    $CI->lib_send_email->general(getenv('email_debug'), $subject, $template, $data);
+    $CI->lib_send_email->general($email_debug, $subject, $template, $data);
   }
 }
 

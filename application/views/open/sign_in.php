@@ -14,7 +14,7 @@ else
 {
   ?>
   <h1>Check your <abbr title="<?php echo getenv('email_admin'); ?>">email</abbr> to login</h1>
-  <p>The email link expires in 5mins. So hurry!</p>
+  <p>The email link expires in 15 mins. So hurry!</p>
   <?php
 }
 ?>

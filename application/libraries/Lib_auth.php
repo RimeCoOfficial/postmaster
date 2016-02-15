@@ -36,7 +36,7 @@ class Lib_auth
     }
 
     $login_email_key = random_string('md5');
-    $this->CI->session->set_tempdata('login_email_key', $login_email_key, 300); // Expire in 5 minutes
+    $this->CI->session->set_tempdata('login_email_key', $login_email_key, 900); // Expire in 15 minutes
 
     return $login_email_key;
   }
