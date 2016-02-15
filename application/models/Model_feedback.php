@@ -44,9 +44,7 @@ class Model_feedback extends CI_Model
 
   function stats()
   {
-    // SELECT type, COUNT(*) FROM feedback GROUP BY type;
-
-    $this->db->select('to_email, type, sub_type, recieved, COUNT(*) AS count');
+    $this->db->select('*, COUNT(*) AS count');
     $this->db->group_by('type');
 
     $query = $this->db->get($this->feedback_table);

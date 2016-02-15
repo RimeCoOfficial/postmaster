@@ -158,8 +158,3 @@ CREATE TABLE IF NOT EXISTS message_archive (
   PRIMARY KEY (request_id),
   FOREIGN KEY (request_id) REFERENCES message_request(request_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
-
--- @ALTER:
-ALTER TABLE `message_archive` CHANGE `amzn_message_id` `ses_message_id` VARCHAR(256) CHARACTER SET ascii COLLATE ascii_bin NULL DEFAULT NULL;
-ALTER TABLE `message_archive` ADD `ses_feedback_json` TEXT NULL DEFAULT NULL AFTER `ses_message_id`;
