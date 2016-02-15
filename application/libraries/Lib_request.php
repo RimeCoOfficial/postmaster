@@ -57,6 +57,8 @@ class Lib_request
     {
       echo '('.$message['request_id'].') Processing message: '.$message['message_id'].' '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
       
+      $processed_error = NULL;
+
       // has unsubscribed
       if ($message['unsubscribed'] == '1000-01-01 00:00:00')
       {
@@ -65,9 +67,15 @@ class Lib_request
         {
           $archive_list[] = $this->archive($message);
         }
+        else $processed_error = 'recipient:bounce';
       }
+      else $processed_error = 'recipient:unsubscribed';
 
-      $message_processed_list[] = ['request_id' => $message['request_id'], 'processed' => date('Y-m-d H:i:s')];
+      $message_processed_list[] = [
+        'request_id' => $message['request_id'],
+        'processed' => date('Y-m-d H:i:s'),
+        'processed_error' => $processed_error
+      ];
     }
 
     if (!empty($message_processed_list))

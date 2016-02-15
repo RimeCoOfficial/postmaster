@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS request (
   to_email                varchar(256)        NOT NULL,
   pseudo_vars_json        text                          DEFAULT NULL  COLLATE utf8mb4_unicode_ci,
   processed               datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
-  -- comments
+  processed_error         varchar(32)                   DEFAULT NULL,       
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (request_id),
   FOREIGN KEY (message_id) REFERENCES message(message_id) ON UPDATE CASCADE ON DELETE CASCADE,
