@@ -53,7 +53,7 @@ class Model_recipient extends CI_Model
     $this->db->set('metadata_json', $metadata_json);
 
     if ($update_recipient_id)  $this->db->where('recipient_id', $update_recipient_id);
-    else                            $this->db->where('auto_recipient_id', $auto_recipient_id);
+    else                       $this->db->where('auto_recipient_id', $auto_recipient_id);
 
     $this->db->where('metadata_updated <', $metadata_updated);
 
