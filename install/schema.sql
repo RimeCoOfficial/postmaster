@@ -159,5 +159,3 @@ CREATE TABLE IF NOT EXISTS archive (
   PRIMARY KEY (request_id),
   FOREIGN KEY (request_id) REFERENCES request(request_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
-ALTER TABLE `recipient` CHANGE `list_recipient_id` `recipient_id` VARCHAR(512) CHARACTER SET ascii COLLATE ascii_bin NOT NULL;
