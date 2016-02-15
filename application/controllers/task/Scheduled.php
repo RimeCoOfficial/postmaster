@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Scheduled_messages extends CI_Controller
+class Scheduled extends CI_Controller
 {
   function __construct()
   {
@@ -14,14 +14,15 @@ class Scheduled_messages extends CI_Controller
 
     $this->load->helper('cron');
     echo 'Scheduled Message'.PHP_EOL;
+
+    $this->load->library('lib_request_scheduled');
   }
 
-  // cd ~/Sites/postmaster && php index.php task scheduled_messages autoresponder
-  // cd /srv/www/postmaster/current && php index.php task scheduled_messages autoresponder
+  // cd ~/Sites/postmaster && php index.php task scheduled autoresponder
+  // cd /srv/www/postmaster/current && php index.php task scheduled autoresponder
   function autoresponder($count = 999)
   {
     echo 'Start Autoresponder'.PHP_EOL;
-    $this->load->library('lib_request_scheduled');
 
     if (is_running() === FALSE)
     {
@@ -44,12 +45,11 @@ class Scheduled_messages extends CI_Controller
     }
   }
 
-  // cd ~/Sites/postmaster && php index.php task scheduled_messages campaign
-  // cd /srv/www/postmaster/current && php index.php task scheduled_messages campaign
+  // cd ~/Sites/postmaster && php index.php task scheduled campaign
+  // cd /srv/www/postmaster/current && php index.php task scheduled campaign
   function campaign($count = 999)
   {
     echo 'Start Campaign'.PHP_EOL;
-    $this->load->library('lib_request_scheduled');
 
     if (is_running() === FALSE)
     {

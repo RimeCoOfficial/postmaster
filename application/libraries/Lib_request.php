@@ -56,7 +56,7 @@ class Lib_request
     foreach ($messages as $message)
     {
       echo '('.$message['request_id'].') Processing message: '.$message['message_id'].' '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
-
+      
       // has unsubscribed
       if ($message['unsubscribed'] == '1000-01-01 00:00:00')
       {
@@ -77,9 +77,12 @@ class Lib_request
       // mark processed
       $this->CI->model_request->mark_processed($message_processed_list);
 
-      // send message
-      $this->CI->load->model('model_archive');
-      $this->CI->model_archive->store($archive_list);
+      if (!empty($archive_list))
+      {
+        // send message
+        $this->CI->load->model('model_archive');
+        $this->CI->model_archive->store($archive_list);
+      }
 
       $this->CI->db->trans_complete();
     }
