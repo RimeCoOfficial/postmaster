@@ -17,48 +17,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // // $config['mod_mime_fix']     = TRUE;   // DEFAULT
 
 $config = [
-  'inline-image' => [
-    'title' => 'Inline image',
-    'description' => '',
+  'attachments' => [
+    'title' => 'Pictures inline or Files',
     'icon' => 'glyphicon-picture',
 
     'upload'  => [
-      'upload_path'       => '/tmp/ci/upload',
-      'allowed_types'     => 'gif|jpg|png',
+      'upload_path'       => '/tmp/',
+      'allowed_types'     => 'gif|jpg|png|md|txt',
       'max_filename'      => 200, // type_name / [YYYYmmdd-HHmmss_filename.ext]
       'file_ext_tolower'  => TRUE,
       'overwrite'         => TRUE,
       'max_size'          => '2048',
       'max_width'         => '750',
       'max_height'        => '750',
+      // 'encrypt_name'      => FALSE, 
+      'remove_spaces'     => TRUE,
     ]
   ],
-  'file' => [
-    'title' => 'File',
-    'description' => '',
-    'icon' => 'glyphicon-file',
-
-    'upload'  => [
-      'upload_path'       => '/tmp/ci/upload',
-      'allowed_types'     => 'md|txt',
-      'max_filename'      => 200,
-      'file_ext_tolower'  => TRUE,
-      'overwrite'         => TRUE,
-      'max_size'          => '2048',
-    ],
-  ],
-  'import' => [
+  'contacts' => [
     'title' => 'Import contact list',
-    'description' => '',
     'icon' => 'glyphicon-list',
 
     'upload'  => [
-      'upload_path'       => '/tmp/ci/upload',
+      'upload_path'       => '/tmp/',
       'allowed_types'     => 'csv|xls',
       'max_filename'      => 200,
       'file_ext_tolower'  => TRUE,
       'overwrite'         => TRUE,
       'max_size'          => '2048',
+      // 'encrypt_name'      => FALSE, 
+      'remove_spaces'     => TRUE,
     ],
-  ]
+  ],
+  // 'archive', 'log'
 ];

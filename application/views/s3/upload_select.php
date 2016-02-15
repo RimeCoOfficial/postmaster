@@ -15,19 +15,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div> -->
         <div class="media-body">
           <h4 class="media-heading">
-            <span class="text-capitalize"><?php echo $config['title']; ?></span>
-            <!-- <small><?php echo $config['description']; ?></small> -->
-
-            <span class="pull-right">
-              <span class="label label-default"><?php echo $prefix; ?></span>
-            </span>
+            <?php echo $config['title']; ?>
+            <small class="text-uppercase"><?php echo $prefix; ?></small>
           </h4>
-          <dl class="dl-horizontal">
+          <ul class="list-inline">
             <?php foreach ($config['upload'] as $key => $value): ?>
-            <dt><?php echo str_replace('_', ' ', $key); ?></dt>
-            <dd><?php echo $value; ?></dd>
+              <li class="text-muted">
+                <strong><?php echo $key; ?></strong>
+                <samp><?php print_r($value); ?></samp>
+              </li>
             <?php endforeach; ?>
-          </dl>
+          </ul>
         </div>
       </div>
 
