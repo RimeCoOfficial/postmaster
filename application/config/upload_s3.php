@@ -22,7 +22,7 @@ $config = [
     'icon' => 'glyphicon-picture',
 
     'upload'  => [
-      'upload_path'       => '/tmp/',
+      'upload_path'       => '/tmp/ci/',
       'allowed_types'     => 'gif|jpg|png|md|txt',
       'max_filename'      => 200, // type_name / [YYYYmmdd-HHmmss_filename.ext]
       'file_ext_tolower'  => TRUE,
@@ -39,7 +39,7 @@ $config = [
     'icon' => 'glyphicon-list',
 
     'upload'  => [
-      'upload_path'       => '/tmp/',
+      'upload_path'       => '/tmp/ci/',
       'allowed_types'     => 'csv|xls',
       'max_filename'      => 200,
       'file_ext_tolower'  => TRUE,

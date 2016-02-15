@@ -6,6 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $env_var_is_hidden = [
   'FOO'                   => FALSE,
   'CI_ENV'                => FALSE,
+  'ci_cache_dir'          => FALSE,
   'ci_base_url'           => FALSE,
   'ci_proxy_ips'          => FALSE,
   'db_hostname'           => FALSE,
