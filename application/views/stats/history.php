@@ -4,11 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <h1>Request History</h1>
 
-<?php if (empty($message_archive_list)): ?>
+<?php if (empty($archive_list)): ?>
   <p class="lead text-muted">No message found</p>
 <?php else: ?>
   <div class="list-group">
-    <?php foreach ($message_archive_list as $request): ?>
+    <?php foreach ($archive_list as $request): ?>
       <div class="list-group-item">
         <div class="media">
           <div class="media-body">

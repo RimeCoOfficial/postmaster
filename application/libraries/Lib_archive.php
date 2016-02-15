@@ -4,14 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use GuzzleHttp\Promise;
 use Aws\Exception\AwsException;
 
-class Lib_message_archive
+class Lib_archive
 {
   private $error = array();
   
   function __construct($options = array())
   {
     $this->CI =& get_instance();
-    $this->CI->load->model('model_message_archive');
+    $this->CI->load->model('model_archive');
   }
   
   /**
@@ -27,18 +27,18 @@ class Lib_message_archive
 
   function get($request_id, $web_version_key)
   {
-    return $this->CI->model_message_archive->get($request_id, $web_version_key);
+    return $this->CI->model_archive->get($request_id, $web_version_key);
   }
 
   function get_list($type = NULL)
   {
     $count = 100;
-    return $this->CI->model_message_archive->get_list($type, $count);
+    return $this->CI->model_archive->get_list($type, $count);
   }
 
   function get_unsent($count)
   {
-    return $this->CI->model_message_archive->get_unsent($count);
+    return $this->CI->model_archive->get_unsent($count);
   }
 
   function send($messages)
@@ -89,7 +89,7 @@ class Lib_message_archive
       }
 
       // mark sent
-      if(!empty($message_sent_list)) $this->CI->model_message_archive->mark_sent($message_sent_list);
+      if(!empty($message_sent_list)) $this->CI->model_archive->mark_sent($message_sent_list);
     }
 
     if (!empty($error_msg))
@@ -103,7 +103,7 @@ class Lib_message_archive
 
   function get_info($request_id, $unsubscribe_key)
   {
-    $recipient_info = $this->CI->model_message_archive->get_info($request_id, $unsubscribe_key);
+    $recipient_info = $this->CI->model_archive->get_info($request_id, $unsubscribe_key);
 
     if (!empty($recipient_info)) return $recipient_info;
     else

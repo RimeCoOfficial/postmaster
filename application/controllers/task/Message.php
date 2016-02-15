@@ -21,23 +21,23 @@ class Message extends CI_Controller
   function process($count = 999)
   {
     echo 'Start process'.PHP_EOL;
-    $this->load->library('lib_message_request');
+    $this->load->library('lib_request');
 
     if (is_running() === FALSE)
     {
       lock();
       while (TRUE)
       {
-        $messages = $this->lib_message_request->get_to_process($count);
+        $messages = $this->lib_request->get_to_process($count);
         if (empty($messages))
         {
           echo 'No task found!'.PHP_EOL;
           break;
         }
 
-        if (is_null($this->lib_message_request->process($messages)))
+        if (is_null($this->lib_request->process($messages)))
         {
-          show_error($this->lib_message_request->get_error_message());
+          show_error($this->lib_request->get_error_message());
         }
       }
       unlock();
@@ -49,23 +49,23 @@ class Message extends CI_Controller
   function send($count = 999)
   {
     echo 'Start send'.PHP_EOL;
-    $this->load->library('lib_message_archive');
+    $this->load->library('lib_archive');
 
     if (is_running() === FALSE)
     {
       lock();
       while (TRUE)
       {
-        $messages = $this->lib_message_archive->get_unsent($count);
+        $messages = $this->lib_archive->get_unsent($count);
         if (empty($messages))
         {
           echo 'No task found!'.PHP_EOL;
           break;
         }
 
-        if (is_null($this->lib_message_archive->send($messages)))
+        if (is_null($this->lib_archive->send($messages)))
         {
-          show_error($this->lib_message_archive->get_error_message());
+          show_error($this->lib_archive->get_error_message());
         }
       }
       unlock();

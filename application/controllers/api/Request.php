@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Transactional extends CI_Controller
+class Request extends CI_Controller
 {
   function __construct()
   {
@@ -16,14 +16,14 @@ class Transactional extends CI_Controller
   }
 
   /*
-curl -X POST -i http://localhost/postmaster/api/transactional/send/1 -d \
+curl -X POST -i http://localhost/postmaster/api/request/transactional/1 -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
-&list_recipient_id=visitor-ecfa94f6c8ef80696ba6ee7d2434cbf7@suvozit.com\
+&recipient_id=visitor-ecfa94f6c8ef80696ba6ee7d2434cbf7@suvozit.com\
 &to_name=Shubhajit Saha\
 &to_email=www@suvozit.com\
 &pseudo_vars[foo]=bar"
   */
-  public function send($message_id = 0)
+  public function transactional($message_id = 0)
   {
     if (is_null($result = $this->lib_message->add_request($message_id)))
     {

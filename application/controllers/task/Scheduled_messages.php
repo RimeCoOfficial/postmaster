@@ -21,23 +21,23 @@ class Scheduled_messages extends CI_Controller
   function autoresponder($count = 999)
   {
     echo 'Start Autoresponder'.PHP_EOL;
-    $this->load->library('lib_message_scheduled');
+    $this->load->library('lib_request_scheduled');
 
     if (is_running() === FALSE)
     {
       lock();
       while (TRUE)
       {
-        $list_recipients = $this->lib_message_scheduled->get_autoresponder_recipients($count);
-        if (empty($list_recipients))
+        $recipients = $this->lib_request_scheduled->get_autoresponder_recipients($count);
+        if (empty($recipients))
         {
           echo 'No task found!'.PHP_EOL;
           break;
         }
 
-        if (is_null($this->lib_message_scheduled->process_autoresponders($list_recipients)))
+        if (is_null($this->lib_request_scheduled->process_autoresponders($recipients)))
         {
-          show_error($this->lib_message_scheduled->get_error_message());
+          show_error($this->lib_request_scheduled->get_error_message());
         }
       }
       unlock();
@@ -49,23 +49,23 @@ class Scheduled_messages extends CI_Controller
   function campaign($count = 999)
   {
     echo 'Start Campaign'.PHP_EOL;
-    $this->load->library('lib_message_scheduled');
+    $this->load->library('lib_request_scheduled');
 
     if (is_running() === FALSE)
     {
       lock();
       while (TRUE)
       {
-        $campaign_message = $this->lib_message_scheduled->get_latest_campaign();        
+        $campaign_message = $this->lib_request_scheduled->get_latest_campaign();        
         if (empty($campaign_message))
         {
           echo 'No task found!'.PHP_EOL;
           break;
         }
 
-        if (is_null($this->lib_message_scheduled->process_campaign($campaign_message, $count)))
+        if (is_null($this->lib_request_scheduled->process_campaign($campaign_message, $count)))
         {
-          show_error($this->lib_message_scheduled->get_error_message());
+          show_error($this->lib_request_scheduled->get_error_message());
         }
       }
       unlock();

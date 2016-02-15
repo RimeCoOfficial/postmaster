@@ -86,8 +86,8 @@ class Lib_feedback
             $feedback['sub_type'] = !empty($feedback['sub_type']) ? character_limiter($feedback['sub_type'], 64) : NULL;
             $feedback['recieved'] = date('Y-m-d H:i:s', strtotime($ses_message['mail']['timestamp']));
 
-            $this->CI->load->model('model_message_archive');
-            $this->CI->model_message_archive->set_ses_message($ses_message['mail']['messageId'], $feedback['to_email'], $sns_message['Message']);
+            $this->CI->load->model('model_archive');
+            $this->CI->model_archive->set_ses_message($ses_message['mail']['messageId'], $feedback['to_email'], $sns_message['Message']);
 
             $this->CI->model_feedback->store($feedback['to_email']);
             $this->CI->model_feedback->update($feedback);

@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Lib_message_scheduled
+class Lib_request_scheduled
 {
   private $error = array();
   
   function __construct($options = array())
   {
     $this->CI =& get_instance();
-    $this->CI->load->model('model_message_scheduled');
+    $this->CI->load->model('model_request_scheduled');
   }
   
   /**
@@ -24,51 +24,51 @@ class Lib_message_scheduled
 
   function get_autoresponder_recipients($count)
   {
-    return $this->CI->model_message_scheduled->get_autoresponder_recipients($count);
+    return $this->CI->model_request_scheduled->get_autoresponder_recipients($count);
   }
 
-  function process_autoresponders($list_recipients)
+  function process_autoresponders($recipients)
   {
     $request_list = [];
     
-    foreach ($list_recipients as $list_recipient)
+    foreach ($recipients as $recipient)
     {
       $pseudo_vars = [];
-      if (!is_null($list_recipient['metadata_json']))
+      if (!is_null($recipient['metadata_json']))
       {
-        $metadata = json_decode($list_recipient['metadata_json'], TRUE);
+        $metadata = json_decode($recipient['metadata_json'], TRUE);
         if (!empty($metadata)) foreach ($metadata as $key => $value) $pseudo_vars['_metadata_'.$key] = $value;
       }
 
       $pseudo_vars_json = !empty($pseudo_vars) ? json_encode($pseudo_vars) : NULL;
 
-      echo "\t".'Autoresponder #'.$list_recipient['message_id'].', to_email: '.$list_recipient['to_email'].PHP_EOL;
+      echo "\t".'Autoresponder #'.$recipient['message_id'].', to_email: '.$recipient['to_email'].PHP_EOL;
 
       // message_id, auto_recipient_id, to_name, to_email, pseudo_vars_json
       $request_list[] = [
-        'message_id' => $list_recipient['message_id'],
-        'auto_recipient_id' => $list_recipient['auto_recipient_id'],
-        'to_name' => $list_recipient['to_name'],
-        'to_email' => $list_recipient['to_email'],
+        'message_id' => $recipient['message_id'],
+        'auto_recipient_id' => $recipient['auto_recipient_id'],
+        'to_name' => $recipient['to_name'],
+        'to_email' => $recipient['to_email'],
         'pseudo_vars_json' => $pseudo_vars_json,
       ];
     }
 
-    $this->CI->load->model('model_message_request');
-    $this->CI->model_message_request->add_batch($request_list);
+    $this->CI->load->model('model_request');
+    $this->CI->model_request->add_batch($request_list);
     return TRUE;
   }
 
   function get_latest_campaign()
   {
-    return $this->CI->model_message_scheduled->get_latest_campaign();
+    return $this->CI->model_request_scheduled->get_latest_campaign();
   }
 
   function process_campaign($message, $count)
   {
-    $list_recipients = $this->CI->model_message_scheduled->get_campaign_recipients($message['message_id'], $message['list_id'], $count);
+    $recipients = $this->CI->model_request_scheduled->get_campaign_recipients($message['message_id'], $message['list_id'], $count);
 
-    if (empty($list_recipients))
+    if (empty($recipients))
     {
       echo "\t".'Campaign #'.$message['message_id'].', archiving...'.PHP_EOL;
 
@@ -79,31 +79,31 @@ class Lib_message_scheduled
 
     $request_list = [];
     
-    foreach ($list_recipients as $list_recipient)
+    foreach ($recipients as $recipient)
     {
       $pseudo_vars = [];
-      if (!is_null($list_recipient['metadata_json']))
+      if (!is_null($recipient['metadata_json']))
       {
-        $metadata = json_decode($list_recipient['metadata_json'], TRUE);
+        $metadata = json_decode($recipient['metadata_json'], TRUE);
         if (!empty($metadata)) foreach ($metadata as $key => $value) $pseudo_vars['_metadata_'.$key] = $value;
       }
 
       $pseudo_vars_json = !empty($pseudo_vars) ? json_encode($pseudo_vars) : NULL;
 
-      echo "\t".'Campaign #'.$message['message_id'].', to_email: '.$list_recipient['to_email'].PHP_EOL;
+      echo "\t".'Campaign #'.$message['message_id'].', to_email: '.$recipient['to_email'].PHP_EOL;
 
       // message_id, auto_recipient_id, to_name, to_email, pseudo_vars_json
       $request_list[] = [
         'message_id' => $message['message_id'],
-        'auto_recipient_id' => $list_recipient['auto_recipient_id'],
-        'to_name' => $list_recipient['to_name'],
-        'to_email' => $list_recipient['to_email'],
+        'auto_recipient_id' => $recipient['auto_recipient_id'],
+        'to_name' => $recipient['to_name'],
+        'to_email' => $recipient['to_email'],
         'pseudo_vars_json' => $pseudo_vars_json,
       ];
     }
 
-    $this->CI->load->model('model_message_request');
-    $this->CI->model_message_request->add_batch($request_list);
+    $this->CI->load->model('model_request');
+    $this->CI->model_request->add_batch($request_list);
     return TRUE;
   }
 }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Lib_list_recipient
+class Lib_recipient
 {
   private $error = array();
   
@@ -9,7 +9,7 @@ class Lib_list_recipient
   {
     $this->CI =& get_instance();
 
-    $this->CI->load->model('model_list_recipient');
+    $this->CI->load->model('model_recipient');
   }
   
   /**
@@ -23,25 +23,25 @@ class Lib_list_recipient
     return $this->error;
   }
 
-  function get($list_id, $list_recipient_id, $to_name = '', $to_email = '')
+  function get($list_id, $recipient_id, $to_name = '', $to_email = '')
   {
-    $list_recipient = $this->CI->model_list_recipient->get($list_id, $list_recipient_id);
+    $recipient = $this->CI->model_recipient->get($list_id, $recipient_id);
 
-    if (empty($list_recipient))
+    if (empty($recipient))
     {
-      $this->CI->model_list_recipient->create($list_id, $list_recipient_id, $to_name, $to_email);
-      $list_recipient = $this->CI->model_list_recipient->get($list_id, $list_recipient_id);
+      $this->CI->model_recipient->create($list_id, $recipient_id, $to_name, $to_email);
+      $recipient = $this->CI->model_recipient->get($list_id, $recipient_id);
     }
     
-    return $list_recipient;
+    return $recipient;
   }
 
   function api_verify_input($list_id, $timestamp_param = NULL)
   {
-    $list_recipient_id = $this->CI->input->post('list_recipient_id');
-    if (empty($list_recipient_id))
+    $recipient_id = $this->CI->input->post('recipient_id');
+    if (empty($recipient_id))
     {
-      $this->error = ['status' => 401, 'message' => 'missing parameter list_recipient_id'];
+      $this->error = ['status' => 401, 'message' => 'missing parameter recipient_id'];
       return NULL;
     }
 
@@ -64,7 +64,7 @@ class Lib_list_recipient
     $timestamp = date('Y-m-d H:i:s', $timestamp);
 
     $result = [
-      'list_recipient_id' => $list_recipient_id,
+      'recipient_id' => $recipient_id,
       'to_name' => $to_name,
       'to_email' => $to_email,
       'to_name' => $to_name,
@@ -78,8 +78,8 @@ class Lib_list_recipient
       $result['metadata_json'] = $metadata_json;
     }
 
-    $list_recipient = $this->get($list_id, $list_recipient_id, $to_name, $to_email);
-    $result['list_recipient'] = $list_recipient;
+    $recipient = $this->get($list_id, $recipient_id, $to_name, $to_email);
+    $result['recipient'] = $recipient;
 
     return $result;
   }
@@ -91,7 +91,7 @@ class Lib_list_recipient
       return NULL;
     }
 
-    $this->CI->model_list_recipient->subscribe($result['list_recipient']['auto_recipient_id'], $result['subscribed']);
+    $this->CI->model_recipient->subscribe($result['recipient']['auto_recipient_id'], $result['subscribed']);
     return ['200' => 'OK'];
   }
 
@@ -102,7 +102,7 @@ class Lib_list_recipient
       return NULL;
     }
 
-    $this->CI->model_list_recipient->unsubscribe($result['list_recipient']['auto_recipient_id'], $result['unsubscribed']);
+    $this->CI->model_recipient->unsubscribe($result['recipient']['auto_recipient_id'], $result['unsubscribed']);
     return ['200' => 'OK'];
   }
 
@@ -116,19 +116,19 @@ class Lib_list_recipient
     $update_other_lists = $this->CI->input->post('update_other_lists');
     if ($update_other_lists == TRUE)
     {
-      $update_list_recipient_id = $result['list_recipient']['list_recipient_id'];
+      $update_recipient_id = $result['recipient']['recipient_id'];
     }
-    else $update_list_recipient_id = FALSE;
+    else $update_recipient_id = FALSE;
 
-    $this->CI->model_list_recipient->update_metadata($result['list_recipient']['auto_recipient_id'], $result['metadata_json'], $result['metadata_updated'], $update_list_recipient_id);
+    $this->CI->model_recipient->update_metadata($result['recipient']['auto_recipient_id'], $result['metadata_json'], $result['metadata_updated'], $update_recipient_id);
     return ['200' => 'OK'];
   }
 
-  function unsubscribe_all($list_recipient_id, $unsubscribed = '9999-12-31 23:59:59')
+  function unsubscribe_all($recipient_id, $unsubscribed = '9999-12-31 23:59:59')
   {
     // $unsubscribed = date('Y-m-d H:i:s');
 
-    $this->CI->model_list_recipient->unsubscribe_all($list_recipient_id, $unsubscribed);
+    $this->CI->model_recipient->unsubscribe_all($recipient_id, $unsubscribed);
     return ['200' => 'OK'];
   }
 }
