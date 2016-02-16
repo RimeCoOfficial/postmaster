@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <?php
             ?>
-            <samp class="small text-muted-2">
+            <samp class="small">
               <?php
               if (!empty($request['sent']) AND $request['sent'] != '1000-01-01 00:00:00')
               {
@@ -63,16 +63,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             {
               $collapse_id = 'collapseExample'.$request['request_id'];
               ?>
-              <a class="" role="button" data-toggle="collapse" href="#<?php echo $collapse_id; ?>" aria-expanded="false" aria-controls="collapseExample">
-                †
-              </a>
-              <div class="collapse" id="<?php echo $collapse_id; ?>">
-                <?php
-                $data = json_decode($request['ses_feedback_json']);
-                $json_string = json_encode($data, JSON_PRETTY_PRINT);
-                ?>
-                <pre><?php echo $json_string; ?></pre>
-              </div>
+              <a role="button" data-toggle="collapse" href="#<?php echo $collapse_id; ?>" aria-expanded="false" aria-controls="collapseExample">&hellip;</a>
               <?php
             }
             ?>
@@ -100,6 +91,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <a class="text-<?php echo ($request['sent'] == '1000-01-01 00:00:00' ? 'info' : 'success'); ?>" href="<?php echo base_url('open/message/'.$request['request_id'].'/'.$request['web_version_key']); ?>" target="_blank">
                 <span class="media-object glyphicon glyphicon-<?php echo ($request['sent'] == '1000-01-01 00:00:00' ? 'hourglass' : 'ok-sign'); ?>"></span>
               </a>
+            </div>
+            <?php
+          }
+          ?>
+
+          <?php
+          if (!empty($collapse_id))
+          {
+            ?>
+            <div class="collapse" id="<?php echo $collapse_id; ?>">
+              <?php
+              $data = json_decode($request['ses_feedback_json']);
+              $json_string = json_encode($data, JSON_PRETTY_PRINT);
+              ?>
+              <pre class="text-wrap" style="margin-top: 5px;"><?php echo $json_string; ?></pre>
             </div>
             <?php
           }
