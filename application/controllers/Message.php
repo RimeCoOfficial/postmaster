@@ -142,10 +142,10 @@ class Message extends CI_Controller
 
     $this->load->library('form_validation');
 
-    if ($message['type'] == 'transactional')
-    {
-      $this->form_validation->set_data(['php_datetime_str' => 'now']);
-    }
+    // if ($message['type'] == 'transactional')
+    // {
+    //   $this->form_validation->set_data(['php_datetime_str' => 'now']);
+    // }
     
     if ($this->form_validation->run('message/publish'))
     {
@@ -183,14 +183,22 @@ class Message extends CI_Controller
 
   public function unarchive($message_id = NULL)
   {
-    if (is_null($this->lib_message->unarchive($message_id)))
+    if (is_null($type = $this->lib_message->unarchive($message_id)))
     {
       show_error($this->lib_message->get_error_message());
     }
     else
     {
-      $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<abbr class="text-nowrap pull-right" title="Patience Young Grasshopper&#13;http://emojicons.com/e/patience-young-grasshopper">&nbsp; ┬─┬﻿ ノ( ゜-゜ノ)</abbr>
+      if ($type == 'transactional')
+      {
+        $this->session->set_flashdata('alert', ['type' => 'success', 'message' => '<abbr class="text-nowrap pull-right" title="Magical Table Flipping&#13;http://emojicons.com/e/magical-table-flipping">&nbsp; (/¯◡ ‿ ◡)/¯ ~ ┻━┻</abbr>
+          <strong>Hooah</strong> /ˈhuːɑː/ Message was successfuly published']);
+      }
+      else
+      {
+        $this->session->set_flashdata('alert', ['type' => 'info', 'message' => '<abbr class="text-nowrap pull-right" title="Patience Young Grasshopper&#13;http://emojicons.com/e/patience-young-grasshopper">&nbsp; ┬─┬﻿ ノ( ゜-゜ノ)</abbr>
         <strong>Archive</strong> Message has been revert to draft']);
+      }
       redirect('message/view/'.$message_id);
     }
   }

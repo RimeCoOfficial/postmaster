@@ -60,6 +60,11 @@ class Lib_message
     $this->CI->model_message->update(
       $message['message_id'], $subject, $body_html_input, $result['body_html'], $result['body_text'], $reply_to_name, $reply_to_email, $list_unsubscribe
     );
+
+    if ($message['type'] == 'transactional' AND is_null($message['published_tds']))
+    {
+      $this->CI->model_message->update_publish($message['message_id'], 0);
+    }
     
     return $message;
   }
@@ -69,10 +74,15 @@ class Lib_message
     $date_from_str = '1000-01-01 00:00:00';
     $date_from = strtotime($date_from_str);
 
+    if ($message['type'] == 'transactional')
+    {
+      $this->error = ['message' => 'transactional messages are automatically set to zero when updated or unarchived'];
+      return NULL;
+    }
+
     switch ($message['type'])
     {
       case 'autoresponder':
-      case 'transactional':
         $date_to = strtotime($php_datetime_str, $date_from);
         break;
       
@@ -131,8 +141,8 @@ class Lib_message
       return NULL;
     }
 
-    $this->CI->model_message->unarchive($message_id);
-    return TRUE;
+    $this->CI->model_message->unarchive($message_id, $message['type']);
+    return $message['type'];
   }
 
   function _process_html($message, $body_html_input)

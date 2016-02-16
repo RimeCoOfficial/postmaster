@@ -74,10 +74,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 if ($message['archived'] == '1000-01-01 00:00:00')
 {
-  ?>
-  
-  <?php
-  if (is_null($message['published_tds']))
+  if (is_null($message['published_tds']) AND $message['type'] != 'transactional')
   {
     // drafting
     ?>
@@ -105,56 +102,62 @@ if ($message['archived'] == '1000-01-01 00:00:00')
   }
   else
   {
-    // published
-    ?>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Published</h3>
-      </div>
-      <div class="panel-body">
-        <div class="media">
-          <div class="media-body">
-            <p>
-              The message has been published 
-              <abbr title="published_tds=<?php echo $message['published_tds'] ?>">
-                <?php
-                switch ($message['type']) {
-                  case 'autoresponder':
-                    echo '+';
-                    if      ($message['published_tds'] / (60*24*30) > 1) echo $message['published_tds'] / (60*24*30).' months';
-                    else if ($message['published_tds'] / (60*24)    > 1) echo $message['published_tds'] / (60*24)   .' days';
-                    else if ($message['published_tds'] / (60)       > 1) echo $message['published_tds'] / (60)      .' minutes';
-                    else                                                 echo $message['published_tds']             .' seconds';
-                    break;
-                  
-                  case 'campaign':
-                    $date_from_str = '1000-01-01 00:00:00';
-                    $date_from = strtotime($date_from_str);
+    // published = re-publish
+    if ($message['type'] != 'transactional')
+    {
+      ?>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Published</h3>
+        </div>
+        <div class="panel-body">
+          <div class="media">
+            <div class="media-body">
+              <p>
+                The message has been published 
+                <abbr title="published_tds=<?php echo $message['published_tds'] ?>">
+                  <?php
+                  switch ($message['type']) {
+                    case 'autoresponder':
+                      echo '+';
+                      if      ($message['published_tds'] / (60*24*30) > 1) echo $message['published_tds'] / (60*24*30).' months';
+                      else if ($message['published_tds'] / (60*24)    > 1) echo $message['published_tds'] / (60*24)   .' days';
+                      else if ($message['published_tds'] / (60)       > 1) echo $message['published_tds'] / (60)      .' minutes';
+                      else                                                 echo $message['published_tds']             .' seconds';
+                      break;
+                    
+                    case 'campaign':
+                      $date_from_str = '1000-01-01 00:00:00';
+                      $date_from = strtotime($date_from_str);
 
-                    echo date('Y-m-d H:i:s', $message['published_tds'] + $date_from). ' GMT';
-                    break;
+                      echo date('Y-m-d H:i:s', $message['published_tds'] + $date_from). ' GMT';
+                      break;
 
-                  case 'transactional':
-                    echo 'at zero (0)';
-                    break;
-                }
-                ?>
-              </abbr>
-            </p>
-          </div>
-          <div class="media-right">
-            <a href="<?php echo base_url('message/publish/'.$message['message_id']); ?>" class="btn btn-default">
-              <div class="media-object">
-                <span class="glyphicon glyphicon-floppy-saved"></span>
-                <span class="sr-only">Publish</span>
-              </div>
-            </a>
+                    case 'transactional':
+                      echo 'at zero (0)';
+                      break;
+                  }
+                  ?>
+                </abbr>
+              </p>
+            </div>
+            <div class="media-right">
+              <a href="<?php echo base_url('message/publish/'.$message['message_id']); ?>" class="btn btn-default">
+                <div class="media-object">
+                  <span class="glyphicon glyphicon-floppy-saved"></span>
+                  <span class="sr-only">Publish</span>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <?php
+    }
 
-    <?php if ($message['type'] != 'campaign'): ?>
+    if (!is_null($message['published_tds']) AND $message['type'] != 'campaign')
+    {
+      ?>
       <div class="panel panel-warning">
         <div class="panel-heading">
           <h3 class="panel-title">Warning Zone</h3>
@@ -180,9 +183,8 @@ if ($message['archived'] == '1000-01-01 00:00:00')
           </div>
         </div>
       </div>
-    <?php endif; ?>
-
-    <?php
+      <?php
+    }
   }
 }
 else

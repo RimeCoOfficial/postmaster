@@ -35,7 +35,7 @@ else
   ?>
   <table class="table table-striped table-condensed">
     <caption>Recent recipients</caption>
-    <thead> <tr> <th>#</th> <th>Address</th> <th><samp>metadata_updated, unsubscribed, list_id</samp></th> </tr> </thead>
+    <thead> <tr> <th>#</th> <th>Address</th> <th><samp>metadata_updated, unsubscribed</samp></th> </tr> </thead>
     <tbody>
       <?php
       foreach ($recipient_list as $recipient)
@@ -53,8 +53,7 @@ else
           <td>
             <samp>
               <?php echo $recipient['metadata_updated']; ?>,
-              <?php echo ($recipient['unsubscribed'] == '1000-01-01 00:00:00') ? 'N' : 'Y'; ?>,
-              <?php echo $recipient['list_id']; ?>
+              <?php echo ($recipient['unsubscribed'] == '1000-01-01 00:00:00') ? 'N' : 'Y'; ?>
             </samp>
           </td>
         </tr>

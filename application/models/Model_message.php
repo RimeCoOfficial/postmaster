@@ -83,14 +83,17 @@ class Model_message extends CI_Model
     
     $this->db->where('message_id', $message_id);
     $this->db->where('archived', '1000-01-01 00:00:00');
+    $this->db->where('published_tds IS NOT NULL');
 
     $this->db->update($this->message_table);
   }
 
-  function unarchive($message_id)
+  function unarchive($message_id, $type)
   {
     $this->db->set('archived', '1000-01-01 00:00:00');
-    $this->db->set('published_tds', NULL);
+
+    if ($type == 'transactional') $this->db->set('published_tds', 0);
+    else                          $this->db->set('published_tds', NULL);
     
     $this->db->where('message_id', $message_id);
     $this->db->where('archived !=', '1000-01-01 00:00:00');
