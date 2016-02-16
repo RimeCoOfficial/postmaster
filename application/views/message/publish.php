@@ -24,7 +24,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="row">
   <div class="col-sm-5">
-    <button type="submit" class="btn btn-primary btn-block">Publish</button>
+    <button type="submit" class="btn btn-primary btn-block">
+      <span class="glyphicon glyphicon-floppy-saved"></span>
+      <span class="sr-only">Publish</span>
+    </button>
   </div>
 </div>
 
@@ -34,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="panel panel-default">
   <div class="panel-heading">Supported Date and Time Formats</div>
-  <table class="table table-striped">
+  <table class="table table-condensed">
     <thead>
       <tr><th>Formats</th> <th>Examples</th></tr>
     </thead>

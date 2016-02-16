@@ -94,6 +94,7 @@ if ($message['archived'] == '1000-01-01 00:00:00')
             <a href="<?php echo base_url('message/publish/'.$message['message_id']); ?>" class="btn btn-primary">
               <div class="media-object">
                 <span class="glyphicon glyphicon-floppy-saved"></span>
+                <span class="sr-only">Publish</span>
               </div>
             </a>
           </div>
@@ -145,6 +146,7 @@ if ($message['archived'] == '1000-01-01 00:00:00')
             <a href="<?php echo base_url('message/publish/'.$message['message_id']); ?>" class="btn btn-default">
               <div class="media-object">
                 <span class="glyphicon glyphicon-floppy-saved"></span>
+                <span class="sr-only">Publish</span>
               </div>
             </a>
           </div>
@@ -171,6 +173,7 @@ if ($message['archived'] == '1000-01-01 00:00:00')
               <a href="<?php echo base_url('message/archive/'.$message['message_id']); ?>" class="btn btn-warning">
                 <div class="media-object">
                   <span class="glyphicon glyphicon-floppy-remove"></span>
+                  <span class="sr-only">Archive</span>
                 </div>
               </a>
             </div>
@@ -209,6 +212,7 @@ else
             <a href="<?php echo base_url('message/unarchive/'.$message['message_id']); ?>" class="btn btn-default">
               <div class="media-object">
                 <span class="glyphicon glyphicon-floppy-open"></span>
+                <span class="sr-only">Unarchive</span>
               </div>
             </a>
           </div>

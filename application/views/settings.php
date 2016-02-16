@@ -44,8 +44,6 @@ $env_var_is_hidden = [
 <br>
 <br> -->
 
-<p class="lead"><abbr title="😘😘😘"><?php echo $this->input->ip_address(); ?></abbr></p>
-
 <div class="panel panel-default">
   <div class="panel-heading">
     <h1 class="panel-title">Environment Vars</h1>
@@ -89,3 +87,8 @@ $env_var_is_hidden = [
   </table>
 </div>
 
+<p class="lead">
+  👍
+  <abbr title="You are awesome... 😘😘😘"><?php echo $this->input->ip_address(); ?></abbr>
+  <?php echo $this->input->user_agent(); ?>
+</p>

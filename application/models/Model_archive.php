@@ -38,6 +38,8 @@ class Model_archive extends CI_Model
     $this->db->select($this->request_table.'.to_name');
     $this->db->select($this->request_table.'.to_email');
     $this->db->select($this->request_table.'.created');
+    $this->db->select($this->request_table.'.processed');
+    $this->db->select($this->request_table.'.processed_error');
     $this->db->select($this->message_table.'.message_id');
     $this->db->select($this->message_table.'.list_id');
     $this->db->select($this->list_unsubscribe_table.'.type');

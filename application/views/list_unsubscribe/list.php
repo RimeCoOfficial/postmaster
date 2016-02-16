@@ -25,10 +25,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="list-group-item">
         <div class="media">
           <div class="media-body">
-            <h5 class="media-heading">
-              <?php echo anchor('list-unsubscribe/recipients/'.$list['list_id'], $list['list']); ?>
-              <small>#<?php echo $list['list_id']; ?></small>
-            </h5>
+            <div class="media-heading">
+              <span class="lead">
+                <span class="text-muted"><?php echo $list['list_id']; ?></span>
+                <?php echo anchor('list-unsubscribe/recipients/'.$list['list_id'], $list['list']); ?>
+              </span>
+            </div>
           </div>
 
           <div class="media-right">
@@ -39,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <!-- </a> -->
           </div>
           
-          <div class="media-right small">
+          <div class="media-right">
             <a href="<?php echo base_url('message/create/'.$list['list_id']); ?>">
               <span class="media-object glyphicon glyphicon-plus"></span>
             </a>

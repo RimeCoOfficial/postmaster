@@ -17,54 +17,55 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               if (empty($request['web_version_key']))
               {
                 ?>
-                <samp class="small">Processing request [<?php echo $request['request_id']; ?>]</samp>
+                <samp class="small">[<?php echo $request['request_id']; ?>] Processing request</samp>
                 <?php
               }
-              else
-              {
-                // $request['ses_feedback_json'] = json_encode(['value' => 'value']);
-
-                if (!empty($request['ses_feedback_json']))
-                {
-                  $collapse_id = 'collapseExample'.$request['request_id'];
-                  ?>
-                  <a class="" role="button" data-toggle="collapse" href="#<?php echo $collapse_id; ?>" aria-expanded="false" aria-controls="collapseExample">
-                    <?php echo $request['subject']; ?>
-                  </a>
-                  <?php
-                }
-                else echo $request['subject'];
-              }
+              else echo $request['subject'];
               ?>
+
+              <small class="text-muted">
+                #<?php echo $request['message_id']; ?>
+                
+                <?php echo $request['list']; ?>
+
+                <strong>
+                  <?php echo $request['to_email']; ?>
+                </strong>
+              </small>
             </h5>
 
-            <small>
-              #<?php echo $request['message_id']; ?>
-              
-              <span class="text-uppercase">
-                <a href="<?php echo base_url('stats/history?filter=list_id:'.$request['list_id']); ?>" class="text-muted"><?php echo $request['list']; ?></a>
-              </span>
 
-              <strong>
-                <a href="<?php echo base_url('stats/history?filter=to_email:'.urlencode($request['to_email'])); ?>" class="text-muted"><?php echo $request['to_email']; ?></a>
-              </strong>
-
+            <?php
+            ?>
+            <samp class="small text-muted-2">
               <?php
-              if (empty($request['web_version_key']))
+              if (!empty($request['sent']) AND $request['sent'] != '1000-01-01 00:00:00')
               {
-                echo 'requested '.date('M d, Y h:i A', strtotime($request['created']));
+                echo date('M d, Y h:i A', strtotime($request['sent'])).' GMT: Sent ';
               }
-              else
+              elseif (!empty($request['processed_error']))
               {
-                echo 'sent '.date('M d, Y h:i A', strtotime($request['sent']));
+                echo date('M d, Y h:i A', strtotime($request['processed'])).' GMT '.'Failed: '.$request['processed_error'];
+              }
+              elseif (!empty($request['processed']) AND $request['processed'] != '1000-01-01 00:00:00')
+              {
+                echo date('M d, Y h:i A', strtotime($request['processed'])).' GMT '.'Processed';
+              }
+              else // if (!empty($request['created']))
+              {
+                echo date('M d, Y h:i A', strtotime($request['created'])).' GMT '.'Requested ';
               }
               ?>
-            </small>
+            </samp>
 
             <?php
             if (!empty($request['ses_feedback_json']))
             {
+              $collapse_id = 'collapseExample'.$request['request_id'];
               ?>
+              <a class="" role="button" data-toggle="collapse" href="#<?php echo $collapse_id; ?>" aria-expanded="false" aria-controls="collapseExample">
+                †
+              </a>
               <div class="collapse" id="<?php echo $collapse_id; ?>">
                 <?php
                 $data = json_decode($request['ses_feedback_json']);
@@ -78,11 +79,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
 
           <div class="media-right">
-            <a href="<?php echo base_url('stats/history?filter=list_type:'.$request['type']); ?>">
-              <span class="media-object label label-default">
-                <?php echo $request['type']; ?>
-              </span>
-            </a>
+            <span class="media-object label label-default">
+              <?php echo $request['type']; ?>
+            </span>
           </div>
 
           <?php
