@@ -14,6 +14,6 @@ application/logs/*
 *.sublime-workspace
 composer.lock
 
-opsworks/*
-opsworks/index.html
-opsworks/.htaccess
+!opsworks/*
+!opsworks/index.html
+!opsworks/.htaccess
