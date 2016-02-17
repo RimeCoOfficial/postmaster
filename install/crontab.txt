@@ -1,0 +1,9 @@
+* * * * * cd ~/Sites/postmaster && php index.php task process_notification queue bounces
+* * * * * cd ~/Sites/postmaster && php index.php task process_notification queue complaints
+* * * * * cd ~/Sites/postmaster && php index.php task process_notification queue deliveries
+
+* * * * * cd ~/Sites/postmaster && php index.php task message process
+* * * * * cd ~/Sites/postmaster && php index.php task message send
+* * * * * cd ~/Sites/postmaster && php index.php task message archive
+* * * * * cd ~/Sites/postmaster && php index.php task scheduled autoresponder
+* * * * * cd ~/Sites/postmaster && php index.php task scheduled campaign
