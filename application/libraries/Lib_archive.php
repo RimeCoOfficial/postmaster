@@ -67,7 +67,9 @@ class Lib_archive
       $results = Promise\unwrap($promises);
     } catch (AwsException $e) {
       // handle the error.
-      $error_msg = 'getAwsRequestId: '.$e->getAwsRequestId().', getAwsErrorType:'.$e->getAwsErrorType().', getAwsErrorCode:'.$e->getAwsErrorCode();
+      $error_msg = 'getAwsRequestId: '.$e->getAwsRequestId().', getAwsErrorType:'.$e->getAwsErrorType().', getAwsErrorCode:'.$e->getAwsErrorCode()."\n\n";
+      $error_msg .= $e->getMessage()."\n";
+      $error_msg .= $e->getTraceAsString();
     }
 
     if (!empty($results))
