@@ -154,6 +154,13 @@ CREATE TABLE IF NOT EXISTS archive (
   list_unsubscribe        text                          DEFAULT NULL,
   priority                tinyint unsigned              DEFAULT 0,
   sent                    datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  -- @todo: s3/archive
+  -- s3/archive/request_id-web_version_key.html|txt|json
+  -- s3/archive/campaign-list_id-message_id.html|text
+  -- .html body_html
+  -- .text body_text
+  -- .json ses_feedback_json
+  archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   ses_message_id          varchar(256)                  DEFAULT NULL,
   ses_feedback_json       text                          DEFAULT NULL, -- @todo: store it to s3 and thrash later
   PRIMARY KEY (request_id),

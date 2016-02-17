@@ -40,26 +40,26 @@ class Lib_archive
     return $this->CI->model_archive->get_unsent($count);
   }
 
-  function send($messages)
+  function send($requests)
   {
     // 1. send emails async
     $this->CI->load->library('composer/lib_aws');
     $ses_client = $this->CI->lib_aws->get_ses();
     $promises = [];
 
-    foreach ($messages as $message)
+    foreach ($requests as $request)
     {
-      echo '('.$message['request_id'].') Sending message: '.$message['subject'].', to: '.$message['to_email'].PHP_EOL;
+      echo '('.$request['request_id'].') Sending message: '.$request['subject'].', to: '.$request['to_email'].PHP_EOL;
 
-      // @debug: send to *@mail.rime.co
-      // $message['to_email'] = 'user-'.md5($message['to_email']).'@mail.rime.co';
+      // @debug: send to *@users.noreply.rime.co
+      // $request['to_email'] = 'user-'.md5($request['to_email']).'@users.noreply.rime.co';
       
-      $raw_message = ses_raw_email($message);
+      $raw_message = ses_raw_email($request);
       // var_dump($raw_message); die();
 
       $email = ['RawMessage' => array('Data' => $raw_message)];
 
-      $promises[ $message['request_id'] ] = $ses_client->sendRawEmailAsync($email);
+      $promises[ $request['request_id'] ] = $ses_client->sendRawEmailAsync($email);
     }
 
     // Wait on both promises to complete and return the results.
