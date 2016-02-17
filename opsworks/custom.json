@@ -63,6 +63,11 @@
         "name"    : "message send",
         "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
         "command" : "cd /srv/www/postmaster/current && php index.php task message send"
+      },
+      {
+        "name"    : "message archive",
+        "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
+        "command" : "cd /srv/www/postmaster/current && php index.php task message archive"
       }
     ]
   }

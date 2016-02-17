@@ -147,11 +147,12 @@ class Lib_request
 
   private function _parse($archive, $message)
   {
-    $web_version_link = 'open/message/';
-    $unsubscribe_link = 'open/unsubscribe?';
+    // $web_version_link = base_url('open/message/');
+    $web_version_link = 'https://s3.amazonaws.com/'.getenv('aws_s3_bucket').'/requests';
+    $unsubscribe_link = base_url('open/unsubscribe?');
 
     $list_unsubscribe_url = getenv('app_unsubscribe_uri');
-    if (empty($list_unsubscribe_url)) $list_unsubscribe_url = base_url($unsubscribe_link);
+    if (empty($list_unsubscribe_url)) $list_unsubscribe_url = $unsubscribe_link;
     else $list_unsubscribe_url = getenv('app_base_url').$list_unsubscribe_url;
 
     $list_unsubscribe_url .= 'request_id='.$archive['request_id'].'&unsubscribe_key='.$archive['unsubscribe_key'];
@@ -165,7 +166,7 @@ class Lib_request
       '_to_name' => $message['to_name'],
       '_reply_to_email' => $message['reply_to_email'],
       '_reply_to_name' => $message['reply_to_name'],
-      '_web_version_link' => base_url($web_version_link.$archive['request_id'].'/'.$archive['web_version_key']),
+      '_web_version_link' => $web_version_link.'/'.$archive['request_id'].'-'.$archive['web_version_key'].'.html',
       '_unsubscribe_link' => $list_unsubscribe_url,
       '_current_day' => date('l'),
       '_current_day_number' => date('N'),

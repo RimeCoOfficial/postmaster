@@ -2,6 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Aws\S3\S3Client;
+use GuzzleHttp\Promise;
+use Aws\Exception\AwsException;
 
 class Lib_s3_object
 {
@@ -70,5 +72,47 @@ class Lib_s3_object
 
     $s3_object_url = $result['ObjectURL'];
     return $s3_object_url;
+  }
+
+  function upload_async($objects = [])
+  {
+    if (empty($objects))
+    {
+      $this->error = ['message' => 'object array is empty'];
+      return NULL;
+    }
+
+    $promises = [];
+    foreach ($objects as $id => $object) {
+      // $key = 'data.txt', $body = 'Hello!'
+      // Executing an operation asynchronously returns a Promise object.
+      $promises[ $id ] = $this->s3_client->putObjectAsync([
+        'Bucket'      => $this->bucket,
+        'Key'         => $object['key'],
+        'Body'        => $object['body'],
+        'ContentType' => $object['content-type'],
+      ]);
+    }
+
+    // Wait for the operation to complete to get the Result object.
+    try {
+      $results = Promise\unwrap($promises);
+    } catch (AwsException $e) {
+      // handle the error.
+      $message = 'getAwsRequestId: '.$e->getAwsRequestId().', getAwsErrorType:'.$e->getAwsErrorType().', getAwsErrorCode:'.$e->getAwsErrorCode()."\n\n";
+      $message .= $e->getMessage()."\n";
+      $message .= $e->getTraceAsString();
+
+      $this->error = ['message' => $error_msg];
+    }
+
+    // if (!empty($this->error)) echo $error_msg['message']; else var_dump($results); die();
+
+    $response = [];
+    foreach ($results as $id => $result) {
+      if (!empty($result['ObjectURL'])) $response[ $id ] = $result['ObjectURL'];
+    }
+
+    return $response;
   }
 }

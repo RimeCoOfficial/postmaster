@@ -62,7 +62,7 @@ class Lib_archive
       $promises[ $request['request_id'] ] = $ses_client->sendRawEmailAsync($email);
     }
 
-    // Wait on both promises to complete and return the results.
+    // Wait on promises to complete and return the results.
     try {
       $results = Promise\unwrap($promises);
     } catch (AwsException $e) {
@@ -90,7 +90,7 @@ class Lib_archive
       }
 
       // mark sent
-      if(!empty($message_sent_list)) $this->CI->model_archive->mark_sent($message_sent_list);
+      if(!empty($message_sent_list)) $this->CI->model_archive->update_batch($message_sent_list);
     }
 
     if (!empty($error_msg))
@@ -111,5 +111,67 @@ class Lib_archive
       $this->error = ['status' => 401, 'message' => 'invalid details ;('];
       return NULL;
     }
+  }
+
+  function get_unarchive($count)
+  {
+    return $this->CI->model_archive->get_unarchive($count);
+  }
+
+  function archive($requests)
+  {
+    // 1. send emails async
+    $this->CI->load->library('lib_s3_object');
+    $objects = [];
+
+    foreach ($requests as $request)
+    {
+      echo '('.$request['request_id'].') Archiving request: '.$request['subject'].PHP_EOL;
+      
+      $objects[ $request['request_id'].'-html' ] = [
+        'key' => 'requests/'.$request['request_id'].'-'.$request['web_version_key'].'.html',
+        'body' => $request['body_html'],
+        'content-type' => 'text/html',
+      ];
+
+      $objects[ $request['request_id'].'-text' ] = [
+        'key' => 'requests/'.$request['request_id'].'-'.$request['web_version_key'].'.txt',
+        'body' => $request['body_text'],
+        'content-type' => 'text/plain',
+      ];
+    }
+
+    if (is_null($results = $this->CI->lib_s3_object->upload_async($objects)))
+    {
+      $this->error = $this->CI->lib_s3_object->get_error_message();
+      return NULL;
+    }
+
+    if (!empty($results))
+    {
+      $message_archived_list = [];
+      foreach ($requests as $request)
+      {
+        $request_id = $request['request_id'];
+
+        if (!empty($results[ $request_id.'-html' ]) AND !empty($results[ $request_id.'-text' ]))
+        {
+          echo '('.$request_id.') Archived: '.$results[ $request_id.'-html' ]['key'].PHP_EOL;
+
+          $message_archived_list[] = [
+            'request_id' => $request_id,
+            'archived' => date('Y-m-d H:i:s'),
+            'body_html' => 's3://'.$objects[ $request_id.'-html' ]['key'],
+            'body_text' => 's3://'.$objects[ $request_id.'-text' ]['key'],
+          ];
+        }
+      }
+
+      if (!empty($message_archived_list)) $this->CI->model_archive->update_batch($message_archived_list);
+    }
+
+    $this->error = $this->CI->lib_s3_object->get_error_message();
+    if (!empty($this->error)) return NULL;
+    else                      return TRUE;
   }
 }

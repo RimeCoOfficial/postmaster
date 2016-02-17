@@ -73,7 +73,7 @@ class Model_archive extends CI_Model
     return $query->result_array();
   }
 
-  function mark_sent($message_list)
+  function update_batch($message_list)
   {
     $this->db->update_batch($this->archive_table, $message_list, 'request_id');
   }
@@ -107,5 +107,18 @@ class Model_archive extends CI_Model
 
     $this->db->update($this->archive_table);
     return $this->db->affected_rows() > 0;
+  }
+
+  function get_unarchive($count)
+  {
+    $this->db->limit($count);
+    
+    $this->db->order_by('request_id', 'ASC');
+
+    $this->db->where('sent >', '1000-01-01 00:00:00');
+    $this->db->where('archived', '1000-01-01 00:00:00');
+
+    $query = $this->db->get($this->archive_table);
+    return $query->result_array();
   }
 }
