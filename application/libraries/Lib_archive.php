@@ -96,8 +96,7 @@ class Lib_archive
       $this->error = ['message' => $error_msg];
       return NULL;
     }
-
-    return TRUE;
+    else return TRUE;
   }
 
   function get_info($request_id, $unsubscribe_key)
