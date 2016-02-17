@@ -89,6 +89,8 @@ $env_var_is_hidden = [
 
 <p class="lead">
   👍
-  <abbr title="You are awesome... 😘😘😘"><?php echo $this->input->ip_address(); ?></abbr>
+  <abbr title="You are awesome... 😘😘😘" data-toggle="tooltip" data-placement="top">
+    <?php echo $this->input->ip_address(); ?>
+  </abbr>
   <?php echo $this->input->user_agent(); ?>
 </p>

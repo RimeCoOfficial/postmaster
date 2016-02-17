@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
       <div class="modal-footer text-danger">
         <strong>Don't spam:</strong>
-        Test mail won't be logged or checked against list-unsubcription
+        Test mail won't be logged or checked against list-unsubcribe or bounces
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       </div>
     </div>

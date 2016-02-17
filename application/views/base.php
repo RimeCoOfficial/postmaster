@@ -115,11 +115,11 @@ PHP version <?php echo phpversion(); ?>
 
             <p class="small">
               <a href="https://GitHub.com/RimeOfficial/postmaster">
-                <img class="img-responsive pull-left" src="<?php echo asset_url('images/GitHub-Mark-20px.png'); ?>" width="20px">
+                <img class="img-responsive pull-left" src="<?php echo asset_url('images/Octicons-mark-github.svg'); ?>" width="20px">
               </a>
 
               <a href="http://pages.rime.co/postmaster">
-                <img class="img-responsive pull-right" src="<?php echo asset_url('images/license-apache2.svg'); ?>">
+                <img class="img-responsive pull-right" src="<?php echo asset_url('images/license-apache-v2.svg'); ?>">
               </a>
             </p>
 
@@ -134,5 +134,15 @@ PHP version <?php echo phpversion(); ?>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+      // Opt-in functionality
+      // For performance reasons, the Tooltip and Popover data-apis are opt-in, meaning you must initialize them yourself.
+
+      // One way to initialize all tooltips on a page would be to select them by their data-toggle attribute:
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
   </body>
 </html>

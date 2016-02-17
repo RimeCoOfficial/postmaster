@@ -25,11 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="list-group-item">
         <div class="media">
           <div class="media-body">
-            <div class="media-heading">
-              <span class="lead">
-                <span class="text-muted"><?php echo $list['list_id']; ?></span>
-                <?php echo anchor('list-unsubscribe/recipients/'.$list['list_id'], $list['list']); ?>
-              </span>
+            <div class="media-heading lead">
+              <span class="text-muted"><?php echo $list['list_id']; ?></span>
+              <?php echo anchor('list-unsubscribe/recipients/'.$list['list_id'], $list['list']); ?>
             </div>
           </div>
 
