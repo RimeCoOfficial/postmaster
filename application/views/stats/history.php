@@ -16,8 +16,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <?php
               if (empty($request['web_version_key']))
               {
+                
                 ?>
-                <samp class="small">[<?php echo $request['request_id']; ?>] Processing request</samp>
+                <samp class="text-muted"><strong>
+                  <?php
+                    $text = !empty($request['processed_error']) ? $request['processed_error'] : 'Request accepted';
+                    echo '['.$request['request_id'].'] '.$text;
+                  ?>
+                </strong></samp>
                 <?php
               }
               else echo $request['subject'];
@@ -41,19 +47,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <?php
               if (!empty($request['sent']) AND $request['sent'] != '1000-01-01 00:00:00')
               {
-                echo date('M d, Y h:i A', strtotime($request['sent'])).' GMT: Sent ';
+                echo date('M d, Y h:i A', strtotime($request['sent'])).' GMT';
               }
               elseif (!empty($request['processed_error']))
               {
-                echo date('M d, Y h:i A', strtotime($request['processed'])).' GMT '.'Failed: '.$request['processed_error'];
+                echo date('M d, Y h:i A', strtotime($request['processed'])).' GMT '.'Processing failed!';
               }
               elseif (!empty($request['processed']) AND $request['processed'] != '1000-01-01 00:00:00')
               {
-                echo date('M d, Y h:i A', strtotime($request['processed'])).' GMT '.'Processed';
+                echo date('M d, Y h:i A', strtotime($request['processed'])).' GMT '.'Sending mail...';
               }
               else // if (!empty($request['created']))
               {
-                echo date('M d, Y h:i A', strtotime($request['created'])).' GMT '.'Requested ';
+                echo date('M d, Y h:i A', strtotime($request['created'])).' GMT '.'Processing request...';
               }
               ?>
             </samp>
