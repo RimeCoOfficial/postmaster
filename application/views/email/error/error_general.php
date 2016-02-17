@@ -15,6 +15,7 @@ if (!empty($ip))
   ?>
   <code>
     <strong>IP:</strong> <?php echo $ip; ?>
+    <strong>whoami:</strong> <?php echo $whoami; ?>
   </code>
   <br>
   <?php

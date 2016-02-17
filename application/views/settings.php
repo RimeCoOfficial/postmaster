@@ -44,6 +44,8 @@ $env_var_is_hidden = [
 <br>
 <br> -->
 
+<p class="lead"><?php echo exec('whoami'); ?></p>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h1 class="panel-title">Environment Vars</h1>

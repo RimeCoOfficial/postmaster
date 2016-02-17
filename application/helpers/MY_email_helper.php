@@ -57,6 +57,7 @@ function report_error($subject, $template, $data)
     if (is_cli()) $subject = 'CLI: '.$subject;
 
     $data['ip']       = is_cli() ? NULL : $CI->input->ip_address();
+    $data['whoami']   = exec('whoami');
 
     $data['request']  = $_REQUEST;
     $data['server']   = is_cli() ? NULL : $CI->input->server(NULL);
