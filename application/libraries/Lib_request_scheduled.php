@@ -73,7 +73,7 @@ class Lib_request_scheduled
       echo "\t".'Campaign #'.$message['message_id'].', archiving...'.PHP_EOL;
 
       $this->CI->load->library('lib_message');
-      $this->CI->lib_message->archive($message['message_id'], $message['type']);
+      $this->CI->model_message->archive($message['message_id']);
       return TRUE;
     }
 
