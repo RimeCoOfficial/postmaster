@@ -70,11 +70,41 @@ class Lib_request_scheduled
 
     if (empty($recipients))
     {
-      echo "\t".'Campaign #'.$message['message_id'].', archiving...'.PHP_EOL;
+      $message_id = $message['message_id'];
+      echo "\t".'Campaign #'.$message_id.', archiving...'.PHP_EOL;
 
-      $this->CI->load->library('lib_message');
-      $this->CI->model_message->archive($message['message_id']);
-      return TRUE;
+      $objects = [];
+      $objects[ $message_id.'-html' ] = [
+        'key' => 'messages/'.$message_id.'-'.md5($message_id).md5($message['created']).'.html',
+        'body' => $message['body_html'],
+        'content-type' => 'text/html',
+      ];
+
+      $objects[ $message_id.'-text' ] = [
+        'key' => 'messages/'.$message_id.'-'.md5($message_id).md5($message['created']).'.txt',
+        'body' => $message['body_text'],
+        'content-type' => 'text/plain',
+      ];
+
+      $this->CI->load->library('lib_s3_object');
+      if (is_null($results = $this->CI->lib_s3_object->upload_async($objects)))
+      {
+        $this->error = $this->CI->lib_s3_object->get_error_message();
+        return NULL;
+      }
+
+      if (!empty($results))
+      {
+        if (!empty($results[ $message_id.'-html' ]) AND !empty($results[ $message_id.'-text' ]))
+        {
+          $this->CI->load->library('lib_message');
+          $this->CI->model_message->archive($message_id);
+        }
+      }
+
+      $this->error = $this->CI->lib_s3_object->get_error_message();
+      if (!empty($this->error)) return NULL;
+      else                      return TRUE;
     }
 
     $request_list = [];

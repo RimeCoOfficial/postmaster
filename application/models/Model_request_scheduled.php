@@ -42,6 +42,9 @@ class Model_request_scheduled extends CI_Model
 
     $this->db->select($this->message_table.'.message_id');
     $this->db->select($this->message_table.'.list_id');
+    $this->db->select($this->message_table.'.created');
+    $this->db->select($this->message_table.'.body_html');
+    $this->db->select($this->message_table.'.body_text');
     $this->db->select($this->list_unsubscribe_table.'.list');
     $this->db->select($this->list_unsubscribe_table.'.type');
 

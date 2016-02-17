@@ -28,7 +28,7 @@ putenv('aws_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 // Asia Pacific (Tokyo)         ap-northeast-1
 // South America (Sao Paulo)    sa-east-1
 putenv('aws_region=xx-xxxx-1');
-putenv('aws_s3_bucket=bucket');
+putenv('aws_s3_bucket=bucket.localhost');
 
 putenv('ga=UA-XXXXXXXXX-1');
 
