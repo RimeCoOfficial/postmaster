@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div> -->
         <div class="media-body">
           <h4 class="media-heading">
-            <?php echo $config['title']; ?>
+            <?php echo $config['title']; ?><br>
             <small class="text-uppercase"><?php echo $prefix; ?></small>
           </h4>
           <ul class="list-inline">

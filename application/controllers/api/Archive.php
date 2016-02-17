@@ -17,7 +17,7 @@ class Archive extends CI_Controller
 
   /*
 # Request
-curl -X POST -i http://localhost/postmaster/api/archive/get-info/[request_id]/[unsubscribe_key] -d \
+curl -X POST -i http://localhost/postmaster/api/v1/archive/get-info/[request_id]/[unsubscribe_key] -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
 # Respoonse

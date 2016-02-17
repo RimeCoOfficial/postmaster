@@ -16,7 +16,7 @@ class Recipient extends CI_Controller
   }
 
   /*
-curl -X POST -i http://localhost/postmaster/api/recipient/subscribe/1 -d \
+curl -X POST -i http://localhost/postmaster/api/v1/recipient/subscribe/1 -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
 &recipient_id=visitor-ecfa94f6c8ef80696ba6ee7d2434cbf7@suvozit.com\
 &to_name=Shubhajit Saha\
@@ -34,7 +34,7 @@ curl -X POST -i http://localhost/postmaster/api/recipient/subscribe/1 -d \
   }
 
   /*
-curl -X POST -i http://localhost/postmaster/api/recipient/unsubscribe/1 -d \
+curl -X POST -i http://localhost/postmaster/api/v1/recipient/unsubscribe/1 -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
 &recipient_id=visitor-ecfa94f6c8ef80696ba6ee7d2434cbf7@suvozit.com\
 &to_name=Shubhajit Saha\
@@ -52,7 +52,7 @@ curl -X POST -i http://localhost/postmaster/api/recipient/unsubscribe/1 -d \
   }
 
   /*
-curl -X POST -i http://localhost/postmaster/api/recipient/update-metadata/1 -d \
+curl -X POST -i http://localhost/postmaster/api/v1/recipient/update-metadata/1 -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
 &recipient_id=visitor-ecfa94f6c8ef80696ba6ee7d2434cbf7@suvozit.com\
 &to_name=Shubhajit Saha\

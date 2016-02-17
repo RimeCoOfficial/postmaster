@@ -16,7 +16,7 @@ class Request extends CI_Controller
   }
 
   /*
-curl -X POST -i http://localhost/postmaster/api/request/transactional/1 -d \
+curl -X POST -i http://localhost/postmaster/api/v1/request/transactional/1 -d \
 "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\
 &recipient_id=visitor-ecfa94f6c8ef80696ba6ee7d2434cbf7@suvozit.com\
 &to_name=Shubhajit Saha\
