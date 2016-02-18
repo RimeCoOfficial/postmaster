@@ -28,7 +28,7 @@ class Lib_send_email
 
     $result = $ses_client->sendEmail([
       'Destination' => [
-        'ToAddresses' => [$to_email],
+        'ToAddresses' => [app_name().' <'.$to_email.'>'],
       ],
       'Message' => [
         'Body' => [
