@@ -13,7 +13,7 @@ function job_name()
 
 function _check_lock_file()
 {
-  $lock_file = getenv('ci_cache_dir').'/cron.lock';
+  $lock_file = getenv('ci_cache_dir').'/cron_lock.json';
 
   if (!file_exists($lock_file))
   {
