@@ -28,7 +28,7 @@ class Lib_send_email
 
     $result = $ses_client->sendEmail([
       'Destination' => [
-        'ToAddresses' => [app_name().' <'.$to_email.'>'],
+        'ToAddresses' => [$to_email],
       ],
       'Message' => [
         'Body' => [
@@ -37,7 +37,7 @@ class Lib_send_email
         ],
         'Subject' => ['Data' => $subject],
       ],
-      'Source' => getenv('email_source'),
+      'Source' => app_name().' <'.getenv('email_source').'>',
     ]);
 
     return $result['MessageId'];

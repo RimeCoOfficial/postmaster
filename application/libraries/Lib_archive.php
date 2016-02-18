@@ -156,7 +156,7 @@ class Lib_archive
 
         if (!empty($results[ $request_id.'-html' ]) AND !empty($results[ $request_id.'-text' ]))
         {
-          echo '('.$request_id.') Archived: '.$results[ $request_id.'-html' ]['key'].PHP_EOL;
+          echo '('.$request_id.') Archived: '.$objects[ $request_id.'-html' ]['key'].PHP_EOL;
 
           $message_archived_list[] = [
             'request_id' => $request_id,
