@@ -24,9 +24,9 @@ class Process_notification extends CI_Controller
   // complaint@simulator.amazonses.com
   // suppressionlist@simulator.amazonses.com
 
-  // cd ~/Sites/postmaster && php index.php task process_notification queue bounces
-  // cd /srv/www/postmaster/current && php index.php task process_notification queue bounces
-  function queue($type = 'bounces') //  type = bounces, complaints, deliveries
+  // cd ~/Sites/postmaster && php index.php task process_notification ses
+  // cd /srv/www/postmaster/current && php index.php task process_notification ses
+  function ses() //  type = bounces, complaints, deliveries
   {
     echo 'Start Notification'.PHP_EOL;
     $this->load->library('lib_feedback');
@@ -36,7 +36,7 @@ class Process_notification extends CI_Controller
       lock();
       while (TRUE)
       {
-        if (is_null($this->lib_feedback->process_notification($type)))
+        if (is_null($this->lib_feedback->process_notification()))
         {
           show_error($this->lib_feedback->get_error_message());
         }

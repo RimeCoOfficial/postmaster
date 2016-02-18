@@ -28,29 +28,19 @@
     },
     "cron_jobs": [
       {
-        "name"    : "process_notification queue bounces",
+        "name"    : "process_notification ses",
         "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
-        "command" : "cd /srv/www/postmaster/current && php index.php task process_notification queue bounces"
+        "command" : "cd /srv/www/postmaster/current && php index.php task process_notification ses"
       },
-      {
-        "name"    : "process_notification queue complaints",
-        "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
-        "command" : "cd /srv/www/postmaster/current && php index.php task process_notification queue complaints"
-      },
-      {
-        "name"    : "process_notification queue deliveries",
-        "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
-        "command" : "cd /srv/www/postmaster/current && php index.php task process_notification queue deliveries"
-      },
-
+      
       {
         "name"    : "scheduled autoresponder",
-        "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
+        "minute"  : "*/15", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
         "command" : "cd /srv/www/postmaster/current && php index.php task scheduled autoresponder"
       },
       {
         "name"    : "scheduled campaign",
-        "minute"  : "*", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
+        "minute"  : "*/15", "hour" : "*", "day" : "*", "month" : "*", "weekday" : "*",
         "command" : "cd /srv/www/postmaster/current && php index.php task scheduled campaign"
       },
 

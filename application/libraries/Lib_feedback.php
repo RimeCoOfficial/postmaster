@@ -22,7 +22,7 @@ class Lib_feedback
     return $this->error;
   }
 
-  function process_notification($queue_type)
+  function process_notification()
   {
     $this->CI->load->library('composer/lib_aws');
     $sqs_client = $this->CI->lib_aws->get_sqs();
@@ -34,7 +34,7 @@ class Lib_feedback
     // https://sqs.us-west-2.amazonaws.com/012345678901/ses-bounces
     // https://sqs.us-west-2.amazonaws.com/012345678901/ses-complaints
     // https://sqs.us-west-2.amazonaws.com/012345678901/ses-deliveries
-    $queue_url = 'https://sqs.'.$config['region'].'.amazonaws.com/'.$config['account_id'].'/ses-'.$queue_type;
+    $queue_url = 'https://sqs.'.$config['region'].'.amazonaws.com/'.$config['account_id'].'/ses-notifications';
 
     $result = $sqs_client->receiveMessage(array(
       'QueueUrl' => $queue_url,
@@ -89,9 +89,9 @@ class Lib_feedback
             $this->CI->model_feedback->store($feedback['to_email']);
             $this->CI->model_feedback->update($feedback);
 
-            echo "\t".'Email address: '.$feedback['to_email'].', '.$feedback['type'].' ['.$feedback['sub_type'].']'.PHP_EOL;
+            echo "\t".'Email address: '.$feedback['to_email'].', ['.$feedback['type'].'] '.$feedback['sub_type'].PHP_EOL;
           }
-          else print_r($ses_message);
+          else print_r($ses_message).PHP_EOL;
         }
       }
 
