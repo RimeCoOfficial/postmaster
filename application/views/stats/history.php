@@ -63,16 +63,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               }
               ?>
             </samp>
-
-            <?php
-            if (!empty($request['ses_feedback_json']))
-            {
-              $collapse_id = 'collapseExample'.$request['request_id'];
-              ?>
-              <a role="button" data-toggle="collapse" href="#<?php echo $collapse_id; ?>" aria-expanded="false" aria-controls="collapseExample">&hellip;</a>
-              <?php
-            }
-            ?>
           </div>
 
           <div class="media-right">
@@ -97,21 +87,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <a class="text-<?php echo ($request['sent'] == '1000-01-01 00:00:00' ? 'info' : 'success'); ?>" href="<?php echo 'https://s3.amazonaws.com/'.getenv('aws_s3_bucket').'/requests/'.$request['request_id'].'-'.$request['web_version_key'].'.html'; ?>" target="_blank">
                 <span class="media-object glyphicon glyphicon-<?php echo ($request['sent'] == '1000-01-01 00:00:00' ? 'hourglass' : 'ok-sign'); ?>"></span>
               </a>
-            </div>
-            <?php
-          }
-          ?>
-
-          <?php
-          if (!empty($collapse_id))
-          {
-            ?>
-            <div class="collapse" id="<?php echo $collapse_id; ?>">
-              <?php
-              $data = json_decode($request['ses_feedback_json']);
-              $json_string = json_encode($data, JSON_PRETTY_PRINT);
-              ?>
-              <pre class="text-wrap" style="margin-top: 5px;"><?php echo $json_string; ?></pre>
             </div>
             <?php
           }

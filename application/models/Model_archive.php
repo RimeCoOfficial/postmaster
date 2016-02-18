@@ -34,7 +34,6 @@ class Model_archive extends CI_Model
     $this->db->select($this->archive_table.'.web_version_key');
     $this->db->select($this->archive_table.'.subject');
     $this->db->select($this->archive_table.'.sent');
-    $this->db->select($this->archive_table.'.ses_feedback_json');
     $this->db->select($this->request_table.'.to_name');
     $this->db->select($this->request_table.'.to_email');
     $this->db->select($this->request_table.'.created');
@@ -96,17 +95,6 @@ class Model_archive extends CI_Model
 
     $query = $this->db->get($this->archive_table);
     return $query->row_array();
-  }
-
-  function set_ses_message($ses_message_id, $to_email, $ses_feedback_json)
-  {
-    $this->db->where('ses_message_id', $ses_message_id);
-    $this->db->where('to_email', $to_email);
-
-    $this->db->set('ses_feedback_json', $ses_feedback_json);
-
-    $this->db->update($this->archive_table);
-    return $this->db->affected_rows() > 0;
   }
 
   function get_unarchive($count)

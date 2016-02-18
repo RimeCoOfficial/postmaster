@@ -31,6 +31,9 @@ CREATE TABLE IF NOT EXISTS feedback (
   type                    varchar(16)                   DEFAULT NULL, -- latest status: delivery, bounce, complaint
   sub_type                varchar(64)                   DEFAULT NULL,
   recieved                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
+  -- @todo: store it to s3
+  -- s3://recipients/md5(to_email).json
+  -- ses_feedback_json       text                          DEFAULT NULL,
   PRIMARY KEY (to_email)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
@@ -105,6 +108,8 @@ CREATE TABLE IF NOT EXISTS message (
   
   published_tds           bigint                        DEFAULT NULL, -- tds = Time Difference in Seconds. NULL = Draft
 
+  -- Campaign only
+  -- s3://messages/message_id-md5(list_id)md5(created).html|txt
   archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (message_id),
@@ -155,12 +160,8 @@ CREATE TABLE IF NOT EXISTS archive (
   priority                tinyint unsigned              DEFAULT 0,
   sent                    datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   ses_message_id          varchar(256)                  DEFAULT NULL,
-  ses_feedback_json       text                          DEFAULT NULL, -- @todo: store it to s3 and thrash later
-  -- s3/archive/request_id-web_version_key.html|txt|json
-  -- s3/archive/campaign-list_id-message_id.html|text
-  -- .html body_html
-  -- .text body_text
-  -- .json ses_feedback_json
+
+  -- s3://requests/request_id-web_version_key.html|txt
   archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   PRIMARY KEY (request_id),
   FOREIGN KEY (request_id) REFERENCES request(request_id) ON UPDATE CASCADE ON DELETE CASCADE
