@@ -75,13 +75,13 @@ class Lib_request_scheduled
 
       $objects = [];
       $objects[ $message_id.'-html' ] = [
-        'key' => 'messages/'.$message_id.'-'.md5($message_id).md5($message['created']).'.html',
+        'key' => 'messages/'.$message_id.'-'.md5($message['list_id']).md5($message['created']).'.html',
         'body' => $message['body_html'],
         'content-type' => 'text/html',
       ];
 
       $objects[ $message_id.'-text' ] = [
-        'key' => 'messages/'.$message_id.'-'.md5($message_id).md5($message['created']).'.txt',
+        'key' => 'messages/'.$message_id.'-'.md5($message['list_id']).md5($message['created']).'.txt',
         'body' => $message['body_text'],
         'content-type' => 'text/plain',
       ];
