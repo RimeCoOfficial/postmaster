@@ -33,11 +33,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <span class="glyphicon glyphicon-floppy-save"></span>
     </button>
   </div>
-  <div class="col-sm-7">
-    <p class="h6">
-      <a href="<?php echo base_url('message/view/'.$message['message_id'].'/html'); ?>" target="_blank">HTML <span class="glyphicon glyphicon-new-window"></span></a>
-    </p>
-  </div>
 </div>
 
 <?php echo form_close(); ?>
