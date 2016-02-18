@@ -10,7 +10,7 @@
         "db_hostname=mydbinstance.XXXXXXXXXXXX.us-east-1.rds.amazonaws.com",
         "db_username=awsuser",
         "db_password=mypassword",
-        "AWS_PHP_CACHE_DIR=/srv/www/postmaster/current/application/cache/aws",
+        "AWS_PHP_CACHE_DIR=/tmp",
         "aws_account_id=XXXXXXXXXXXX",
         "aws_access_key=XXXXXXXXXXXXXXXXXXXX",
         "aws_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",

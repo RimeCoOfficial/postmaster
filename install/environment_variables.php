@@ -13,7 +13,7 @@ putenv('db_username=root');
 putenv('db_password=root');
 
 // Debug keys
-putenv('AWS_PHP_CACHE_DIR=/Users/suvozit/Sites/postmaster/application/cache/aws');
+putenv('AWS_PHP_CACHE_DIR=/tmp');
 putenv('aws_account_id=111111111111');
 putenv('aws_access_key=XXXXXXXXXXXXXXXXXXXX');
 putenv('aws_secret_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
