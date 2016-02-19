@@ -8,13 +8,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </p>
 
 <?php
-if (empty($subscribe_uri))
+if (empty($subscribe_uri)) $subscribe_uri = base_url('open/subscribe/'.$list_unsubscribe['list_id']);
+else
 {
-  $subscribe_uri = base_url('open/subscribe').'?';
+  $subscribe_uri = getenv('app_base_url').'/'.$subscribe_uri;
+  $subscribe_uri .= 'list_id='.$list_unsubscribe['list_id'];
 }
-else $subscribe_uri = getenv('app_base_url').'/'.$subscribe_uri;
-
-$subscribe_uri .= 'list_id='.$list_unsubscribe['list_id'];
 ?>
 
 <a href="<?php echo $subscribe_uri; ?>" class="btn btn-default">

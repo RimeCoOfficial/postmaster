@@ -20,7 +20,7 @@ $date_picker_length         =    19; // 'YYYY-MM-DD HH:MM AM'
 
 $body_html_input_max_length = 99000;
 
-$reply_to_name_max_length   =    64;
+$full_name_max_length       =    64;
 
 $list_max_length            =    32;
 $message_type_options       = [
@@ -32,6 +32,15 @@ $message_type_options       = [
 $subject_max_length         =   128;
 
 $config = array(
+  'full_name' => array(
+    'label'         => 'Name',
+    'rules'         => 'max_length['.$full_name_max_length.']|trim',
+
+    'max_length'    => $full_name_max_length,
+    
+    // html5 tag - not supported in Internet Explorer 9 and earlier versions.
+    'placeholder'   => 'Enter full name, so we can recognize you.',
+  ),
   'email' => array(
     'label'         => 'Email',
     'rules'         => 'strtolower|max_length['.$email_max_length.']|valid_email|trim|required',
@@ -114,9 +123,9 @@ $config = array(
 
   'reply_to_name' => array(
     'label'         => 'Reply-to Name',
-    'rules'         => 'max_length['.$reply_to_name_max_length.']|trim',
+    'rules'         => 'max_length['.$full_name_max_length.']|trim',
 
-    'max_length'    => $reply_to_name_max_length,
+    'max_length'    => $full_name_max_length,
     
     // html5 tag - not supported in Internet Explorer 9 and earlier versions.
     'placeholder'   => 'Enter reply-to name, so people you know can recognize you.',

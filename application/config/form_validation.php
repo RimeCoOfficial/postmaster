@@ -18,6 +18,8 @@ $config = array(
   'message/edit'                => ['subject', 'reply_to_name', 'reply_to_email', 'body_html_input'],
   'message/publish'             => ['php_datetime_str'],
   'message/send_test'           => ['email'],
+
+  'open/subscribe'              => ['full_name', 'email'],
 );
 
 if ( ! function_exists('fill_element'))

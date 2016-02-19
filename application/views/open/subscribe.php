@@ -2,11 +2,22 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<h1>Subscribe</h1>
+<h1>Subscribe to <?php echo $list_unsubscribe['list']; ?></h1>
 <p class="lead">
-  You subscribed to <?php echo getenv('app_name') ?> emails.
+  From <?php echo getenv('app_name') ?>
 </p>
 
-<a href="<?php echo getenv('app_base_url'); ?>" class="btn btn-default">
-  Continue to <?php echo getenv('app_name') ?> Home
-</a>
+<?php echo form_open(uri_string()); ?>
+
+<?php $this->view('form/input', array('id' => 'full_name', 'value' => NULL)); ?>
+<?php $this->view('form/input', array('id' => 'email', 'value' => NULL)); ?>
+
+<div class="row">
+  <div class="col-sm-5">
+    <button type="submit" class="btn btn-primary btn-block">
+      Subscribe
+    </button>
+  </div>
+</div>
+
+<?php echo form_close(); ?>

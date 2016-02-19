@@ -60,8 +60,9 @@ class Model_recipient extends CI_Model
     return $this->db->affected_rows() > 0;
   }
 
-  function update_metadata($auto_recipient_id, $metadata_json, $metadata_updated, $update_recipient_id = FALSE)
+  function update_metadata($auto_recipient_id, $to_name, $metadata_json, $metadata_updated, $update_recipient_id = FALSE)
   {
+    $this->db->set('to_name', $to_name);
     $this->db->set('metadata_json', $metadata_json);
 
     if ($update_recipient_id)  $this->db->where('recipient_id', $update_recipient_id);
@@ -79,6 +80,17 @@ class Model_recipient extends CI_Model
 
     $this->db->where('recipient_id', $recipient_id);
     $this->db->where('unsubscribed <', $unsubscribed);
+
+    $this->db->update($this->recipient_table);
+    return $this->db->affected_rows() > 0;
+  }
+
+  function subscribe_all($recipient_id, $subscribed)
+  {
+    $this->db->set('unsubscribed', '1000-01-01 00:00:00');
+
+    $this->db->where('recipient_id', $recipient_id);
+    $this->db->where('unsubscribed <', $subscribed);
 
     $this->db->update($this->recipient_table);
     return $this->db->affected_rows() > 0;

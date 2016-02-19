@@ -72,7 +72,6 @@ class Lib_recipient
       'recipient_id' => $recipient_id,
       'to_name' => $to_name,
       'to_email' => $to_email,
-      'to_name' => $to_name,
       $timestamp_param => $timestamp,
     ];
 
@@ -125,15 +124,34 @@ class Lib_recipient
     }
     else $update_recipient_id = FALSE;
 
-    $this->CI->model_recipient->update_metadata($result['recipient']['auto_recipient_id'], $result['metadata_json'], $result['metadata_updated'], $update_recipient_id);
+    $this->CI->model_recipient->update_metadata($result['recipient']['auto_recipient_id'], $result['to_name'], $result['metadata_json'], $result['metadata_updated'], $update_recipient_id);
     return ['200' => 'OK'];
   }
 
-  function unsubscribe_all($recipient_id, $unsubscribed = '9999-12-31 23:59:59')
+  function unsubscribe_all($recipient_id) //, $unsubscribed = '9999-12-31 23:59:59')
   {
-    // $unsubscribed = date('Y-m-d H:i:s');
+    $unsubscribed = date('Y-m-d H:i:s');
 
     $this->CI->model_recipient->unsubscribe_all($recipient_id, $unsubscribed);
+    return ['200' => 'OK'];
+  }
+
+  function subscribe_all($list_id, $to_name, $to_email)
+  {
+    $recipient_id = 'auto-'.md5($to_email);
+    $subscribed = date('Y-m-d H:i:s');
+
+    $recipient_info = $this->CI->model_recipient->get($list_id, $recipient_id);
+    if (empty($recipient_info))
+    {
+      $this->CI->model_recipient->create($list_id, $recipient_id, $to_name, $to_email);
+    }
+    else
+    {
+      $this->CI->model_recipient->update_metadata($recipient_info['auto_recipient_id'], $to_name, NULL, $subscribed, $recipient_id);
+    }
+    
+    $this->CI->model_recipient->subscribe_all($recipient_id, $subscribed);
     return ['200' => 'OK'];
   }
 }
