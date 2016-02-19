@@ -149,11 +149,11 @@ class Lib_request
   {
     // $web_version_link = base_url('open/message/');
     $web_version_link = 'https://s3.amazonaws.com/'.getenv('aws_s3_bucket').'/requests';
-    $unsubscribe_link = base_url('open/unsubscribe?');
+    $unsubscribe_link = base_url('open/unsubscribe').'?';
 
     $list_unsubscribe_url = getenv('app_unsubscribe_uri');
     if (empty($list_unsubscribe_url)) $list_unsubscribe_url = $unsubscribe_link;
-    else $list_unsubscribe_url = getenv('app_base_url').$list_unsubscribe_url;
+    else $list_unsubscribe_url = getenv('app_base_url').'/'.$list_unsubscribe_url;
 
     $list_unsubscribe_url .= 'request_id='.$archive['request_id'].'&unsubscribe_key='.$archive['unsubscribe_key'];
     $list_unsubscribe_url = $message['list_unsubscribe'] ? $list_unsubscribe_url : NULL;

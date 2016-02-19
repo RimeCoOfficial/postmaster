@@ -1,7 +1,4 @@
-* * * * * cd ~/Sites/postmaster && php index.php task process_notification queue bounces
-* * * * * cd ~/Sites/postmaster && php index.php task process_notification queue complaints
-* * * * * cd ~/Sites/postmaster && php index.php task process_notification queue deliveries
-
+* * * * * cd ~/Sites/postmaster && php index.php task process_notification ses
 * * * * * cd ~/Sites/postmaster && php index.php task message process
 * * * * * cd ~/Sites/postmaster && php index.php task message send
 * * * * * cd ~/Sites/postmaster && php index.php task message archive

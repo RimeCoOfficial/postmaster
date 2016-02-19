@@ -23,7 +23,8 @@
         "api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         "app_name=Example",
         "app_base_url=http://localhost/example",
-        "app_unsubscribe_uri="
+        "app_unsubscribe_uri=",
+        "app_subscribe_uri="
       ]
     },
     "cron_jobs": [

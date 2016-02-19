@@ -28,6 +28,7 @@ $env_var_is_hidden = [
   'app_base_url'          => FALSE,
   'app_base_url'          => FALSE,
   'app_unsubscribe_uri'   => FALSE,
+  'app_subscribe_uri'     => FALSE,
 ];
 ?>
 

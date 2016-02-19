@@ -35,7 +35,7 @@ class Open extends CI_Controller
     $app_unsubscribe_uri = getenv('app_unsubscribe_uri');
     if ($app_unsubscribe_uri)
     {
-      redirect(getenv('app_base_url').$app_unsubscribe_uri.http_build_query($this->input->get()));
+      redirect(getenv('app_base_url').'/'.$app_unsubscribe_uri.http_build_query($this->input->get()));
     }
 
     $request_id = $this->input->get('request_id');
