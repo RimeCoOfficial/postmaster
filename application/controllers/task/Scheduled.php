@@ -20,7 +20,7 @@ class Scheduled extends CI_Controller
 
   // cd ~/Sites/postmaster && php index.php task scheduled autoresponder
   // cd /srv/www/postmaster/current && php index.php task scheduled autoresponder
-  function autoresponder($count = 999)
+  function autoresponder($count = 99)
   {
     echo 'Start Autoresponder'.PHP_EOL;
 
@@ -47,7 +47,7 @@ class Scheduled extends CI_Controller
 
   // cd ~/Sites/postmaster && php index.php task scheduled campaign
   // cd /srv/www/postmaster/current && php index.php task scheduled campaign
-  function campaign($count = 999)
+  function campaign($count = 99)
   {
     echo 'Start Campaign'.PHP_EOL;
 

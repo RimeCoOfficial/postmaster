@@ -7,10 +7,10 @@ class Send_email extends CI_Controller
   {
     parent::__construct();
 
-    // if (!is_cli())
-    // {
-    //   show_error('CLI request only.');
-    // }
+    if (!is_cli())
+    {
+      show_error('CLI request only.');
+    }
   }
 
   // cd ~/Sites/log-pixel && php index.php test send_email test
