@@ -32,6 +32,7 @@ if (!empty($backtrace))
         <b>Function:</b> <?php echo $b['function']; ?><br>
         <b>Args:</b> <span style="white-space: pre;"><?php print_r($b['args']); ?></span>
       </code>
+      <br>
     </li>
     <?php endforeach; ?>
   </ol>

@@ -15,7 +15,7 @@ if (!empty($ip))
 {
   ?>
   <code>
-    <strong>IP:</strong> <?php echo $ip; ?>
+    <strong>IP:</strong> <?php echo $ip; ?><br>
     <strong>whoami:</strong> <?php echo $whoami; ?>
   </code>
   <br>
@@ -26,8 +26,5 @@ if (!empty($ip))
 <?php $this->view('email/error/backtrace'); ?>
 
 <br>
-
-<p>
-  Happy debugging!<br>
-  &mdash; The <?php echo app_name(); ?>
-</p>
+Happy debugging!<br>
+&mdash; The <?php echo app_name(); ?>

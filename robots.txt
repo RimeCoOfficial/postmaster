@@ -1,8 +1,7 @@
 # http://www.robotstxt.org
 
-# http://stackoverflow.com/a/44711
-# Boaz answered The trick is using the $ to mark the end of URL.
-
 User-Agent: *
-Disallow: /*
-Allow: /$
+Disallow: *
+
+Allow: /
+Allow: /open

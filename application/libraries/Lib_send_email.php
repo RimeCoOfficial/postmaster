@@ -37,7 +37,7 @@ class Lib_send_email
         ],
         'Subject' => ['Data' => $subject],
       ],
-      'Source' => app_name().' <'.getenv('email_source').'>',
+      'Source' => app_name().' '.app_name().' <'.getenv('email_source').'>',
     ]);
 
     return $result['MessageId'];
