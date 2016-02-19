@@ -15,6 +15,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   Created <?php echo $list_unsubscribe['created']; ?> GMT
 
+  <?php
+  if ($list_unsubscribe['type'] == 'campaign')
+  {
+    ?>
+    <a href="<?php echo base_url('open/campaign/'.$list_unsubscribe['list_id'].'/'.md5($list_unsubscribe['created'])); ?>"
+      target="_blank">
+      <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
+    </a>
+    <?php
+  }
+  ?>
+
   <span class="pull-right">
     <span class="label label-default"><?php echo $list_unsubscribe['type']; ?></span>
   </span>

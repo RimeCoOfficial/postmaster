@@ -46,3 +46,9 @@ putenv('app_unsubscribe_uri=');
 //    /email/unsubscribe?
 //    /email/unsubscribe?archive_id=XXXX&unsubscribe_key=YYYY
 // putenv('app_unsubscribe_uri=/email/unsubscribe?');
+
+putenv('app_subscribe_uri=');
+// for custom subscribe page, apend a query to uri with a question mark (?)
+//    /email/subscribe?
+//    /email/subscribe?list_id=XXXX
+// putenv('app_subscribe_uri=/email/subscribe?');

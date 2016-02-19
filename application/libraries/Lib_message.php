@@ -299,4 +299,9 @@ class Lib_message
 
     return ['request_id' => $request_id];
   }
+
+  function get_campaign_archive($list_id, $count = 9)
+  {
+    return $this->CI->model_message->get_campaign_archive($list_id, $count);
+  }
 }

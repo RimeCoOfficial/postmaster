@@ -100,4 +100,20 @@ class Model_message extends CI_Model
 
     $this->db->update($this->message_table);
   }
+
+  function get_campaign_archive($list_id, $count)
+  {
+    $this->db->limit($count);
+
+    $this->db->select('subject, message_id, list_id, created, archived');
+
+    $this->db->order_by('published_tds', 'DESC');
+
+    $this->db->where('list_id', $list_id);
+    $this->db->where('published_tds IS NOT NULL');
+    $this->db->where('archived !=', '1000-01-01 00:00:00');
+
+    $query = $this->db->get($this->message_table);
+    return $query->result_array();
+  }
 }
