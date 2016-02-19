@@ -3,6 +3,10 @@
 # http://stackoverflow.com/a/44711
 # Boaz answered The trick is using the $ to mark the end of URL.
 
-User-Agent: *
-Disallow: /*
-Allow: /$
+User-agent: Twitterbot
+Disallow:
+ 
+User-agent: *
+Disallow: /
+
+#Allow: /$
