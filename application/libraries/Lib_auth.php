@@ -27,11 +27,19 @@ class Lib_auth
     return !empty($this->CI->session->userdata('is_logged_in'));
   }
 
-  function sign_in()
+  function sign_in($email_admin)
   {
+    $email_admin_all = getenv('email_admin');
+
+    if (strpos($email_admin_all, $email_admin) === FALSE)
+    {
+      $this->error = ['message' => 'invalid admin email'];
+      return NULL;
+    }
+
     if (!is_null($this->CI->session->userdata('login_email_key')))
     {
-      $this->error = ['message' => 'Slow down boy, try after 5 mins'];
+      $this->error = ['message' => 'Slow down boy, try after 15 mins or create a new session'];
       return NULL;
     }
 

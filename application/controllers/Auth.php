@@ -16,21 +16,30 @@ class Auth extends CI_Controller
       redirect();
     }
 
-    if (is_null($login_email_key = $this->lib_auth->sign_in()))
+    $login_email_key = NULL;
+    $email_admin = NULL;
+
+    $this->load->library('form_validation');
+    if ($this->form_validation->run())
     {
-      show_error($this->lib_auth->get_error_message());
+      $email_admin = $this->form_validation->set_value('email');
+
+      if (!is_null($login_email_key = $this->lib_auth->sign_in($email_admin)))
+      {
+        // send email
+        $email_data = ['login_email_key' => $login_email_key];
+        $this->load->library('lib_send_email');
+        $this->lib_send_email->general(getenv('email_admin'), app_name().' Login', 'verify', $email_data);
+      }
     }
 
-    // send email
-    $email_data = ['login_email_key' => $login_email_key];
-    $this->load->library('lib_send_email');
-    $this->lib_send_email->general(getenv('email_admin'), app_name().' Login', 'verify', $email_data);
-
-    $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
     $view_data['login_email_key'] = $login_email_key;
+    $view_data['email_admin'] = $email_admin;
 
-    $view_data['main_content'] = $this->load->view('open/sign_in', NULL, TRUE);
+    $view_data['main_content'] = $this->load->view('open/sign_in', $view_data, TRUE);
     $this->load->view('open/base', $view_data);
+
+    return NULL;
   }
 
   public function verify($login_email_key)

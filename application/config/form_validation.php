@@ -9,15 +9,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $config = array(
-  // 'controller/method'            => ['value1', 'value2'],
+  // 'controller/method'           => ['value1', 'value2'],
+  'auth/sign_in'                => ['email'],
+  'list_unsubscribe/create'     => ['list', 'type'],
+  'list_unsubscribe/edit'       => ['list'],
 
-  'list_unsubscribe/create' => ['list', 'type'],
-  'list_unsubscribe/edit'   => ['list'],
-
-  'message/create'          => ['subject'],
-  'message/edit'            => ['subject', 'reply_to_name', 'reply_to_email', 'body_html_input'],
-  'message/publish'         => ['php_datetime_str'],
-  'message/send_test'       => ['email'],
+  'message/create'              => ['subject'],
+  'message/edit'                => ['subject', 'reply_to_name', 'reply_to_email', 'body_html_input'],
+  'message/publish'             => ['php_datetime_str'],
+  'message/send_test'           => ['email'],
 );
 
 if ( ! function_exists('fill_element'))

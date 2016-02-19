@@ -34,7 +34,7 @@ putenv('ga=UA-XXXXXXXXX-1');
 
 putenv('email_source=postmaster@example.com');
 
-putenv('email_admin=founders@example.com');
+putenv('email_admin=founders@example.com,others@example.com,extraterrestrial@example.com');
 putenv('email_debug=debug-postmaster@example.com');
 
 putenv('api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
