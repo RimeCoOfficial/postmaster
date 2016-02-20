@@ -1,7 +1,4 @@
 # http://www.robotstxt.org
 
 User-Agent: *
-Disallow: *
-
-Allow: /
-Allow: /open
+Allow: *
