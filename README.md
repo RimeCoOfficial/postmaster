@@ -1,5 +1,5 @@
 A **light-weight** (*CodeIgniter*, *Twitter Bootstrap*, *SVG*) **email server** (*Campaign*, *Autoresponder* and *Transactional*) which **includes a tweet-bot** and **its free** (*Apache 2.0*, *AWS: SES, OpsWorks t2.micro, SQS, SNS, S3, RDS t2.micro, Route 53*).  
-&mdash; **From [Rime](https://rime.co)**
+&mdash; From **[Rime](https://rime.co)**
 
 ## Features
 
