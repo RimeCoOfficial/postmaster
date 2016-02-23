@@ -32,10 +32,7 @@ PHP version <?php echo phpversion(); ?>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <style type="text/css">
-      body { padding-top: 20px; padding-bottom: 20px; }
-      .container { max-width: 680px; }
-    </style>
+    <link rel="stylesheet" href="<?php echo asset_url('stylesheets/app.css'); ?>">
   </head>
   <body>
    

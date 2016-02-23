@@ -1,5 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+$base_url = config_item('base_url');
+$asset_url = config_item('asset_url');
+
 ?><!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,13 +12,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Error</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <style type="text/css">
-      body { padding-top: 20px; padding-bottom: 20px; }
-      .container { max-width: 680px; }
-    </style>
+    <link rel="stylesheet" href="<?php echo $asset_url.('stylesheets/app.css'); ?>">
   </head>
   <body>
-  	<div class="container">
+  	<div class="container container-slim">
   		<h1><?php echo $heading; ?></h1>
   		<?php echo $message; ?>
   	</div>

@@ -25,7 +25,9 @@ $config['app_name'] = 'Postmaster';
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = getenv('ci_base_url');
+$config['base_url'] = getenv('ci_base_url').'/';
+
+$config['asset_url'] = getenv('ci_asset_url').'/';
 
 /*
 |--------------------------------------------------------------------------

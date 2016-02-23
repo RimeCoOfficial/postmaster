@@ -6,6 +6,7 @@
         "CI_ENV=production",
         "ci_cache_dir=/srv/www/postmaster/current/application/cache",
         "ci_base_url=http://postmaster.example.com",
+        "ci_asset_url=http://pages.rime.co/postmaster",
         "ci_proxy_ips=172.XX.XX.0/20,172.XX.XX.0/20,172.XX.XX.0/20",
         "db_hostname=mydbinstance.XXXXXXXXXXXX.us-east-1.rds.amazonaws.com",
         "db_username=awsuser",
