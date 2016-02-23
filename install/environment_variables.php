@@ -6,7 +6,6 @@ putenv('FOO=BAR');
 
 putenv('ci_cache_dir=/Users/suvozit/Sites/postmaster/application/cache');
 putenv('ci_base_url=http://localhost/postmaster');
-putenv('ci_asset_url=http://localhost/postmaster/gh-pages');
 putenv('ci_proxy_ips=');
 
 putenv('db_hostname=localhost');
