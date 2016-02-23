@@ -56,8 +56,8 @@ class Lib_send_email
     }
     else if (!empty($result['MessageId']))
     {
-      print_r($result).PHP_EOL;
-      return $result['MessageId'];
+      $result = $result->toArray();
+      return $result;
     }
     else
     {
