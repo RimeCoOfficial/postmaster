@@ -32,7 +32,7 @@ PHP version <?php echo phpversion(); ?>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="<?php echo asset_url('stylesheets/app.css'); ?>">
+    <link rel="stylesheet" href="<?php echo asset_url('stylesheets/app.min.css'); ?>">
   </head>
   <body>
    
