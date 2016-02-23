@@ -37,7 +37,7 @@ cd /srv/www/log_pixel/current && php index.php test send
   public function direct()
   {
     $this->load->library('lib_send_email');
-    if (is_null($result = $this->lib_send_email->direct(getenv('email_admin'), 'foobar', '👍')))
+    if (is_null($result = $this->lib_send_email->direct(getenv('email_admin'), 'Foobar', '👍')))
     {
       output_error($this->lib_send_email->get_error_message());
     }
