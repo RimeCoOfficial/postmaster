@@ -27,11 +27,11 @@ class Lib_auth
     return !empty($this->CI->session->userdata('is_logged_in'));
   }
 
-  function sign_in($email_admin)
+  function sign_in($email_webmaster)
   {
-    $email_admin_all = getenv('email_admin');
+    $email_webmaster_all = getenv('email_webmaster');
 
-    if (strpos($email_admin_all, $email_admin) === FALSE)
+    if (strpos($email_webmaster_all, $email_webmaster) === FALSE)
     {
       $this->error = ['message' => 'invalid admin email'];
       return NULL;

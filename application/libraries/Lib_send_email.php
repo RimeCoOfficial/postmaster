@@ -37,7 +37,7 @@ class Lib_send_email
         ],
         'Subject' => ['Data' => $subject],
       ],
-      'Source' => app_name().' '.app_name().' <'.getenv('email_source').'>',
+      'Source' => '"'.app_name().'" <'.getenv('email_postmaster').'>',
     ]);
 
     return $result['MessageId'];
@@ -51,4 +51,7 @@ class Lib_send_email
     if (ENVIRONMENT === 'production') return $this->direct($to_email, $subject, $message, $alt_message);
     else                              return TRUE;
   }
+
+  // @todo: general => error
+  // function error($to_email, $subject = 'Untitled', $template, $data = []) {}
 }

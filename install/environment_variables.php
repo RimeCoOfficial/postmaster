@@ -32,10 +32,10 @@ putenv('aws_s3_bucket=bucket.localhost');
 
 putenv('ga=UA-XXXXXXXXX-1');
 
-putenv('email_source=postmaster@example.com');
+putenv('email_postmaster=www@example.com');
 
-putenv('email_admin=founders@example.com,others@example.com,extraterrestrial@example.com');
-putenv('email_debug=debug-postmaster@example.com');
+putenv('email_webmaster=founders@example.com,www@example.com');
+putenv('email_admin=postmaster@example.com');
 
 putenv('api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 

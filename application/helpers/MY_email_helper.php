@@ -30,9 +30,9 @@ function valid_email($str)
 
 function report_error($subject, $template, $data)
 {
-  $email_debug = getenv('email_debug');
+  $email_admin = getenv('email_admin');
 
-  if (!is_null($CI =& get_instance()) AND ENVIRONMENT === 'production' AND !empty($email_debug))
+  if (!is_null($CI =& get_instance()) AND ENVIRONMENT === 'production' AND !empty($email_admin))
   {
     $data['debug_backtrace'] = NULL;
     $data['backtrace'] = array();
@@ -63,7 +63,7 @@ function report_error($subject, $template, $data)
     $data['server']   = is_cli() ? NULL : $CI->input->server(NULL);
     
     $CI->load->library('lib_send_email');
-    $CI->lib_send_email->general($email_debug, $subject, $template, $data);
+    $CI->lib_send_email->general($email_admin, $subject, $template, $data);
   }
 }
 
@@ -124,6 +124,7 @@ function ses_raw_email($message)
   if (!empty($message['list_unsubscribe'])) $msg .= 'List-Unsubscribe: '.$message['list_unsubscribe']."\n";
 
   $msg .= 'X-Mailer: '.$client_name.' via '.app_name()."\n";
+  $msg .= 'X-About: http://www.rime.co/postmaster'."\n";
   
   // random unique string
   $boundary_hash = md5($message['request_id'].'.'.time());

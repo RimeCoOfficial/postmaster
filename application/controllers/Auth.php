@@ -17,24 +17,23 @@ class Auth extends CI_Controller
     }
 
     $login_email_key = NULL;
-    $email_admin = NULL;
+    $email_webmaster = NULL;
 
     $this->load->library('form_validation');
     if ($this->form_validation->run())
     {
-      $email_admin = $this->form_validation->set_value('email');
+      $email_webmaster = $this->form_validation->set_value('email');
 
-      if (!is_null($login_email_key = $this->lib_auth->sign_in($email_admin)))
+      if (!is_null($login_email_key = $this->lib_auth->sign_in($email_webmaster)))
       {
         // send email
-        $email_data = ['login_email_key' => $login_email_key];
         $this->load->library('lib_send_email');
-        $this->lib_send_email->general($email_admin, 'Sign in', 'verify', $email_data);
+        $this->lib_send_email->direct($email_webmaster, 'Sign in', anchor('auth/verify/'.$login_email_key, NULL, 'target="_blank"'));
       }
     }
 
     $view_data['login_email_key'] = $login_email_key;
-    $view_data['email_admin'] = $email_admin;
+    $view_data['email_webmaster'] = $email_webmaster;
 
     $view_data['main_content'] = $this->load->view('open/sign_in', $view_data, TRUE);
     $this->load->view('open/base', $view_data);

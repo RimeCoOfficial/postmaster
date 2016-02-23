@@ -10,10 +10,10 @@ if (!empty($login_email_key) AND ENVIRONMENT !== 'production')
   <p><?php echo anchor('auth/verify/'.$login_email_key); ?></p>
   <?php
 }
-elseif (!empty($email_admin))
+elseif (!empty($email_webmaster))
 {
   ?>
-  <h1>Check your <abbr title="<?php echo $email_admin; ?>">email</abbr> to login</h1>
+  <h1>Check your <abbr title="<?php echo $email_webmaster; ?>">email</abbr> to login</h1>
   <p>The email link expires in 15 mins. So hurry!</p>
   <?php
 }
@@ -35,6 +35,11 @@ else
   </div>
 
   <?php echo form_close(); ?>
+
+  <br>
+  <p>
+    <strong>Not able to sign-in?</strong> Click <strong><?php echo mailto(getenv('email_admin'), 'here'); ?></strong> to contact admin.
+  </p>
   <?php
 }
 ?>

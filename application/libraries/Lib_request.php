@@ -116,7 +116,7 @@ class Lib_request
     $archive['web_version_key'] = random_string('alnum', 64);
     $archive['unsubscribe_key'] = random_string('alnum', 64);
     $archive['from_name'] = getenv('app_name');
-    $archive['from_email'] = getenv('email_source');
+    $archive['from_email'] = getenv('email_postmaster');
 
     $archive['to_name'] = $message['to_name'];
     $archive['to_email'] = $message['to_email'];
