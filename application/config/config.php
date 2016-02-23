@@ -27,9 +27,8 @@ $config['app_name'] = 'Postmaster';
 */
 $config['base_url'] = getenv('ci_base_url').'/';
 
-// if (ENVIRONMENT !== 'production') return base_url('gh-pages/'.$uri);
-$config['asset_url'] = $config['base_url'].'gh-pages/';
-if (ENVIRONMENT == 'production') return 'https://rimeofficial.github.io/postmaster/';
+if (ENVIRONMENT === 'production') $config['asset_url'] = 'https://rimeofficial.github.io/postmaster/';
+else                              $config['asset_url'] = $config['base_url'].'gh-pages/';
 
 // $config['asset_url'] = getenv('ci_asset_url').'/';
 
