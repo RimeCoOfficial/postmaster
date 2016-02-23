@@ -15,8 +15,7 @@ class Test extends CI_Controller
 
 /*
 # Request
-curl -X POST -i http://localhost/postmaster/api/test/direct -d \
-"key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+curl -X POST -i http://localhost/postmaster/api/test/direct -d "key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
 # Response
 HTTP/1.1 200 OK
@@ -38,11 +37,16 @@ cd /srv/www/log_pixel/current && php index.php test send
   public function direct()
   {
     $this->load->library('lib_send_email');
-    $message_id = $this->lib_send_email->direct(getenv('email_admin'), 'foo', 'bar');
-    
-    $this->load->helper('api');
-    $response = array('email_admin' => getenv('email_admin'), 'message_id' => $message_id);
-    output($response);
+    if (is_null($message_id = $this->lib_send_email->direct(getenv('email_admin'), 'foobar', '👍')))
+    {
+      output_error($this->lib_send_email->get_error_message());
+    }
+    else
+    {
+      $this->load->helper('api');
+      $response = array('email_admin' => getenv('email_admin'), 'message_id' => $message_id);
+      output($response);
+    }
   }
 
   function error_php()
