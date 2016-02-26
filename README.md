@@ -11,11 +11,11 @@ A **light-weight** (*CodeIgniter*, *Twitter Bootstrap*, *SVG*) **email server** 
 - [x] API Access
    
 ```
-  - [x] transactional/send
-  - [x] list-recipient/subscribe
-  - [x] list-recipient/unsubscribe
-  - [x] list-recipient/update-metadata
-  - [x] message-archive/get-info
+  - [x] request/transactional/[message_id]
+  - [x] recipient/subscribe/[list_id]
+  - [x] recipient/unsubscribe/[list_id]
+  - [x] recipient/update-metadata/[list_id]
+  - [x] archive/get-info/[request_id]/[unsubscribe_key]
 ```
 
 - [x] Upload attachments to S3 (`YYYYMMDD-HHMMSS_file_name.ext`)
