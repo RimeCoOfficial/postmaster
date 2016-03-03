@@ -5,6 +5,8 @@ class Home extends CI_Controller
 {
   public function index()
   {
+    trigger_error('Blowing In The Wind (Live On TV, March 1963)', E_USER_ERROR);
+    
     $this->load->library('lib_auth');
     if ($this->lib_auth->is_logged_in())
     {

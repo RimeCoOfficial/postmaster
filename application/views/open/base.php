@@ -43,5 +43,7 @@ PHP version <?php echo phpversion(); ?>
         </div>
       </div>
     </div>
+
+    <?php $this->view('footer'); ?>
   </body>
 </html>

@@ -28,42 +28,51 @@ function valid_email($str)
   return filter_var($str, FILTER_VALIDATE_EMAIL) ? $str : NULL;
 }
 
-function report_error($subject, $template, $data)
+// trigger_error('Blowing In The Wind (Live On TV, March 1963)', E_USER_ERROR);
+// throw new Exception("No woman no cry", 1);
+// show_error('Underneath the bridge.', 503);
+function report_error($template, $message_data)
 {
-  $email_admin = getenv('email_admin');
+  if (ENVIRONMENT !== 'production') return;
+  
+  $CI =& get_instance();
 
-  if (!is_null($CI =& get_instance()) AND ENVIRONMENT === 'production' AND !empty($email_admin))
+  switch ($template) {
+    case 'error_404':       $subject = '404 Page Not Found'; break;
+    case 'error_db':        $subject = 'Database Error'; break;
+    case 'error_exception': $subject = 'An uncaught Exception was encountered'; break;
+    case 'error_general':   $subject = 'An Error Was Encountered'; break;
+    case 'error_php':       $subject = 'A PHP Error was encountered'; break;
+    default:                $subject = 'ERROR';
+  }
+
+  if (is_cli()) $subject = 'CLI: '.$subject;
+  else          $subject = $CI->input->ip_address().': '.$subject;
+
+  // $request  = $_REQUEST;
+  // $server   = $is_cli ? NULL : $this->CI->input->server(NULL);
+
+  $CI->load->library('email');
+
+  $CI->email->from(getenv('email_postmaster'), 'Postmaster');
+  $CI->email->to(getenv('email_admin'));
+  // $CI->email->cc('another@another-example.com'); 
+  // $CI->email->bcc('them@their-example.com'); 
+
+  $CI->email->subject($subject);
+
+  $message = $CI->load->view('errors/html/'.$template, $message_data, TRUE);
+  $alt_message = $CI->load->view('errors/cli/'.$template, $message_data, TRUE);
+
+  $CI->email->message($message);
+  $CI->email->set_alt_message($alt_message);
+
+  // var_dump($subject, $alt_message); die();
+
+  if ( ! $CI->email->send())
   {
-    $data['debug_backtrace'] = NULL;
-    $data['backtrace'] = array();
-    if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE === TRUE)
-    {
-      // $data['debug_backtrace'] = debug_backtrace();
-      foreach (debug_backtrace() as $error)
-      {
-        if (isset($error['file']) && strpos($error['file'], realpath(BASEPATH)) !== 0)
-        {
-          $b['file'] = $error['file'];
-          $b['line'] = $error['line'];
-          $b['function'] = $error['function'];
-
-          $b['args'] = $error['args'];
-
-          $data['backtrace'][] = $b;
-        }
-      }
-    }
-
-    if (is_cli()) $subject = 'CLI: '.$subject;
-
-    $data['ip']       = is_cli() ? NULL : $CI->input->ip_address();
-    $data['whoami']   = exec('whoami');
-
-    $data['request']  = $_REQUEST;
-    $data['server']   = is_cli() ? NULL : $CI->input->server(NULL);
-    
-    $CI->load->library('lib_send_email');
-    $CI->lib_send_email->general($email_admin, $subject, $template, $data);
+    // Generate error
+    // echo $CI->email->print_debugger();
   }
 }
 

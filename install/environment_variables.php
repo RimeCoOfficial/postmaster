@@ -7,7 +7,8 @@ putenv('FOO=BAR');
 putenv('ci_cache_dir=/Users/suvozit/Sites/postmaster/application/cache');
 putenv('ci_base_url=http://localhost/postmaster');
 putenv('ci_proxy_ips=');
-
+putenv('ci_email_smtp_user=XXXXXXXXXXXXXXXXXXXX');
+putenv('ci_email_smtp_pass=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 putenv('db_hostname=localhost');
 putenv('db_username=root');
 putenv('db_password=root');

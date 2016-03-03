@@ -7,6 +7,8 @@
         "ci_cache_dir=/srv/www/postmaster/current/application/cache",
         "ci_base_url=https://postmaster.example.com",
         "ci_proxy_ips=172.XX.XX.0/20,172.XX.XX.0/20,172.XX.XX.0/20",
+        "ci_email_smtp_user=XXXXXXXXXXXXXXXXXXXX",
+        "ci_email_smtp_pass=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
         "db_hostname=mydbinstance.XXXXXXXXXXXX.us-east-1.rds.amazonaws.com",
         "db_username=awsuser",
         "db_password=mypassword",
