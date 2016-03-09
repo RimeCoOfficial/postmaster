@@ -21,6 +21,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <dl>
   <dt>Note: List-unsubscribe are one email recipient can unsubscribe</dt>
-  <dd>Type <strong>can't</strong> be changed later</dd>
-  <dd>Examples: <code>Newsletter</code> <code>Notification</code> <code>Announcement</code> <code>Requested Invitation</code></dd>
+  <dd>Type can <strong>not</strong> be changed later</dd>
+  <dd>Examples: <code>Newsletter</code> <code>Notification</code> <code>Announcement</code> <code>Request sign-up</code></dd>
 </dl>

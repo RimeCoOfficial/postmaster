@@ -60,9 +60,10 @@ class Model_recipient extends CI_Model
     return $this->db->affected_rows() > 0;
   }
 
-  function update_metadata($auto_recipient_id, $to_name, $metadata_json, $metadata_updated, $update_recipient_id = FALSE)
+  function update_metadata($auto_recipient_id, $to_name, $to_email, $metadata_json, $metadata_updated, $update_recipient_id = FALSE)
   {
     $this->db->set('to_name', $to_name);
+    $this->db->set('to_email', $to_email);
     $this->db->set('metadata_json', $metadata_json);
 
     if ($update_recipient_id)  $this->db->where('recipient_id', $update_recipient_id);

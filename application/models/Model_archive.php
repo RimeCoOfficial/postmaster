@@ -80,15 +80,17 @@ class Model_archive extends CI_Model
   function get_info($request_id, $unsubscribe_key)
   {
     $this->db->select($this->recipient_table.'.recipient_id');
-    $this->db->select($this->recipient_table.'.list_id');
+    $this->db->select($this->list_unsubscribe_table.'.list');
     $this->db->select($this->request_table.'.to_name');
     $this->db->select($this->request_table.'.to_email');
     $this->db->select($this->request_table.'.message_id');
+    $this->db->select($this->request_table.'.created');
 
     $this->db->limit(1);
 
     $this->db->join($this->request_table, $this->request_table.'.request_id = '.$this->archive_table.'.request_id');
     $this->db->join($this->recipient_table, $this->recipient_table.'.auto_recipient_id = '.$this->request_table.'.auto_recipient_id');
+    $this->db->join($this->list_unsubscribe_table, $this->list_unsubscribe_table.'.list_id = '.$this->recipient_table.'.list_id');
 
     $this->db->where($this->archive_table.'.request_id', $request_id);
     $this->db->where($this->archive_table.'.unsubscribe_key', $unsubscribe_key);

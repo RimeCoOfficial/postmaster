@@ -6,20 +6,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <?php echo $list_unsubscribe['list']; ?>
 
   <span class="pull-right">
-    <a href="<?php echo base_url('list-unsubscribe/edit/'.$list_unsubscribe['list_id']); ?>" class="btn btn-default">Edit</a>
+    <a href="<?php echo base_url('list-unsubscribe/edit/'.rawurlencode(strtolower($list_unsubscribe['list']))); ?>" class="btn btn-default">Edit</a>
   </span>
 </h1>
 
 <p class="lead">
-  #<?php echo $list_unsubscribe['list_id']; ?>
-
   Created <?php echo $list_unsubscribe['created']; ?> GMT
 
   <?php
   if ($list_unsubscribe['type'] == 'campaign')
   {
     ?>
-    <a href="<?php echo base_url('open/campaign/'.$list_unsubscribe['list_id'].'/'.md5($list_unsubscribe['created'])); ?>"
+    <a href="<?php echo base_url('open/campaign/'.rawurlencode(strtolower($list_unsubscribe['list'])).'/'.md5($list_unsubscribe['created'])); ?>"
       target="_blank">
       <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
     </a>

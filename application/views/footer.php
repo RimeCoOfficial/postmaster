@@ -26,5 +26,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   ga('create', '<?php echo getenv('ga'); ?>', 'auto');
   ga('send', 'pageview');
-
 </script>

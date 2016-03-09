@@ -27,6 +27,15 @@ class Model_list_unsubscribe extends CI_Model
     return $query->row_array();
   }
 
+  function get_by_name($list)
+  {
+    $this->db->limit(1);
+    $this->db->where('LOWER(list)', strtolower($list));
+
+    $query = $this->db->get($this->list_unsubscribe_table);
+    return $query->row_array();
+  }
+
   function get_list()
   {
     $this->db->limit(50);
@@ -35,6 +44,14 @@ class Model_list_unsubscribe extends CI_Model
 
     $query = $this->db->get($this->list_unsubscribe_table);
     return $query->result_array();
+  }
+
+  function is_list_available($list)
+  {
+    $this->db->where('LOWER(list)', strtolower($list));
+    
+    $query = $this->db->get($this->list_unsubscribe_table);
+    return $query->num_rows() == 0;
   }
 
   function create($list, $type)

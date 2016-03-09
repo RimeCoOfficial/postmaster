@@ -36,16 +36,15 @@ class List_unsubscribe extends CI_Controller
     $this->load->library('form_validation');
     if ($this->form_validation->run('list_unsubscribe/create'))
     {
-      if (is_null($list_id = $this->lib_list_unsubscribe->create(
-        $this->form_validation->set_value('list'),
-        $this->form_validation->set_value('type')
-      )))
+      $list = $this->form_validation->set_value('list');
+
+      if (is_null($this->lib_list_unsubscribe->create($list, $this->form_validation->set_value('type'))))
       {
         show_error($this->lib_list_unsubscribe->get_error_message());
       }
       else
       {
-        redirect('list-unsubscribe/edit/'.$list_id);
+        redirect('list-unsubscribe/recipients/'.rawurlencode(strtolower($list)));
       }
     }
 
@@ -55,9 +54,9 @@ class List_unsubscribe extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function edit($list_id = 0)
+  public function edit($list = 0)
   {
-    $list_unsubscribe = $this->lib_list_unsubscribe->get($list_id);
+    $list_unsubscribe = $this->lib_list_unsubscribe->get_by_name($list);
     if (empty($list_unsubscribe)) show_404();
 
     $local_view_data = [];
@@ -66,16 +65,15 @@ class List_unsubscribe extends CI_Controller
     $this->load->library('form_validation');
     if ($this->form_validation->run('list_unsubscribe/edit'))
     {
-      if (is_null($this->lib_list_unsubscribe->update(
-        $list_id,
-        $this->form_validation->set_value('list')
-      )))
+      $list = $this->form_validation->set_value('list');
+
+      if (is_null($this->lib_list_unsubscribe->update($list_unsubscribe['list_id'], $list)))
       {
         show_error($this->lib_list_unsubscribe->get_error_message());
       }
       else
       {
-        redirect('list-unsubscribe/edit/'.$list_id);
+        redirect('list-unsubscribe/recipients/'.rawurlencode(strtolower($list)));
       }
     }
 
@@ -85,16 +83,16 @@ class List_unsubscribe extends CI_Controller
     $this->load->view('base', $view_data);
   }
 
-  public function recipients($list_id = 0)
+  public function recipients($list = 0)
   {
-    $list_unsubscribe = $this->lib_list_unsubscribe->get($list_id);
+    $list_unsubscribe = $this->lib_list_unsubscribe->get_by_name($list);
     if (empty($list_unsubscribe)) show_404();
 
     $local_view_data = [];
     $local_view_data['list_unsubscribe'] = $list_unsubscribe;
 
     $this->load->library('lib_recipient');
-    $local_view_data['recipient_list'] = $this->lib_recipient->get_list($list_id);
+    $local_view_data['recipient_list'] = $this->lib_recipient->get_list($list_unsubscribe['list_id']);
 
     $view_data['is_logged_in'] = $this->lib_auth->is_logged_in();
 

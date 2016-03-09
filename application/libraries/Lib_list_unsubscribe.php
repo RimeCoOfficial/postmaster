@@ -28,6 +28,12 @@ class Lib_list_unsubscribe
     return $this->CI->model_list_unsubscribe->get($list_id);
   }
 
+  function get_by_name($list)
+  {
+    $list = rawurldecode($list);
+    return $this->CI->model_list_unsubscribe->get_by_name($list);
+  }
+
   function get_list()
   {
     return $this->CI->model_list_unsubscribe->get_list();
@@ -35,11 +41,22 @@ class Lib_list_unsubscribe
 
   function create($list, $type)
   {
+    if (!$this->CI->model_list_unsubscribe->is_list_available($list))
+    {
+      $this->error = ['message' => 'list name already taken'];
+      return NULL;
+    }
     return $this->CI->model_list_unsubscribe->create($list, $type);
   }
 
   function update($list_id, $list)
   {
+    if (!$this->CI->model_list_unsubscribe->is_list_available($list))
+    {
+      $this->error = ['message' => 'list name already taken'];
+      return NULL;
+    }
+
     $this->CI->model_list_unsubscribe->update($list_id, $list);
     return TRUE;
   }

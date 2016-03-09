@@ -124,7 +124,7 @@ class Lib_recipient
     }
     else $update_recipient_id = FALSE;
 
-    $this->CI->model_recipient->update_metadata($result['recipient']['auto_recipient_id'], $result['to_name'], $result['metadata_json'], $result['metadata_updated'], $update_recipient_id);
+    $this->CI->model_recipient->update_metadata($result['recipient']['auto_recipient_id'], $result['to_name'], $result['to_email'], $result['metadata_json'], $result['metadata_updated'], $update_recipient_id);
     return ['200' => 'OK'];
   }
 

@@ -3,10 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Open extends CI_Controller
 {
-  public function campaign($list_id = NULL, $created_hash = NULL)
+  public function campaign($list = NULL, $created_hash = NULL)
   {
     $this->load->library('lib_list_unsubscribe');
-    $list_unsubscribe = $this->lib_list_unsubscribe->get($list_id);
+    $list_unsubscribe = $this->lib_list_unsubscribe->get_by_name($list);
 
     if (empty($list_unsubscribe)
       OR md5($list_unsubscribe['created']) != $created_hash
@@ -20,14 +20,14 @@ class Open extends CI_Controller
     $view_vars['subscribe_uri'] = getenv('app_subscribe_uri');
 
     $this->load->library('lib_message');
-    $view_vars['message_list'] = $this->lib_message->get_campaign_archive($list_id);
+    $view_vars['message_list'] = $this->lib_message->get_campaign_archive($list_unsubscribe['list_id']);
 
     $main_view_vars = [];
     $main_view_vars['main_content'] = $this->load->view('open/campaign', $view_vars, TRUE);
     $this->load->view('open/base', $main_view_vars);
   }
 
-  public function subscribe($list_id = NULL)
+  public function subscribe($list = NULL)
   {
     // $app_subscribe_uri = getenv('app_subscribe_uri');
     // if ($app_subscribe_uri)
@@ -39,7 +39,7 @@ class Open extends CI_Controller
     if ($app_subscribe_uri) show_404();
 
     $this->load->library('lib_list_unsubscribe');
-    $list_unsubscribe = $this->lib_list_unsubscribe->get($list_id);
+    $list_unsubscribe = $this->lib_list_unsubscribe->get_by_name($list);
 
     if (empty($list_unsubscribe)
       OR $list_unsubscribe['type'] != 'campaign')
@@ -52,7 +52,7 @@ class Open extends CI_Controller
     {
       $this->load->library('lib_recipient');
       if (!is_null($this->lib_recipient->subscribe_all(
-        $list_id,
+        $list_unsubscribe['list_id'],
         $this->form_validation->set_value('full_name'),
         $this->form_validation->set_value('email'))))
       {

@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS feedback (
 
 CREATE TABLE IF NOT EXISTS list_unsubscribe (
   list_id                 int                 NOT NULL  AUTO_INCREMENT,
-  list                    varchar(32)         NOT NULL,
+  list                    varchar(32)         NOT NULL  UNIQUE,
   type                    varchar(16)         NOT NULL,                 -- autoresponder, campaign, transactional
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (list_id)
@@ -58,6 +58,8 @@ INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`, `type`) VALUES
   ('Announcement', 'campaign'), ('Newsletter', 'campaign'),
   -- Autoresponder
   ('Requested sign-up', 'autoresponder'), ('Tips', 'autoresponder');
+
+-- ALTER TABLE `list_unsubscribe` ADD UNIQUE(`list`);
 
 -- --------------------------------------------------------
 
