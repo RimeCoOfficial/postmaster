@@ -59,8 +59,6 @@ INSERT INTO `ci_postmaster`.`list_unsubscribe` (`list`, `type`) VALUES
   -- Autoresponder
   ('Requested sign-up', 'autoresponder'), ('Tips', 'autoresponder');
 
--- ALTER TABLE `list_unsubscribe` ADD UNIQUE(`list`);
-
 -- --------------------------------------------------------
 
 --
