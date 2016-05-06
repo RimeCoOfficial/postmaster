@@ -1,5 +1,9 @@
 # Dependencies
 markdown:         kramdown
+
+kramdown:
+  input: GFM
+
 highlighter:      rouge
 
 gems:             [jekyll-gist, jekyll-sitemap]
@@ -7,9 +11,9 @@ gems:             [jekyll-gist, jekyll-sitemap]
 permalink:        pretty
 
 # Setup
-title:            Jelly Bean
-description:      'A slenderize two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> documentation theme that pairs a prominent sidebar with uncomplicated content. Its built on <a href="http://getbootstrap.com" target="_blank">Bootstrap</a> responsive front-end framework.'
-baseurl:          /jelly-bean
+title:            Postmaster
+description:      'A light-weight (CodeIgniter, Twitter Bootstrap, SVG) email server (Campaign, Autoresponder and Transactional) and its free (Apache 2.0, AWS: SES, OpsWorks t2.micro, SQS, SNS, S3, RDS t2.micro, Route 53).'
+baseurl:          /postmaster
 
 asset_url:        https://static.rime.co
 

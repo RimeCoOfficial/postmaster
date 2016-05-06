@@ -1,5 +1,5 @@
 ---
-title: OpsWorks: Stack
+title: OpsWorks - Stack
 ---
 
 ## Settings
