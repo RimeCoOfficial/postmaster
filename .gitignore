@@ -1,8 +1,4 @@
-application/*
-install/*
-vendor/*
-opsworks/*
-
-composer.lock
-
-tmp/*
+_site/
+*.swp
+pkg/
+test/
