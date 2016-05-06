@@ -1,0 +1,39 @@
+# Dependencies
+markdown:         kramdown
+highlighter:      rouge
+
+gems:             [jekyll-gist, jekyll-sitemap]
+
+permalink:        pretty
+
+# Setup
+title:            Jelly Bean
+description:      'A slenderize two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> documentation theme that pairs a prominent sidebar with uncomplicated content. Its built on <a href="http://getbootstrap.com" target="_blank">Bootstrap</a> responsive front-end framework.'
+baseurl:          /jelly-bean
+
+asset_url:        https://static.rime.co
+
+# Custom vars
+version:          1.0.0
+
+# Github vars
+github:
+  username:       rimeofficial
+
+collections:
+  docs:
+    output:       true
+    permalink:    /:path/
+
+defaults:
+  - scope:
+      path:       ''
+      type:       docs
+    values:
+      layout:     page
+
+ga:               UA-41643154-1
+
+app:
+  name:           Rime
+  domain:         rime.co
