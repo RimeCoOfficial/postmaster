@@ -1,9 +1,5 @@
 # Dependencies
 markdown:         kramdown
-
-kramdown:
-  input: GFM
-
 highlighter:      rouge
 
 gems:             [jekyll-gist, jekyll-sitemap]
@@ -15,7 +11,7 @@ title:            Postmaster
 description:      'A light-weight (CodeIgniter, Twitter Bootstrap, SVG) email server (Campaign, Autoresponder and Transactional) and its free (Apache 2.0, AWS: SES, OpsWorks t2.micro, SQS, SNS, S3, RDS t2.micro, Route 53).'
 baseurl:          /postmaster
 
-asset_url:        https://static.rime.co
+asset_url:        https://rimeofficial.github.io/static
 
 # Custom vars
 version:          1.0.0
@@ -27,7 +23,7 @@ github:
 collections:
   docs:
     output:       true
-    permalink:    /:path/
+    permalink:    /:path
 
 defaults:
   - scope:
