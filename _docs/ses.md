@@ -26,7 +26,7 @@ title: SES
 **Email Address:** postmaster@example.com
 
 ### Notifications
-- SNS Topic Configuration: notifications [[SNS, SQS]]
+- SNS Topic Configuration: notifications [SNS, SQS]({{ site.baseurl }}/sns-sqs)
 - Email Feedback Forwarding: Disable
 
 #### DKIM

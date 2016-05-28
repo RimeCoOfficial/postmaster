@@ -29,9 +29,9 @@ title: GitHub Deploy
 ## GitHub - repo/settings/hooks `AWS OpsWorks`
 
 {:.table}
-| App | [[OpsWorks: app]] **OpsWorks ID**
+| App | [OpsWorks - App]({{ site.baseurl }}/opsworks-app) **OpsWorks ID**
 | :--- | :--- 
-| Stack | [[OpsWorks: stack]] **OpsWorks ID**
+| Stack | [OpsWorks - stack]({{ site.baseurl }}/opsworks-stack) **OpsWorks ID**
 | Branch name | master
 | GitHub api url | |
 | Aws access key | XXXXXXXXXXXXXXXXXXXX

@@ -34,14 +34,14 @@ title: OpsWorks - Stack
 | **IAM instance profile** | aws-opsworks-ec2-role `Default`
 | **Hostname theme** | Greek Deities
 | **OpsWorks Agent version** | *Auto-update* Use latest version `Default`
-| **Custom JSON** | [blob/master/opsworks/custom.json](../blob/master/opsworks/custom.json)
+| **Custom JSON** | [blob/master/opsworks/custom.json](https://github.com/{{ site.github.username }}{{ site.baseurl }}/blob/master/opsworks/custom.json)
 
 > #### IAM
 > **User:** `OpsWorks.postmaster`  
 > **Permissions:** `AmazonS3FullAccess`, `AmazonSESFullAccess`, `AmazonSQSFullAccess`
 >
 > Replace `aws_account_id`, `aws_access_key`, `aws_secret_key`
-> [blob/master/opsworks/custom.json#L12-L14](../blob/master/opsworks/custom.json#L12-L14)
+> [blob/master/opsworks/custom.json#L12-L14](https://github.com/{{ site.github.username }}{{ site.baseurl }}/blob/master/opsworks/custom.json#L12-L14)
 
 ## Security
 

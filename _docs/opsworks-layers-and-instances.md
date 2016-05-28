@@ -9,11 +9,11 @@ title: OpsWorks - Layers and Instances
 {:.table}
 | Layer type | PHP App Server
 | :--- | :---
-| Elastic Load Balancer | PHP-LB ([[Load Balancer]])
+| Elastic Load Balancer | PHP-LB ([Load Balancer]({{ site.baseurl }}/load-balancer))
 | Instance Shutdown Behavior | Wait `Default`
 
 ### RDS
-mydbinstance ([[RDS]])
+mydbinstance ([RDS]({{ site.baseurl }}/rds))
 
 {:.table}
 | User | awsuser

@@ -18,4 +18,4 @@ Next, add a tracking image to the pages you want to track:
 * `your-repo/page-name` is an arbitrary path. For best results specify the repository name and the page name - e.g. if you have multiple readme's or wiki pages you can use different paths to map them to same repo: `your-repo/readme`, `your-repo/other-page`, and so on!
 
 
-Replace `"ga=UA-XXXXXXXX-X"` in [blob/master/opsworks/custom.json#L17](../blob/master/opsworks/custom.json#L17)
+Replace `"ga=UA-XXXXXXXX-X"` in [blob/master/opsworks/custom.json#L17](https://github.com/{{ site.github.username }}{{ site.baseurl }}/blob/master/opsworks/custom.json#L17)

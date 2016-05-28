@@ -96,7 +96,7 @@ title: RDS
 ---
 
 ## Config
-Update `db_hostname` in [../blob/master/opsworks/custom.json#L9](../blob/master/opsworks/custom.json#L9)
+Update `db_hostname` in [blob/master/opsworks/custom.json#L9](https://github.com/{{ site.github.username }}{{ site.baseurl }}/blob/master/opsworks/custom.json#L9)
 
 ---
 
