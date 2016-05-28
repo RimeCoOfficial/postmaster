@@ -20,15 +20,17 @@ ls -a -l
 sudo nano /usr/local/opt/mysql/my.cnf
 ```
 
-insert the following lines
-```
+insert the following lines  
+
+```sh
 default_time_zone='+00:00'
 innodb_autoinc_lock_mode=0
 ```
 
-restart
+restart  
+
 ```sh
 mysql.server restart
 ```
 
-https://gist.github.com/suvozit/6dda7971e240f0a3f282#test
+[https://gist.github.com/suvozit/6dda7971e240f0a3f282#test](https://gist.github.com/suvozit/6dda7971e240f0a3f282#test)

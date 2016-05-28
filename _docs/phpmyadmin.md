@@ -4,26 +4,35 @@ title: phpMyAdmin
 
 ## OpsWorks
 #### Stack
-**Name** | phpMyAdmin
+
+{:.table}
+| **Name** | phpMyAdmin
 | :--- | :--- |
-**Region** | US East (N. Virginia)
-**Default operating system** | Ubuntu 14.04 LTS
-**Hostname theme** | Greek Deities
+| **Region** | US East (N. Virginia)
+| **Default operating system** | Ubuntu 14.04 LTS
+| **Hostname theme** | Greek Deities
 
 #### Layer
-Layer type | PHP App Server
-:--- | :---
+
+{:.table}
+| Layer type | PHP App Server
+| :--- | :---
+| | 
 
 #### App
-Name | phpMyAdmin
-:--- | :---
-Repository URL | https://github.com/RimeOfficial/phpMyAdmin
-Branch/Revision | master
+
+{:.table}
+| Name | phpMyAdmin
+| :--- | :---
+| Repository URL | https://github.com/RimeOfficial/phpMyAdmin
+| Branch/Revision | master
 
 ##### Environment Variables
-Key | Value
---- | ---
-host | mydbinstance.XXXXXXXXXXXX.us-east-1.rds.amazonaws.com
+
+{:.table}
+| Key | Value
+| --- | ---
+| host | mydbinstance.XXXXXXXXXXXX.us-east-1.rds.amazonaws.com
 
 ## phpMyAdmin
 ```

@@ -26,7 +26,7 @@ Pseudo-variable names are enclosed in braces, like this:
 ```
 
 ## Variable Pairs
-The above example code allows simple variables to be replaced. What if you would like an entire block of variables to be repeated, with each iteration containing new values?
+The above example code allows simple variables to be replaced. What if you would like an entire block of variables to be repeated, with each iteration containing new values? Consider this example template:
 
 ```html
 <html>
@@ -65,6 +65,7 @@ data[blog_entries][body]=Body 5
 
 ## Usage Notes
 If you include substitution parameters that are not referenced in your template, they are ignored:
+
 ```
 data[title]=Mr&\
 data[firstname]=John&\
@@ -75,6 +76,7 @@ data[lastname]=Doe
 ```
 
 If you do not include a substitution parameter that is referenced in your template, the original pseudo-variable is shown in the result:
+
 ```
 data[title]=Mr&\
 data[firstname]=John&\
@@ -85,6 +87,7 @@ data[lastname]=Doe
 ```
 
 If you provide a string substitution parameter when an array is expected, i.e. for a variable pair, the substitution is done for the opening variable pair tag, but the closing variable pair tag is not rendered properly:
+
 ```
 data[degree]=Mr&\
 data[firstname]=John&\
@@ -97,6 +100,7 @@ data[degrees][degree]=PhD
 ```
 
 If you name one of your individual substitution parameters the same as one used inside a variable pair, the results may not be as expected:
+
 ```
 data[degree]=Mr&\
 data[firstname]=John&\
@@ -109,23 +113,25 @@ data[degrees][degree]=PhD
 ```
 
 ## Reserved Pseudo-variables
-Vars | Description | Example
---- | --- | ---
-`_request_id` | | |
-`_subject` | | |
-`_list_recipient_id` | | |
-`_to_email` | | |
-`_to_name` | | |
-`_reply_to_email` | | |
-`_reply_to_name` | | |
-`_unsubscribe_link` | Unsubscribe link | |
-`_web_version_link` | Web version link | *https&#58;&#47;&#47;s3.amazonaws.com&#47;bucket&#47;requests&#47;7-8f14e45fceea167a5a36dedd4bea25430fda77af5ec567e2351ce16a0b9958f7.html\|txt* |
-`_current_day` | A full textual representation of the day of the week | *Sunday* through *Saturday* |
-`_current_day_number` | Numeric representation of the day of the week | *1* (for Monday) through *7* (for Sunday) |
-`_current_date` | Day of the month | *1* to *31* |
-`_current_month` | Full textual representation of the month | *January* through *December* |
-`_current_month_number` | Numerical representation of the month | *1* through *12* |
-`_current_year` | Full numeric representation of the year, 4 digits |  *1999* or *2003* |
-`_campaign_archive_link` | Only for campaign mails | |
-`_app_name` | | |
-`_app_base_url` | | |
+
+{:.table}
+| Vars | Description | Example
+| --- | --- | ---
+| `_request_id` | | |
+| `_subject` | | |
+| `_list_recipient_id` | | |
+| `_to_email` | | |
+| `_to_name` | | |
+| `_reply_to_email` | | |
+| `_reply_to_name` | | |
+| `_unsubscribe_link` | Unsubscribe link | |
+| `_web_version_link` | Web version link | *https&#58;&#47;&#47;s3.amazonaws.com&#47;bucket&#47;requests&#47;7-8f14e45fceea167a5a36dedd4bea25430fda77af5ec567e2351ce16a0b9958f7.html\|txt* |
+| `_current_day` | A full textual representation of the day of the week | *Sunday* through *Saturday* |
+| `_current_day_number` | Numeric representation of the day of the week | *1* (for Monday) through *7* (for Sunday) |
+| `_current_date` | Day of the month | *1* to *31* |
+| `_current_month` | Full textual representation of the month | *January* through *December* |
+| `_current_month_number` | Numerical representation of the month | *1* through *12* |
+| `_current_year` | Full numeric representation of the year, 4 digits |  *1999* or *2003* |
+| `_campaign_archive_link` | Only for campaign mails | |
+| `_app_name` | | |
+| `_app_base_url` | | |
