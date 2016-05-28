@@ -30,7 +30,7 @@ title: Load Balancer
 # Route 53
 
 {:.table}
-| Name: | postmaster.rime.co.  
+| Name: | example.email.  
 | :--- | :---
 | Type: | A  - IPv4 address
 | Alias: |Yes
@@ -39,4 +39,4 @@ title: Load Balancer
 {:.table}
 | Name | Type | Value
 | ---- | ---- | -----
-| postmaster.example.com | A | ALIAS dualstack.php-lb-XXXXXXXXXX.us-east-1.elb.amazonaws.com.
+| example.email | A | ALIAS dualstack.php-lb-XXXXXXXXXX.us-east-1.elb.amazonaws.com.

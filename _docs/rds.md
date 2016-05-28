@@ -46,7 +46,9 @@ title: RDS
 ---
 
 ## Instance
+
 ### DB Details
+
 #### Instance Specifications
 
 {:.table}
@@ -68,6 +70,7 @@ title: RDS
 | Master Password* | mypassword
 
 ### Advanced Settings
+
 #### Network & Security
 
 {:.table}

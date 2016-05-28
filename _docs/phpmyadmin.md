@@ -3,7 +3,8 @@ title: phpMyAdmin
 ---
 
 ## OpsWorks
-#### Stack
+
+### Stack
 
 {:.table}
 | **Name** | phpMyAdmin
@@ -12,14 +13,14 @@ title: phpMyAdmin
 | **Default operating system** | Ubuntu 14.04 LTS
 | **Hostname theme** | Greek Deities
 
-#### Layer
+### Layer
 
 {:.table}
 | Layer type | PHP App Server
 | :--- | :---
 | | 
 
-#### App
+### App
 
 {:.table}
 | Name | phpMyAdmin
@@ -27,7 +28,7 @@ title: phpMyAdmin
 | Repository URL | https://github.com/RimeOfficial/phpMyAdmin
 | Branch/Revision | master
 
-##### Environment Variables
+#### Environment Variables
 
 {:.table}
 | Key | Value

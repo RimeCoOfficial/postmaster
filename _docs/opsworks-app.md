@@ -31,7 +31,7 @@ title: OpsWorks - App
 `-`
 
 ## Add Domains
-postmaster.example.com
+example.email
 
 ## SSL Settings
 

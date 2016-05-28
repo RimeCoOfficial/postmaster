@@ -7,7 +7,7 @@ title: SES
 ### Verify a New Domain
 **Domain:** example.com  
 
-- Generate DKIM Settings
+- [x] Generate DKIM Settings
 
 #### Route 53 - Records
 
