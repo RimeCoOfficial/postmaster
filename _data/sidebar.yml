@@ -1,8 +1,29 @@
-- title: Getting Started
+- title: Installation
   pages:
-  - one
-  - two
+  - opsworks-stack
+  - load-balancer
+  - rds
+  - phpmyadmin
+  - opsworks-app
+  - opsworks-layers-and-instances
+  - sns-sqs
+  - ses
+  - s3
 
-- title: Your Content
+- title: References
   pages:
-  - three
+  - opsworks
+  - iam
+  - security-groups
+  - route-53
+
+- title: Others
+  pages:
+  - google-analytics
+  - github-deploy
+  - debug-setup
+
+- title: More
+  pages:
+  - email-variables
+  - api
