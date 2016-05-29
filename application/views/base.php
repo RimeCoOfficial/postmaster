@@ -33,12 +33,12 @@ PHP version <?php echo phpversion(); ?>
           <footer>
 
             <p class="small">
-              Project maintained by <strong><?php echo anchor('http://github.com/rimeofficial', 'rimeofficial'); ?></strong>
+              Project maintained by <strong><?php echo anchor('http://github.com/rimeofficial', 'rimeofficial', 'target="_blank"'); ?></strong>
 
               <span class="pull-right">
                 <strong>GitHub</strong>
-                <?php echo anchor('http://github.com/rimeofficial/postmaster/wiki', 'Wiki'); ?>
-                <?php echo anchor('http://github.com/rimeofficial/postmaster/issues', 'Report an issue'); ?>
+                <?php echo anchor('http://github.com/rimeofficial/postmaster/wiki', 'Wiki', 'target="_blank"'); ?>
+                <?php echo anchor('http://github.com/rimeofficial/postmaster/issues', 'Report an issue', 'target="_blank"'); ?>
               </span>
             </p>
           </footer>
