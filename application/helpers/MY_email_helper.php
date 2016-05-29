@@ -133,7 +133,7 @@ function ses_raw_email($message)
   if (!empty($message['list_unsubscribe'])) $msg .= 'List-Unsubscribe: '.$message['list_unsubscribe']."\n";
 
   $msg .= 'X-Mailer: '.$client_name.' via '.app_name()."\n";
-  $msg .= 'X-About: http://www.rime.co/postmaster'."\n";
+  $msg .= 'X-About: http://rimeofficial.github.io/postmaster'."\n";
   
   // random unique string
   $boundary_hash = md5($message['request_id'].'.'.time());

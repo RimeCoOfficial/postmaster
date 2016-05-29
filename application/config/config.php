@@ -27,7 +27,10 @@ $config['app_name'] = 'Postmaster';
 */
 $config['base_url'] = getenv('ci_base_url').'/';
 
-$config['asset_url'] = 'https://static.rime.co/postmaster';
+$config['asset_url'] = 'https://rimeofficial.github.io/postmaster';
+// $config['asset_url'] = 'http://localhost/postmaster'; // @debug: asset_url
+
+// $config['asset_url'] = 'https://static.rime.co/postmaster';
 // $config['asset_url'] = 'http://localhost/static/postmaster'; // @debug: asset_url
 
 $config['asset_url'] = $config['asset_url'].'/';

@@ -17,3 +17,5 @@ composer.lock
 opsworks/*
 !opsworks/index.html
 !opsworks/.htaccess
+
+_site/

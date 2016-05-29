@@ -33,13 +33,13 @@ PHP version <?php echo phpversion(); ?>
           <footer>
 
             <p class="small">
-              <a href="https://GitHub.com/RimeOfficial/postmaster">
-                <img class="img-responsive pull-left" src="<?php echo asset_url('images/Octicons-mark-github.svg'); ?>" width="20px">
-              </a>
+              Project maintained by <strong><?php echo anchor('http://github.com/rimeofficial', 'rimeofficial'); ?></strong>
 
-              <a href="http://www.rime.co/postmaster">
-                <img class="img-responsive pull-right" src="<?php echo asset_url('images/license-apache-v2.svg'); ?>">
-              </a>
+              <span class="pull-right">
+                <strong>GitHub</strong>
+                <?php echo anchor('http://github.com/rimeofficial/postmaster/wiki', 'Wiki'); ?>
+                <?php echo anchor('http://github.com/rimeofficial/postmaster/issues', 'Report an issue'); ?>
+              </span>
             </p>
           </footer>
         </div>
