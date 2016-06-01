@@ -99,14 +99,18 @@ class Lib_s3_object
       $results = Promise\unwrap($promises);
     } catch (AwsException $e) {
       // handle the error.
-      $message = 'getAwsRequestId: '.$e->getAwsRequestId().', getAwsErrorType:'.$e->getAwsErrorType().', getAwsErrorCode:'.$e->getAwsErrorCode()."\n\n";
-      $message .= $e->getMessage()."\n";
-      $message .= $e->getTraceAsString();
-
-      $this->error = ['message' => $error_msg];
+      $error_msg = 'getAwsRequestId: '.$e->getAwsRequestId().', getAwsErrorType:'.$e->getAwsErrorType().', getAwsErrorCode:'.$e->getAwsErrorCode()."\n\n";
+      $error_msg .= $e->getMessage()."\n";
+      $error_msg .= $e->getTraceAsString();
     }
 
     // if (!empty($this->error)) echo $error_msg['message']; else var_dump($results); die();
+
+    if (!empty($error_msg))
+    {
+      $this->error = ['message' => $error_msg];
+      return NULL;
+    }
 
     $response = [];
     foreach ($results as $id => $result) {
