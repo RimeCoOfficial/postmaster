@@ -104,7 +104,7 @@ function ses_raw_email($message)
 {
   $client_name = getenv('app_name');
 
-  $to = !empty($message['to_name']) ? '"'.$message['to_name'].'" <'.$message['to_email'].'>' : $message['to_email'];
+  $to = !empty($message['to_name']) ? '"'.str_replace('"', '\"', $message['to_name']).'" <'.$message['to_email'].'>' : $message['to_email'];
   
   // @debug: send to debug
   // $to = 'www@suvozit.com';
@@ -112,12 +112,13 @@ function ses_raw_email($message)
   $subject = $message['subject'];
   $body_html = $message['body_html'];
   $body_text = $message['body_text'];
-  $from = !empty($message['from_name']) ? '"'.$message['from_name'].'" <'.$message['from_email'].'>' : $message['from_email'];
+  $from = !empty($message['from_name']) ? '"'.str_replace('"', '\"', $message['from_name']).'" <'.$message['from_email'].'>' : $message['from_email'];
   $reply_to = NULL;
 
   if (!empty($message['reply_to_email']))
   {
-    $reply_to = (!empty($message['reply_to_name']) ? $message['reply_to_name'] : $client_name).' <'.$message['reply_to_email'].'>';
+    $reply_to = (!empty($message['reply_to_name']) ? $message['reply_to_name'] : $client_name);
+    $reply_to = '"'.str_replace('"', '\"', $reply_to).'" <'.$message['reply_to_email'].'>';
   }
 
   $msg = '';
