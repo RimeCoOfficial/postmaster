@@ -35,11 +35,6 @@ else
   </div>
 
   <?php echo form_close(); ?>
-
-  <br>
-  <p>
-    <strong>Not able to sign-in?</strong> Click <strong><?php echo mailto(getenv('email_admin'), 'here'); ?></strong> to contact admin.
-  </p>
   <?php
 }
 ?>

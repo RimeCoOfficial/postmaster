@@ -33,13 +33,13 @@ class Lib_auth
 
     if (strpos($email_webmaster_all, $email_webmaster) === FALSE)
     {
-      $this->error = ['message' => 'invalid admin email'];
+      $this->error = ['status' => 401, 'message' => 'invalid admin email'];
       return NULL;
     }
 
     if (!is_null($this->CI->session->userdata('login_email_key')))
     {
-      $this->error = ['message' => 'Slow down boy, try after 15 mins or create a new session'];
+      $this->error = ['status' => 401, 'message' => 'Slow down boy, try after 15 mins or create a new session'];
       return NULL;
     }
 
@@ -55,12 +55,15 @@ class Lib_auth
 
     if ($login_email_key == $session_login_email_key)
     {
+      // destroy login key
+      $this->CI->session->unset_userdata('login_email_key');
+
       $this->CI->session->set_userdata('is_logged_in', TRUE);
       return TRUE;
     }
     else
     {
-      $this->error = ['message' => 'login didnt match, so try again babe!'];
+      $this->error = ['status' => 401, 'message' => 'login didnt match, so try again babe!'];
       return NULL;
     }
   }

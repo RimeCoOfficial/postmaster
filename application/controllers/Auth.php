@@ -43,6 +43,11 @@ class Auth extends CI_Controller
 
   public function verify($login_email_key)
   {
+    if ($this->lib_auth->is_logged_in())
+    {
+      redirect();
+    }
+
     if (is_null($this->lib_auth->verify($login_email_key)))
     {
       show_error($this->lib_auth->get_error_message());
