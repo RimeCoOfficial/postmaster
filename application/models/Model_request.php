@@ -3,66 +3,66 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_request extends CI_Model
 {
-  private $message_table = 'message';
-  private $list_unsubscribe_table = 'list_unsubscribe';
-  private $recipient_table = 'recipient';
-  private $request_table = 'request';
+    private $message_table = 'message';
+    private $list_unsubscribe_table = 'list_unsubscribe';
+    private $recipient_table = 'recipient';
+    private $request_table = 'request';
 
-  function can_add($message_id)
-  {
-    $this->db->limit(1);
+    function can_add($message_id)
+    {
+        $this->db->limit(1);
 
-    $this->db->where('message_id', $message_id);
-    $this->db->where('published_tds IS NOT NULL');
-    $this->db->where('archived', '1000-01-01 00:00:00');
+        $this->db->where('message_id', $message_id);
+        $this->db->where('published_tds IS NOT NULL');
+        $this->db->where('archived', '1000-01-01 00:00:00');
 
-    $query = $this->db->get($this->message_table);
-    return $query->num_rows() > 0;
-  }
+        $query = $this->db->get($this->message_table);
+        return $query->num_rows() > 0;
+    }
 
-  function add($message_id, $auto_recipient_id, $to_name, $to_email, $pseudo_vars_json)
-  {
-    $this->db->set('message_id', $message_id);
-    $this->db->set('auto_recipient_id', $auto_recipient_id);
-    $this->db->set('to_name', $to_name);
-    $this->db->set('to_email', $to_email);
-    $this->db->set('pseudo_vars_json', $pseudo_vars_json);
+    function add($message_id, $auto_recipient_id, $to_name, $to_email, $pseudo_vars_json)
+    {
+        $this->db->set('message_id', $message_id);
+        $this->db->set('auto_recipient_id', $auto_recipient_id);
+        $this->db->set('to_name', $to_name);
+        $this->db->set('to_email', $to_email);
+        $this->db->set('pseudo_vars_json', $pseudo_vars_json);
 
-    $this->db->insert($this->request_table);
-    return $this->db->insert_id();
-  }
+        $this->db->insert($this->request_table);
+        return $this->db->insert_id();
+    }
 
-  function add_batch($request_list)
-  {
-    $this->db->insert_batch($this->request_table, $request_list);
-  }
+    function add_batch($request_list)
+    {
+        $this->db->insert_batch($this->request_table, $request_list);
+    }
 
-  function get_to_process($count)
-  {
-    $this->db->limit($count);
-    $this->db->order_by('request_id', 'ASC');
+    function get_to_process($count)
+    {
+        $this->db->limit($count);
+        $this->db->order_by('request_id', 'ASC');
 
-    $this->db->select($this->message_table.'.*');
-    $this->db->select($this->request_table.'.*');
-    $this->db->select($this->list_unsubscribe_table.'.list');
-    $this->db->select($this->list_unsubscribe_table.'.type');
-    $this->db->select($this->recipient_table.'.recipient_id');
-    $this->db->select($this->recipient_table.'.to_name AS recipient_to_name');
-    $this->db->select($this->recipient_table.'.unsubscribed');
-    $this->db->select($this->recipient_table.'.metadata_json');
+        $this->db->select($this->message_table.'.*');
+        $this->db->select($this->request_table.'.*');
+        $this->db->select($this->list_unsubscribe_table.'.list');
+        $this->db->select($this->list_unsubscribe_table.'.type');
+        $this->db->select($this->recipient_table.'.recipient_id');
+        $this->db->select($this->recipient_table.'.to_name AS recipient_to_name');
+        $this->db->select($this->recipient_table.'.unsubscribed');
+        $this->db->select($this->recipient_table.'.metadata_json');
 
-    $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->request_table.'.message_id');
-    $this->db->join($this->list_unsubscribe_table, $this->list_unsubscribe_table.'.list_id = '.$this->message_table.'.list_id');
-    $this->db->join($this->recipient_table, $this->recipient_table.'.auto_recipient_id = '.$this->request_table.'.auto_recipient_id');
+        $this->db->join($this->message_table, $this->message_table.'.message_id = '.$this->request_table.'.message_id');
+        $this->db->join($this->list_unsubscribe_table, $this->list_unsubscribe_table.'.list_id = '.$this->message_table.'.list_id');
+        $this->db->join($this->recipient_table, $this->recipient_table.'.auto_recipient_id = '.$this->request_table.'.auto_recipient_id');
 
-    $this->db->where('processed', '1000-01-01 00:00:00');
+        $this->db->where('processed', '1000-01-01 00:00:00');
 
-    $query = $this->db->get($this->request_table);
-    return $query->result_array();
-  }
+        $query = $this->db->get($this->request_table);
+        return $query->result_array();
+    }
 
-  function mark_processed($message_list)
-  {
-    $this->db->update_batch($this->request_table, $message_list, 'request_id');
-  }
+    function mark_processed($message_list)
+    {
+        $this->db->update_batch($this->request_table, $message_list, 'request_id');
+    }
 }

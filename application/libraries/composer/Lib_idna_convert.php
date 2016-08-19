@@ -7,10 +7,10 @@ use Etechnika\IdnaConvert\IdnaConvert as IdnaConvert;
 
 class Lib_idna_convert
 {
-  // if (function_exists('idn_to_ascii')) // PECL Library idn_to_ascii
-  // {
-  //   $str = idn_to_ascii($str);
-  // }
-  function encode($str) { return IdnaConvert::encodeString($str); }
-  function decode($str) { return IdnaConvert::decodeString($str); }
+    // if (function_exists('idn_to_ascii')) // PECL Library idn_to_ascii
+    // {
+    //   $str = idn_to_ascii($str);
+    // }
+    function encode($str) { return IdnaConvert::encodeString($str); }
+    function decode($str) { return IdnaConvert::decodeString($str); }
 }

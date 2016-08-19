@@ -5,5 +5,5 @@ use zz\Html\HTMLMinify;
 
 class Lib_html_minifier
 {
-  public function process($str) { return HTMLMinify::minify($str); }
+    public function process($str) { return HTMLMinify::minify($str); }
 }
