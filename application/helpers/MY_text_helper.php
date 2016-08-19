@@ -10,18 +10,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 function html_to_text($html)
 {
-  // $dom = HtmlDomParser::str_get_html($html);
-  // if (!is_null($html_dom = $dom->find('div[id=text-area]', 0)))
-  // {
-  //   $html = $html_dom->innertext;
-  // }
+    // $dom = HtmlDomParser::str_get_html($html);
+    // if (!is_null($html_dom = $dom->find('div[id=text-area]', 0)))
+    // {
+    //   $html = $html_dom->innertext;
+    // }
 
-  $text = strip_tags($html);
+    $text = strip_tags($html);
 
-  // http://stackoverflow.com/a/2368546
-  $text = preg_replace('!\s+!', ' ', $text); // or '/\s+/'
+    // http://stackoverflow.com/a/2368546
+    $text = preg_replace('!\s+!', ' ', $text); // or '/\s+/'
 
-  $text = trim($text);
+    $text = trim($text);
 
-  return $text;
+    return $text;
 }
