@@ -9,13 +9,13 @@ $this->load->config('form_element', TRUE);
 $element_config = $this->config->item($id, 'form_element');
 
 $element = array(
-  'name'          => $id,
-  'id'            => $id,
+    'name'          => $id,
+    'id'            => $id,
 
-  'selected'      => set_value($id, $value),
-  'options'       => $element_config['options'],
+    'selected'      => set_value($id, $value),
+    'options'       => $element_config['options'],
 
-  'class'         => 'form-control',
+    'class'         => 'form-control',
 );
 
 if (!empty($element_config['required'])) $element['required'] = NULL;
@@ -26,11 +26,11 @@ if (!empty($error[ $element['name'] ])) $element['id'] = 'inputError';
 ?>
 
 <div class="form-group <?php if (!empty($error[ $element['name'] ])) echo 'has-error'; ?>">
-  <?php echo form_label($element_config['label'].(!empty($element_config['required']) ? ' *' : ''), $element['id'], array('class' => 'control-label')); ?>
+    <?php echo form_label($element_config['label'].(!empty($element_config['required']) ? ' *' : ''), $element['id'], array('class' => 'control-label')); ?>
 
-  <?php echo form_dropdown($element); ?>
+    <?php echo form_dropdown($element); ?>
 
-  <?php if (!empty($error[ $element['name'] ])): ?>
-    <span class="help-block"><?php echo $error[ $element['name'] ]; ?></span>
-  <?php endif; ?>
+    <?php if (!empty($error[ $element['name'] ])): ?>
+        <span class="help-block"><?php echo $error[ $element['name'] ]; ?></span>
+    <?php endif; ?>
 </div>

@@ -11,41 +11,41 @@ CodeIgniter Version <?php echo CI_VERSION; ?>
 PHP version <?php echo phpversion(); ?> 
  -->
 <html lang="en">
-  <head>
-    <?php $this->view('head'); ?>
-  </head>
-  <body>
-   
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
+    <head>
+        <?php $this->view('head'); ?>
+    </head>
+    <body>
+     
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
 
-          <header>
-            <?php $this->view('header'); ?>
-          </header>
+                    <header>
+                        <?php $this->view('header'); ?>
+                    </header>
 
-          <?php $this->view('nav_tab'); ?>
-          <?php $this->view('alert'); ?>
+                    <?php $this->view('nav_tab'); ?>
+                    <?php $this->view('alert'); ?>
 
-          <?php echo $main_content; ?>
+                    <?php echo $main_content; ?>
 
-          <!-- <hr> -->
-          <footer>
+                    <!-- <hr> -->
+                    <footer>
 
-            <p class="small">
-              Project maintained by <strong><?php echo anchor('http://github.com/rimeofficial', 'rimeofficial', 'target="_blank"'); ?></strong>
+                        <p class="small">
+                            Project maintained by <strong><?php echo anchor('http://github.com/rimeofficial', 'rimeofficial', 'target="_blank"'); ?></strong>
 
-              <span class="pull-right">
-                <strong>GitHub</strong>
-                <?php echo anchor('http://github.com/rimeofficial/postmaster/wiki', 'Wiki', 'target="_blank"'); ?>
-                <?php echo anchor('http://github.com/rimeofficial/postmaster/issues', 'Report an issue', 'target="_blank"'); ?>
-              </span>
-            </p>
-          </footer>
+                            <span class="pull-right">
+                                <strong>GitHub</strong>
+                                <?php echo anchor('http://github.com/rimeofficial/postmaster/wiki', 'Wiki', 'target="_blank"'); ?>
+                                <?php echo anchor('http://github.com/rimeofficial/postmaster/issues', 'Report an issue', 'target="_blank"'); ?>
+                            </span>
+                        </p>
+                    </footer>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <?php $this->view('footer'); ?>
-  </body>
+        <?php $this->view('footer'); ?>
+    </body>
 </html>
