@@ -1,11 +1,11 @@
 {
-  "require":
-  {
-    "guzzlehttp/guzzle": "~6.0",
-    "aws/aws-sdk-php": "3.0.4",
-    "etechnika/idna-convert": "1.0.*",
-    "sunra/php-simple-html-dom-parser": "v1.5.0",
-    "zaininnari/html-minifier": "*",
-    "tijsverkoyen/css-to-inline-styles": "1.5.4"
-  }
+    "require":
+    {
+        "guzzlehttp/guzzle": "~6.0",
+        "aws/aws-sdk-php": "3.0.4",
+        "etechnika/idna-convert": "1.0.*",
+        "sunra/php-simple-html-dom-parser": "v1.5.0",
+        "zaininnari/html-minifier": "*",
+        "tijsverkoyen/css-to-inline-styles": "1.5.4"
+    }
 }
