@@ -19,7 +19,7 @@
                 "aws_region=us-east-1",
                 "aws_s3_bucket=bucket",
                 "ga=UA-XXXXXXXX-X",
-                "email_postmaster=www@example.com",
+                "email_postmaster=no-reply@example.com",
                 "email_webmaster=founders@example.com,postmaster@example.com",
                 "email_admin=postmaster@example.com",
                 "api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
