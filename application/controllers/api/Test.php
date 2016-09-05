@@ -29,10 +29,6 @@ class Test extends CI_Controller
         "email_admin": "postmaster@example.com",
         "message_id": "000001530edf7371-e7cc889a-6dcd-4eb5-8b7d-e6cb67ad0c78-000000"
     }
-
-    # ssh
-    cd ~/Sites/log-pixel && php index.php test send
-    cd /srv/www/log_pixel/current && php index.php test send
     */
     public function direct()
     {

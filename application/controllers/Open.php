@@ -20,7 +20,7 @@ class Open extends CI_Controller
         $view_vars['subscribe_uri'] = getenv('app_subscribe_uri');
 
         $this->load->library('lib_message');
-        $view_vars['message_list'] = $this->lib_message->get_campaign_archive($list_unsubscribe['list_id']);
+        $view_vars['message_list'] = $this->lib_message->get_campaign_archive($list_unsubscribe['list_id'], 99);
 
         $main_view_vars = [];
         $main_view_vars['main_content'] = $this->load->view('open/campaign', $view_vars, TRUE);
