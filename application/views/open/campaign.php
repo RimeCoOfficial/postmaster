@@ -43,7 +43,7 @@ else
                 <strong><?php echo $message['subject']; ?></strong>
 
                 <span class="pull-right small">
-                    <samp><?php echo date('M d, Y', $message['published_tds'] + strtotime('1000-01-01 00:00:00')); ?></samp>
+                    <samp><?php echo date('M d, Y', strtotime($message['archived'])); ?></samp>
                 </span>
             </a>
             <?php

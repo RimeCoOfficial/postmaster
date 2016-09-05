@@ -107,7 +107,7 @@ class Model_message extends CI_Model
 
         $this->db->select('subject, message_id, list_id, created, published_tds, archived');
 
-        $this->db->order_by('published_tds', 'DESC');
+        $this->db->order_by('archived', 'DESC');
 
         $this->db->where('list_id', $list_id);
         $this->db->where('published_tds IS NOT NULL');
