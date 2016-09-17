@@ -147,10 +147,7 @@ class Lib_request
 
     private function _parse($archive, $message)
     {
-        // $web_version_link = base_url('open/message/');
         // $unsubscribe_link = base_url('open/unsubscribe?');
-        
-        $web_version_link = 'https://s3.amazonaws.com/'.getenv('aws_s3_bucket').'/requests/'.$archive['request_id'].'-'.$archive['web_version_key'].'.html';
 
         $unsubscribe_link = NULL;
         if ($message['list_unsubscribe'])
@@ -176,7 +173,6 @@ class Lib_request
             '_to_name' => $message['to_name'],
             '_reply_to_email' => $message['reply_to_email'],
             '_reply_to_name' => $message['reply_to_name'],
-            '_web_version_link' => $web_version_link,
             '_unsubscribe_link' => $unsubscribe_link,
             '_current_day' => date('l'),
             '_current_day_number' => date('N'),

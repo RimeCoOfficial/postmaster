@@ -71,33 +71,4 @@ class Message extends CI_Controller
             unlock();
         }
     }
-
-    // cd ~/Sites/postmaster && php index.php task message archive
-    // cd /srv/www/postmaster/current && php index.php task message archive
-    function archive($count = 9)
-    {
-        echo 'Start archive'.PHP_EOL;
-        $this->load->library('lib_archive');
-
-        if (is_running() === FALSE)
-        {
-            lock();
-            while (TRUE)
-            {
-                $messages = $this->lib_archive->get_unarchive($count);
-
-                if (empty($messages))
-                {
-                    echo 'No task found!'.PHP_EOL;
-                    break;
-                }
-
-                if (is_null($this->lib_archive->archive($messages)))
-                {
-                    show_error($this->lib_archive->get_error_message());
-                }
-            }
-            unlock();
-        }
-    }
 }

@@ -39,7 +39,7 @@ else
         foreach ($message_list as $message)
         {
             ?>
-            <a href="https://s3.amazonaws.com/<?php echo getenv('aws_s3_bucket').'/messages/'.$message['message_id'].'-'.md5($message['list_id']).md5($message['created']); ?>.html" class="list-group-item" target="_blank">
+            <a class="list-group-item" href="<?php echo base_url('open/message/'.$message['message_id'].'/html'); ?>">
                 <strong><?php echo $message['subject']; ?></strong>
 
                 <span class="pull-right small">

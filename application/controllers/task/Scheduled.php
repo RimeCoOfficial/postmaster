@@ -56,7 +56,8 @@ class Scheduled extends CI_Controller
             lock();
             while (TRUE)
             {
-                $campaign_message = $this->lib_request_scheduled->get_latest_campaign();        
+                $campaign_message = $this->lib_request_scheduled->get_latest_campaign();
+
                 if (empty($campaign_message))
                 {
                     echo 'No task found!'.PHP_EOL;

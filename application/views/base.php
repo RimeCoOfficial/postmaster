@@ -31,9 +31,8 @@ PHP version <?php echo phpversion(); ?>
 
                     <!-- <hr> -->
                     <footer>
-
-                        <p class="small">
-                            Project maintained by <strong><?php echo anchor('http://github.com/rimeofficial', 'rimeofficial', 'target="_blank"'); ?></strong>
+                        <p>
+                            Project maintained by <strong><?php echo anchor('http://rime.co', 'Rime', 'target="_blank"'); ?></strong>
 
                             <span class="pull-right">
                                 <strong>GitHub</strong>

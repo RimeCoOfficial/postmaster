@@ -84,9 +84,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     {
                         ?>
                         <div class="media-right">
-                            <a class="text-<?php echo ($request['sent'] == '1000-01-01 00:00:00' ? 'info' : 'success'); ?>" href="<?php echo 'https://s3.amazonaws.com/'.getenv('aws_s3_bucket').'/requests/'.$request['request_id'].'-'.$request['web_version_key'].'.html'; ?>" target="_blank">
+                            <span class="text-<?php echo ($request['sent'] == '1000-01-01 00:00:00' ? 'info' : 'success'); ?>">
                                 <span class="media-object glyphicon glyphicon-<?php echo ($request['sent'] == '1000-01-01 00:00:00' ? 'hourglass' : 'ok-sign'); ?>"></span>
-                            </a>
+                            </span>
                         </div>
                         <?php
                     }

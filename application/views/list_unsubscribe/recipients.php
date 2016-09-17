@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     if ($list_unsubscribe['type'] == 'campaign')
     {
         ?>
-        <a href="<?php echo base_url('open/campaign/'.rawurlencode(strtolower($list_unsubscribe['list'])).'/'.md5($list_unsubscribe['created'])); ?>"
+        <a href="<?php echo base_url('open/campaign/'.rawurlencode(strtolower($list_unsubscribe['list']))); ?>"
             target="_blank">
             <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
         </a>

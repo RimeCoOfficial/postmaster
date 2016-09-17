@@ -85,7 +85,15 @@ class Lib_archive
                 )
                 {
                     $ses_message_id = $result['MessageId'];
-                    $message_sent_list[] = ['request_id' => $request_id, 'sent' => date('Y-m-d H:i:s'), 'ses_message_id' => $ses_message_id];
+                    $message_sent_list[] = [
+                        'request_id' => $request_id,
+                        'sent' => date('Y-m-d H:i:s'),
+                        'ses_message_id' => $ses_message_id,
+
+                        'archived' => date('Y-m-d H:i:s'),
+                        'body_html' => '',
+                        'body_text' => '',
+                    ];
                 }
             }
 
@@ -116,62 +124,5 @@ class Lib_archive
     function get_unarchive($count)
     {
         return $this->CI->model_archive->get_unarchive($count);
-    }
-
-    function archive($requests)
-    {
-        // 1. send emails async
-        $this->CI->load->library('lib_s3_object');
-        $objects = [];
-
-        foreach ($requests as $request)
-        {
-            echo '('.$request['request_id'].') Archiving request: '.$request['subject'].PHP_EOL;
-            
-            $objects[ $request['request_id'].'-html' ] = [
-                'key' => 'requests/'.$request['request_id'].'-'.$request['web_version_key'].'.html',
-                'body' => $request['body_html'],
-                'content-type' => 'text/html',
-            ];
-
-            $objects[ $request['request_id'].'-text' ] = [
-                'key' => 'requests/'.$request['request_id'].'-'.$request['web_version_key'].'.txt',
-                'body' => $request['body_text'],
-                'content-type' => 'text/plain',
-            ];
-        }
-
-        if (is_null($results = $this->CI->lib_s3_object->upload_async($objects)))
-        {
-            $this->error = $this->CI->lib_s3_object->get_error_message();
-            return NULL;
-        }
-
-        if (!empty($results))
-        {
-            $message_archived_list = [];
-            foreach ($requests as $request)
-            {
-                $request_id = $request['request_id'];
-
-                if (!empty($results[ $request_id.'-html' ]) AND !empty($results[ $request_id.'-text' ]))
-                {
-                    echo '('.$request_id.') Archived: '.$objects[ $request_id.'-html' ]['key'].PHP_EOL;
-
-                    $message_archived_list[] = [
-                        'request_id' => $request_id,
-                        'archived' => date('Y-m-d H:i:s'),
-                        'body_html' => 's3://'.$objects[ $request_id.'-html' ]['key'],
-                        'body_text' => 's3://'.$objects[ $request_id.'-text' ]['key'],
-                    ];
-                }
-            }
-
-            if (!empty($message_archived_list)) $this->CI->model_archive->update_batch($message_archived_list);
-        }
-
-        $this->error = $this->CI->lib_s3_object->get_error_message();
-        if (!empty($this->error)) return NULL;
-        else                      return TRUE;
     }
 }

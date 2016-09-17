@@ -3,13 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Open extends CI_Controller
 {
-    public function campaign($list = NULL, $created_hash = NULL)
+    public function campaign($list = NULL)
     {
         $this->load->library('lib_list_unsubscribe');
         $list_unsubscribe = $this->lib_list_unsubscribe->get_by_name($list);
 
         if (empty($list_unsubscribe)
-            OR md5($list_unsubscribe['created']) != $created_hash
             OR $list_unsubscribe['type'] != 'campaign')
         {
             show_404();
@@ -25,6 +24,21 @@ class Open extends CI_Controller
         $main_view_vars = [];
         $main_view_vars['main_content'] = $this->load->view('open/campaign', $view_vars, TRUE);
         $this->load->view('open/base', $main_view_vars);
+    }
+
+    public function message($message_id = 0, $type = NULL)
+    {
+        $this->load->library('lib_message');
+        $message = $this->lib_message->get($message_id);
+        if (empty($message)) show_404();
+
+        if ($type == 'html' OR $type == 'text' OR $type == 'html_input')
+        {
+            
+        }
+        else $type = 'html';
+
+        echo $message['body_'.$type]; die();
     }
 
     public function subscribe($list = NULL)

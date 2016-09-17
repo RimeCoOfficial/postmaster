@@ -108,8 +108,6 @@ CREATE TABLE IF NOT EXISTS message (
   
   published_tds           bigint                        DEFAULT NULL, -- tds = Time Difference in Seconds. NULL = Draft
 
-  -- Campaign only
-  -- s3://messages/message_id-md5(list_id)md5(created).html|txt
   archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   created                 datetime            NOT NULL  DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (message_id),
@@ -160,8 +158,6 @@ CREATE TABLE IF NOT EXISTS archive (
   priority                tinyint unsigned              DEFAULT 0,
   sent                    datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   ses_message_id          varchar(256)                  DEFAULT NULL,
-
-  -- s3://requests/request_id-web_version_key.html|txt
   archived                datetime            NOT NULL  DEFAULT '1000-01-01 00:00:00',
   PRIMARY KEY (request_id),
   FOREIGN KEY (request_id) REFERENCES request(request_id) ON UPDATE CASCADE ON DELETE CASCADE
