@@ -91,8 +91,8 @@ class Lib_archive
                         'ses_message_id' => $ses_message_id,
 
                         'archived' => date('Y-m-d H:i:s'),
-                        'body_html' => '',
-                        'body_text' => '',
+                        'body_html' => NULL,
+                        'body_text' => NULL,
                     ];
                 }
             }
