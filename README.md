@@ -1,5 +1,7 @@
 # Postmaster
 
+![](./images/favicon.png)
+
 A **light-weight** (*CodeIgniter*, *Twitter Bootstrap*, *SVG*) **email server** (*Campaign*, *Autoresponder* and *Transactional*) and **its free** (*Apache 2.0*, *AWS: SES, OpsWorks t2.micro, SQS, SNS, S3, RDS t2.micro, Route 53*).  
 
 <blockquote class="imgur-embed-pub" lang="en" data-id="Fi5YIvH"><a href="//imgur.com/Fi5YIvH">J (Will Smith) has to bring back Kevin Brown a. k. a K (Tommy Lee Jones) to the MIB. Funny Scene.&lt;a class=&quot;youtube-link-no-embed&quot; target=&quot;_blank&quot; href=&quot;https://www.youtube.com/watch?v=4HgUh5bOgbM&amp;amp;t=3m15s&quot;&gt;https://www.youtube.com/watch?v=4HgUh5bOgbM&amp;amp;t=3m15s&lt;/a&gt;</a></blockquote>
