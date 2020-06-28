@@ -8,11 +8,6 @@ A **light-weight** (*CodeIgniter*, *Twitter Bootstrap*, *SVG*) **email server** 
 
 ![](./images/paris_france.jpg)
 
-
-[![](images/Fi5YIvH.gif)](//imgur.com/Fi5YIvH)
-
-<blockquote class="imgur-embed-pub" lang="en" data-id="Fi5YIvH">J (Will Smith) has to bring back Kevin Brown a. k. a. K (Tommy Lee Jones) to the MIB. Funny Scene &mdash; <a href="https://www.youtube.com/watch?v=4HgUh5bOgbM&t=3m15s">Men In Black II - Post Office Scene</a></blockquote>
-
 ## Features
 
 - List-unsubscribe
@@ -41,3 +36,8 @@ A **light-weight** (*CodeIgniter*, *Twitter Bootstrap*, *SVG*) **email server** 
 - Campaign Archive - `open/campaign/{list}/{created_hash}`
 - Open Subscribe `open/subscribe/{list}` and Unsubscribe `open/unsubscribe/{request_id}/{unsubscribe_key}`
 - Google Analytics (click and open)
+
+
+[![](images/Fi5YIvH.gif)](//imgur.com/Fi5YIvH)
+
+<blockquote>J (Will Smith) has to bring back Kevin Brown a. k. a. K (Tommy Lee Jones) to the MIB. Funny Scene <br>&mdash; <a href="//youtu.be/4HgUh5bOgbM?t=195">Men In Black II - Post Office Scene</a></blockquote>
