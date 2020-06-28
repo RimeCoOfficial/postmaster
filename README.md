@@ -1,12 +1,8 @@
-
-
 # Postmaster
 
-![](./images/cheap-1st-class-76p-definitive-stamp-with-l-s-gum.-[3]-1413-p.jpg)
-
-A **light-weight** (*CodeIgniter*, *Twitter Bootstrap*, *SVG*) **email server** (*Campaign*, *Autoresponder* and *Transactional*) and **its free** (*Apache 2.0*, *AWS: SES, OpsWorks t2.micro, SQS, SNS, S3, RDS t2.micro, Route 53*).  
-
 ![](./images/paris_france.jpg)
+
+A **light-weight** (*CodeIgniter*, *Twitter Bootstrap*, *SVG*) **email server** (*Campaign*, *Autoresponder* and *Transactional*) and **its free** (*Apache 2.0*, *AWS: SES, OpsWorks t2.micro, SQS, SNS, S3, RDS t2.micro, Route 53*).
 
 ## Features
 
@@ -40,4 +36,4 @@ A **light-weight** (*CodeIgniter*, *Twitter Bootstrap*, *SVG*) **email server** 
 
 [![](images/Fi5YIvH.gif)](//imgur.com/Fi5YIvH)
 
-<blockquote>J (Will Smith) has to bring back Kevin Brown a. k. a. K (Tommy Lee Jones) to the MIB. Funny Scene <br>&mdash; <a href="//youtu.be/4HgUh5bOgbM?t=195">Men In Black II - Post Office Scene</a></blockquote>
+<blockquote>J (Will Smith) has to bring back Kevin Brown a. k. a. K (Tommy Lee Jones) to the MIB. Funny Scene <br>&mdash; [Men In Black II - Post Office Scene](//youtu.be/4HgUh5bOgbM?t=195)</blockquote>
