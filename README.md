@@ -1,6 +1,6 @@
 # Postmaster
 
-![](./images/favicon.png)
+![](./images/paris_france.jpg)
 
 A **light-weight** (*CodeIgniter*, *Twitter Bootstrap*, *SVG*) **email server** (*Campaign*, *Autoresponder* and *Transactional*) and **its free** (*Apache 2.0*, *AWS: SES, OpsWorks t2.micro, SQS, SNS, S3, RDS t2.micro, Route 53*).  
 
