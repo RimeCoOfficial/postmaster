@@ -33,7 +33,7 @@ A **light-weight** (*CodeIgniter*, *Twitter Bootstrap*, *SVG*) **email server** 
 - Open Subscribe `open/subscribe/{list}` and Unsubscribe `open/unsubscribe/{request_id}/{unsubscribe_key}`
 - Google Analytics (click and open)
 
-# 🙇🏻‍♂️ ··· 🤖
+# 🙇🏼‍♂️ ··· 🤖
 
 [![](images/Fi5YIvH.gif)](//imgur.com/Fi5YIvH)
 
